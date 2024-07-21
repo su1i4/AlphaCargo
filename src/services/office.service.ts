@@ -1,8 +1,8 @@
 import {createApi} from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from '../api';
 
-export const baseApi = createApi({
-  reducerPath: 'baseApi',
+export const officeApi = createApi({
+  reducerPath: 'officeApi',
   baseQuery: baseQueryWithReauth,
   endpoints: build => ({
     
@@ -11,4 +11,4 @@ export const baseApi = createApi({
 
 export const {
   
-} = baseApi;
+} = officeApi;

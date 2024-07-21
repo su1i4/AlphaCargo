@@ -1,5 +1,5 @@
-import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import React, {ReactNode} from 'react';
+import {View, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
 export const GradientWrapper = ({
@@ -20,11 +20,7 @@ export const GradientWrapper = ({
         padding: 2,
       }}>
       <View style={{backgroundColor: 'white', padding: 2, borderRadius: 18}}>
-        <View style={[styles.wrapper, {backgroundColor: color}]}>
-          <Text style={styles.text}>
-            {text}
-          </Text>
-        </View>
+        <View style={[styles.wrapper, {backgroundColor: color}]}></View>
       </View>
     </LinearGradient>
   );
@@ -35,16 +31,6 @@ const styles = StyleSheet.create({
     width: 75,
     height: 75,
     borderRadius: 20,
-    position: 'relative',
+    position: 'relative'
   },
-  text: {
-    position: 'absolute',
-    left: 10,
-    right: 10,
-    bottom: 10,
-    color: 'white',
-    fontSize: 9,
-    textAlign: 'center',
-    fontWeight: '700'
-  }
 });

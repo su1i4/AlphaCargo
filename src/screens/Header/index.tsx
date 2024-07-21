@@ -1,30 +1,22 @@
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
-import {SearchInput} from '../../components/UI/SearchInput';
+import {ReactNode} from 'react';
 
 interface HeaderProps {
+  children?: ReactNode;
   text: string;
   Right: any;
   Left?: any;
-  isSearch?: boolean;
-  value?: string;
-  onChange?: any;
-  placeholder?: string;
-  id: string;
 }
 
 export default function Header({
+  children,
   text,
   Right,
   Left,
-  isSearch = false,
-  value = '',
-  onChange,
-  placeholder = '',
-  id = 'afqf',
 }: HeaderProps): JSX.Element {
   return (
     <View style={styles.header}>
-      <View style={[styles.container, {paddingBottom: isSearch ? 10 : 20}]}>
+      <View style={styles.container}>
         {Left ? (
           <TouchableOpacity>
             <Left />
@@ -37,16 +29,7 @@ export default function Header({
           <Right />
         </TouchableOpacity>
       </View>
-      {isSearch && (
-        <View style={styles.component}>
-          <SearchInput
-            id={id}
-            value={value}
-            onChange={onChange}
-            placeholder={placeholder}
-          />
-        </View>
-      )}
+      {children && children}
     </View>
   );
 }
@@ -56,12 +39,12 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#02447F',
     position: 'static',
-    top: 0,
+    top: 0
   },
   container: {
     width: '100%',
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingVertical: 20,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -71,10 +54,6 @@ const styles = StyleSheet.create({
     color: '#F9FFFF',
     fontSize: 18,
     fontWeight: '600',
-    paddingBottom: 5,
-  },
-  component: {
-    paddingHorizontal: 20,
-    paddingBottom: 15,
+    paddingBottom: 5
   },
 });
