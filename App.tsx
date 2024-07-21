@@ -24,8 +24,10 @@ function App(): React.JSX.Element {
         console.log(data);
       })
       .catch(error => {
-        console.error('There was a problem with your fetch operation:', error);
+        console.error('There was a problem:', error);
       });
+
+
   }
 
   checkServer();
