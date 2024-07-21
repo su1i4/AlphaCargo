@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
   function checkServer() {
-    fetch('https://alphacargoserver.azurewebsites.net/tariffs')
+    fetch('https://alphacargoserver.azurewebsites.net/offices')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok ' + response.statusText);
