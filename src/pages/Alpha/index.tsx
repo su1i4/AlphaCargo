@@ -26,7 +26,7 @@ export default function Alpha() {
 
   return (
     <SafeAreaView>
-      <Header Left={BellIcon} text="Мой Альфа" Right={SingleUser} />
+      <Header id='Alpha' Left={BellIcon} text="Мой Альфа" Right={SingleUser} />
       <ScrollView>
         <View style={styles.Wrapper}>
           <View

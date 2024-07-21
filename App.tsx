@@ -12,6 +12,23 @@ import TabNavigation from './src/TabNavigation';
 const Stack = createNativeStackNavigator();
 
 function App(): React.JSX.Element {
+  function checkServer() {
+    fetch('https://alphacargoserver.azurewebsites.net/tariffs')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok ' + response.statusText);
+        }
+        return response.json();
+      })
+      .then(data => {
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('There was a problem with your fetch operation:', error);
+      });
+  }
+
+  checkServer();
 
   return (
     <NavigationContainer>
@@ -35,12 +52,12 @@ function App(): React.JSX.Element {
           options={{headerShown: false}}
           name="TabNavigation"
           component={TabNavigation}
-        /> 
+        />
         <Stack.Screen
           options={{headerShown: false}}
           name="Profile"
           component={Profile}
-        /> 
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
