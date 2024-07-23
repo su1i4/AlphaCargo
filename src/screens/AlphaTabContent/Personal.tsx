@@ -1,19 +1,23 @@
-import {View, Text, StyleSheet} from 'react-native';
-import { InfoContainer } from '../../components/Containers/InfoContainer';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {InfoContainer} from '../../components/Containers/InfoContainer';
 import Percent from '../../assets/icons/Percent';
 import HandIcon from '../../assets/icons/HandIcon';
 import RocketIcon from '../../assets/icons/RocketIcon';
 import SingleUser from '../../assets/icons/SingleUser';
+import {useNavigation} from '@react-navigation/native';
 
 export const Personal = () => {
+  const navigation: any = useNavigation();
   return (
     <>
       <Text style={styles.titles}>Популярное</Text>
-      <InfoContainer
-        Icon={<Percent />}
-        title="Программа лояльности"
-        content="Пользуйтесь услугами и копите баллы"
-      />
+      <TouchableOpacity onPress={() => navigation.navigate('Loyalty')}>
+        <InfoContainer
+          Icon={<Percent />}
+          title="Программа лояльности"
+          content="Пользуйтесь услугами и копите баллы"
+        />
+      </TouchableOpacity>
       <Text style={styles.titles}>Зарабатывай вместе с Альфа</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
@@ -39,15 +43,15 @@ export const Personal = () => {
 };
 
 const styles = StyleSheet.create({
-    titles: {
-      color: '#8C8C8C',
-      fontSize: 13,
-      fontWeight: '400',
-    },
-    brokeTools: {
-      // width: '100%',
-      display: 'flex',
-      flexDirection: 'row',
-      gap: 10,
-    },
-  });
+  titles: {
+    color: '#8C8C8C',
+    fontSize: 13,
+    fontWeight: '400',
+  },
+  brokeTools: {
+    // width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 10,
+  },
+});
