@@ -8,6 +8,7 @@ import ChangeSignIn from './src/pages/Login/ChangeSignIn';
 import Verification from './src/pages/Login/Verification';
 import Profile from './src/screens/Profile';
 import TabNavigation from './src/TabNavigation';
+import MainNavigation from './src/MainStackNavigation';
 
 const Stack = createNativeStackNavigator();
 
@@ -52,8 +53,8 @@ function App(): React.JSX.Element {
         />
         <Stack.Screen
           options={{headerShown: false}}
-          name="TabNavigation"
-          component={TabNavigation}
+          name="MainNavigation"
+          component={MainNavigation}
         />
         <Stack.Screen
           options={{headerShown: false}}

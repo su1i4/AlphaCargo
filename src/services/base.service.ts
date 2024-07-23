@@ -5,7 +5,7 @@ export const baseApi = createApi({
   reducerPath: 'baseApi',
   baseQuery: baseQueryWithReauth,
   endpoints: build => ({
-    getOffices: build.query({
+    getOffices: build.query<any, void>({
       query: () => 'offices',
     }),
     getOfficeById: build.query<any, any>({

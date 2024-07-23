@@ -10,7 +10,7 @@ export default function ChangeSignIn({navigation}: any) {
   const [password, setPassword] = useState('');
 
   const backToLogin = () => {
-    navigation.navigate('TabNavigation');
+    navigation.navigate('MainNavigation');
   }
 
   return (
