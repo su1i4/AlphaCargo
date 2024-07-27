@@ -17,6 +17,12 @@ export const baseApi = createApi({
     getServiceById: build.query<any, any>({
       query: id => `services/${id}`,
     }),
+    getAllCities: build.query<any, void>({
+      query: () => 'locations/cities',
+    }),
+    getAllCountries: build.query<any, void>({
+      query: () => 'locations/countries',
+    }),
   }),
 });
 
@@ -25,4 +31,6 @@ export const {
   useGetOfficeByIdQuery,
   useGetServiceByIdQuery,
   useGetServicesQuery,
+  useGetAllCitiesQuery,
+  useGetAllCountriesQuery
 } = baseApi;

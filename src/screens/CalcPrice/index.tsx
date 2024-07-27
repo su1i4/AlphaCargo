@@ -1,27 +1,21 @@
-import {SafeAreaView, StyleSheet, ScrollView, View} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import Header from '../Header';
-import BellIcon from '../../assets/icons/BellIcon';
-import LogoutIcon from '../../assets/icons/LogoutIcon';
+import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
-import {Panel} from '../Panel';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export default function Profile() {
+export default function CalcPrice() {
   const naviagation: any = useNavigation();
   return (
     <SafeAreaView style={styles.safeArea}>
       <Header
         id="Profile"
-        Left={BellIcon}
-        text="Личный кабинет"
-        Right={LogoutIcon}
-        func={() => naviagation.goBack()}
+        text="Рассчитать стоимость"
+        Right={SingleUser}
+        func={() => naviagation.navigate('Profile')}
       />
       <ScrollView style={styles.scrollView}>
         <View style={styles.Wrapper}>
-          <TouchableOpacity onPress={() => naviagation.navigate('')} >
-            <Panel />
-          </TouchableOpacity>
+            
         </View>
       </ScrollView>
     </SafeAreaView>

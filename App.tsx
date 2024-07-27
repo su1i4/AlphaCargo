@@ -1,73 +1,18 @@
 import React from 'react';
 
-import {NavigationContainer} from '@react-navigation/native';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-
-import Login from './src/pages/Login';
-import ChangeSignIn from './src/pages/Login/ChangeSignIn';
-import Verification from './src/pages/Login/Verification';
-import Profile from './src/screens/Profile';
-import TabNavigation from './src/TabNavigation';
-import MainNavigation from './src/MainStackNavigation';
-
-const Stack = createNativeStackNavigator();
+import {Provider} from 'react-redux';
+import {store} from './src/store';
+import Toast from 'react-native-toast-message';
+import {toastConfig} from './src/utils/constants';
+import Main from './src/pages';
 
 function App(): React.JSX.Element {
-  function checkServer() {
-    fetch('https://alphacargoserver.azurewebsites.net/offices')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok ' + response.statusText);
-        }
-        return response.json();
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('There was a problem:', error);
-      });
-
-
-  }
-
-  checkServer();
-
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Login"
-          component={Login}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="ChangeSignIn"
-          component={ChangeSignIn}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Verification"
-          component={Verification}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="MainNavigation"
-          component={MainNavigation}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Profile"
-          component={Profile}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <Main />
+      <Toast config={toastConfig} />
+    </Provider>
   );
 }
-
-// const styles = StyleSheet.create({
-
-// });
 
 export default App;

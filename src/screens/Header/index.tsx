@@ -10,6 +10,7 @@ interface HeaderProps {
   onChange?: any;
   placeholder?: string;
   id: string;
+  func?: any;
 }
 
 export default function Header({
@@ -21,6 +22,7 @@ export default function Header({
   onChange,
   placeholder = '',
   id = 'afqf',
+  func,
 }: HeaderProps): JSX.Element {
   return (
     <View style={styles.header}>
@@ -33,7 +35,7 @@ export default function Header({
           <View style={{width: 25}} />
         )}
         <Text style={styles.text}>{text}</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => (func ? func() : false)}>
           <Right />
         </TouchableOpacity>
       </View>
