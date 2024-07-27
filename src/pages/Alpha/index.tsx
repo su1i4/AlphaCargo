@@ -11,8 +11,10 @@ import {Buisenes} from '../../screens/AlphaTabContent/Buisenes';
 import QuesDock from '../../assets/icons/QuesDock';
 import Card from '../../assets/icons/Card';
 import FaUser from '../../assets/icons/FaUser';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Alpha() {
+  const navigation: any = useNavigation()
   const [activeTab, setActiveTab] = useState(0);
 
   const HeaderIcons = [
@@ -26,7 +28,7 @@ export default function Alpha() {
 
   return (
     <SafeAreaView>
-      <Header id='Alpha' Left={BellIcon} text="Мой Альфа" Right={SingleUser} />
+      <Header id='Alpha' Left={BellIcon} text="Мой Альфа" Right={SingleUser} func={() => navigation.navigate('Profile')} />
       <ScrollView>
         <View style={styles.Wrapper}>
           <View

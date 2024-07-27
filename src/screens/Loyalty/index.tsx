@@ -48,7 +48,6 @@ export const Loyalty = () => {
   const [text, setText] = useState('');
 
   const backToLogin = () => {
-    console.log('false');
   };
 
   return (

@@ -1,13 +1,23 @@
 import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View, Text} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import Header from '../../screens/Header';
 import BellIcon from '../../assets/icons/BellIcon';
 import SingleUser from '../../assets/icons/SingleUser';
 import WatchOrde from '../../assets/icons/WatchOrder';
 import {GradientWrapper} from '../../components/Containers/WatchOrderHeader';
 import {BannerWrapper} from '../../components/Containers/BannerContainer';
+import {useNavigation} from '@react-navigation/native';
 
 export default function WatchOrder() {
+  const navigation: any = useNavigation();
+
   const Components = [
     {color: '#FF8A8A', text: 'Хранение товара'},
     {color: '#495665', text: 'Бесплатная доставка'},
@@ -23,7 +33,9 @@ export default function WatchOrder() {
     return (
       <View style={styles.iconContainer}>
         <BellIcon size={19} />
-        <SingleUser size={19} />
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <SingleUser size={19} />
+        </TouchableOpacity>
       </View>
     );
   };
@@ -37,7 +49,7 @@ export default function WatchOrder() {
         value={text}
         onChange={setText}
         isSearch
-        placeholder='Номер посылки'
+        placeholder="Номер посылки"
         text="Отследить заказ"
         Right={Right}
       />

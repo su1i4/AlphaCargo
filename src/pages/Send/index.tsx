@@ -6,8 +6,10 @@ import Calc from '../../assets/icons/Calc';
 import CarIcon from '../../assets/icons/CarIcon';
 import TarifIcon from '../../assets/icons/TarifIcon';
 import {Tab} from '../../components/UI/Tab';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Send() {
+  const naviagation: any = useNavigation()
   const [activeTab, setActiveTab] = useState(0);
   const [text, setText] = useState('');
   return (
@@ -19,6 +21,7 @@ export default function Send() {
         isSearch
         placeholder="Номер посылки"
         text="Отправления"
+        func={() => naviagation.navigate('Profile')}
         Right={SingleUser}
       />
       <ScrollView>
