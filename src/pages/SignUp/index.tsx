@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
   TouchableOpacity,
-  Linking
+  Linking,
 } from 'react-native';
 import {LoginContainer} from '../../components/Containers/LoginContainer';
 import {Input} from '../../components/UI/Inputs/Input';
@@ -16,13 +16,15 @@ import {Sign} from '../../components/sign';
 import LoginSign from '../../assets/icons/LoginSign';
 import {useLoginStep1Mutation} from '../../services/auth.service';
 import Toast from 'react-native-toast-message';
+import TelegramBlack from '../../assets/svg/TelegramBlack';
+import Telegram from '../../assets/svg/Telegram';
+import { PhoneNumberInput } from '../../components/UI/PhoneInput';
 
-export default function Login({navigation}: any) {
-  const [typeAuth, setTypeAuth] = useState('login')
+export default function SignUp({navigation}: any) {
+  const [typeAuth, setTypeAuth] = useState('login');
   const [Login] = useLoginStep1Mutation();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [open, setOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handlePost = async () => {
@@ -42,12 +44,11 @@ export default function Login({navigation}: any) {
   };
 
   const openTelegramBot = async () => {
-    const urlApp = 'tg://resolve?domain=alphacargoverify_bot'; 
-    const urlWeb = 'https://t.me/alphacargoverify_bot'; 
+    const urlApp = 'tg://resolve?domain=alphacargoverify_bot';
+    const urlWeb = 'https://t.me/alphacargoverify_bot';
 
     try {
-      const supportedApp = await Linking.canOpenURL(urlApp);  
-      navigation.navigate('Verification');
+      const supportedApp = await Linking.canOpenURL(urlApp);
       if (supportedApp) {
         await Linking.openURL(urlApp);
       } else {
@@ -57,18 +58,6 @@ export default function Login({navigation}: any) {
       console.error('An error occurred', err);
     }
   };
-
-  useEffect(() => {
-    let timeout: any;
-    if (open) {
-      timeout = setTimeout(() => setOpen(false), 3000);
-    }
-    return () => {
-      if (timeout && open) {
-        clearTimeout(timeout);
-      }
-    };
-  }, [open]);
 
   const onClose = () => {
     setPhone('');
@@ -82,35 +71,35 @@ export default function Login({navigation}: any) {
           <Image source={require('../../assets/images/AlphaCargo.png')} />
         </View>
         <LoginContainer isClose={true} text={'Войти'}>
-          <Input
-            value={phone}
-            onChange={setPhone}
-            placeholder="Введите логин..."
-          />
+          <PhoneNumberInput />
+          <Input value={phone} onChange={setPhone} placeholder="Пароль" />
           <View style={styles.inputWrap}>
-            <Input
-              value={password}
-              onChange={setPassword}
-              placeholder="Введите пароль..."
-            />
-            {open && (
-              <TouchableOpacity onPress={openTelegramBot} style={styles.logWrap}>
-                <Sign />
-              </TouchableOpacity>
-            )}
+            <Input value={password} onChange={setPassword} placeholder="Код" />
             <TouchableOpacity
               onPress={() => {
-                setOpen(prev => !prev);
+                navigation.navigate('ChangeSignIn')
               }}
               style={styles.signWrap}>
-              <LoginSign />
+              <TelegramBlack />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={openTelegramBot} style={styles.logWrap}>
+              <Telegram />
             </TouchableOpacity>
           </View>
-          <ButtonCustom
-            title="Войти"
-            onClick={handlePost}
-            isLoading={loading}
-          />
+          <View style={styles.buttonContainer}>
+            <ButtonCustom
+              title="Войти"
+              onClick={handlePost}
+              isLoading={loading}
+              style={{width: '47%'}}
+            />
+            <ButtonCustom
+              title="Регистриция"
+              onClick={handlePost}
+              isLoading={loading}
+              style={{width: '47%'}}
+            />
+          </View>
         </LoginContainer>
       </View>
       <AuthFooter />
@@ -145,13 +134,19 @@ const styles = StyleSheet.create({
   },
   signWrap: {
     position: 'absolute',
-    top: 15,
-    right: 20,
+    top: 10,
+    right: 50,
     padding: 5,
   },
   logWrap: {
     position: 'absolute',
     right: 20,
-    top: -20,
+    top: 15,
+  },
+  buttonContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
   },
 });

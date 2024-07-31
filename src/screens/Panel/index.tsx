@@ -1,6 +1,5 @@
 import {View, StyleSheet, Text, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import CarSvg from '../../assets/svg/CarSvg';
 
 export const Panel = () => {
   return (

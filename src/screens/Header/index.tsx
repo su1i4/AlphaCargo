@@ -11,6 +11,7 @@ interface HeaderProps {
   placeholder?: string;
   id: string;
   func?: any;
+  funcLeft?: any
 }
 
 export default function Header({
@@ -23,12 +24,13 @@ export default function Header({
   placeholder = '',
   id = 'afqf',
   func,
+  funcLeft
 }: HeaderProps): JSX.Element {
   return (
     <View style={styles.header}>
       <View style={[styles.container, {paddingBottom: isSearch ? 10 : 20}]}>
         {Left ? (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => (funcLeft ? funcLeft() : false)} >
             <Left />
           </TouchableOpacity>
         ) : (

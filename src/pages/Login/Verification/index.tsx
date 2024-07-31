@@ -9,10 +9,29 @@ import {
 import {LoginContainer} from '../../../components/Containers/LoginContainer';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
 import ArrowBack from '../../../assets/icons/ArrowBack';
+import CodeInput from '../../../components/UI/CodeINput';
+import {useLoginStep2Mutation} from '../../../services/auth.service';
+import Toast from 'react-native-toast-message';
 
-export default function Verification({navigation}: any) {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+export default function Verification({navigation, route}: any) {
+  // const {phone, password} = route.params;
+  const [Verification] = useLoginStep2Mutation();
+  const [loading, setLoading] = useState(false);
+
+  const handlePost = async () => {
+    setLoading(true);
+    try {
+      // const response = await Verification({phone, password}).unwrap();
+      // console.log(response, 'this is response');
+    } catch (error) {
+      Toast.show({
+        type: 'error',
+        text1: 'Ошибка входа',
+        text2: 'Пожалуйста, проверьте ваш email и пароль',
+      });
+    }
+    setLoading(false);
+  };
 
   const onClick = () => {
     navigation.navigate('ChangeSignIn');
@@ -20,7 +39,7 @@ export default function Verification({navigation}: any) {
 
   const backToLogin = () => {
     navigation.navigate('Login');
-  }
+  };
 
   return (
     <SafeAreaView>
@@ -35,6 +54,7 @@ export default function Verification({navigation}: any) {
             </TouchableOpacity>
             <Text style={styles.text}>Код отправлен на +77772146644</Text>
           </View>
+          <CodeInput />
           <ButtonCustom title="Войти" onClick={onClick} isLoading={false} />
         </LoginContainer>
       </View>

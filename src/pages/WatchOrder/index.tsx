@@ -32,7 +32,9 @@ export default function WatchOrder() {
   const Right = () => {
     return (
       <View style={styles.iconContainer}>
-        <BellIcon size={19} />
+        <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
+          <BellIcon size={19} />
+        </TouchableOpacity>
         <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
           <SingleUser size={19} />
         </TouchableOpacity>

@@ -1,32 +1,24 @@
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  TouchableOpacity,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
 import Header from '../Header';
-import BellIcon from '../../assets/icons/BellIcon';
-import LogoutIcon from '../../assets/icons/LogoutIcon';
 import {useNavigation} from '@react-navigation/native';
-import {Panel} from '../Panel';
+import LogoutIcon from '../../assets/icons/LogoutIcon';
+import BellIcon from '../../assets/icons/BellIcon';
 
-export default function Profile() {
+export default function Bonus() {
   const naviagation: any = useNavigation();
   return (
     <SafeAreaView style={styles.safeArea}>
       <Header
-        id="Profile"
+        id=""
+        text="Бонусы"
         Left={BellIcon}
-        text="Личный кабинет"
         Right={LogoutIcon}
         func={() => naviagation.goBack()}
+        funcLeft={() => naviagation.navigate('Notifications')}
       />
       <ScrollView style={styles.scrollView}>
         <View style={styles.Wrapper}>
-          <TouchableOpacity onPress={() => naviagation.navigate('CalcPrice')}>
-            <Panel />
-          </TouchableOpacity>
+            
         </View>
       </ScrollView>
     </SafeAreaView>
