@@ -11,21 +11,13 @@ import Header from '../../screens/Header';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
 import {useNavigation} from '@react-navigation/native';
 import BellIcon from '../../assets/icons/BellIcon';
+import { useGetNotificationsQuery } from '../../services/base.service';
 
 export const Notifications = () => {
   const navigation: any = useNavigation();
-  const data = [
-    {
-      name: 'Coca-Cola',
-      date: '31.05.2024',
-      status: 'Прочитано',
-    },
-    {
-      name: 'Coca-Cola',
-      date: '31.05.2024',
-      status: 'Прочитано',
-    },
-  ];
+  const {data} = useGetNotificationsQuery()
+
+  console.log(data, 'this is data')
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -39,7 +31,7 @@ export const Notifications = () => {
       />
       <ScrollView style={styles.scrollView}>
         <View style={styles.Wrapper}>
-          {data.map((item: any, index: number) => (
+          {[].map((item: any, index: number) => (
             <View key={index} style={styles.container}>
               <Text
                 style={{

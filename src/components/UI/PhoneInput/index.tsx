@@ -6,14 +6,10 @@ export const PhoneNumberInput = ({setPhoneNumber}: any) => {
 
   return (
     <PhoneInput
-      defaultCode="KZ"
+      defaultCode="KG"
       layout="first"
       onChangeFormattedText={(text) => {
-        console.log(text);
-      }}
-      onChangeText={(text) => {
-        // setPhoneNumber(text);
-        console.log(text, 'this is number')
+        setPhoneNumber(text)
       }}
       containerStyle={styles.containerStyle}
       textContainerStyle={styles.textContainerStyle}

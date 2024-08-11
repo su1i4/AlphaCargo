@@ -1,14 +1,11 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import Login from './Login';
-import ChangeSignIn from './Login/ChangeSignIn';
-import Verification from './Login/Verification';
+import Login from './Auth/Login';
+import Verification from './Auth/Verification';
 import MainNavigation from '../MainStackNavigation';
-import SignUp from './SignUp';
+import SignUp from './Auth/SignUp';
 import OfficesLog from './Offices';
-import SignUpMain from './SignUp/SIgnUpMain';
-import {Notifications} from '../screens/notifications';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,23 +15,13 @@ export default function Main() {
       <Stack.Navigator>
         <Stack.Screen
           options={{headerShown: false}}
-          name="SignUp"
-          component={SignUp}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="SignUpMain"
-          component={SignUpMain}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
           name="Login"
           component={Login}
         />
         <Stack.Screen
           options={{headerShown: false}}
-          name="ChangeSignIn"
-          component={ChangeSignIn}
+          name="SignUp"
+          component={SignUp}
         />
         <Stack.Screen
           options={{headerShown: false}}
@@ -50,11 +37,6 @@ export default function Main() {
           options={{headerShown: false}}
           name="OfficesLog"
           component={OfficesLog}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
-          name="Notifications"
-          component={Notifications}
         />
       </Stack.Navigator>
     </NavigationContainer>

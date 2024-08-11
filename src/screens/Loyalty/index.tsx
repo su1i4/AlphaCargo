@@ -16,7 +16,7 @@ import MedalThree from '../../assets/icons/MedalThree';
 import {useNavigation} from '@react-navigation/native';
 
 export const Loyalty = () => {
-  const navigation = useNavigation();
+  const navigation: any = useNavigation();
   const Right = () => {
     return ( 
       <TouchableOpacity onPress={() => navigation.goBack()} >
@@ -101,7 +101,7 @@ export const Loyalty = () => {
             </Text>
           </View>
           {LEVELS.map((item: any, index: number) => (
-            <View key={index} style={styles.container}>
+            <TouchableOpacity onPress={() => navigation.navigate('Bonus')} key={index} style={styles.container}>
               {item.icon}
               <Text
                 style={{
@@ -126,7 +126,7 @@ export const Loyalty = () => {
                 присваивается всем, кто подключился к Альфа Карго и еще ничего
                 не отправил или отправил только одну посылку в предыдущем месяце
               </Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
       </ScrollView>

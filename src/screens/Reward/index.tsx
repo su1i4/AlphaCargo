@@ -11,32 +11,59 @@ import {useNavigation} from '@react-navigation/native';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
 import BellIcon from '../../assets/icons/BellIcon';
 import Serebro from '../../assets/svg/Serebro';
-import Tasks from '../../assets/icons/Tasks';
-import Reward from '../../assets/icons/Reward';
-import Vopros from '../../assets/icons/Vopros';
+import Standart from '../../assets/icons/Reward/Standart';
+import Bronza from '../../assets/icons/Reward/Bronza';
+import Zoloto from '../../assets/icons/Reward/Zoloto';
+import Platina from '../../assets/icons/Reward/Platina';
+import SerebroIcon from '../../assets/icons/Reward/Serebro';
 import {Panel} from '../Panel';
 
-export default function Bonus() {
+export default function Reward() {
   const naviagation: any = useNavigation();
+
+  const data = [
+    {
+      name: 'Платежи MBANK',
+      text: 'Совершите хотябы 1 платеж в MBANK',
+    },
+    {
+      name: 'Оборот денег до 10000 сомов',
+      text: 'Сумма платежей через приложение или MBANK',
+    },
+    {
+      name: 'Количество платежей до 5',
+      text: 'Количество платежей через приложение или MBANK',
+    },
+  ];
 
   const items = [
     {
-      text: 'Задания',
-      icon: <Tasks />,
-      link: 'Tasks',
+      text: 'Стандарт',
+      icon: <Standart />,
     },
     {
-      text: 'Награды',
-      icon: <Reward />,
-      link: 'Reward',
+      text: 'Бронза',
+      icon: <Bronza />,
+    },
+    {
+      text: 'Серебро',
+      icon: <SerebroIcon />,
+    },
+    {
+      text: 'Золото',
+      icon: <Zoloto />,
+    },
+    {
+      text: 'Платина',
+      icon: <Platina />,
     },
   ];
 
   return (
     <SafeAreaView style={styles.safeArea}>
       <Header
-        id=""
-        text="Бонусы"
+        id="Reward"
+        text="Награды"
         Left={BellIcon}
         Right={LogoutIcon}
         func={() => naviagation.goBack()}
@@ -64,22 +91,20 @@ export default function Bonus() {
           </View>
           <Panel
             content={
-              <View style={styles.textWrapper}>
-                <Text style={[styles.text, {fontSize: 20, fontWeight: '600'}]}>
-                  3200 бонусов
-                </Text>
-                <Text style={[styles.text, {fontSize: 13, fontWeight: '400'}]}>
-                  Ваш кэшбек
-                </Text>
+              <View
+                style={{
+                  height: 'auto',
+                  display: 'flex',
+                  paddingRight: 15,
+                  flexDirection: 'column',
+                  alignSelf: 'center'
+                }}>
+                <Text style={styles.Meg}>До 4% бонусов от</Text>
+                <Text style={styles.Meg}>покупок у</Text>
+                <Text style={styles.Meg}>партнеров</Text>
               </View>
             }
           />
-          <View style={styles.LinkInside}>
-            <Vopros />
-            <Text style={{color: '#000018', fontSize: 13, fontWeight: '400'}}>
-              О программе лояльности
-            </Text>
-          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -130,16 +155,14 @@ const styles = StyleSheet.create({
   LinkWrap: {
     display: 'flex',
     flexDirection: 'row',
-    gap: 10,
-  },
-  LinkInside: {
+    justifyContent: 'space-between',
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
+    padding: 10,
+  },
+  LinkInside: {
     display: 'flex',
-    flexDirection: 'row',
-    gap: 5,
-    paddingVertical: 7,
-    paddingHorizontal: 12,
+    flexDirection: 'column',
     alignItems: 'center',
   },
   LinkInsideText: {
@@ -147,14 +170,9 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
   },
-  textWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 10,
-    width: '60%',
-    paddingVertical: 20,
-  },
-  text: {
+  Meg: {
     color: '#F9FFFF',
+    fontSize: 20,
+    fontWeight: '600',
   },
 });

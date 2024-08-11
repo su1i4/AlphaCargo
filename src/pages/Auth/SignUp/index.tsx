@@ -8,25 +8,50 @@ import {
   TouchableOpacity,
   Linking,
 } from 'react-native';
-import { LoginContainer } from '../../../components/Containers/LoginContainer';
-import { useLoginStep1Mutation } from '../../../services/auth.service';
+import {LoginContainer} from '../../../components/Containers/LoginContainer';
+import {Input} from '../../../components/UI/Inputs/Input';
+import {ButtonCustom} from '../../../components/UI/Buttons/Button';
+import AuthFooter from '../../../components/Auth/AuthFooter';
+import {Sign} from '../../../components/sign';
+import LoginSign from '../../../assets/icons/LoginSign';
+import {
+  useLoginStep1Mutation,
+  useLoginStep2Mutation,
+} from '../../../services/auth.service';
 import Toast from 'react-native-toast-message';
-import { PhoneNumberInput } from '../../../components/UI/PhoneInput';
-import { ButtonCustom } from '../../../components/UI/Buttons/Button';
-import { Input } from '../../../components/UI/Inputs/Input';
-import Telegram from '../../../assets/svg/Telegram';
 import TelegramBlack from '../../../assets/svg/TelegramBlack';
+import Telegram from '../../../assets/svg/Telegram';
+import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
+import { useNavigation } from '@react-navigation/native';
 
-
-export default function SignUpMain({navigation}: any) {
-  const [typeAuth, setTypeAuth] = useState('login');
+export default function SignUp() {
+  const navigation: any = useNavigation()
   const [Login] = useLoginStep1Mutation();
+  const [LoginStep2] = useLoginStep2Mutation();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [open, setOpen] = useState<boolean>(false);
+  const [code, setCode] = useState('')
   const [loading, setLoading] = useState<boolean>(false);
+  const [phoneError, setPhoneError] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
 
   const handlePost = async () => {
+    setPhoneError('');
+    setPasswordError('');
+    let hasError = false;
+
+    if (!phone) {
+      setPhoneError('Пожалуйста, введите номер телефона');
+      hasError = true;
+    }
+
+    if (!password) {
+      setPasswordError('Пожалуйста, введите пароль');
+      hasError = true;
+    }
+
+    if (hasError) return;
+
     setLoading(true);
     try {
       const response = await Login({phone, password}).unwrap();
@@ -36,7 +61,7 @@ export default function SignUpMain({navigation}: any) {
       Toast.show({
         type: 'error',
         text1: 'Ошибка входа',
-        text2: 'Пожалуйста, проверьте ваш email и пароль',
+        text2: 'Пожалуйста, проверьте ваш номер и пароль',
       });
     }
     setLoading(false);
@@ -58,17 +83,11 @@ export default function SignUpMain({navigation}: any) {
     }
   };
 
+
   useEffect(() => {
-    let timeout: any;
-    if (open) {
-      timeout = setTimeout(() => setOpen(false), 3000);
-    }
-    return () => {
-      if (timeout && open) {
-        clearTimeout(timeout);
-      }
-    };
-  }, [open]);
+    if(phone) setPhoneError('')
+    if(password) setPasswordError('')
+  }, [phone, password])
 
   const onClose = () => {
     setPhone('');
@@ -79,16 +98,26 @@ export default function SignUpMain({navigation}: any) {
     <SafeAreaView>
       <View style={styles.main}>
         <View style={styles.imageContainer}>
-          <Image source={require('../../../assets/images/AlphaCargo.png')} />
+          {/* <Image source={require('../../assets/images/AlphaCargo.png')} /> */}
         </View>
         <LoginContainer isClose={true} text={'Войти'}>
-          <PhoneNumberInput />
-          <Input value={phone} onChange={setPhone} placeholder="Пароль" />
+          <View style={styles.msgWrap}>
+            <PhoneNumberInput setPhoneNumber={setPhone} />
+            {phoneError ? (
+              <Text style={styles.errorText}>{phoneError}</Text>
+            ) : null}
+          </View>
+          <View style={styles.msgWrap}>
+            <Input value={password} onChange={setPassword} placeholder="Пароль" />
+            {passwordError ? (
+              <Text style={styles.errorText}>{passwordError}</Text>
+            ) : null}
+          </View>
+          <Input value={code} onChange={setCode} placeholder="Код" />
           <View style={styles.inputWrap}>
-            <Input value={password} onChange={setPassword} placeholder="Код" />
             <TouchableOpacity
               onPress={() => {
-                setOpen(prev => !prev);
+                navigation.navigate('ChangeSignIn');
               }}
               style={styles.signWrap}>
               <TelegramBlack />
@@ -105,14 +134,15 @@ export default function SignUpMain({navigation}: any) {
               style={{width: '47%'}}
             />
             <ButtonCustom
-              title="Регистриция"
-              onClick={handlePost}
-              isLoading={loading}
+              title="Регистрация"
+              onClick={() => navigation.navigate('SignUp')}
+              isLoading={false}
               style={{width: '47%'}}
             />
           </View>
         </LoginContainer>
       </View>
+      <AuthFooter />
     </SafeAreaView>
   );
 }
@@ -157,6 +187,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    width: '100%',
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+  },
+  msgWrap: {
     width: '100%',
   },
 });
