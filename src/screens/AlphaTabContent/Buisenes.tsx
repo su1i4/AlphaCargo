@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {InfoContainer} from '../../components/Containers/InfoContainer';
 import Percent from '../../assets/icons/Percent';
 import Calc from '../../assets/icons/Calc';
@@ -8,8 +8,10 @@ import Document from '../../assets/icons/Document';
 import TvIcon from '../../assets/icons/TvIcon';
 import HandIcon from '../../assets/icons/HandIcon';
 import SingleUser from '../../assets/icons/SingleUser';
+import {useNavigation} from '@react-navigation/native';
 
 export const Buisenes = () => {
+  const navigation: any = useNavigation();
   return (
     <>
       <Text style={styles.titles}>Популярное</Text>
@@ -20,16 +22,18 @@ export const Buisenes = () => {
           content={`Узнайте срок и \nцену своих \nотправок`}
           width="48.5%"
         />
-        <InfoContainer
-          Icon={<Percent />}
-          title={`Программа \nлояльности`}
-          content={`Пользуйтесь \nуслугами и копите \nбаллы`}
-          width="48.5%"
-        />
+        <TouchableOpacity style={{width: '48.5%'}} onPress={() => navigation.navigate('Loyalty')} >
+          <InfoContainer
+            Icon={<Percent />}
+            title={`Программа \nлояльности`}
+            content={`Пользуйтесь \nуслугами и копите \nбаллы`}
+            width="100%"
+          />
+        </TouchableOpacity>
       </View>
       <View style={styles.brokeTools}>
         <InfoContainer
-          Icon={<Calc/>}
+          Icon={<Calc />}
           title={`Калькулятор`}
           content={`Рассчитайте \nстоимость`}
           width="48.5%"
@@ -58,10 +62,10 @@ export const Buisenes = () => {
       </View>
       <Text style={styles.titles}>Доставка</Text>
       <InfoContainer
-          Icon={<TvIcon />}
-          title={`Альфа Партнеры`}
-          content={`Размещайте рекламу у нас в приложении`}
-        />
+        Icon={<TvIcon />}
+        title={`Альфа Партнеры`}
+        content={`Размещайте рекламу у нас в приложении`}
+      />
       <Text style={styles.titles}>Зарабатывай вместе с Альфа</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
@@ -88,9 +92,9 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   brokeTools: {
-    // width: '100%',
+    width: '100%',
     display: 'flex',
     flexDirection: 'row',
-    gap: 10,
+    justifyContent: 'space-between'
   },
 });

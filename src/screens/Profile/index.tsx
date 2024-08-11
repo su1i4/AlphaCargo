@@ -1,10 +1,15 @@
-import {SafeAreaView, StyleSheet, ScrollView, View} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import Header from '../Header';
 import BellIcon from '../../assets/icons/BellIcon';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
 import {useNavigation} from '@react-navigation/native';
 import {Panel} from '../Panel';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export default function Profile() {
   const naviagation: any = useNavigation();
@@ -19,7 +24,7 @@ export default function Profile() {
       />
       <ScrollView style={styles.scrollView}>
         <View style={styles.Wrapper}>
-          <TouchableOpacity onPress={() => naviagation.navigate('')} >
+          <TouchableOpacity onPress={() => naviagation.navigate('CalcPrice')}>
             <Panel />
           </TouchableOpacity>
         </View>

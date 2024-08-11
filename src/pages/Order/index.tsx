@@ -16,7 +16,11 @@ import SingleUser from '../../assets/icons/SingleUser';
 import LocateIcon from '../../assets/icons/LocateIcon';
 import BurgerIcon from '../../assets/icons/BurgerIcon';
 import {useNavigation} from '@react-navigation/native';
-import {useGetAllCitiesQuery, useGetAllCountriesQuery, useGetOfficesQuery} from '../../services/base.service';
+import {
+  useGetAllCitiesQuery,
+  useGetAllCountriesQuery,
+  useGetOfficesQuery,
+} from '../../services/base.service';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const BOTTOM_SHEET_MAX_HEIGHT = SCREEN_HEIGHT * 0.7;
@@ -27,7 +31,7 @@ const MIN_DOWNWARD_TRANSLATE_Y = 0;
 export default function Order() {
   const {data = []} = useGetAllCitiesQuery();
   const {data: offices = []} = useGetOfficesQuery();
-  const {data: countries = []} = useGetAllCountriesQuery()
+  const {data: countries = []} = useGetAllCountriesQuery();
 
   const animatedValue = useRef(new Animated.Value(0)).current;
   const lastGestureDy = useRef(0);
@@ -118,7 +122,13 @@ export default function Order() {
         </View>
         <TouchableOpacity
           style={[styles.popAp, {bottom: 20}]}
-          onPress={() => navigation.navigate('Points', {cities: data, offices: offices, countries: countries})}>
+          onPress={() =>
+            navigation.navigate('Points', {
+              cities: data,
+              offices: offices,
+              countries: countries,
+            })
+          }>
           <BurgerIcon size={28} active={true} lox={true} />
         </TouchableOpacity>
       </View>

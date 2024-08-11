@@ -11,14 +11,17 @@ import {Buisenes} from '../../screens/AlphaTabContent/Buisenes';
 import QuesDock from '../../assets/icons/QuesDock';
 import Card from '../../assets/icons/Card';
 import FaUser from '../../assets/icons/FaUser';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Alpha() {
-  const navigation: any = useNavigation()
+  const navigation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
 
   const HeaderIcons = [
-    {icon: <BellIcon color="#94C325" size={18} strokeWidth={2} />, text: `Уведом-\nления`},
+    {
+      icon: <BellIcon color="#94C325" size={18} strokeWidth={2} />,
+      text: `Уведом-\nления`,
+    },
     {icon: <FaUser />, text: `Вызов\nвыездной\nгруппы`},
     {icon: <Card />, text: `Онлайн-\nоплата`},
     {icon: <QuesDock />, text: `Вопросы и\nответы`},
@@ -28,7 +31,14 @@ export default function Alpha() {
 
   return (
     <SafeAreaView>
-      <Header id='Alpha' Left={BellIcon} text="Мой Альфа" Right={SingleUser} func={() => navigation.navigate('Profile')} />
+      <Header
+        id="Alpha"
+        Left={BellIcon}
+        text="Мой Альфа"
+        Right={SingleUser}
+        func={() => navigation.navigate('Profile')}
+        funcLeft={() => navigation.navigate('Notifications')}
+      />
       <ScrollView>
         <View style={styles.Wrapper}>
           <View
@@ -55,7 +65,7 @@ export default function Alpha() {
                     color: '#000018',
                     fontSize: 12,
                     fontWeight: '400',
-                    textAlign: 'center'
+                    textAlign: 'center',
                   }}>
                   {item.text}
                 </Text>

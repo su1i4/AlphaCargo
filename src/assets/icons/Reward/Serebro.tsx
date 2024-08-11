@@ -1,0 +1,40 @@
+import * as React from "react"
+import Svg, { Rect, Defs, Pattern, Use, Image } from "react-native-svg"
+
+function SerebroIcon() {
+  return (
+    <Svg
+      width={34}
+      height={35}
+      viewBox="0 0 34 35"
+      fill="none"
+    >
+      <Rect
+        x={0.5}
+        y={0.866516}
+        width={33}
+        height={33.6346}
+        rx={16.5}
+        fill="url(#pattern0_1084_6200)"
+      />
+      <Defs>
+        <Pattern
+          id="pattern0_1084_6200"
+          patternContentUnits="objectBoundingBox"
+          width={1}
+          height={1}
+        >
+          <Use xlinkHref="#image0_1084_6200" transform="scale(.01923 .01887)" />
+        </Pattern>
+        <Image
+          id="image0_1084_6200"
+          width={52}
+          height={53}
+          xlinkHref="data:image/png;base64,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"
+        />
+      </Defs>
+    </Svg>
+  )
+}
+
+export default SerebroIcon

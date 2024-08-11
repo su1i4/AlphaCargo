@@ -3,14 +3,16 @@ import {SafeAreaView, StyleSheet, View} from 'react-native';
 import SectionItem from './SectionItem';
 import UserIcon from '../../assets/icons/UsersIcon';
 import MapIcon from '../../assets/icons/MapIcon';
+import { useNavigation } from '@react-navigation/native';
 
 const AuthFooter = () => {
+  const navigation: any = useNavigation()
   return (
     <View style={styles.footerContainer}>
       <SectionItem
         title="Стать клиентом"
         Icon={UserIcon}
-        onPress={() => console.log('heelo')}
+        onPress={() => navigation.navigate('SignUpMain')}
         style={{
           borderTopLeftRadius: 4,
           borderTopRightRadius: 4,
@@ -19,7 +21,7 @@ const AuthFooter = () => {
       <SectionItem
         title="Карта офисов"
         Icon={MapIcon}
-        onPress={() => console.log('heelo')}
+        onPress={() => navigation.navigate('Offices')}
         style={{
           borderBottomLeftRadius: 4,
           borderBottomRightRadius: 4,
