@@ -4,14 +4,15 @@ interface InputProps {
   value: string;
   onChange: any;
   placeholder: string;
+  style?: object;
 }
 
-export const Input = ({value, onChange, placeholder}: InputProps) => {
+export const Input = ({value, onChange, placeholder, style}: InputProps) => {
   const inputAccessoryViewID = 'uniqueID';
   return (
     <View style={{position: 'relative'}}>
       <TextInput
-        style={styles.input}
+        style={[styles.input, style]}
         inputAccessoryViewID={inputAccessoryViewID}
         onChangeText={onChange}
         value={value}
