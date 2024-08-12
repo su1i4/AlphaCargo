@@ -7,7 +7,7 @@ interface ButtonProps {
   onClick: () => void;
   style?: object;
   textStyle?: object;
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 export const ButtonCustom = ({
@@ -15,7 +15,7 @@ export const ButtonCustom = ({
   onClick,
   style,
   textStyle,
-  isLoading,
+  isLoading = false,
 }: ButtonProps) => {
   const paddingTop = isLoading ? 10 : 12;
   const paddingBottom = isLoading ? 12 : 14;

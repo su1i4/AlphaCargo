@@ -21,6 +21,7 @@ import TelegramBlack from '../../../assets/svg/TelegramBlack';
 import Telegram from '../../../assets/svg/Telegram';
 import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
 import {useNavigation} from '@react-navigation/native';
+import {useActions} from '../../../hooks/useActions';
 
 export default function Login() {
   const navigation: any = useNavigation();
@@ -32,6 +33,8 @@ export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
+
+  const {saveUser} = useActions();
 
   const handlePost = async () => {
     setPhoneError('');
@@ -54,8 +57,8 @@ export default function Login() {
     if (!code) {
       try {
         const response: any = await login({phone, password});
-        if(response['error']){
-          console.log(response)
+        if (response['error']) {
+          console.log(response);
           Toast.show({
             type: 'error',
             text1: 'Ошибка входа',
@@ -66,15 +69,17 @@ export default function Login() {
     } else {
       try {
         const response: any = await login2({phone, password, code});
-        if(response['error']){
-          console.log(response)
+        if (response['error']) {
+          console.log(response);
           Toast.show({
             type: 'error',
             text1: 'Ошибка входа',
             text2: response.error.data.message,
           });
-        }else{
-          console.log(response)
+        } else {
+          console.log(response.data, 'this is repsonse')
+          saveUser(response.data)
+          navigation.navigate('MainNavigation')
         }
         onClose();
       } catch (error) {}
@@ -133,9 +138,7 @@ export default function Login() {
           </View>
           <View style={styles.inputWrap}>
             <Input value={code} onChange={setCode} placeholder="Код" />
-            <TouchableOpacity
-              onPress={handlePost}
-              style={styles.signWrap}>
+            <TouchableOpacity onPress={handlePost} style={styles.signWrap}>
               <TelegramBlack />
             </TouchableOpacity>
             <TouchableOpacity onPress={openTelegramBot} style={styles.logWrap}>
