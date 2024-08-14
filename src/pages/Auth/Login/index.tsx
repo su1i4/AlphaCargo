@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import {
   SafeAreaView,
   View,
@@ -33,6 +33,7 @@ export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
+  const phoneInputRef = useRef<any>();
 
   const {saveUser} = useActions();
 
@@ -58,30 +59,28 @@ export default function Login() {
       try {
         const response: any = await login({phone, password});
         if (response['error']) {
-          console.log(response);
-          Toast.show({
-            type: 'error',
-            text1: 'Ошибка входа',
-            text2: response.error.data.message,
-          });
-        }
-      } catch (error) {}
-    } else {
-      try {
-        const response: any = await login2({phone, password, code});
-        if (response['error']) {
-          console.log(response);
           Toast.show({
             type: 'error',
             text1: 'Ошибка входа',
             text2: response.error.data.message,
           });
         } else {
-          console.log(response.data, 'this is repsonse')
-          saveUser(response.data)
-          navigation.navigate('MainNavigation')
         }
-        onClose();
+      } catch (error) {}
+    } else {
+      try {
+        const response: any = await login2({phone, password, code});
+        if (response['error']) {
+          Toast.show({
+            type: 'error',
+            text1: 'Ошибка входа',
+            text2: response.error.data.message,
+          });
+        } else {
+          saveUser(response.data);
+          navigation.navigate('MainNavigation');
+          onClose();
+        }
       } catch (error) {}
     }
     setLoading(false);
@@ -111,7 +110,12 @@ export default function Login() {
   const onClose = () => {
     setPhone('');
     setPassword('');
+    if (phoneInputRef.current) {
+      phoneInputRef.current.reset();
+    }
   };
+
+  console.log(password, 'this is password')
 
   return (
     <SafeAreaView>
@@ -121,7 +125,7 @@ export default function Login() {
         </View>
         <LoginContainer isClose={true} text={'Войти'}>
           <View style={styles.msgWrap}>
-            <PhoneNumberInput setPhoneNumber={setPhone} />
+            <PhoneNumberInput setPhoneNumber={setPhone} ref={phoneInputRef} />
             {phoneError ? (
               <Text style={styles.errorText}>{phoneError}</Text>
             ) : null}

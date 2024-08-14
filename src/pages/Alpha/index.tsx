@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {SafeAreaView, View, StyleSheet, Text, ScrollView} from 'react-native';
+import {SafeAreaView, View, StyleSheet, Text, ScrollView, TouchableOpacity} from 'react-native';
 import Header from '../../screens/Header';
 import BellIcon from '../../assets/icons/BellIcon';
 import SingleUser from '../../assets/icons/SingleUser';
@@ -21,10 +21,11 @@ export default function Alpha() {
     {
       icon: <BellIcon color="#94C325" size={18} strokeWidth={2} />,
       text: `Уведом-\nления`,
+      link: ()=>  navigation.navigate('Notifications')
     },
-    {icon: <FaUser />, text: `Вызов\nвыездной\nгруппы`},
-    {icon: <Card />, text: `Онлайн-\nоплата`},
-    {icon: <QuesDock />, text: `Вопросы и\nответы`},
+    {icon: <FaUser />, text: `Вызов\nвыездной\nгруппы`, link: 'Alpha'},
+    {icon: <Card />, text: `Онлайн-\nоплата`, link: 'Alpha'},
+    {icon: <QuesDock />, text: `Вопросы и\nответы`, link: 'Alpha'},
   ];
 
   const components = [<Personal />, <Buisenes />];
@@ -52,14 +53,15 @@ export default function Alpha() {
               <View
                 key={index}
                 style={{display: 'flex', flexDirection: 'column'}}>
-                <View
+                <TouchableOpacity
+                  onPress={() => item.link()}
                   style={{
                     padding: 22,
                     borderRadius: 20,
                     backgroundColor: '#FFFFFF',
                   }}>
                   {item.icon}
-                </View>
+                </TouchableOpacity>
                 <Text
                   style={{
                     color: '#000018',

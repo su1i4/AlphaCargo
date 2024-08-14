@@ -14,7 +14,13 @@ const USER_KEY = '@user';
 export const getUserFromStorage = async () => {
   try {
     const user = await AsyncStorage.getItem(USER_KEY);
-    return user ? JSON.parse(user) : null;
+    const parsedUser = user ? JSON.parse(user) : null;
+    
+    if (parsedUser && parsedUser._j) {
+      return parsedUser._j;
+    }
+    
+    return parsedUser;
   } catch (error) {
     console.error('Error retrieving user data:', error);
     return null;
@@ -32,7 +38,8 @@ export const removeUserFromStorage = async () => {
 export const saveUserToStorage = async (data: any) => {
   try {
     if (data !== null) {
-      const jsonUser = JSON.stringify(data);
+      const dataToSave = data._j ? data._j : data;
+      const jsonUser = JSON.stringify(dataToSave);
       await AsyncStorage.setItem(USER_KEY, jsonUser);
     } else {
       await AsyncStorage.removeItem(USER_KEY);
@@ -41,3 +48,8 @@ export const saveUserToStorage = async (data: any) => {
     console.error('Error saving user data:', error);
   }
 };
+
+export const getRightToken = (data: any) => {
+  const user = data.accessToken || data["_j"]
+  return user
+}

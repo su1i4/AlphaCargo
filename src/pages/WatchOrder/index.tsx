@@ -19,14 +19,21 @@ export default function WatchOrder() {
   const navigation: any = useNavigation();
 
   const Components = [
-    {color: '#FF8A8A', text: 'Хранение товара'},
-    {color: '#495665', text: 'Бесплатная доставка'},
-    {color: '#604C79', text: 'О нашей команде'},
-    {color: '#7ABBA8', text: 'Ваши посылки'},
-    {color: '#FF8A8A', text: 'Хранение товара'},
-    {color: '#495665', text: 'Бесплатная доставка'},
-    {color: '#604C79', text: 'О нашей команде'},
-    {color: '#7ABBA8', text: 'Ваши посылки'},
+    {
+      color: '#495665',
+      text: 'Регистрация',
+      image: require('../../assets/images/REKLAMA5.png'),
+    },
+    {
+      color: '#604C79',
+      text: 'Сдача груза',
+      image: require('../../assets/images/REKLAMA6.png'),
+    },
+    {
+      color: '#7ABBA8',
+      text: 'Оплата',
+      image: require('../../assets/images/REKLAMA7.png'),
+    },
   ];
 
   const Right = () => {
@@ -61,13 +68,17 @@ export default function WatchOrder() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.horizontalScrollView}>
           <View style={[styles.headerWrapper, {paddingTop: 15}]}>
-            {Components.map((item, index) => (
-              <GradientWrapper
-                key={index}
-                text={item.text}
-                color={item.color}
-              />
-            ))}
+            {Components.map((item, index) => {
+              const image = item.image
+              return (
+                <GradientWrapper
+                  key={index}
+                  text={item.text}
+                  color={item.color}
+                  image={image}
+                />
+              );
+            })}
           </View>
         </ScrollView>
         <View style={styles.Wrapper}>
@@ -94,7 +105,7 @@ export default function WatchOrder() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.horizontalScrollView}>
           <View style={styles.headerWrapper}>
-            {['', ''].map((_, index) => (
+            {[''].map((_, index) => (
               <BannerWrapper key={index} index={index} />
             ))}
           </View>

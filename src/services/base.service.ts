@@ -23,7 +23,7 @@ export const baseApi = createApi({
     getAllCountries: build.query<any, void>({
       query: () => 'locations/countries',
     }),
-    getNotifications: build.query<any, void>({
+    getNotifications: build.query<any, any>({
       query: () => 'notifications'
     })
   }),

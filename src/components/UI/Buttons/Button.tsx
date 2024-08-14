@@ -3,11 +3,12 @@ import {TouchableOpacity, Text, StyleSheet} from 'react-native';
 import LoadingIcon from '../../../assets/icons/LoadingIcon';
 
 interface ButtonProps {
-  title: string;
+  title: any;
   onClick: () => void;
   style?: object;
   textStyle?: object;
   isLoading?: boolean;
+  disabled?: boolean
 }
 
 export const ButtonCustom = ({
@@ -16,12 +17,13 @@ export const ButtonCustom = ({
   style,
   textStyle,
   isLoading = false,
+  disabled = false
 }: ButtonProps) => {
   const paddingTop = isLoading ? 10 : 12;
   const paddingBottom = isLoading ? 12 : 14;
   return (
     <TouchableOpacity
-      onPress={onClick}
+      onPress={() => disabled? false: onClick()}
       style={[
         styles.button,
         style,

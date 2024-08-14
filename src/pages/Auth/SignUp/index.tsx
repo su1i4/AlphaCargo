@@ -1,43 +1,32 @@
 import {useEffect, useState} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  Linking,
-} from 'react-native';
+import {SafeAreaView, View, Text, StyleSheet, Linking} from 'react-native';
 import {LoginContainer} from '../../../components/Containers/LoginContainer';
 import {Input} from '../../../components/UI/Inputs/Input';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
-import AuthFooter from '../../../components/Auth/AuthFooter';
-import {Sign} from '../../../components/sign';
-import LoginSign from '../../../assets/icons/LoginSign';
-import {
-  useLoginStep1Mutation,
-  useLoginStep2Mutation,
-} from '../../../services/auth.service';
+import {useSingUpStep1Mutation} from '../../../services/auth.service';
 import Toast from 'react-native-toast-message';
-import TelegramBlack from '../../../assets/svg/TelegramBlack';
 import Telegram from '../../../assets/svg/Telegram';
 import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 export default function SignUp() {
-  const navigation: any = useNavigation()
-  const [Login] = useLoginStep1Mutation();
-  const [LoginStep2] = useLoginStep2Mutation();
+  const navigation: any = useNavigation();
+  const [SignUp] = useSingUpStep1Mutation();
+  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [fio, setFio] = useState('');
   const [password, setPassword] = useState('');
-  const [code, setCode] = useState('')
   const [loading, setLoading] = useState<boolean>(false);
+  const [fioError, setFioError] = useState<string>('');
+  const [emailError, setEmailError] = useState<string>('');
   const [phoneError, setPhoneError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
 
   const handlePost = async () => {
     setPhoneError('');
     setPasswordError('');
+    setEmailError('')
+    setFioError('')
     let hasError = false;
 
     if (!phone) {
@@ -50,19 +39,37 @@ export default function SignUp() {
       hasError = true;
     }
 
+    if (!fio) {
+      setFioError('Пожалуйста, введите имя');
+      hasError = true;
+    }
+
+    if (!email) {
+      setEmailError('Пожалуйста, введите эл.почту');
+      hasError = true;
+    }
+
     if (hasError) return;
 
     setLoading(true);
     try {
-      const response = await Login({phone, password}).unwrap();
-      console.log(response, 'this is response');
-      onClose();
+      const response: any = await SignUp({phone, password, fio, email});
+      if (response['error']) {
+        Toast.show({
+          type: 'error',
+          text1: 'Ошибка входа',
+          text2: response.error.data.message,
+          visibilityTime: 3000,
+        });
+      } else {
+        navigation.navigate('Verification', {
+          fio: fio,
+          email: email,
+          password: password,
+          phone: phone,
+        });
+      }
     } catch (error) {
-      Toast.show({
-        type: 'error',
-        text1: 'Ошибка входа',
-        text2: 'Пожалуйста, проверьте ваш номер и пароль',
-      });
     }
     setLoading(false);
   };
@@ -83,24 +90,38 @@ export default function SignUp() {
     }
   };
 
-
   useEffect(() => {
-    if(phone) setPhoneError('')
-    if(password) setPasswordError('')
-  }, [phone, password])
+    if (phone) setPhoneError('');
+    if (password) setPasswordError('');
+    if (fio) setFioError('');
+    if (email) setEmailError('');
+  }, [phone, password, email, fio]);
 
   const onClose = () => {
     setPhone('');
     setPassword('');
+    setEmail('')
+    setFio('')
   };
 
   return (
     <SafeAreaView>
       <View style={styles.main}>
-        <View style={styles.imageContainer}>
-          {/* <Image source={require('../../assets/images/AlphaCargo.png')} /> */}
-        </View>
-        <LoginContainer isClose={true} text={'Войти'}>
+        <LoginContainer isClose={true} text={'Введите номер телефона'}>
+          <Text style={{color: '#000018', fontSize: 13, fontWeight: '400'}}>
+          Мы отправим вам код через Телеграм-бота
+          </Text>
+
+          <View style={styles.msgWrap}>
+            <Input value={fio} onChange={setFio} placeholder="Введите имя" />
+            {fioError ? <Text style={styles.errorText}>{fioError}</Text> : null}
+          </View>
+          <View style={styles.msgWrap}>
+            <Input value={email} onChange={setEmail} placeholder="Эл.почта" />
+            {emailError ? (
+              <Text style={styles.errorText}>{emailError}</Text>
+            ) : null}
+          </View>
           <View style={styles.msgWrap}>
             <PhoneNumberInput setPhoneNumber={setPhone} />
             {phoneError ? (
@@ -108,41 +129,43 @@ export default function SignUp() {
             ) : null}
           </View>
           <View style={styles.msgWrap}>
-            <Input value={password} onChange={setPassword} placeholder="Пароль" />
+            <Input
+              value={password}
+              onChange={setPassword}
+              placeholder="Придумайте пароль"
+            />
             {passwordError ? (
               <Text style={styles.errorText}>{passwordError}</Text>
             ) : null}
           </View>
-          <Input value={code} onChange={setCode} placeholder="Код" />
-          <View style={styles.inputWrap}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('ChangeSignIn');
-              }}
-              style={styles.signWrap}>
-              <TelegramBlack />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={openTelegramBot} style={styles.logWrap}>
-              <Telegram />
-            </TouchableOpacity>
-          </View>
-          <View style={styles.buttonContainer}>
-            <ButtonCustom
-              title="Войти"
-              onClick={handlePost}
-              isLoading={loading}
-              style={{width: '47%'}}
-            />
-            <ButtonCustom
-              title="Регистрация"
-              onClick={() => navigation.navigate('SignUp')}
-              isLoading={false}
-              style={{width: '47%'}}
-            />
-          </View>
+          <ButtonCustom
+            style={{
+              backgroundColor: '#FFFFFF',
+              borderColor: '#02447F',
+              borderWidth: 1,
+            }}
+            title={
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 5,
+                }}>
+                <Text style={{color: '#000018'}}>Подписаться на бота</Text>
+                <Telegram />
+              </View>
+            }
+            onClick={openTelegramBot}
+          />
+          <ButtonCustom
+            title="Регистрация"
+            onClick={handlePost}
+            isLoading={loading}
+          />
+          {/* () => navigation.navigate('Verification',{fio: '', email: '', password: '', phone: ''}) */}
         </LoginContainer>
       </View>
-      <AuthFooter />
     </SafeAreaView>
   );
 }

@@ -6,6 +6,7 @@ import Verification from './Auth/Verification';
 import MainNavigation from '../MainStackNavigation';
 import SignUp from './Auth/SignUp';
 import OfficesLog from './Offices';
+import SplashScreen from '../screens/SplashScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +14,11 @@ export default function Main() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+        {/* <Stack.Screen
+          options={{headerShown: false}}
+          name="SplashScreen"
+          component={SplashScreen}
+        /> */}
         <Stack.Screen
           options={{headerShown: false}}
           name="Login"
