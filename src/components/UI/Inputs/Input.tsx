@@ -5,16 +5,17 @@ interface InputProps {
   onChange: any;
   placeholder: string;
   style?: object;
+  disbaled?: boolean
 }
 
-export const Input = ({value, onChange, placeholder, style}: InputProps) => {
+export const Input = ({value, onChange, placeholder, style, disbaled = false}: InputProps) => {
   const inputAccessoryViewID = 'uniqueID';
   return (
     <View style={{position: 'relative'}}>
       <TextInput
         style={[styles.input, style]}
         inputAccessoryViewID={inputAccessoryViewID}
-        onChangeText={onChange}
+        onChangeText={!disbaled ? onChange: false}
         value={value}
         placeholder={placeholder}
       />

@@ -1,10 +1,8 @@
 import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 
-// Создайте объект для хранения путей к изображениям
 export const imageSources = [
-  require('../../assets/images/Reklama0.png'),
-  require('../../assets/images/Reklama1.png'),
+  require('../../assets/images/BANNER.png'),
 ];
 export const BannerWrapper = ({index}: {index: number}) => {
   const imageSource = imageSources[index];

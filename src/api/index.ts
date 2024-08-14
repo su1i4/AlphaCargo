@@ -9,10 +9,9 @@ import { RootState } from '../store';
 export const baseQuery = fetchBaseQuery({
   baseUrl: 'https://alphacargoserver.azurewebsites.net/',
   prepareHeaders(headers, api) {
-    const token = JSON.stringify((api.getState() as RootState).auth.user?.accessToken);
-    if (token) {
+    const token: any = JSON.stringify((api.getState() as RootState).auth.user?.accessToken);
+    if (true) {
       headers.set('authorization', `Bearer ${token}`);
-      console.log(token, 'this is token')
     }
     return headers;
   },

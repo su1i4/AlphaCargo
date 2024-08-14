@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   ScrollView,
@@ -11,13 +11,49 @@ import Header from '../../screens/Header';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
 import {useNavigation} from '@react-navigation/native';
 import BellIcon from '../../assets/icons/BellIcon';
-import { useGetNotificationsQuery } from '../../services/base.service';
+import { useAuth } from '../../hooks/useAuth';
+import Loading from '../../components/UI/Loading';
 
 export const Notifications = () => {
+  const user = useAuth();
+  const accessToken = user?.accessToken;
   const navigation: any = useNavigation();
-  const {data} = useGetNotificationsQuery()
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  console.log(data, 'this is data')
+  useEffect(() => {
+    if (accessToken) {
+      const fetchNotifications = async () => {
+        try {
+          const response = await fetch('https://alphacargoserver.azurewebsites.net/notifications', {
+            method: 'GET',
+            headers: {
+              'Authorization': `Bearer ${accessToken}`,
+              'Content-Type': 'application/json',
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          const data = await response.json();
+          setNotifications(data);
+        } catch (err: any) {
+          setError(err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchNotifications();
+    } else {
+      setLoading(false);
+    }
+  }, [accessToken]);
+
+  console.log(notifications && notifications[0])
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -29,18 +65,17 @@ export const Notifications = () => {
         funcLeft={() => navigation.navigate('Notifications')}
         func={() => navigation.goBack()}
       />
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.Wrapper}>
-          {[].map((item: any, index: number) => (
+      <ScrollView style={[styles.scrollView]}>
+        <View style={!loading ? styles.Wrapper: styles.loadWrap}>
+          {!loading ? notifications?.map((item: any, index: number) => (
             <View key={index} style={styles.container}>
               <Text
                 style={{
                   fontSize: 18,
                   fontWeight: '600',
                   color: '#02447F',
-                  marginVertical: 5,
                 }}>
-                {item.name}
+                {item.title}
               </Text>
               <View
                 style={{
@@ -52,14 +87,19 @@ export const Notifications = () => {
               />
               <View>
                 <Text style={{color: '#8C8C8C', fontSize: 13}}>
-                  дата: {item.date}
+                  дата: {item.createdAt.split("T")[0]} - {item.createdAt.split("T")[1].split('.')[0]}
                 </Text>
                 <Text style={{color: '#8C8C8C', fontSize: 13}}>
-                  статус: {item.status}
+                  статус: {item.read ? 'Прочитано': 'Не прочитано'}
+                </Text>
+                <Text style={{color: '#8C8C8C', fontSize: 13}}>
+                  {item.message}
                 </Text>
               </View>
             </View>
-          ))}
+          )) : (
+            <Loading />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -97,4 +137,11 @@ const styles = StyleSheet.create({
     padding: 20,
     width: '100%',
   },
+  loadWrap: {
+    height: 600,
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center'
+  }
 });
