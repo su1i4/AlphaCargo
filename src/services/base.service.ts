@@ -25,6 +25,15 @@ export const baseApi = createApi({
     }),
     getNotifications: build.query<any, any>({
       query: () => 'notifications'
+    }),
+    getParcelTypes: build.query<any, void>({
+      query: () => 'parcel-type'
+    }),
+    getBags: build.query<any, void>({
+      query: () => 'bags'
+    }),
+    getTariffs: build.query<any, void>({
+      query: () => 'tariffs'
     })
   }),
 });
@@ -36,5 +45,8 @@ export const {
   useGetServicesQuery,
   useGetAllCitiesQuery,
   useGetAllCountriesQuery,
-  useGetNotificationsQuery
+  useGetNotificationsQuery,
+  useGetParcelTypesQuery,
+  useGetBagsQuery,
+  useGetTariffsQuery
 } = baseApi;

@@ -6,18 +6,20 @@ interface InputProps {
   placeholder: string;
   style?: object;
   disbaled?: boolean
+  keyboardType?: boolean
 }
 
-export const Input = ({value, onChange, placeholder, style, disbaled = false}: InputProps) => {
+export const Input = ({value, onChange, placeholder, style, disbaled = false, keyboardType = false}: InputProps) => {
   const inputAccessoryViewID = 'uniqueID';
   return (
-    <View style={{position: 'relative'}}>
+    <View style={{position: 'relative', width: '100%'}}>
       <TextInput
         style={[styles.input, style]}
         inputAccessoryViewID={inputAccessoryViewID}
         onChangeText={!disbaled ? onChange: false}
         value={value}
         placeholder={placeholder}
+        keyboardType={keyboardType? 'numeric' :'default'}
       />
     </View>
   );

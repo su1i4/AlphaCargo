@@ -8,6 +8,7 @@ import CalcPrice from '../screens/CalcPrice';
 import Bonus from '../screens/BonusPage';
 import Tasks from '../screens/Tasks';
 import Reward from '../screens/Reward';
+import Tarif from '../screens/Tarif';
 
 const MainStack = createNativeStackNavigator();
 
@@ -19,6 +20,7 @@ export default function MainNavigation() {
       <MainStack.Screen name="Points" component={Points} />
       <MainStack.Screen name="Profile" component={Profile} />
       <MainStack.Screen name="CalcPrice" component={CalcPrice} />
+      <MainStack.Screen name="Tarif" component={Tarif} />
       <MainStack.Screen name="Notifications" component={Notifications} />
       <MainStack.Screen name="Bonus" component={Bonus} />
       <MainStack.Screen name="Reward" component={Reward} />
