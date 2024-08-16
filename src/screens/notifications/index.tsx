@@ -13,6 +13,7 @@ import {useNavigation} from '@react-navigation/native';
 import BellIcon from '../../assets/icons/BellIcon';
 import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/UI/Loading';
+import { getUserFromStorage } from '../../utils/helpers';
 
 export const Notifications = () => {
   const user = useAuth();
@@ -54,6 +55,7 @@ export const Notifications = () => {
   }, [accessToken]);
 
   console.log(notifications && notifications[0])
+  console.log(getUserFromStorage())
 
   return (
     <SafeAreaView style={styles.safeArea}>

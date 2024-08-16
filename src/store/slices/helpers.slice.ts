@@ -12,6 +12,7 @@ export const helpersSlice = createSlice({
       state.product = action.payload
     }
   },
+  
 });
 
 export const {setProduct} = helpersSlice.actions;

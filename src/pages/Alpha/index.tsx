@@ -1,5 +1,14 @@
 import {useState} from 'react';
-import {SafeAreaView, View, StyleSheet, Text, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  SafeAreaView,
+  View,
+  StyleSheet,
+  Text,
+  ScrollView,
+  Linking,
+  Alert,
+  TouchableOpacity,
+} from 'react-native';
 import Header from '../../screens/Header';
 import BellIcon from '../../assets/icons/BellIcon';
 import SingleUser from '../../assets/icons/SingleUser';
@@ -17,15 +26,40 @@ export default function Alpha() {
   const navigation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
 
+  const phoneNumber = '+996772007183';
+  const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
+  const webWhatsAppUrl = `https://wa.me/${phoneNumber}`;
+
+  const openWhatsAppOrWebsite = async () => {
+    try {
+      const supported = await Linking.canOpenURL(whatsAppUrl);
+      if (supported) {
+        await Linking.openURL(whatsAppUrl);
+      } else {
+        await Linking.openURL(webWhatsAppUrl);
+      }
+    } catch (error) {
+      Alert.alert(
+        'Ошибка',
+        'Не удалось открыть WhatsApp, переход к веб-версии.',
+      );
+      await Linking.openURL(webWhatsAppUrl);
+    }
+  };
+
   const HeaderIcons = [
     {
       icon: <BellIcon color="#94C325" size={18} strokeWidth={2} />,
       text: `Уведом-\nления`,
-      link: ()=>  navigation.navigate('Notifications')
+      link: () => navigation.navigate('Notifications'),
     },
-    {icon: <FaUser />, text: `Вызов\nвыездной\nгруппы`, link: 'Alpha'},
-    {icon: <Card />, text: `Онлайн-\nоплата`, link: 'Alpha'},
-    {icon: <QuesDock />, text: `Вопросы и\nответы`, link: 'Alpha'},
+    {
+      icon: <FaUser />,
+      text: `Вызов\nвыездной\nгруппы`,
+      link: openWhatsAppOrWebsite,
+    },
+    {icon: <Card />, text: `Онлайн-\nоплата`, link: () => false},
+    {icon: <QuesDock />, text: `Вопросы и\nответы`, link: () => false},
   ];
 
   const components = [<Personal />, <Buisenes />];
@@ -74,7 +108,9 @@ export default function Alpha() {
               </View>
             ))}
           </View>
-          <Panel />
+          <TouchableOpacity onPress={() => navigation.navigate('CalcPrice')}>
+            <Panel />
+          </TouchableOpacity>
           <Tab text="Сервисы" active={activeTab} setActive={setActiveTab}>
             <View>
               <SingleUser size={19} />

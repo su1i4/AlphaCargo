@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {SafeAreaView, StyleSheet, View, ScrollView, Text} from 'react-native';
+import {SafeAreaView, StyleSheet, View, ScrollView, Text, TouchableOpacity, Linking, Alert} from 'react-native';
 import Header from '../../screens/Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import Calc from '../../assets/icons/Calc';
@@ -12,6 +12,28 @@ export default function Send() {
   const naviagation: any = useNavigation()
   const [activeTab, setActiveTab] = useState(0);
   const [text, setText] = useState('');
+
+  const phoneNumber = '+996772007183';
+  const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
+  const webWhatsAppUrl = `https://wa.me/${phoneNumber}`;
+
+  const openWhatsAppOrWebsite = async () => {
+    try {
+      const supported = await Linking.canOpenURL(whatsAppUrl);
+      if (supported) {
+        await Linking.openURL(whatsAppUrl);
+      } else {
+        await Linking.openURL(webWhatsAppUrl);
+      }
+    } catch (error) {
+      Alert.alert(
+        'Ошибка',
+        'Не удалось открыть WhatsApp, переход к веб-версии.',
+      );
+      await Linking.openURL(webWhatsAppUrl);
+    }
+  };
+
   return (
     <SafeAreaView>
       <Header
@@ -27,21 +49,21 @@ export default function Send() {
       <ScrollView>
         <View style={styles.Wrapper}>
           <View style={styles.brokeTools}>
-            <View style={styles.content}>
+            <TouchableOpacity onPress={() => naviagation.navigate('CalcPrice')}  style={styles.content}>
               <Calc active />
               <Text style={styles.text}>Рассчитать</Text>
-            </View>
-            <View style={styles.content}>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={openWhatsAppOrWebsite} style={styles.content}>
               <CarIcon />
               <Text style={styles.text}>{`Вызвать\nвыездную группу`}</Text>
-            </View>
+            </TouchableOpacity>
           </View>
-          <View style={styles.container}>
+          <TouchableOpacity onPress={() => naviagation.navigate('Tarif')} style={styles.container}>
             <TarifIcon />
             <Text style={{fontSize: 13, fontWeight: '400', color: '#F9FFFF'}}>
               Рассчитать
             </Text>
-          </View>
+          </TouchableOpacity>
           <Tab
             text="Мои отправления"
             active={activeTab}
