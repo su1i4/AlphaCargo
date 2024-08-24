@@ -12,7 +12,7 @@ const AuthFooter = () => {
       <SectionItem
         title="Стать клиентом"
         Icon={UserIcon}
-        onPress={() => navigation.navigate('SignUpMain')}
+        onPress={() => navigation.navigate('SignUp')}
         style={{
           borderTopLeftRadius: 4,
           borderTopRightRadius: 4,
@@ -21,7 +21,7 @@ const AuthFooter = () => {
       <SectionItem
         title="Карта офисов"
         Icon={MapIcon}
-        onPress={() => navigation.navigate('Offices')}
+        onPress={() => navigation.navigate('OfficesLog')}
         style={{
           borderBottomLeftRadius: 4,
           borderBottomRightRadius: 4,
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     width: '100%',
     position: 'absolute',
-    bottom: 30,
+    bottom: 40,
     paddingHorizontal: '5%',
     display: 'flex',
     flexDirection: 'column',
