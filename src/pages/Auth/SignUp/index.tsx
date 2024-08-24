@@ -25,8 +25,8 @@ export default function SignUp() {
   const handlePost = async () => {
     setPhoneError('');
     setPasswordError('');
-    setEmailError('')
-    setFioError('')
+    setEmailError('');
+    setFioError('');
     let hasError = false;
 
     if (!phone) {
@@ -69,8 +69,7 @@ export default function SignUp() {
           phone: phone,
         });
       }
-    } catch (error) {
-    }
+    } catch (error) {}
     setLoading(false);
   };
 
@@ -97,19 +96,12 @@ export default function SignUp() {
     if (email) setEmailError('');
   }, [phone, password, email, fio]);
 
-  const onClose = () => {
-    setPhone('');
-    setPassword('');
-    setEmail('')
-    setFio('')
-  };
-
   return (
     <SafeAreaView>
       <View style={styles.main}>
         <LoginContainer isClose={true} text={'Введите номер телефона'}>
           <Text style={{color: '#000018', fontSize: 13, fontWeight: '400'}}>
-          Мы отправим вам код через Телеграм-бота
+            Мы отправим вам код через Телеграм-бота
           </Text>
 
           <View style={styles.msgWrap}>
@@ -163,7 +155,6 @@ export default function SignUp() {
             onClick={handlePost}
             isLoading={loading}
           />
-          {/* () => navigation.navigate('Verification',{fio: '', email: '', password: '', phone: ''}) */}
         </LoginContainer>
       </View>
     </SafeAreaView>

@@ -1,12 +1,12 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Platform} from 'react-native';
 import SectionItem from './SectionItem';
 import UserIcon from '../../assets/icons/UsersIcon';
 import MapIcon from '../../assets/icons/MapIcon';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const AuthFooter = () => {
-  const navigation: any = useNavigation()
+  const navigation: any = useNavigation();
   return (
     <View style={styles.footerContainer}>
       <SectionItem
@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   footerContainer: {
     width: '100%',
     position: 'absolute',
-    bottom: 40,
+    bottom: Platform.OS === 'ios' ? 50 : 30,
     paddingHorizontal: '5%',
     display: 'flex',
     flexDirection: 'column',
