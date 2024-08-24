@@ -194,17 +194,29 @@ const styles = StyleSheet.create({
   },
   inputWrap: {
     position: 'relative',
+    height: 55, 
+    minHeight: 55,
+    maxHeight: 55
   },
   signWrap: {
     position: 'absolute',
-    top: 10,
+    top: 0,
     right: 50,
-    padding: 5,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 0
   },
   logWrap: {
     position: 'absolute',
+    top: 0,
     right: 20,
-    top: 15,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    bottom: 0
   },
   buttonContainer: {
     display: 'flex',

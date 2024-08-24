@@ -115,7 +115,7 @@ export default function Verification({navigation, route}: any) {
   return (
     <SafeAreaView>
       <View style={styles.main}>
-        <LoginContainer text={'Войти'} isClose={false}>
+        <LoginContainer text={'Войти'} isClose={true}>
           <View style={styles.headerTitle}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <ArrowBack size={17} />

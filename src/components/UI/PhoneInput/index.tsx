@@ -37,6 +37,8 @@ const styles = StyleSheet.create({
   containerStyle: {
     width: '100%',
     height: 55,
+    minHeight: 55,
+    maxHeight: 55,
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#8C8C8C',
@@ -48,7 +50,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   textInputStyle: {
-    height: 50,
+    height: 55,
+    minHeight: 55,
+    maxHeight: 55,
     fontSize: 14,
     color: '#808080'
   },
