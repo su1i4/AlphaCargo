@@ -1,6 +1,7 @@
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {ReactNode} from 'react';
 import CloseIcon from '../../assets/icons/CloseIcons';
+import { useNavigation } from '@react-navigation/native';
 
 interface LoginContainerProps {
   children: ReactNode;
@@ -13,12 +14,13 @@ export const LoginContainer = ({
   text,
   isClose,
 }: LoginContainerProps): JSX.Element => {
+  const navigation = useNavigation()
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
         <Text style={styles.headerTitle}>{text}</Text>
         {isClose && (
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()} >
             <CloseIcon size={20} />
           </TouchableOpacity>
         )}

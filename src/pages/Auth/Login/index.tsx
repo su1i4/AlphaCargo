@@ -123,7 +123,7 @@ export default function Login() {
         <View style={styles.imageContainer}>
           <Image source={require('../../../assets/images/AlphaCargo.png')} />
         </View>
-        <LoginContainer isClose={true} text={'Войти'}>
+        <LoginContainer isClose={false} text={'Войти'}>
           <View style={styles.msgWrap}>
             <PhoneNumberInput setPhoneNumber={setPhone} ref={phoneInputRef} />
             {phoneError ? (

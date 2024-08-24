@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Header from '../Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
@@ -89,9 +89,6 @@ export default function CalcPrice() {
     }
     setLoading(false);
   };
-
-  console.log(fromCities, 'this is cities');
-  console.log(cityFromId, 'this is console.lo');
 
   return (
     <SafeAreaView style={styles.safeArea}>
