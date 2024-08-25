@@ -21,7 +21,14 @@ export const GradientWrapper = ({
         borderRadius: 20,
         padding: 2,
       }}>
-      <View style={{backgroundColor: 'white', padding: 2, borderRadius: 18, position: 'relative', overflow: 'hidden'}}>
+      <View
+        style={{
+          backgroundColor: 'white',
+          padding: 2,
+          borderRadius: 18,
+          position: 'relative',
+          overflow: 'hidden',
+        }}>
         <Image
           source={image}
           style={[styles.wrapper, {backgroundColor: color}]}

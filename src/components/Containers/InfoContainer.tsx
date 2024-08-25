@@ -1,18 +1,18 @@
-import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
 import {ReactNode} from 'react';
 
 interface InfoContainerProps {
   Icon: ReactNode;
   title: string;
   content: string;
-  width?: any
+  width?: any;
 }
 
 export const InfoContainer = ({
   Icon,
   title,
   content,
-  width= '100%'
+  width = '100%',
 }: InfoContainerProps): JSX.Element => {
   return (
     <View style={[styles.container, {width: width}]}>
@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '400',
     color: '#8C8C8C',
-    lineHeight: 18
+    lineHeight: 18,
   },
 });
