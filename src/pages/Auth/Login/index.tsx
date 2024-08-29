@@ -115,10 +115,8 @@ export default function Login() {
     }
   };
 
-  console.log(password, 'this is password')
-
   return (
-    <SafeAreaView>
+    <View>
       <View style={styles.main}>
         <View style={styles.imageContainer}>
           <Image source={require('../../../assets/images/AlphaCargo.png')} />
@@ -166,7 +164,7 @@ export default function Login() {
         </LoginContainer>
       </View>
       <AuthFooter />
-    </SafeAreaView>
+    </View>
   );
 }
 

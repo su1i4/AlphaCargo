@@ -101,7 +101,6 @@ export default function Profile() {
       }
   
       const data = await response.json();
-      console.log(data, 'this is data')
       if (data['error']) {
         Toast.show({
           type: 'error',
