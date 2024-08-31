@@ -1,16 +1,10 @@
+import {useNavigation} from '@react-navigation/native';
 import React from 'react';
-import {View, StyleSheet, Text, Image} from 'react-native';
+import {View, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-export const GradientWrapper = ({
-  text,
-  color,
-  image,
-}: {
-  color: string;
-  text: string;
-  image: any;
-}) => {
+export const GradientWrapper = ({item}: any) => {
+  const naviagation: any = useNavigation();
   return (
     <LinearGradient
       colors={['#5BA0D1', '#9CC042']}
@@ -21,13 +15,20 @@ export const GradientWrapper = ({
         borderRadius: 20,
         padding: 2,
       }}>
-      <View style={{backgroundColor: 'white', padding: 2, borderRadius: 18, position: 'relative', overflow: 'hidden'}}>
+      <TouchableOpacity
+        onPress={() => naviagation.navigate('Vlogs', {item: item})}
+        style={{
+          backgroundColor: 'white',
+          padding: 2,
+          borderRadius: 18,
+          position: 'relative',
+          overflow: 'hidden',
+        }}>
         <Image
-          source={image}
-          style={[styles.wrapper, {backgroundColor: color}]}
+          source={item.image}
+          style={[styles.wrapper, {backgroundColor: item.color}]}
         />
-        <Text style={styles.text}>{text}</Text>
-      </View>
+      </TouchableOpacity>
     </LinearGradient>
   );
 };

@@ -10,6 +10,7 @@ import {useAuth} from '../hooks/useAuth';
 import {authActions} from '../store/slices/auth.slice';
 import {getUserFromStorage} from '../utils/helpers';
 import {useDispatch} from 'react-redux';
+import {checkLoginDate} from '../utils/helpers';
 
 const Stack = createNativeStackNavigator();
 
@@ -21,20 +22,23 @@ export default function Main() {
   useEffect(() => {
     const loadUser = async () => {
       const savedUser = await getUserFromStorage();
-      if (savedUser) {
+      const isLoggedIn = await checkLoginDate();
+
+      if (savedUser && isLoggedIn) {
         dispatch(authActions.saveUser(savedUser));
+      } else {
+        dispatch(authActions.logout());
       }
+
       setLoading(false);
     };
 
     loadUser();
-  }, []);
+  }, [dispatch]);
 
   if (loading) {
     return null;
   }
-
-  console.log(user, 'this is user');
 
   return (
     <NavigationContainer>

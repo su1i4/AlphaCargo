@@ -1,4 +1,5 @@
 import {useEffect, useState, useRef} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   SafeAreaView,
   View,
@@ -22,6 +23,7 @@ import Telegram from '../../../assets/svg/Telegram';
 import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
 import {useNavigation} from '@react-navigation/native';
 import {useActions} from '../../../hooks/useActions';
+import { LAST_LOGIN_KEY } from '../../../utils/consts';
 
 export default function Login() {
   const navigation: any = useNavigation();
@@ -77,6 +79,8 @@ export default function Login() {
             text2: response.error.data.message,
           });
         } else {
+          const currentDate = new Date().toISOString();
+          await AsyncStorage.setItem(LAST_LOGIN_KEY, currentDate);
           saveUser(response.data);
           navigation.navigate('MainNavigation');
           onClose();
@@ -192,9 +196,9 @@ const styles = StyleSheet.create({
   },
   inputWrap: {
     position: 'relative',
-    height: 55, 
+    height: 55,
     minHeight: 55,
-    maxHeight: 55
+    maxHeight: 55,
   },
   signWrap: {
     position: 'absolute',
@@ -204,7 +208,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 0
+    bottom: 0,
   },
   logWrap: {
     position: 'absolute',
@@ -214,7 +218,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 0
+    bottom: 0,
   },
   buttonContainer: {
     display: 'flex',
