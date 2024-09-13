@@ -16,7 +16,7 @@ export default function Vlogs({route}: any) {
     progress.setValue(0);
     Animated.timing(progress, {
       toValue: 1,
-      duration: 5000, // 5 seconds for each story
+      duration: 5000,
       useNativeDriver: false,
     }).start(({finished}) => {
       if (finished) {
