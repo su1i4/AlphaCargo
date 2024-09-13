@@ -26,8 +26,6 @@ export default function CalcPrice() {
   const {data: ParcelTypes = []} = useGetParcelTypesQuery();
   const {data: Bags = []} = useGetBagsQuery();
 
-  console.log(Cities, 'this is allS');
-
   const [loading, setLoading] = useState<boolean>(false);
   const [fromCities, setFromCities] = useState([]);
   const [toCities, setToCities] = useState([]);

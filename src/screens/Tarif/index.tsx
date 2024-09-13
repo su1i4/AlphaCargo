@@ -55,8 +55,6 @@ export default function Tarif() {
     }
   };
 
-  console.log(parcelOption, 'this is tarif');
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <Header

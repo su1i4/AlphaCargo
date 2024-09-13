@@ -80,5 +80,7 @@ const styles = StyleSheet.create({
   component: {
     paddingHorizontal: 20,
     paddingBottom: 15,
+    minHeight: 50,
+    maxHeight: 50,
   },
 });

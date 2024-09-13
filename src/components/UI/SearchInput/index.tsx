@@ -35,12 +35,18 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '400',
     backgroundColor: '#1E2661',
-    gap: 5
+    gap: 5,
+    height: 50,
+    minHeight: 50,
+    maxHeight: 50,
   },
   input: {
     color: '#505893',
     fontSize: 14,
     fontWeight: '400',
-    width: '90%'
+    width: '90%',
+    height: 50,
+    minHeight: 50,
+    maxHeight: 50,
   },
 });

@@ -85,7 +85,6 @@ export default function SignUp() {
         await Linking.openURL(urlWeb);
       }
     } catch (err) {
-      console.error('An error occurred', err);
     }
   };
 
