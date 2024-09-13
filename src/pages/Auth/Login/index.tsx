@@ -80,6 +80,8 @@ export default function Login() {
     }
   };
 
+  console.log(password, 'this is password');
+
   return (
     <View>
       <View style={styles.main}>
