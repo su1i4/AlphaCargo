@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< Updated upstream
 import {StyleSheet, View, Platform} from 'react-native';
-=======
-import {StyleSheet, View} from 'react-native';
->>>>>>> Stashed changes
 import SectionItem from './SectionItem';
 import UserIcon from '../../assets/icons/UsersIcon';
 import MapIcon from '../../assets/icons/MapIcon';

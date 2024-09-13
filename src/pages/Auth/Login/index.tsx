@@ -57,8 +57,8 @@ export default function Login() {
     setLoading(true);
     if (!code) {
       try {
-			const response: any = await login({ phone, password });
-			console.log(response)		
+        const response: any = await login({phone, password});
+        console.log(response);
         if (response['error']) {
           Toast.show({
             type: 'error',
@@ -70,8 +70,8 @@ export default function Login() {
       } catch (error) {}
     } else {
       try {
-			const response: any = await login2({ phone, password, code });
-			console.log(response)
+        const response: any = await login2({phone, password, code});
+        console.log(response);
         if (response['error']) {
           Toast.show({
             type: 'error',
@@ -117,7 +117,7 @@ export default function Login() {
     }
   };
 
-  console.log(password, 'this is password')
+  console.log(password, 'this is password');
 
   return (
     <SafeAreaView>
@@ -196,9 +196,9 @@ const styles = StyleSheet.create({
   },
   inputWrap: {
     position: 'relative',
-    height: 55, 
+    height: 55,
     minHeight: 55,
-    maxHeight: 55
+    maxHeight: 55,
   },
   signWrap: {
     position: 'absolute',
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 0
+    bottom: 0,
   },
   logWrap: {
     position: 'absolute',
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 0
+    bottom: 0,
   },
   buttonContainer: {
     display: 'flex',
