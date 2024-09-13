@@ -1,9 +1,7 @@
 import React from 'react';
 import {View, StyleSheet, Image} from 'react-native';
 
-export const imageSources = [
-  require('../../assets/images/BANNER.png'),
-];
+export const imageSources = [require('../../assets/images/BANNER.png')];
 export const BannerWrapper = ({index}: {index: number}) => {
   const imageSource = imageSources[index];
   return (
