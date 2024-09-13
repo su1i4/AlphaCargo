@@ -40,38 +40,15 @@ export default function Main() {
 
   return (
     <>
-      <StatusBar
-        barStyle="dark-content"
-        backgroundColor="transparent"
-        translucent={true}
-      />
+      {/* Настраиваем StatusBar */}
+      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent={true} />
       <NavigationContainer>
         <Stack.Navigator initialRouteName={user ? 'MainNavigation' : 'Login'}>
-          <Stack.Screen
-            options={{headerShown: false}}
-            name="Login"
-            component={Login}
-          />
-          <Stack.Screen
-            options={{headerShown: false}}
-            name="SignUp"
-            component={SignUp}
-          />
-          <Stack.Screen
-            options={{headerShown: false}}
-            name="Verification"
-            component={Verification}
-          />
-          <Stack.Screen
-            options={{headerShown: false}}
-            name="MainNavigation"
-            component={MainNavigation}
-          />
-          <Stack.Screen
-            options={{headerShown: false}}
-            name="OfficesLog"
-            component={OfficesLog}
-          />
+          <Stack.Screen options={{headerShown: false}} name="Login" component={Login} />
+          <Stack.Screen options={{headerShown: false}} name="SignUp" component={SignUp} />
+          <Stack.Screen options={{headerShown: false}} name="Verification" component={Verification} />
+          <Stack.Screen options={{headerShown: false}} name="MainNavigation" component={MainNavigation} />
+          <Stack.Screen options={{headerShown: false}} name="OfficesLog" component={OfficesLog} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
