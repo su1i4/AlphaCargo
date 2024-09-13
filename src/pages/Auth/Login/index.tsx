@@ -59,7 +59,8 @@ export default function Login() {
     setLoading(true);
     if (!code) {
       try {
-        const response: any = await login({phone, password});
+			const response: any = await login({ phone, password });
+			console.log(response)		
         if (response['error']) {
           Toast.show({
             type: 'error',
@@ -71,7 +72,8 @@ export default function Login() {
       } catch (error) {}
     } else {
       try {
-        const response: any = await login2({phone, password, code});
+			const response: any = await login2({ phone, password, code });
+			console.log(response)
         if (response['error']) {
           Toast.show({
             type: 'error',

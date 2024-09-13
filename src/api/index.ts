@@ -4,12 +4,14 @@ import {
   FetchBaseQueryError,
   fetchBaseQuery,
 } from '@reduxjs/toolkit/query';
-import { RootState } from '../store';
+import {RootState} from '../store';
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: 'https://alphacargoserver.azurewebsites.net/',
   prepareHeaders(headers, api) {
-    const token: any = JSON.stringify((api.getState() as RootState).auth.user?.accessToken);
+    const token: any = JSON.stringify(
+      (api.getState() as RootState).auth.user?.accessToken,
+    );
     if (true) {
       headers.set('authorization', `Bearer ${token}`);
     }
