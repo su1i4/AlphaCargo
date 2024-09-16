@@ -9,6 +9,7 @@ interface ButtonProps {
   textStyle?: object;
   isLoading?: boolean;
   disabled?: boolean
+  loadingColor?: string
 }
 
 export const ButtonCustom = ({
@@ -17,7 +18,8 @@ export const ButtonCustom = ({
   style,
   textStyle,
   isLoading = false,
-  disabled = false
+  disabled = false,
+  loadingColor = '#FFFFFF'
 }: ButtonProps) => {
   const paddingTop = isLoading ? 10 : 12;
   const paddingBottom = isLoading ? 12 : 14;
@@ -30,7 +32,7 @@ export const ButtonCustom = ({
         {paddingTop: paddingTop, paddingBottom: paddingBottom},
       ]}>
       {isLoading ? (
-        <LoadingIcon />
+        <LoadingIcon color={loadingColor} />
       ) : (
         <Text style={[styles.buttonText, textStyle]}>{title}</Text>
       )}

@@ -20,6 +20,7 @@ export default function WatchOrder() {
 
   const Components = [
     {
+      id: 0,
       color: '#495665',
       text: 'Регистрация',
       image: require('../../assets/images/REKLAMA5.png'),
@@ -28,7 +29,7 @@ export default function WatchOrder() {
         require('../../assets/images/REKLAMA6.png'),
         require('../../assets/images/REKLAMA7.png'),
       ],
-    },
+    }
   ];
 
   const Right = () => {
@@ -64,7 +65,7 @@ export default function WatchOrder() {
           contentContainerStyle={styles.horizontalScrollView}>
           <View style={[styles.headerWrapper, {paddingTop: 15}]}>
             {Components.map((item, index) => (
-              <GradientWrapper key={index} item={item} />
+              <GradientWrapper key={index} Components={Components} item={item} />
             ))}
           </View>
         </ScrollView>

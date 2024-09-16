@@ -54,6 +54,7 @@ export default function SignUp() {
     setLoading(true);
     try {
       const response: any = await SignUp({phone, password, fio, email});
+      console.log(response, 'this is lox')
       if (response['error']) {
         Toast.show({
           type: 'error',

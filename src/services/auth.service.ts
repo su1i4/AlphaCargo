@@ -56,6 +56,14 @@ export const authApi = createApi({
         }
       },
       invalidatesTags: ['users']
+    }),
+    deleteUser: build.mutation<void, void>({
+      query: () => {
+        return {
+          url: 'users/deactivateUser',
+          method: "DELETE"
+        }
+      }
     })
   }),
 });
@@ -66,5 +74,6 @@ export const {
   useSingUpStep1Mutation,
   useSingUpStep2Mutation,
   useGetUserQuery,
-  usePatchuserMutation
+  usePatchuserMutation,
+  useDeleteUserMutation
 } = authApi;

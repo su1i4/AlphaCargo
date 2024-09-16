@@ -39,22 +39,35 @@ export default function Verification({navigation, route}: any) {
 
     setLoading(true);
     try {
-      const response: any = await Verification({
-        phone: phone,
-        password: password,
-        fio: fio,
-        email: email,
-        code: String(codeRes),
-      });
-      if (response['error']) {
+      const response: any = await fetch(
+        'https://alphacargoserver.azurewebsites.net/auth/signup-step2',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            phone: phone,
+            password: password,
+            fio: fio,
+            email: email,
+            code: String(codeRes),
+          }),
+        }
+      );
+      if (response.status === 201) {
+        Toast.show({
+          type: 'success',
+          text1: 'Успех',
+          text2: 'Аккаунт успешно создан',
+        });
+        navigation.navigate('Login');
+      } else {
         Toast.show({
           type: 'error',
           text1: 'Ошибка входа',
           text2: response.error.data.message,
         });
-      } else {
-        saveUser(response.data);
-        navigation.navigate('MainNavigation');
       }
     } catch (error) {
       Toast.show({

@@ -17,6 +17,7 @@ import {Input} from '../../components/UI/Inputs/Input';
 import {useAuth} from '../../hooks/useAuth';
 import Loading from '../../components/UI/Loading';
 import Toast from 'react-native-toast-message';
+import { removeUserFromStorage } from '../../utils/helpers';
 
 export default function Profile() {
   const user = useAuth();
@@ -29,13 +30,14 @@ export default function Profile() {
   const [phone, setPhone] = useState('');
   const [fio, setFio] = useState('');
   const [loading, setLoading] = useState(true);
-  const [pacthLoad, setPatchLoad] = useState(false)
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const [pacthLoad, setPatchLoad] = useState(false);
 
   useEffect(() => {
-    if(type){
-      setType(false)
+    if (type) {
+      setType(false);
     }
-  }, [])
+  }, []);
 
   const fetchNotifications = async () => {
     try {
@@ -69,7 +71,6 @@ export default function Profile() {
 
   useEffect(() => {
     if (accessToken) {
-
       fetchNotifications();
     } else {
       setLoading(false);
@@ -81,8 +82,8 @@ export default function Profile() {
       console.error('No access token available');
       return;
     }
-    setPatchLoad(true)
-  
+    setPatchLoad(true);
+
     try {
       const response = await fetch(
         'https://alphacargoserver.azurewebsites.net/users',
@@ -95,11 +96,11 @@ export default function Profile() {
           body: JSON.stringify(updateData),
         },
       );
-  
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-  
+
       const data = await response.json();
       if (data['error']) {
         Toast.show({
@@ -115,14 +116,60 @@ export default function Profile() {
           text2: 'Успешное обновление личных данных',
           visibilityTime: 3000,
         });
-        setType(false)
-        fetchNotifications()
+        setType(false);
+        fetchNotifications();
       }
     } catch (err) {
       console.error('Error updating user data:', err);
     }
-    setPatchLoad(false)
+    setPatchLoad(false);
   };
+
+  const handleDelete = async () => {
+    setDeleteLoading(true);
+    try {
+      const response = await fetch(
+        'https://alphacargoserver.azurewebsites.net/users/deactivateUser',
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+
+      if(response?.status === 200){
+        Toast.show({
+          type: 'success',
+          text1: 'Успеx',
+          text2: 'Успешное удаление аккаунта',
+          visibilityTime: 3000,
+        });
+        removeUserFromStorage()
+        naviagation.navigate('Login')
+      }else{
+        Toast.show({
+          type: 'error',
+          text1: 'Ошибка',
+          text2: 'Ошибка удаления',
+          visibilityTime: 3000,
+        });
+      }
+    } catch (e: any) {
+      console.log(e, 'this is error delete');
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (accessToken) {
+      fetchNotifications();
+    } else {
+      setLoading(false);
+    }
+  }, [accessToken]);
 
   return (
     <SafeAreaView style={styles.safeArea}>
@@ -193,10 +240,20 @@ export default function Profile() {
               />
               <ButtonCustom
                 onClick={() => {
-                  !type ? setType(true) : handlePost({fio: fio, phone: phone, password: password});
+                  !type
+                    ? setType(true)
+                    : handlePost({fio: fio, phone: phone, password: password});
                 }}
                 isLoading={pacthLoad}
                 title={!type ? 'Редактировать' : 'Сохранить'}
+              />
+              <ButtonCustom
+                onClick={handleDelete}
+                isLoading={deleteLoading}
+                textStyle={{color: 'red'}}
+                style={{backgroundColor: 'transparent'}}
+                title="Удалить аккаунт"
+                loadingColor="red"
               />
             </>
           )}
@@ -238,4 +295,5 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '400',
   },
+  delete: {color: 'red', width: '100%', textAlign: 'center'},
 });
