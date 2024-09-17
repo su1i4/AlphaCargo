@@ -1,4 +1,5 @@
 import {useEffect, useState, useRef} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   SafeAreaView,
   View,
@@ -22,6 +23,7 @@ import Telegram from '../../../assets/svg/Telegram';
 import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
 import {useNavigation} from '@react-navigation/native';
 import {useActions} from '../../../hooks/useActions';
+import { LAST_LOGIN_KEY } from '../../../utils/consts';
 
 export default function Login() {
   const navigation: any = useNavigation();
@@ -79,6 +81,8 @@ export default function Login() {
             text2: response.error.data.message,
           });
         } else {
+          const currentDate = new Date().toISOString();
+          await AsyncStorage.setItem(LAST_LOGIN_KEY, currentDate);
           saveUser(response.data);
           navigation.navigate('MainNavigation');
           onClose();
@@ -117,10 +121,8 @@ export default function Login() {
     }
   };
 
-  console.log(password, 'this is password');
-
   return (
-    <SafeAreaView>
+    <View>
       <View style={styles.main}>
         <View style={styles.imageContainer}>
           <Image source={require('../../../assets/images/AlphaCargo.png')} />
@@ -168,7 +170,7 @@ export default function Login() {
         </LoginContainer>
       </View>
       <AuthFooter />
-    </SafeAreaView>
+    </View>
   );
 }
 

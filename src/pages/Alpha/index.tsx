@@ -131,6 +131,7 @@ export default function Alpha() {
 const styles = StyleSheet.create({
   Wrapper: {
     padding: 20,
+    paddingBottom: 40,
     display: 'flex',
     flexDirection: 'column',
     gap: 15,

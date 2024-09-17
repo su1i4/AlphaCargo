@@ -5,7 +5,7 @@ import {
   View,
   ScrollView,
   Text,
-  TouchableOpacity,
+  TouchableOpacity,Platform
 } from 'react-native';
 import {useGetOfficesQuery} from '../../services/base.service';
 import {useNavigation} from '@react-navigation/native';
@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: 15,
     height: '100%',
+    paddingTop: Platform.OS === 'ios'? 55: 40
   },
   header: {
     display: 'flex',

@@ -54,9 +54,6 @@ export const Notifications = () => {
     }
   }, [accessToken]);
 
-  console.log(notifications && notifications[0])
-  console.log(getUserFromStorage())
-
   return (
     <SafeAreaView style={styles.safeArea}>
       <Header

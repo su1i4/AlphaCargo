@@ -20,20 +20,16 @@ export default function WatchOrder() {
 
   const Components = [
     {
+      id: 0,
       color: '#495665',
       text: 'Регистрация',
       image: require('../../assets/images/REKLAMA5.png'),
-    },
-    {
-      color: '#604C79',
-      text: 'Сдача груза',
-      image: require('../../assets/images/REKLAMA6.png'),
-    },
-    {
-      color: '#7ABBA8',
-      text: 'Оплата',
-      image: require('../../assets/images/REKLAMA7.png'),
-    },
+      children: [
+        require('../../assets/images/REKLAMA5.png'),
+        require('../../assets/images/REKLAMA6.png'),
+        require('../../assets/images/REKLAMA7.png'),
+      ],
+    }
   ];
 
   const Right = () => {
@@ -68,17 +64,9 @@ export default function WatchOrder() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.horizontalScrollView}>
           <View style={[styles.headerWrapper, {paddingTop: 15}]}>
-            {Components.map((item, index) => {
-              const image = item.image
-              return (
-                <GradientWrapper
-                  key={index}
-                  text={item.text}
-                  color={item.color}
-                  image={image}
-                />
-              );
-            })}
+            {Components.map((item, index) => (
+              <GradientWrapper key={index} Components={Components} item={item} />
+            ))}
           </View>
         </ScrollView>
         <View style={styles.Wrapper}>

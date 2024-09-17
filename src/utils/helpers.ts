@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {LAST_LOGIN_KEY, ONE_DAY_MS} from './consts';
 
 export function getStatus(openingHour: any, closingHour: any) {
   const currentHour = new Date().getHours();
@@ -15,11 +16,11 @@ export const getUserFromStorage = async () => {
   try {
     const user = await AsyncStorage.getItem(USER_KEY);
     const parsedUser = user ? JSON.parse(user) : null;
-    
+
     if (parsedUser && parsedUser._j) {
       return parsedUser._j;
     }
-    
+
     return parsedUser;
   } catch (error) {
     console.error('Error retrieving user data:', error);
@@ -50,6 +51,21 @@ export const saveUserToStorage = async (data: any) => {
 };
 
 export const getRightToken = (data: any) => {
-  const user = data.accessToken || data["_j"]
-  return user
-}
+  const user = data.accessToken || data['_j'];
+  return user;
+};
+
+export const checkLoginDate = async () => {
+  try {
+    const lastLoginDate = await AsyncStorage.getItem(LAST_LOGIN_KEY);
+    console.log(lastLoginDate, 'lastLoginDate');
+    if (!lastLoginDate) return false;
+
+    const lastLoginTime = new Date(lastLoginDate).getTime();
+    const currentTime = Date.now();
+
+    return currentTime - lastLoginTime < ONE_DAY_MS;
+  } catch (error) {
+    return false;
+  }
+};

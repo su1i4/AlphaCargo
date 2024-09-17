@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: 40,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -80,5 +80,6 @@ const styles = StyleSheet.create({
   component: {
     paddingHorizontal: 20,
     paddingBottom: 15,
+    height: 'auto'
   },
 });
