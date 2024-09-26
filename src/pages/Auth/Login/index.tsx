@@ -1,37 +1,27 @@
 import {useEffect, useState, useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
-  SafeAreaView,
   View,
   Text,
   StyleSheet,
   Image,
-  TouchableOpacity,
-  Linking,
 } from 'react-native';
 import {LoginContainer} from '../../../components/Containers/LoginContainer';
 import {Input} from '../../../components/UI/Inputs/Input';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
 import AuthFooter from '../../../components/Auth/AuthFooter';
-import {
-  useLoginStep1Mutation,
-  useLoginStep2Mutation,
-} from '../../../services/auth.service';
+import {useLoginMutation} from '../../../services/auth.service';
 import Toast from 'react-native-toast-message';
-import TelegramBlack from '../../../assets/svg/TelegramBlack';
-import Telegram from '../../../assets/svg/Telegram';
 import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
 import {useNavigation} from '@react-navigation/native';
 import {useActions} from '../../../hooks/useActions';
-import { LAST_LOGIN_KEY } from '../../../utils/consts';
+import {LAST_LOGIN_KEY} from '../../../utils/consts';
 
 export default function Login() {
   const navigation: any = useNavigation();
-  const [login] = useLoginStep1Mutation();
-  const [login2] = useLoginStep2Mutation();
+  const [login] = useLoginMutation();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
-  const [code, setCode] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
@@ -57,55 +47,24 @@ export default function Login() {
     if (hasError) return;
 
     setLoading(true);
-    if (!code) {
-      try {
-        const response: any = await login({phone, password});
-        console.log(response);
-        if (response['error']) {
-          Toast.show({
-            type: 'error',
-            text1: 'Ошибка входа',
-            text2: response.error.data.message,
-          });
-        } else {
-        }
-      } catch (error) {}
-    } else {
-      try {
-        const response: any = await login2({phone, password, code});
-        console.log(response);
-        if (response['error']) {
-          Toast.show({
-            type: 'error',
-            text1: 'Ошибка входа',
-            text2: response.error.data.message,
-          });
-        } else {
-          const currentDate = new Date().toISOString();
-          await AsyncStorage.setItem(LAST_LOGIN_KEY, currentDate);
-          saveUser(response.data);
-          navigation.navigate('MainNavigation');
-          onClose();
-        }
-      } catch (error) {}
-    }
-    setLoading(false);
-  };
-
-  const openTelegramBot = async () => {
-    const urlApp = 'tg://resolve?domain=alphacargoverify_bot';
-    const urlWeb = 'https://t.me/alphacargoverify_bot';
-
     try {
-      const supportedApp = await Linking.canOpenURL(urlApp);
-      if (supportedApp) {
-        await Linking.openURL(urlApp);
+      const response: any = await login({phone, password});
+      console.log(response);
+      if (response['error']) {
+        Toast.show({
+          type: 'error',
+          text1: 'Ошибка входа',
+          text2: response.error.data.message,
+        });
       } else {
-        await Linking.openURL(urlWeb);
+        const currentDate = new Date().toISOString();
+        await AsyncStorage.setItem(LAST_LOGIN_KEY, currentDate);
+        saveUser(response.data);
+        navigation.navigate('MainNavigation');
+        onClose();
       }
-    } catch (err) {
-      console.error('An error occurred', err);
-    }
+    } catch (error) {}
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -143,15 +102,6 @@ export default function Login() {
             {passwordError ? (
               <Text style={styles.errorText}>{passwordError}</Text>
             ) : null}
-          </View>
-          <View style={styles.inputWrap}>
-            <Input value={code} onChange={setCode} placeholder="Код" />
-            <TouchableOpacity onPress={handlePost} style={styles.signWrap}>
-              <TelegramBlack />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={openTelegramBot} style={styles.logWrap}>
-              <Telegram />
-            </TouchableOpacity>
           </View>
           <View style={styles.buttonContainer}>
             <ButtonCustom

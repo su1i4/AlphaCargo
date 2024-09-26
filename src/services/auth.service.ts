@@ -7,19 +7,10 @@ export const authApi = createApi({
   tagTypes: ['users'],
   endpoints: build => ({
     ////////LOGIN
-    loginStep1: build.mutation<any, any>({
+    login: build.mutation<any, any>({
       query: body => {
         return {
-          url: '/auth/login-step1',
-          method: 'POST',
-          body: body,
-        };
-      },
-    }),
-    loginStep2: build.mutation<any, any>({
-      query: body => {
-        return {
-          url: '/auth/login-step2',
+          url: '/auth/login',
           method: 'POST',
           body: body,
         };
@@ -69,8 +60,7 @@ export const authApi = createApi({
 });
 
 export const {
-  useLoginStep1Mutation,
-  useLoginStep2Mutation,
+  useLoginMutation,
   useSingUpStep1Mutation,
   useSingUpStep2Mutation,
   useGetUserQuery,
