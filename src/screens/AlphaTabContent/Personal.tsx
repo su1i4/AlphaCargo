@@ -1,32 +1,44 @@
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet} from 'react-native';
+import {useState} from 'react';
 import {InfoContainer} from '../../components/Containers/InfoContainer';
 import Percent from '../../assets/icons/Percent';
 import HandIcon from '../../assets/icons/HandIcon';
 import RocketIcon from '../../assets/icons/RocketIcon';
 import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
+import CustomModal from '../../components/UI/Modal';
 
 export const Personal = () => {
+  const [active, setActive] = useState(false);
   const navigation: any = useNavigation();
+
+  const toggleModal = () => {
+    setActive(false);
+  };
+
+  const getModal = () => setActive(true);
+
   return (
     <>
+      <CustomModal active={active} onClose={toggleModal} />
       <Text style={styles.titles}>Популярное</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('Loyalty')}>
-        <InfoContainer
-          Icon={<Percent />}
-          title="Программа лояльности"
-          content="Пользуйтесь услугами и копите баллы"
-        />
-      </TouchableOpacity>
+      <InfoContainer
+        onClick={() => navigation.navigate('Loyalty')}
+        Icon={<Percent />}
+        title="Программа лояльности"
+        content="Пользуйтесь услугами и копите баллы"
+      />
       <Text style={styles.titles}>Зарабатывай вместе с Альфа</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
+          onClick={getModal}
           Icon={<HandIcon size={18} />}
           title="Франшиза"
           content="Начните свой бизнес"
           width="48.5%"
         />
         <InfoContainer
+          onClick={getModal}
           Icon={<RocketIcon />}
           title="Работа в Альфа"
           content={`Начни карьеру в \nАльфа Карго`}
@@ -34,6 +46,7 @@ export const Personal = () => {
         />
       </View>
       <InfoContainer
+        onClick={getModal}
         Icon={<SingleUser size={18} />}
         title="Для франчайзи"
         content="Инструкции и стандарты работы"

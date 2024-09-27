@@ -1,15 +1,27 @@
 import {useState} from 'react';
-import {SafeAreaView, StyleSheet, View, ScrollView, Text, TouchableOpacity, Linking, Alert} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  View,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  Linking,
+  Alert,
+} from 'react-native';
 import Header from '../../screens/Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import Calc from '../../assets/icons/Calc';
 import CarIcon from '../../assets/icons/CarIcon';
 import TarifIcon from '../../assets/icons/TarifIcon';
 import {Tab} from '../../components/UI/Tab';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
+import {useGetParcelQuery} from '../../services/base.service';
+import Loading from '../../components/UI/Loading';
 
 export default function Send() {
-  const naviagation: any = useNavigation()
+  const {data = [], isLoading} = useGetParcelQuery();
+  const naviagation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
   const [text, setText] = useState('');
 
@@ -34,6 +46,8 @@ export default function Send() {
     }
   };
 
+  console.log(data, 'parcels');
+
   return (
     <SafeAreaView>
       <Header
@@ -49,16 +63,22 @@ export default function Send() {
       <ScrollView>
         <View style={styles.Wrapper}>
           <View style={styles.brokeTools}>
-            <TouchableOpacity onPress={() => naviagation.navigate('CalcPrice')}  style={styles.content}>
+            <TouchableOpacity
+              onPress={() => naviagation.navigate('CalcPrice')}
+              style={styles.content}>
               <Calc active />
               <Text style={styles.text}>Рассчитать</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={openWhatsAppOrWebsite} style={styles.content}>
+            <TouchableOpacity
+              onPress={openWhatsAppOrWebsite}
+              style={styles.content}>
               <CarIcon />
               <Text style={styles.text}>{`Вызвать\nвыездную группу`}</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity onPress={() => naviagation.navigate('Tarif')} style={styles.container}>
+          <TouchableOpacity
+            onPress={() => naviagation.navigate('Tarif')}
+            style={styles.container}>
             <TarifIcon />
             <Text style={{fontSize: 13, fontWeight: '400', color: '#F9FFFF'}}>
               Рассчитать
@@ -78,6 +98,15 @@ export default function Send() {
               <Text style={{color: '#F9FFFF'}}>Не оплаченные</Text>
             </View>
           </Tab>
+          <View>
+            {isLoading ? (
+              <Loading />
+            ) : !data.length ? (
+              <Text>Пока что у вас нет посылок</Text>
+            ) : (
+              <View></View>
+            )}
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

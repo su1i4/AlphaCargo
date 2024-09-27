@@ -10,13 +10,12 @@ import {
 import {LoginContainer} from '../../../components/Containers/LoginContainer';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
 import ArrowBack from '../../../assets/icons/ArrowBack';
-import {useLoginStep2Mutation} from '../../../services/auth.service';
+import {useSingUpStep2Mutation} from '../../../services/auth.service';
 import Toast from 'react-native-toast-message';
 import {useActions} from '../../../hooks/useActions';
 
 export default function Verification({navigation, route}: any) {
-  const {fio, email, phone, password} = route.params;
-  const [Verification] = useLoginStep2Mutation();
+  const {phone, password} = route.params;
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState<any>(['', '', '', '', '', '']);
   const [errorText, setErrorText] = useState<string>('');
@@ -49,8 +48,6 @@ export default function Verification({navigation, route}: any) {
           body: JSON.stringify({
             phone: phone,
             password: password,
-            fio: fio,
-            email: email,
             code: String(codeRes),
           }),
         }

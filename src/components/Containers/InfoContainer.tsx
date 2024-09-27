@@ -1,4 +1,4 @@
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {ReactNode} from 'react';
 
 interface InfoContainerProps {
@@ -6,6 +6,7 @@ interface InfoContainerProps {
   title: string;
   content: string;
   width?: any;
+  onClick: any
 }
 
 export const InfoContainer = ({
@@ -13,13 +14,14 @@ export const InfoContainer = ({
   title,
   content,
   width = '100%',
+  onClick
 }: InfoContainerProps): JSX.Element => {
   return (
-    <View style={[styles.container, {width: width}]}>
+    <TouchableOpacity onPress={() => onClick()} style={[styles.container, {width: width}]}>
       <View style={styles.iconWrapper}>{Icon}</View>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.content}>{content}</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 

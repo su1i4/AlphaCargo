@@ -5,28 +5,21 @@ import {Input} from '../../../components/UI/Inputs/Input';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
 import {useSingUpStep1Mutation} from '../../../services/auth.service';
 import Toast from 'react-native-toast-message';
-import Telegram from '../../../assets/svg/Telegram';
 import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
 import {useNavigation} from '@react-navigation/native';
 
 export default function SignUp() {
   const navigation: any = useNavigation();
   const [SignUp] = useSingUpStep1Mutation();
-  const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [fio, setFio] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
-  const [fioError, setFioError] = useState<string>('');
-  const [emailError, setEmailError] = useState<string>('');
   const [phoneError, setPhoneError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
 
   const handlePost = async () => {
     setPhoneError('');
     setPasswordError('');
-    setEmailError('');
-    setFioError('');
     let hasError = false;
 
     if (!phone) {
@@ -39,21 +32,11 @@ export default function SignUp() {
       hasError = true;
     }
 
-    if (!fio) {
-      setFioError('Пожалуйста, введите имя');
-      hasError = true;
-    }
-
-    if (!email) {
-      setEmailError('Пожалуйста, введите эл.почту');
-      hasError = true;
-    }
-
     if (hasError) return;
 
     setLoading(true);
     try {
-      const response: any = await SignUp({phone, password, fio, email});
+      const response: any = await SignUp({phone});
       console.log(response, 'this is lox')
       if (response['error']) {
         Toast.show({
@@ -64,8 +47,6 @@ export default function SignUp() {
         });
       } else {
         navigation.navigate('Verification', {
-          fio: fio,
-          email: email,
           password: password,
           phone: phone,
         });
@@ -74,27 +55,10 @@ export default function SignUp() {
     setLoading(false);
   };
 
-  const openTelegramBot = async () => {
-    const urlApp = 'tg://resolve?domain=alphacargoverify_bot';
-    const urlWeb = 'https://t.me/alphacargoverify_bot';
-
-    try {
-      const supportedApp = await Linking.canOpenURL(urlApp);
-      if (supportedApp) {
-        await Linking.openURL(urlApp);
-      } else {
-        await Linking.openURL(urlWeb);
-      }
-    } catch (err) {
-    }
-  };
-
   useEffect(() => {
     if (phone) setPhoneError('');
     if (password) setPasswordError('');
-    if (fio) setFioError('');
-    if (email) setEmailError('');
-  }, [phone, password, email, fio]);
+  }, [phone, password]);
 
   return (
     <SafeAreaView>
@@ -103,17 +67,6 @@ export default function SignUp() {
           <Text style={{color: '#000018', fontSize: 13, fontWeight: '400'}}>
             Мы отправим вам код через Телеграм-бота
           </Text>
-
-          <View style={styles.msgWrap}>
-            <Input value={fio} onChange={setFio} placeholder="Введите имя" />
-            {fioError ? <Text style={styles.errorText}>{fioError}</Text> : null}
-          </View>
-          <View style={styles.msgWrap}>
-            <Input value={email} onChange={setEmail} placeholder="Эл.почта" />
-            {emailError ? (
-              <Text style={styles.errorText}>{emailError}</Text>
-            ) : null}
-          </View>
           <View style={styles.msgWrap}>
             <PhoneNumberInput setPhoneNumber={setPhone} />
             {phoneError ? (
@@ -130,26 +83,6 @@ export default function SignUp() {
               <Text style={styles.errorText}>{passwordError}</Text>
             ) : null}
           </View>
-          <ButtonCustom
-            style={{
-              backgroundColor: '#FFFFFF',
-              borderColor: '#02447F',
-              borderWidth: 1,
-            }}
-            title={
-              <View
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  gap: 5,
-                }}>
-                <Text style={{color: '#000018'}}>Подписаться на бота</Text>
-                <Telegram />
-              </View>
-            }
-            onClick={openTelegramBot}
-          />
           <ButtonCustom
             title="Регистрация"
             onClick={handlePost}

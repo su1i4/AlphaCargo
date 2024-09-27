@@ -21,10 +21,12 @@ import QuesDock from '../../assets/icons/QuesDock';
 import Card from '../../assets/icons/Card';
 import FaUser from '../../assets/icons/FaUser';
 import {useNavigation} from '@react-navigation/native';
+import CustomModal from '../../components/UI/Modal';
 
 export default function Alpha() {
   const navigation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
+  const [active, setActive] = useState(false);
 
   const phoneNumber = '+996772007183';
   const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
@@ -58,11 +60,15 @@ export default function Alpha() {
       text: `Вызов\nвыездной\nгруппы`,
       link: openWhatsAppOrWebsite,
     },
-    {icon: <Card />, text: `Онлайн-\nоплата`, link: () => false},
-    {icon: <QuesDock />, text: `Вопросы и\nответы`, link: () => false},
+    {icon: <Card />, text: `Онлайн-\nоплата`, link: () => setActive(true)},
+    {icon: <QuesDock />, text: `Вопросы и\nответы`, link: () => setActive(true)},
   ];
 
   const components = [<Personal />, <Buisenes />];
+
+  const toggleModal = () => {
+    setActive(false);
+  };
 
   return (
     <SafeAreaView>
@@ -75,6 +81,7 @@ export default function Alpha() {
         funcLeft={() => navigation.navigate('Notifications')}
       />
       <ScrollView>
+        <CustomModal active={active} onClose={toggleModal} />
         <View style={styles.Wrapper}>
           <View
             style={{

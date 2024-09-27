@@ -34,11 +34,15 @@ export const baseApi = createApi({
     }),
     getTariffs: build.query<any, void>({
       query: () => 'tariffs'
+    }),
+    getParcel: build.query<any, void>({
+      query: () => 'parcels'
     })
   }),
 });
 
 export const {
+  useGetParcelQuery,
   useGetOfficesQuery,
   useGetOfficeByIdQuery,
   useGetServiceByIdQuery,

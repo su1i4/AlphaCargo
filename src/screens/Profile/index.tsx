@@ -17,7 +17,7 @@ import {Input} from '../../components/UI/Inputs/Input';
 import {useAuth} from '../../hooks/useAuth';
 import Loading from '../../components/UI/Loading';
 import Toast from 'react-native-toast-message';
-import { removeUserFromStorage } from '../../utils/helpers';
+import {removeUserFromStorage} from '../../utils/helpers';
 
 export default function Profile() {
   const user = useAuth();
@@ -139,16 +139,16 @@ export default function Profile() {
         },
       );
 
-      if(response?.status === 200){
+      if (response?.status === 200) {
         Toast.show({
           type: 'success',
           text1: 'Успеx',
           text2: 'Успешное удаление аккаунта',
           visibilityTime: 3000,
         });
-        removeUserFromStorage()
-        naviagation.navigate('Login')
-      }else{
+        removeUserFromStorage();
+        naviagation.navigate('Login');
+      } else {
         Toast.show({
           type: 'error',
           text1: 'Ошибка',
@@ -238,15 +238,39 @@ export default function Profile() {
                 onChange={setEmail}
                 placeholder=""
               />
-              <ButtonCustom
-                onClick={() => {
-                  !type
-                    ? setType(true)
-                    : handlePost({fio: fio, phone: phone, password: password});
-                }}
-                isLoading={pacthLoad}
-                title={!type ? 'Редактировать' : 'Сохранить'}
-              />
+              <View style={{display: 'flex', flexDirection: 'row', gap: 10}}>
+                <ButtonCustom
+                  onClick={() => {
+                    !type
+                      ? setType(true)
+                      : handlePost({
+                          fio: fio,
+                          phone: phone,
+                          password: password,
+                        });
+                  }}
+                  isLoading={pacthLoad}
+                  style={{width: '80%'}}
+                  title={!type ? 'Редактировать' : 'Сохранить'}
+                />
+                <TouchableOpacity
+                  style={{
+                    width: '18%',
+                    backgroundColor: '#02447F',
+                    paddingTop: 12,
+                    paddingBottom: 14,
+                    paddingHorizontal: 10,
+                    borderRadius: 10,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                  onPress={() => {
+                    removeUserFromStorage();
+                    naviagation.navigate('Login');
+                  }}>
+                  <LogoutIcon size={20} />
+                </TouchableOpacity>
+              </View>
               <ButtonCustom
                 onClick={handleDelete}
                 isLoading={deleteLoading}
