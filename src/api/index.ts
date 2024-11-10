@@ -7,7 +7,7 @@ import {
 import {RootState} from '../store';
 
 export const baseQuery = fetchBaseQuery({
-  baseUrl: 'https://alphacargoserver.azurewebsites.net/',
+  baseUrl: 'https://alpha-cargo.kg/api/',
   prepareHeaders(headers, api) {
     const token: any = JSON.stringify(
       (api.getState() as RootState).auth.user?.accessToken,
