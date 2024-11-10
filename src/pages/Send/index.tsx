@@ -98,15 +98,13 @@ export default function Send() {
               <Text style={{color: '#F9FFFF'}}>Не оплаченные</Text>
             </View>
           </Tab>
-          <View>
-            {isLoading ? (
-              <Loading />
-            ) : !data.length ? (
-              <Text>Пока что у вас нет посылок</Text>
-            ) : (
-              <View></View>
-            )}
-          </View>
+          {isLoading ? (
+            <Loading />
+          ) : !data.length ? (
+            <Text>Пока что у вас нет посылок</Text>
+          ) : (
+            <View></View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

@@ -108,14 +108,19 @@ const styles = StyleSheet.create({
     top: '110%',
     left: 0,
     right: 0,
-    backgroundColor: '#EFEFEF',
+    backgroundColor: 'rgba(239, 239, 239, 1)', 
     borderRadius: 10,
     borderColor: '#8C8C8C',
     borderWidth: 1,
     maxHeight: 200,
     zIndex: 1000,
     elevation: 5,
+    shadowColor: '#000', // iOS shadow
+    shadowOffset: { width: 0, height: 2 }, // iOS shadow
+    shadowOpacity: 0.25, // iOS shadow
+    shadowRadius: 3.84, // iOS shadow
   },
+  
   option: {
     paddingVertical: 10,
     paddingHorizontal: 20,
