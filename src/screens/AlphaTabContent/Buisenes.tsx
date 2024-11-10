@@ -11,6 +11,7 @@ import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
 import CustomModal from '../../components/UI/Modal';
 import {useState} from 'react';
+import Perevozka from '../../assets/icons/Perevozka';
 
 export const Buisenes = () => {
   const [active, setActive] = useState(false);
@@ -52,7 +53,7 @@ export const Buisenes = () => {
         />
         <InfoContainer
           onClick={getModal}
-          Icon={<Calc />}
+          Icon={<Perevozka />}
           title={`LTL`}
           content={`Перевозка грузов \nдля бизнеса`}
           width="48.5%"
