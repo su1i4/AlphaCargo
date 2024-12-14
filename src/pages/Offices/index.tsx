@@ -20,6 +20,7 @@ export default function OfficesLog() {
         text="Пункты Альфа"
         Right={SingleUser}
         func={() => navigation.navigate('Profile')}
+        isSearch={false}
       />
     </View>
   );

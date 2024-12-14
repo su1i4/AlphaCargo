@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     fontSize: 13,
     fontWeight: '400',
-    backgroundColor: '#1E2661',
+    backgroundColor: 'white',
     gap: 5,
     height: 50,
     minHeight: 50,

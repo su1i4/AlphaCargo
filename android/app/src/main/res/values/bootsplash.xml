@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="bootsplash_background" type="color">#FFFFFF</item>
+    <item name="bootsplash_logo" type="drawable">@drawable/bootsplash_logo</item>
+    <item name="bootsplash_logo_width" type="dimen">200dp</item>
+    <item name="bootsplash_logo_height" type="dimen">200dp</item>
+</resources>

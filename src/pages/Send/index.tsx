@@ -52,10 +52,6 @@ export default function Send() {
     <SafeAreaView>
       <Header
         id="watchOrder"
-        value={text}
-        onChange={setText}
-        isSearch
-        placeholder="Номер посылки"
         text="Отправления"
         func={() => naviagation.navigate('Profile')}
         Right={SingleUser}
@@ -98,8 +94,8 @@ export default function Send() {
               <Text style={{color: '#F9FFFF'}}>Не оплаченные</Text>
             </View>
           </Tab>
-          {isLoading ? (
-            <Loading />
+          {!isLoading ? (
+            <Text>Загрузка ...</Text>
           ) : !data.length ? (
             <Text>Пока что у вас нет посылок</Text>
           ) : (

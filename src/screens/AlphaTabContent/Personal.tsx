@@ -31,7 +31,7 @@ export const Personal = () => {
       <Text style={styles.titles}>Зарабатывай вместе с Альфа</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={getModal}
+          onClick={() => navigation.navigate('Franshiza')}
           Icon={<HandIcon size={18} />}
           title="Франшиза"
           content="Начните свой бизнес"

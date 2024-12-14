@@ -65,7 +65,7 @@ export default function SignUp() {
       <View style={styles.main}>
         <LoginContainer isClose={true} text={'Введите номер телефона'}>
           <Text style={{color: '#000018', fontSize: 13, fontWeight: '400'}}>
-            Мы отправим вам код через Телеграм-бота
+            Мы отправим вам на телефон номер
           </Text>
           <View style={styles.msgWrap}>
             <PhoneNumberInput setPhoneNumber={setPhone} />
