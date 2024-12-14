@@ -5,7 +5,8 @@ import {
   View,
   ScrollView,
   Text,
-  TouchableOpacity,Platform
+  TouchableOpacity,
+  Platform,
 } from 'react-native';
 import {useGetOfficesQuery} from '../../services/base.service';
 import {useNavigation} from '@react-navigation/native';
@@ -15,25 +16,25 @@ export const Points = ({route}: any) => {
   const {cities, offices, countries} = route.params;
   const navigation = useNavigation();
 
-  const [logCountry, setLogCountry] = useState<any>({})
-  const [logCities, setLogCities] = useState<any>({})
+  const [logCountry, setLogCountry] = useState<any>({});
+  const [logCities, setLogCities] = useState<any>({});
 
   useEffect(() => {
-    if(cities){
+    if (cities) {
       const result = cities.reduce((acc: any, item: any) => {
         acc[item.id] = item.cityname;
         return acc;
       }, {});
-      setLogCities(result)
+      setLogCities(result);
     }
-    if(countries){
+    if (countries) {
       const result = countries.reduce((acc: any, item: any) => {
         acc[item.id] = item.countryname;
         return acc;
       }, {});
-      setLogCountry(result)
+      setLogCountry(result);
     }
-  }, [cities, countries])
+  }, [cities, countries]);
 
   const close = () => {
     navigation.goBack();
@@ -51,7 +52,7 @@ export const Points = ({route}: any) => {
   ];
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <View style={{flex: 1}}>
       <ScrollView>
         <View style={styles.Wrapper}>
           <View style={styles.header}>
@@ -64,12 +65,17 @@ export const Points = ({route}: any) => {
           </View>
           <View style={styles.bodyContent}>
             {offices?.map((item: any, index: number) => (
-              <PointsCard key={index} item={item} country={logCountry[item.countryId]} city={logCities[item.cityId]} />
+              <PointsCard
+                key={index}
+                item={item}
+                country={logCountry[item.countryId]}
+                city={logCities[item.cityId]}
+              />
             ))}
           </View>
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
@@ -80,7 +86,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: 15,
     height: '100%',
-    paddingTop: Platform.OS === 'ios'? 55: 40
+    paddingTop: Platform.OS === 'ios' ? 55 : 40,
   },
   header: {
     display: 'flex',

@@ -1,11 +1,6 @@
 import {useEffect, useState, useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-} from 'react-native';
+import {View, Text, StyleSheet, Image} from 'react-native';
 import {LoginContainer} from '../../../components/Containers/LoginContainer';
 import {Input} from '../../../components/UI/Inputs/Input';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
@@ -83,10 +78,42 @@ export default function Login() {
   console.log(password, 'this is password');
 
   return (
-    <View>
+    <>
       <View style={styles.main}>
         <View style={styles.imageContainer}>
-          <Image source={require('../../../assets/images/AlphaCargo.png')} />
+          <View
+            style={{
+              borderRadius: 30,
+              overflow: 'hidden',
+              backgroundColor: 'white',
+              width: 130,
+              height: 135,
+            }}>
+            <Image
+              style={{width: 130, height: 100}}
+              source={require('../../../assets/images/alpha-cargo.png')}
+            />
+            <Text
+              style={{
+                color: '#02447F',
+                textAlign: 'center',
+                fontSize: 20,
+                fontWeight: 900,
+                lineHeight: 20,
+              }}>
+              ALPHA
+            </Text>
+            <Text
+              style={{
+                color: '#02447F',
+                textAlign: 'center',
+                fontSize: 16,
+                fontWeight: 700,
+                lineHeight: 15,
+              }}>
+              CARGO
+            </Text>
+          </View>
         </View>
         <LoginContainer isClose={false} text={'Войти'}>
           <View style={styles.msgWrap}>
@@ -105,24 +132,16 @@ export default function Login() {
               <Text style={styles.errorText}>{passwordError}</Text>
             ) : null}
           </View>
-          <View style={styles.buttonContainer}>
-            <ButtonCustom
-              title="Войти"
-              onClick={handlePost}
-              isLoading={loading}
-              style={{width: '47%'}}
-            />
-            <ButtonCustom
-              title="Регистрация"
-              onClick={() => navigation.navigate('SignUp')}
-              isLoading={false}
-              style={{width: '47%'}}
-            />
-          </View>
+          <ButtonCustom
+            title="Войти"
+            onClick={handlePost}
+            isLoading={loading}
+            style={{width: '100%'}}
+          />
         </LoginContainer>
       </View>
       <AuthFooter />
-    </View>
+    </>
   );
 }
 
@@ -173,12 +192,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     bottom: 0,
-  },
-  buttonContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
   },
   errorText: {
     color: 'red',

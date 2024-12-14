@@ -10,6 +10,8 @@ import Tasks from '../screens/Tasks';
 import Reward from '../screens/Reward';
 import Tarif from '../screens/Tarif';
 import Vlogs from '../screens/Vlogs';
+import Questions from '../screens/Questions';
+import Franshiza from '../screens/Franshiza';
 
 const MainStack = createNativeStackNavigator();
 
@@ -27,6 +29,8 @@ export default function MainNavigation() {
       <MainStack.Screen name="Reward" component={Reward} />
       <MainStack.Screen name="Tasks" component={Tasks} />
       <MainStack.Screen name="Vlogs" component={Vlogs} />
+      <MainStack.Screen name="Questions" component={Questions} />
+      <MainStack.Screen name="Franshiza" component={Franshiza} />
     </MainStack.Navigator>
   );
 }

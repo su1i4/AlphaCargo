@@ -29,7 +29,7 @@ export default function WatchOrder() {
         require('../../assets/images/REKLAMA6.png'),
         require('../../assets/images/REKLAMA7.png'),
       ],
-    }
+    },
   ];
 
   const Right = () => {
@@ -48,7 +48,7 @@ export default function WatchOrder() {
   const [text, setText] = useState('');
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Header
         id="watchOrder"
         value={text}
@@ -56,7 +56,6 @@ export default function WatchOrder() {
         isSearch
         placeholder="Номер посылки"
         text="Отследить заказ"
-        Right={Right}
       />
       <ScrollView style={styles.scrollView}>
         <ScrollView
@@ -65,19 +64,15 @@ export default function WatchOrder() {
           contentContainerStyle={styles.horizontalScrollView}>
           <View style={[styles.headerWrapper, {paddingTop: 15}]}>
             {Components.map((item, index) => (
-              <GradientWrapper key={index} Components={Components} item={item} />
+              <GradientWrapper
+                key={index}
+                Components={Components}
+                item={item}
+              />
             ))}
           </View>
         </ScrollView>
         <View style={styles.Wrapper}>
-          <View>
-            <Text style={styles.title}>
-              Мы - доставляем<Text style={{color: '#02447F'}}> быстро,</Text>
-            </Text>
-            <Text style={styles.title}>
-              вы - платите<Text style={{color: '#94C325'}}> мало</Text>
-            </Text>
-          </View>
           <View style={styles.watchOrderContainer}>
             <WatchOrde />
           </View>
@@ -99,7 +94,7 @@ export default function WatchOrder() {
           </View>
         </ScrollView>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 

@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {
-  SafeAreaView,
   View,
   StyleSheet,
   Text,
@@ -61,7 +60,11 @@ export default function Alpha() {
       link: openWhatsAppOrWebsite,
     },
     {icon: <Card />, text: `Онлайн-\nоплата`, link: () => setActive(true)},
-    {icon: <QuesDock />, text: `Вопросы и\nответы`, link: () => setActive(true)},
+    {
+      icon: <QuesDock />,
+      text: `Вопросы и\nответы`,
+      link: () => navigation.navigate('Questions'),
+    },
   ];
 
   const components = [<Personal />, <Buisenes />];
@@ -71,7 +74,7 @@ export default function Alpha() {
   };
 
   return (
-    <SafeAreaView>
+    <View>
       <Header
         id="Alpha"
         Left={BellIcon}
@@ -115,6 +118,44 @@ export default function Alpha() {
               </View>
             ))}
           </View>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <View
+              style={{
+                width: '48%',
+                height: 80,
+                borderRadius: 16,
+                backgroundColor: 'white',
+                padding: 10,
+              }}>
+              <Text style={{fontSize: 16, fontWeight: 500, color: 'black'}}>
+                За декабрь
+              </Text>
+              <Text style={{fontSize: 16, fontWeight: 500, color: 'green'}}>
+                0
+              </Text>
+            </View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Bonus')}
+              style={{
+                width: '48%',
+                height: 80,
+                borderRadius: 16,
+                backgroundColor: 'white',
+                padding: 10,
+              }}>
+              <Text style={{fontSize: 16, fontWeight: 500, color: 'black'}}>
+                Мои баллы
+              </Text>
+              <Text style={{fontSize: 16, fontWeight: 500, color: 'green'}}>
+                1
+              </Text>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity onPress={() => navigation.navigate('CalcPrice')}>
             <Panel />
           </TouchableOpacity>
@@ -131,7 +172,7 @@ export default function Alpha() {
           {components[activeTab]}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 

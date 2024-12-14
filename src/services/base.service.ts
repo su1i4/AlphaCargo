@@ -24,20 +24,29 @@ export const baseApi = createApi({
       query: () => 'locations/countries',
     }),
     getNotifications: build.query<any, any>({
-      query: () => 'notifications'
+      query: () => 'notifications',
     }),
     getParcelTypes: build.query<any, void>({
-      query: () => 'parcel-type'
+      query: () => 'parcel-type',
     }),
     getBags: build.query<any, void>({
-      query: () => 'bags'
+      query: () => 'bags',
     }),
     getTariffs: build.query<any, void>({
-      query: () => 'tariffs'
+      query: () => 'tariffs',
     }),
     getParcel: build.query<any, void>({
-      query: () => 'parcels'
-    })
+      query: () => 'parcels',
+    }),
+    postFranchise: build.mutation<any, any>({
+      query: body => {
+        return {
+          url: '/franchise',
+          method: 'POST',
+          body: body,
+        };
+      },
+    }),
   }),
 });
 
@@ -52,5 +61,6 @@ export const {
   useGetNotificationsQuery,
   useGetParcelTypesQuery,
   useGetBagsQuery,
-  useGetTariffsQuery
+  useGetTariffsQuery,
+  usePostFranchiseMutation,
 } = baseApi;

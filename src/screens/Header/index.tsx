@@ -3,7 +3,7 @@ import {SearchInput} from '../../components/UI/SearchInput';
 
 interface HeaderProps {
   text: string;
-  Right: any;
+  Right?: any;
   Left?: any;
   isSearch?: boolean;
   value?: string;
@@ -11,7 +11,7 @@ interface HeaderProps {
   placeholder?: string;
   id: string;
   func?: any;
-  funcLeft?: any
+  funcLeft?: any;
 }
 
 export default function Header({
@@ -24,22 +24,33 @@ export default function Header({
   placeholder = '',
   id = 'afqf',
   func,
-  funcLeft
+  funcLeft,
 }: HeaderProps): JSX.Element {
   return (
     <View style={styles.header}>
-      <View style={[styles.container, {paddingBottom: isSearch ? 10 : 20}]}>
+      <View
+        style={[
+          styles.container,
+          {
+            paddingBottom: isSearch ? 10 : 20,
+            justifyContent: !Left && !Right ? 'center' : 'space-between',
+          },
+        ]}>
         {Left ? (
-          <TouchableOpacity onPress={() => (funcLeft ? funcLeft() : false)} >
+          <TouchableOpacity onPress={() => (funcLeft ? funcLeft() : false)}>
             <Left />
           </TouchableOpacity>
         ) : (
           <View style={{width: 25}} />
         )}
         <Text style={styles.text}>{text}</Text>
-        <TouchableOpacity onPress={() => (func ? func() : false)}>
-          <Right />
-        </TouchableOpacity>
+        {Right ? (
+          <TouchableOpacity onPress={() => (func ? func() : false)}>
+            <Right />
+          </TouchableOpacity>
+        ) : (
+          <View style={{width: 25}}></View>
+        )}
       </View>
       {isSearch && (
         <View style={styles.component}>
@@ -68,7 +79,6 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
   },
   text: {
@@ -80,6 +90,6 @@ const styles = StyleSheet.create({
   component: {
     paddingHorizontal: 20,
     paddingBottom: 15,
-    height: 'auto'
+    height: 'auto',
   },
 });

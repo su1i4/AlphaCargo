@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#F9FFFF',
-    fontSize: 13,
+    fontSize: 14,
     fontWeight: '400',
   },
 });

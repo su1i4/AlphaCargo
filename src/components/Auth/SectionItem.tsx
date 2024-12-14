@@ -16,7 +16,7 @@ const SectionItem = ({Icon, title, onPress, style}: SectionProps) => {
         <Icon />
       </View>
       <Text style={styles.title}>{title}</Text>
-      <ArrowRight size={17} />
+      <ArrowRight size={20} />
     </TouchableOpacity>
   );
 };
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
+    paddingVertical: 10,
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 13,
+    fontSize: 14,
     color: '#000018',
   },
   chevron: {
