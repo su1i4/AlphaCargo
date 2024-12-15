@@ -94,7 +94,7 @@ export default function Send() {
               <Text style={{color: '#F9FFFF'}}>Не оплаченные</Text>
             </View>
           </Tab>
-          {!isLoading ? (
+          {isLoading ? (
             <Text>Загрузка ...</Text>
           ) : !data.length ? (
             <Text>Пока что у вас нет посылок</Text>

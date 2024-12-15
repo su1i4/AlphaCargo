@@ -38,6 +38,9 @@ export const baseApi = createApi({
     getParcel: build.query<any, void>({
       query: () => 'parcels',
     }),
+    findParcel: build.query<any, any>({
+      query: number => `parcels/invoice/${number}`,
+    }),
     postFranchise: build.mutation<any, any>({
       query: body => {
         return {
@@ -63,4 +66,6 @@ export const {
   useGetBagsQuery,
   useGetTariffsQuery,
   usePostFranchiseMutation,
+  useLazyFindParcelQuery,
+  useFindParcelQuery,
 } = baseApi;

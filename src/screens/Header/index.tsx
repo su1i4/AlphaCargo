@@ -72,6 +72,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#02447F',
     position: 'static',
     top: 0,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+
+    elevation: 5,
   },
   container: {
     width: '100%',
