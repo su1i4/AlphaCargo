@@ -59,11 +59,15 @@ export default function Alpha() {
       text: `Вызов\nвыездной\nгруппы`,
       link: openWhatsAppOrWebsite,
     },
-    {icon: <Card />, text: `Онлайн-\nоплата`, link: () => setActive(true)},
+    {
+      icon: <Card />,
+      text: `Онлайн-\nоплата`,
+      link: () => navigation.navigate('Payment'),
+    },
     {
       icon: <QuesDock />,
       text: `Вопросы и\nответы`,
-      link: () => navigation.navigate('Questions'),
+      link: () => navigation.navigate('Help'),
     },
   ];
 

@@ -35,8 +35,8 @@ export const GradientWrapper = ({item, Components}: any) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: 75,
-    height: 75,
+    width: 90,
+    height: 90,
     borderRadius: 20,
     objectFit: 'cover',
   },

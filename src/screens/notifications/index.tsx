@@ -5,7 +5,6 @@ import {
   StyleSheet,
   View,
   Text,
-  TouchableOpacity,
 } from 'react-native';
 import Header from '../../screens/Header';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
@@ -13,7 +12,6 @@ import {useNavigation} from '@react-navigation/native';
 import BellIcon from '../../assets/icons/BellIcon';
 import { useAuth } from '../../hooks/useAuth';
 import Loading from '../../components/UI/Loading';
-import { getUserFromStorage } from '../../utils/helpers';
 
 export const Notifications = () => {
   const user = useAuth();

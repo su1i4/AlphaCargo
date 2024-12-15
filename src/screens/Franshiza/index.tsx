@@ -5,6 +5,8 @@ import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
 import {usePostFranchiseMutation} from '../../services/base.service';
 import {useForm, Controller} from 'react-hook-form';
+import Toast from 'react-native-toast-message';
+import {ButtonCustom} from '../../components/UI/Buttons/Button';
 
 export default function Franshiza() {
   const [postFranchise, {isLoading}] = usePostFranchiseMutation();
@@ -27,9 +29,15 @@ export default function Franshiza() {
     try {
       const response = await postFranchise(data).unwrap();
       console.log('Response:', response);
-      reset(); // Сброс формы после успешной отправки
-    } catch (error) {
-      console.error('Error:', error);
+
+      reset();
+    } catch (error: any) {
+      Toast.show({
+        type: 'error',
+        text1: 'Ошибка отправки',
+        text2: error?.data?.error?.message || 'error',
+        visibilityTime: 3000,
+      });
     }
   };
 
@@ -42,7 +50,19 @@ export default function Franshiza() {
         func={() => navigation.navigate('Profile')}
         isSearch={false}
       />
-
+      <View
+        style={{
+          paddingHorizontal: 10,
+          paddingVertical: 10,
+          backgroundColor: '#E1E1E1',
+        }}>
+        <Text style={{color: 'black', fontSize: 17}}>
+          Анкета для открытия франшизы Альфа Карго
+        </Text>
+      </View>
+      <Text style={{paddingHorizontal: 10}}>
+        Заполните форму и мы с вами свяжемся в ближайшее время
+      </Text>
       <View style={styles.formContainer}>
         <Controller
           control={control}
@@ -150,12 +170,16 @@ export default function Franshiza() {
           )}
         />
 
-        <Button
+        {/* <Button
           title={isLoading ? 'Отправка...' : 'Отправить'}
           onPress={handleSubmit(onSubmit)}
           disabled={isLoading}
+        /> */}
+        <ButtonCustom
+          title="Отправить"
+          onClick={handleSubmit(onSubmit)}
+          isLoading={isLoading}
         />
-        
       </View>
     </View>
   );
@@ -171,9 +195,10 @@ const styles = StyleSheet.create({
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 5,
+    borderColor: '#8C8C8C',
+    borderRadius: 10,
     padding: 10,
+    backgroundColor: 'white',
     marginBottom: 10,
   },
 });

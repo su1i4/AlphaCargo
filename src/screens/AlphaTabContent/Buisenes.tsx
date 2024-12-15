@@ -69,20 +69,13 @@ export const Buisenes = () => {
           width="48.5%"
         />
         <InfoContainer
-          onClick={getModal}
+          onClick={() => navigation.navigate('Gruz')}
           Icon={<Document />}
           title={`Официальный \nгруз`}
           content={`Правила для \nупаковки`}
           width="48.5%"
         />
       </View>
-      <Text style={styles.titles}>Доставка</Text>
-      <InfoContainer
-        onClick={getModal}
-        Icon={<TvIcon />}
-        title={`Альфа Партнеры`}
-        content={`Размещайте рекламу у нас в приложении`}
-      />
       <Text style={styles.titles}>Зарабатывай вместе с Альфа</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
@@ -100,6 +93,13 @@ export const Buisenes = () => {
           width="48.5%"
         />
       </View>
+      <Text style={styles.titles}>Доставка</Text>
+      <InfoContainer
+        onClick={getModal}
+        Icon={<TvIcon />}
+        title={`Альфа Партнеры`}
+        content={`Размещайте рекламу у нас в приложении`}
+      />
     </>
   );
 };

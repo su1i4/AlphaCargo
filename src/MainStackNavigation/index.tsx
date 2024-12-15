@@ -12,6 +12,9 @@ import Tarif from '../screens/Tarif';
 import Vlogs from '../screens/Vlogs';
 import Questions from '../screens/Questions';
 import Franshiza from '../screens/Franshiza';
+import Help from '../screens/Help';
+import Payment from '../screens/Payment';
+import Gruz from '../screens/Gruz';
 
 const MainStack = createNativeStackNavigator();
 
@@ -30,7 +33,10 @@ export default function MainNavigation() {
       <MainStack.Screen name="Tasks" component={Tasks} />
       <MainStack.Screen name="Vlogs" component={Vlogs} />
       <MainStack.Screen name="Questions" component={Questions} />
+      <MainStack.Screen name="Help" component={Help} />
       <MainStack.Screen name="Franshiza" component={Franshiza} />
+      <MainStack.Screen name="Payment" component={Payment} />
+      <MainStack.Screen name="Gruz" component={Gruz} />
     </MainStack.Navigator>
   );
 }

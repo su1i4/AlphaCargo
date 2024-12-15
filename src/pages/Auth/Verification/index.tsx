@@ -50,7 +50,7 @@ export default function Verification({navigation, route}: any) {
             password: password,
             code: String(codeRes),
           }),
-        }
+        },
       );
       if (response.status === 201) {
         Toast.show({
@@ -130,9 +130,7 @@ export default function Verification({navigation, route}: any) {
             <TouchableOpacity onPress={() => navigation.goBack()}>
               <ArrowBack size={17} />
             </TouchableOpacity>
-            <Text style={styles.text}>
-              Введите код отправленный на телеграм бот
-            </Text>
+            <Text style={styles.text}>Введите код отправленный на {phone}</Text>
           </View>
           <View style={styles.container}>
             {code.map((digit: any, index: any) => (
