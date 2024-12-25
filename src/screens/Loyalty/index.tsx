@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
@@ -51,7 +50,7 @@ export const Loyalty = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Header id="Loyalty" text="Программа лояльности" Right={Right} />
       <ScrollView style={styles.scrollView}>
         <View style={styles.Wrapper}>
@@ -130,7 +129,7 @@ export const Loyalty = () => {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

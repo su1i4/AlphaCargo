@@ -20,14 +20,12 @@ const Payment = () => {
     try {
       setLoading(true);
       const res = await findParcel(parcel);
-      console.log(res);
       if (res.data.Status !== 'Bad, not found') {
         setBlockParcel(res.data);
         setParcel('');
       }
       setLoading(false);
     } catch (error) {
-      console.log(error);
     } finally {
       setLoading(false);
     }

@@ -1,6 +1,5 @@
 import {useState} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
   View,
   ScrollView,
@@ -17,7 +16,6 @@ import TarifIcon from '../../assets/icons/TarifIcon';
 import {Tab} from '../../components/UI/Tab';
 import {useNavigation} from '@react-navigation/native';
 import {useGetParcelQuery} from '../../services/base.service';
-import Loading from '../../components/UI/Loading';
 
 export default function Send() {
   const {data = [], isLoading} = useGetParcelQuery();
@@ -46,10 +44,8 @@ export default function Send() {
     }
   };
 
-  console.log(data, 'parcels');
-
   return (
-    <SafeAreaView>
+    <View>
       <Header
         id="watchOrder"
         text="Отправления"
@@ -76,8 +72,8 @@ export default function Send() {
             onPress={() => naviagation.navigate('Tarif')}
             style={styles.container}>
             <TarifIcon />
-            <Text style={{fontSize: 13, fontWeight: '400', color: '#F9FFFF'}}>
-              Рассчитать
+            <Text style={{fontSize: 15, fontWeight: '400', color: '#F9FFFF'}}>
+              Тарифы
             </Text>
           </TouchableOpacity>
           <Tab
@@ -103,7 +99,7 @@ export default function Send() {
           )}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -133,7 +129,7 @@ const styles = StyleSheet.create({
   },
   text: {
     color: '#8C8C8C',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '400',
     textAlign: 'center',
   },

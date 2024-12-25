@@ -44,7 +44,6 @@ export default function Login() {
     setLoading(true);
     try {
       const response: any = await login({phone, password});
-      console.log(response);
       if (response['error']) {
         Toast.show({
           type: 'error',
@@ -75,10 +74,8 @@ export default function Login() {
     }
   };
 
-  console.log(password, 'this is password');
-
   return (
-    <>
+    <View>
       <View style={styles.main}>
         <View style={styles.imageContainer}>
           <View
@@ -141,7 +138,7 @@ export default function Login() {
         </LoginContainer>
       </View>
       <AuthFooter />
-    </>
+    </View>
   );
 }
 

@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
 import Header from '../../screens/Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import LocateIcon from '../../assets/icons/LocateIcon';
@@ -17,21 +10,18 @@ import {
   useGetAllCountriesQuery,
   useGetOfficesQuery,
 } from '../../services/base.service';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import Mapbox from '@rnmapbox/maps';
 
-const initialRegion = {
-  latitude: 37.78825,
-  longitude: -122.4324,
-  latitudeDelta: 0.0922,
-  longitudeDelta: 0.0421,
-};
+const mapBoxAccessToken =
+  'pk.eyJ1Ijoic3VsaXNoIiwiYSI6ImNtMGU3a3E2ZzBnZjcyanFzMzgxdWNhMjcifQ.h6HlFjmcCXDjeWrJwqNgUg';
+Mapbox.setAccessToken(mapBoxAccessToken);
 
 export default function Order() {
   const {data = []} = useGetAllCitiesQuery();
   const {data: offices = []} = useGetOfficesQuery();
   const {data: countries = []} = useGetAllCountriesQuery();
   const [address, setAddress] = useState('');
-  const [myLocation, setMyLocation] = useState(initialRegion);
+  const [selectedOffice, setSelectedOffice] = useState<any>(null);
 
   const navigation: any = useNavigation();
 
@@ -52,15 +42,23 @@ export default function Order() {
         <Text style={styles.tab}>Открыто</Text>
       </View>
       <View style={styles.container}>
-        <MapView
+        <Mapbox.MapView
           style={styles.map}
-          initialRegion={{
-            latitude: myLocation.latitude,
-            longitude: myLocation.longitude,
-            latitudeDelta: initialRegion.latitudeDelta,
-            longitudeDelta: initialRegion.longitudeDelta,
-          }}
-          provider={PROVIDER_GOOGLE}></MapView>
+          // centerCoordinate={initialCoordinates}
+        >
+          {offices?.map((office: any, index: any) => (
+            <Mapbox.PointAnnotation
+              key={`point-${office.id}`}
+              id={`point-${office.id}`}
+              coordinate={[Number(office.lng), Number(office.lat)]}
+              onSelected={() => setSelectedOffice(office)}>
+              <View style={styles.marker}>
+
+              </View>
+            </Mapbox.PointAnnotation>
+          ))}
+        </Mapbox.MapView>
+
         <View style={[styles.popAp, {bottom: 80}]}>
           <LocateIcon />
         </View>
@@ -85,6 +83,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+    width: '100%',
     position: 'relative',
   },
   header: {
@@ -114,6 +113,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   map: {
-    ...StyleSheet.absoluteFillObject,
+    flex: 1,
+    width: '100%',
   },
+  markerContainer: {
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  marker: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: '#94C325',
+    borderWidth: 2,
+    borderColor: 'white',
+  },
+  markerIcon: {
+    width: 30,
+    height: 30,
+    backgroundColor: 'red'
+  }
 });

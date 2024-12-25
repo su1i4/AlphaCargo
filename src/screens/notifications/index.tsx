@@ -53,7 +53,7 @@ export const Notifications = () => {
   }, [accessToken]);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Header
         id="Notifications"
         text="Уведомления"
@@ -99,7 +99,7 @@ export const Notifications = () => {
           )}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

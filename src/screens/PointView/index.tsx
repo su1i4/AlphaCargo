@@ -1,12 +1,12 @@
-import {SafeAreaView, StyleSheet, ScrollView, View} from 'react-native';
+import { StyleSheet, ScrollView, View} from 'react-native';
 
 export const PointView = ({route}: any) => {
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <View style={{flex: 1}}>
       <ScrollView>
         <View style={styles.Wrapper}></View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

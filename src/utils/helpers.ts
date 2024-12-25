@@ -58,7 +58,6 @@ export const getRightToken = (data: any) => {
 export const checkLoginDate = async () => {
   try {
     const lastLoginDate = await AsyncStorage.getItem(LAST_LOGIN_KEY);
-    console.log(lastLoginDate, 'lastLoginDate');
     if (!lastLoginDate) return false;
 
     const lastLoginTime = new Date(lastLoginDate).getTime();

@@ -10,8 +10,6 @@ export default function OfficesLog() {
 
   const navigation: any = useNavigation();
 
-  console.log(data, 'offices lat and lang')
-
   return (
     <View style={styles.container}>
       <Header

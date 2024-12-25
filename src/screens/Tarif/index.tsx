@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 import Header from '../Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
@@ -7,6 +7,7 @@ import Toast from 'react-native-toast-message';
 import {useGetTariffsQuery} from '../../services/base.service';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
 import {Select} from '../../components/UI/Select';
+import Back from '../../assets/icons/Back';
 
 export default function Tarif() {
   const {data: Tarifs = []} = useGetTariffsQuery();
@@ -56,11 +57,13 @@ export default function Tarif() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Header
         id="офсл"
         text="Тарифы"
         Right={SingleUser}
+        Left={Back}
+        funcLeft={() => naviagation.goBack()}
         func={() => naviagation.navigate('Profile')}
       />
       <View style={styles.Wrapper}>
@@ -121,7 +124,7 @@ export default function Tarif() {
           style={{width: '100%'}}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

@@ -1,5 +1,6 @@
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {SearchInput} from '../../components/UI/SearchInput';
+import { Platform } from 'react-native';
 
 interface HeaderProps {
   text: string;
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: Platform.OS === 'ios' ? 55: 40,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',

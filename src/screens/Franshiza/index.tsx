@@ -28,8 +28,6 @@ export default function Franshiza() {
   const onSubmit = async (data: any) => {
     try {
       const response = await postFranchise(data).unwrap();
-      console.log('Response:', response);
-
       reset();
     } catch (error: any) {
       Toast.show({
