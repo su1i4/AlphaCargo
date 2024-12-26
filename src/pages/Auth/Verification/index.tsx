@@ -50,7 +50,6 @@ export default function Verification({navigation, route}: any) {
           }),
         },
       );
-      console.log
       if (response.status === 201) {
         Toast.show({
           type: 'success',

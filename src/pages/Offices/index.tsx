@@ -49,8 +49,6 @@ export default function OfficesLog() {
     }
   };
 
-  console.log(offices)
-
   return (
     <View style={{flex: 1}}>
       <Header

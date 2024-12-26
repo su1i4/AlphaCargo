@@ -55,8 +55,6 @@ export default function Order() {
     }
   };
 
-  console.log(offices)
-
   return (
     <View style={{flex: 1}}>
       <Header

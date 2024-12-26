@@ -36,10 +36,13 @@ export const baseApi = createApi({
       query: () => 'tariffs',
     }),
     getParcel: build.query<any, void>({
-      query: () => 'parcels',
+      query: () => '/parcels',
     }),
     findParcel: build.query<any, any>({
       query: number => `parcels/invoice/${number}`,
+    }),
+    getParcelPDFfile: build.query<any, any>({
+      query: number => `parcels/invoice/${number}/pdf`,
     }),
     postFranchise: build.mutation<any, any>({
       query: body => {

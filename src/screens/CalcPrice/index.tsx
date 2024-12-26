@@ -63,7 +63,7 @@ export default function CalcPrice() {
       return;
     } else {
       try {
-        const url = 'https://alphacargoserver.azurewebsites.net/calculator';
+        const url = 'https://alpha-cargo.kg/api/calculator';
         const requestBody = {
           cityFromId: cityFromId,
           cityToId: cityToId,
