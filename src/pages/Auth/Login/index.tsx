@@ -12,7 +12,8 @@ import {useNavigation} from '@react-navigation/native';
 import {useActions} from '../../../hooks/useActions';
 import {LAST_LOGIN_KEY} from '../../../utils/consts';
 
-export default function Login() {
+export default function Login({_, route}: any) {
+  const { ph = '', pass = '' } = route.params || {};
   const navigation: any = useNavigation();
   const [login] = useLoginMutation();
   const [phone, setPhone] = useState('');
@@ -23,6 +24,13 @@ export default function Login() {
   const phoneInputRef = useRef<any>();
 
   const {saveUser} = useActions();
+
+  useEffect(() => {
+    if(ph && pass){
+      setPassword(pass)
+      setPhone(ph)
+    }
+  }, [ph, pass])
 
   const handlePost = async () => {
     setPhoneError('');

@@ -7,6 +7,7 @@ import {usePostFranchiseMutation} from '../../services/base.service';
 import {useForm, Controller} from 'react-hook-form';
 import Toast from 'react-native-toast-message';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
+import Back from '../../assets/icons/Back';
 
 export default function Franshiza() {
   const [postFranchise, {isLoading}] = usePostFranchiseMutation();
@@ -44,8 +45,8 @@ export default function Franshiza() {
       <Header
         id="Orders"
         text="Франшиза"
-        Right={SingleUser}
-        func={() => navigation.navigate('Profile')}
+        Left={Back}
+        funcLeft={() => navigation.goBack()}
         isSearch={false}
       />
       <View

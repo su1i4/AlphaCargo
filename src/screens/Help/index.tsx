@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet,  Linking, Alert} from 'react-native';
 import Header from '../Header';
 import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
@@ -8,6 +8,22 @@ import Chat from '../../assets/icons/support/chat';
 
 const Help = () => {
   const navigation: any = useNavigation();
+
+  const handleWhatsApp = () => {
+    const phoneNumber = '+996504244527';
+    const message = 'Здравствуйте! Я хотел бы предложить функционал.';
+    const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+
+    Linking.canOpenURL(url)
+      .then(supported => {
+        if (supported) {
+          return Linking.openURL(url);
+        } else {
+          Alert.alert('Ошибка', 'WhatsApp не установлен на устройстве.');
+        }
+      })
+      .catch(err => console.error('Ошибка при открытии WhatsApp:', err));
+  };
 
   return (
     <View style={{flex: 1}}>
@@ -27,7 +43,9 @@ const Help = () => {
           </TouchableOpacity>
           <TouchableOpacity style={[styles.wrap, {paddingLeft: 4}]}>
             <Chat />
-            <Text>Предложить функционал</Text>
+            <TouchableOpacity onPress={handleWhatsApp}  >
+              <Text>Предложить функционал</Text>
+            </TouchableOpacity>
           </TouchableOpacity>
         </View>
       </View>

@@ -184,7 +184,7 @@ export default function Profile() {
           {loading ? (
             <Loading />
           ) : (
-            <View>
+            <View style={{display: 'flex', flexDirection: 'column', gap: 20}}>
               <TouchableOpacity
                 onPress={() => naviagation.navigate('CalcPrice')}>
                 <Panel />

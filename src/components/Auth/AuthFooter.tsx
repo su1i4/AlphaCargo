@@ -24,7 +24,7 @@ const AuthFooter = () => {
       <SectionItem
         title="Карта офисов"
         Icon={MapIcon}
-        onPress={() => setActive(true)}
+        onPress={() => navigation.navigate('OfficesLog')}
         style={{
           borderBottomLeftRadius: 4,
           borderBottomRightRadius: 4,
