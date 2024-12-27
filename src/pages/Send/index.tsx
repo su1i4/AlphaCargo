@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import RNFS from 'react-native-fs';
-import Share from 'react-native-share';
+import FileViewer from 'react-native-file-viewer';
 import {useAuth} from '../../hooks/useAuth';
 import {
   StyleSheet,
@@ -27,11 +27,11 @@ export default function Send() {
   const user = useAuth();
   const accessToken = user?.accessToken;
   const [parcelFind, setParcelFind] = useState('');
-  const [originalData, setOriginalData] = useState([]); // Holds the unfiltered data
+  const [originalData, setOriginalData] = useState([]);
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const {data: oneParcel = null, isLoading: oneParcelLoading} =
-    useFindParcelQuery(parcelFind.trim(), {skip: !parcelFind});
+    useFindParcelQuery(parcelFind.trim());
   const naviagation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
 
@@ -83,49 +83,58 @@ export default function Send() {
   useEffect(() => {
     switch (activeTab) {
       case 0:
-        setData(originalData); // Show all data
+        setData(originalData);
         break;
       case 1:
-        setData(originalData.filter((item: any) => item.payment === true)); // Show paid items
+        setData(originalData.filter((item: any) => item.payment === true));
         break;
       case 2:
-        setData(originalData.filter((item: any) => !item.payment)); // Show unpaid items
+        setData(originalData.filter((item: any) => !item.payment));
         break;
       default:
         break;
     }
   }, [activeTab, originalData]);
 
-  const getPdf = async (invoiceNumber: string, accessToken: string) => {
+  const getPdf = async (invoiceNumber: string) => {
     try {
-      const response = await fetch(`${URL}/api/parcels/invoice/${invoiceNumber}/pdf`, {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
+      const response = await fetch(
+        `${URL}/parcels/invoice/${invoiceNumber}/pdf`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/pdf',
+          },
         },
-      });
-  
+      );
       if (!response.ok) {
         throw new Error('Failed to fetch PDF');
       }
-  
-      const blob: any = await response.blob();
+      const blob = await response.blob();
       const filePath = `${RNFS.DocumentDirectoryPath}/invoice-${invoiceNumber}.pdf`;
-  
-      await RNFS.writeFile(filePath, blob, 'base64');
-  
-      await Share.open({
-        url: `file://${filePath}`,
-        type: 'application/pdf',
-        failOnCancel: false,
+      const base64Data = await blobToBase64(blob);
+      await RNFS.writeFile(filePath, base64Data, 'base64');
+
+      await FileViewer.open(filePath, {
+        showOpenWithDialog: true,
       });
-  
-      Alert.alert('Success', 'PDF downloaded and shared successfully!');
     } catch (error) {
-      Alert.alert('Error', 'Failed to download or share the PDF');
+      Alert.alert('Error', 'Failed to download or open the PDF');
       console.error(error);
     }
   };
+
+  const blobToBase64 = (blob: Blob): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => resolve((reader.result as string).split(',')[1]);
+      reader.onerror = () => reject(reader.error);
+      reader.readAsDataURL(blob);
+    });
+  };
+
+  console.log(oneParcel, 'this is fuck');
 
   return (
     <View>
@@ -186,11 +195,13 @@ export default function Send() {
             <Text>Пусто</Text>
           ) : null}
           {oneParcel?.Statuses?.length && (
-            <OneParcelCard oneParcel={oneParcel?.Statuses[0]} lodor={true} />
+            <OneParcelCard oneParcel={oneParcel?.Statuses} />
           )}
           {data &&
             !parcelFind &&
-            data?.map((item: any) => <ParcelCard oneParcel={item} />)}
+            data?.map((item: any) => (
+              <ParcelCard oneParcel={item} getPdf={getPdf} />
+            ))}
         </View>
       </ScrollView>
     </View>

@@ -3,11 +3,8 @@ import {ButtonCustom} from '../../components/UI/Buttons/Button';
 import {useNavigation} from '@react-navigation/native';
 import PdfIcon from '../../assets/icons/PdfIcon';
 
-export const ParcelCard = (props: any) => {
-  const {oneParcel, download} = props;
+export const ParcelCard = ({oneParcel, getPdf}: any) => {
   const navigation: any = useNavigation();
-
-  console.log(props, 'this is fuck');
 
   return (
     <View key={oneParcel?.invoice} style={styles.wrapper}>
@@ -31,18 +28,12 @@ export const ParcelCard = (props: any) => {
         />
       )}
       <TouchableOpacity
+        onPress={() => getPdf(oneParcel?.invoice)}
         style={{
           position: 'absolute',
           bottom: 15,
           right: 0,
           width: 60,
-          //   height: 50,
-          //   backgroundColor: 'gray',
-          //   display: 'flex',
-          //   flexDirection: 'column',
-          //   justifyContent: 'center',
-          //   alignItems: 'center',
-          //   borderRadius: 25,
         }}>
         <PdfIcon />
         <Text style={{fontSize: 12, color: 'white'}}>Скачать</Text>

@@ -55,6 +55,8 @@ export default function Order() {
     }
   };
 
+  console.log(offices)
+
   return (
     <View style={{flex: 1}}>
       <Header
@@ -107,7 +109,7 @@ export default function Order() {
               {selectedPoint?.contactNumbers}
             </Text>
             <Text style={styles.popoverText}>
-              <Text style={styles.label}>Часы работы: </Text>
+              <Text style={styles.label}>Часы работы </Text>
               {selectedPoint?.openingHour}:00 - {selectedPoint?.closingHour}:00
             </Text>
             <TouchableOpacity

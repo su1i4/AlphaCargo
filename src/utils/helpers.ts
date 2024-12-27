@@ -23,7 +23,6 @@ export const getUserFromStorage = async () => {
 
     return parsedUser;
   } catch (error) {
-    console.error('Error retrieving user data:', error);
     return null;
   }
 };
@@ -32,7 +31,6 @@ export const removeUserFromStorage = async () => {
   try {
     await AsyncStorage.removeItem(USER_KEY);
   } catch (error) {
-    console.error('Error removing user data:', error);
   }
 };
 
