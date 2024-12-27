@@ -20,8 +20,6 @@ const Payment = () => {
   const [amount, setAmount] = useState('');
   const [file, setFile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const {data: oneParcel = null, isLoading: oneParcelLoading} =
-    useFindParcelQuery(parcel.trim());
 
   const handleFileSelect = async () => {
     try {

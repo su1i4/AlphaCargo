@@ -29,6 +29,12 @@ export default function Franshiza() {
   const onSubmit = async (data: any) => {
     try {
       const response = await postFranchise(data).unwrap();
+      Toast.show({
+        type: 'success',
+        text1: 'Успех',
+        text2: 'Франшиза успешно отправлено',
+        visibilityTime: 3000,
+      });
       reset();
     } catch (error: any) {
       Toast.show({

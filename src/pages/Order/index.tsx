@@ -120,9 +120,9 @@ export default function Order() {
           </View>
         )}
 
-        <View style={[styles.popAp, {bottom: 80}]}>
+        {/* <View style={[styles.popAp, {bottom: 80}]}>
           <LocateIcon />
-        </View>
+        </View> */}
 
         <TouchableOpacity
           style={[styles.popAp, {bottom: 20}]}
