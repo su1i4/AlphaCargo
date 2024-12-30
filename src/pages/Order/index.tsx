@@ -119,11 +119,6 @@ export default function Order() {
             </TouchableOpacity>
           </View>
         )}
-
-        {/* <View style={[styles.popAp, {bottom: 80}]}>
-          <LocateIcon />
-        </View> */}
-
         <TouchableOpacity
           style={[styles.popAp, {bottom: 20}]}
           onPress={() =>

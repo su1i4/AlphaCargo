@@ -8,7 +8,7 @@ export const OneParcelCard = ({oneParcel = []}: any) => {
 
   return (
     <View style={styles.wrapper}>
-      {oneParcel.map((item: any, index: number) => (
+      {oneParcel.map((item: any) => (
         <View style={{display: 'flex', flexDirection: 'row', gap: 10}}>
           {item.payment ? (
             <Check />

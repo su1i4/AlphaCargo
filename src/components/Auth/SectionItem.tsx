@@ -13,7 +13,7 @@ const SectionItem = ({Icon, title, onPress, style}: SectionProps) => {
   return (
     <TouchableOpacity onPress={onPress} style={[styles.container, style]}>
       <View style={styles.iconContainer}>
-        <Icon />
+        {Icon}
       </View>
       <Text style={styles.title}>{title}</Text>
       <ArrowRight size={20} />
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 14,
+    fontSize: 15,
     color: '#000018',
   },
   chevron: {

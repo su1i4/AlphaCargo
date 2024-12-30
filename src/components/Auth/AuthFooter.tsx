@@ -1,33 +1,29 @@
-import React, { useState } from 'react';
 import {StyleSheet, View, Platform} from 'react-native';
 import SectionItem from './SectionItem';
 import UserIcon from '../../assets/icons/UsersIcon';
 import MapIcon from '../../assets/icons/MapIcon';
 import {useNavigation} from '@react-navigation/native';
-import CustomModal from '../UI/Modal';
 
 const AuthFooter = () => {
   const navigation: any = useNavigation();
-  const [active, setActive] = useState(false)
   return (
     <View style={styles.footerContainer}>
-      <CustomModal active={active} onClose={() => setActive(false)} />
       <SectionItem
         title="Стать клиентом"
-        Icon={UserIcon}
+        Icon={<UserIcon size={22} />}
         onPress={() => navigation.navigate('SignUp')}
         style={{
-          borderTopLeftRadius: 4,
-          borderTopRightRadius: 4,
+          borderTopLeftRadius: 12,
+          borderTopRightRadius: 12,
         }}
       />
       <SectionItem
         title="Карта офисов"
-        Icon={MapIcon}
+        Icon={<MapIcon size={22} />}
         onPress={() => navigation.navigate('OfficesLog')}
         style={{
-          borderBottomLeftRadius: 4,
-          borderBottomRightRadius: 4,
+          borderBottomLeftRadius: 12,
+          borderBottomRightRadius: 12,
         }}
       />
     </View>

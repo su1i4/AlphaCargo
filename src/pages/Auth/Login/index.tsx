@@ -86,39 +86,7 @@ export default function Login({_, route}: any) {
     <View>
       <View style={styles.main}>
         <View style={styles.imageContainer}>
-          <View
-            style={{
-              borderRadius: 30,
-              overflow: 'hidden',
-              backgroundColor: 'white',
-              width: 130,
-              height: 135,
-            }}>
-            <Image
-              style={{width: 130, height: 100}}
-              source={require('../../../assets/images/alpha-cargo.png')}
-            />
-            <Text
-              style={{
-                color: '#02447F',
-                textAlign: 'center',
-                fontSize: 20,
-                fontWeight: 900,
-                lineHeight: 20,
-              }}>
-              ALPHA
-            </Text>
-            <Text
-              style={{
-                color: '#02447F',
-                textAlign: 'center',
-                fontSize: 16,
-                fontWeight: 700,
-                lineHeight: 15,
-              }}>
-              CARGO
-            </Text>
-          </View>
+          <Image source={require('../../../assets/images/AlphaCargo.png')} />
         </View>
         <LoginContainer isClose={false} text={'Войти'}>
           <View style={styles.msgWrap}>

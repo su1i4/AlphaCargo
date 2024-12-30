@@ -18,20 +18,15 @@ import CarIcon from '../../assets/icons/CarIcon';
 import TarifIcon from '../../assets/icons/TarifIcon';
 import {Tab} from '../../components/UI/Tab';
 import {useNavigation} from '@react-navigation/native';
-import {useFindParcelQuery} from '../../services/base.service';
 import {ParcelCard} from './parcelCard';
-import {OneParcelCard} from './oneParcelCard';
 import {URL} from '../../utils/consts';
 
 export default function Send() {
   const user = useAuth();
   const accessToken = user?.accessToken;
-  const [parcelFind, setParcelFind] = useState('');
   const [originalData, setOriginalData] = useState([]);
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
-  const {data: oneParcel = null, isLoading: oneParcelLoading} =
-    useFindParcelQuery(parcelFind.trim());
   const naviagation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
 
@@ -134,17 +129,12 @@ export default function Send() {
     });
   };
 
-  console.log(oneParcel, 'this is fuck');
-
   return (
     <View>
       <Header
         id="watchOrder"
         text="Отправления"
         placeholder="Номер посылки"
-        value={parcelFind}
-        onChange={setParcelFind}
-        isSearch
         func={() => naviagation.navigate('Profile')}
         Right={SingleUser}
       />
@@ -172,7 +162,7 @@ export default function Send() {
               Тарифы
             </Text>
           </TouchableOpacity>
-          {data && !parcelFind && (
+          {data && (
             <Tab
               text="Мои отправления"
               active={activeTab}
@@ -188,17 +178,12 @@ export default function Send() {
               </View>
             </Tab>
           )}
-          {isLoading || oneParcelLoading ? (
+          {isLoading ? (
             <Text>Загрузка ...</Text>
-          ) : (parcelFind && !oneParcel?.Statuses?.length) ||
-            (!parcelFind && (!data || data.length === 0)) ? (
+          ) : !data.length  ? (
             <Text>Пусто</Text>
           ) : null}
-          {oneParcel?.Statuses?.length && (
-            <OneParcelCard oneParcel={oneParcel?.Statuses} />
-          )}
           {data &&
-            !parcelFind &&
             data?.map((item: any) => (
               <ParcelCard oneParcel={item} getPdf={getPdf} />
             ))}

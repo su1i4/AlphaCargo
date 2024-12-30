@@ -100,7 +100,7 @@ export const Loyalty = () => {
             </Text>
           </View>
           {LEVELS.map((item: any, index: number) => (
-            <TouchableOpacity onPress={() => navigation.navigate('Bonus')} key={index} style={styles.container}>
+            <TouchableOpacity key={index} style={styles.container}>
               {item.icon}
               <Text
                 style={{
