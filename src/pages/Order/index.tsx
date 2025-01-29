@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import Header from '../../screens/Header';
 import SingleUser from '../../assets/icons/SingleUser';
-import LocateIcon from '../../assets/icons/LocateIcon';
 import BurgerIcon from '../../assets/icons/BurgerIcon';
 import {useNavigation} from '@react-navigation/native';
 import {

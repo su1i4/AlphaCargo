@@ -12,6 +12,7 @@ import {authActions} from '../store/slices/auth.slice';
 import {getUserFromStorage} from '../utils/helpers';
 import {useDispatch} from 'react-redux';
 import {checkLoginDate} from '../utils/helpers';
+import Begin from './Begin';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,14 +42,43 @@ export default function Main() {
   return (
     <>
       {/* Настраиваем StatusBar */}
-      <StatusBar barStyle="dark-content" backgroundColor="transparent" translucent={true} />
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName={user ? 'MainNavigation' : 'Login'}>
-          <Stack.Screen options={{headerShown: false}} name="Login" component={Login} />
-          <Stack.Screen options={{headerShown: false}} name="SignUp" component={SignUp} />
-          <Stack.Screen options={{headerShown: false}} name="Verification" component={Verification} />
-          <Stack.Screen options={{headerShown: false}} name="MainNavigation" component={MainNavigation} />
-          <Stack.Screen options={{headerShown: false}} name="OfficesLog" component={OfficesLog} />
+        <Stack.Navigator initialRouteName={user ? 'MainNavigation' : 'Begin'}>
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="Begin"
+            component={Begin}
+          />
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="Login"
+            component={Login}
+          />
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="SignUp"
+            component={SignUp}
+          />
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="Verification"
+            component={Verification}
+          />
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="MainNavigation"
+            component={MainNavigation}
+          />
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="OfficesLog"
+            component={OfficesLog}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
