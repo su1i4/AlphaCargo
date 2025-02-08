@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Linking, Alert} from 'react-native';
 import {useState} from 'react';
 import {InfoContainer} from '../../components/Containers/InfoContainer';
 import Percent from '../../assets/icons/Percent';
@@ -18,8 +18,29 @@ export const Personal = () => {
 
   const getModal = () => setActive(true);
 
+  const handleLink = async (link: string) => {
+    const url = link;
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        Alert.alert('Ошибка', 'Невозможно открыть ссылку: ' + url);
+      }
+    } catch (error) {
+      Alert.alert('Ошибка', 'Произошла ошибка при попытке открыть ссылку.');
+    }
+  };
+
   return (
-    <>
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 20,
+        marginTop: 20,
+        marginBottom: 40,
+      }}>
       <CustomModal active={active} onClose={toggleModal} />
       <Text style={styles.titles}>Популярное</Text>
       <InfoContainer
@@ -38,7 +59,7 @@ export const Personal = () => {
           width="48.5%"
         />
         <InfoContainer
-          onClick={getModal}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/career')}
           Icon={<RocketIcon />}
           title="Работа в Альфа"
           content={`Начни карьеру в \nАльфа Карго`}
@@ -46,12 +67,12 @@ export const Personal = () => {
         />
       </View>
       <InfoContainer
-        onClick={getModal}
+        onClick={() => handleLink('https://www.alpha-cargo.kg/#/franchise')}
         Icon={<SingleUser size={18} />}
         title="Для франчайзи"
         content="Инструкции и стандарты работы"
       />
-    </>
+    </View>
   );
 };
 

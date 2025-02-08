@@ -1,4 +1,4 @@
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {useState} from 'react';
 import World from './icons/world';
 import Boxes from './icons/boxes';
@@ -45,8 +45,21 @@ export default function Begin() {
 
   return (
     <View style={styles.main}>
+      <View style={styles.progressBarContainer}>
+        <View
+          style={[
+            styles.progressBar,
+            {width: `${((step + 1) / temps.length) * 100}%`},
+          ]}
+        />
+      </View>
       {temps[step].Icon}
       <Text style={styles.text}>{temps[step].text}</Text>
+      <TouchableOpacity onPress={() => navigation.navigate('TarifMain')} >
+        <Text style={{textDecorationLine: 'underline'}}>
+          Узнайте наши тарифы
+        </Text>
+      </TouchableOpacity>
       <View style={styles.statistic}>
         <View style={{width: '90%'}}>
           <ButtonCustom title="Начать" onClick={outStep} />
@@ -59,11 +72,21 @@ export default function Begin() {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
+  },
+  progressBarContainer: {
+    position: 'absolute',
+    top: 80,
+    width: '90%',
+    height: 5,
+    backgroundColor: '#ddd',
+  },
+  progressBar: {
+    height: '100%',
+    backgroundColor: 'black',
   },
   text: {
     fontWeight: '700',
@@ -72,7 +95,6 @@ const styles = StyleSheet.create({
   },
   statistic: {
     width: '100%',
-    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     position: 'absolute',

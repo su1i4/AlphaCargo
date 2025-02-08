@@ -4,8 +4,8 @@ import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
 function SAL() {
   return (
     <Svg
-      width={1141}
-      height={574}
+      width={550}
+      height={304}
       viewBox="0 0 1141 574"
       fill="none"
     >

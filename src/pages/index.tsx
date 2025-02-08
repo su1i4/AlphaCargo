@@ -13,6 +13,7 @@ import {getUserFromStorage} from '../utils/helpers';
 import {useDispatch} from 'react-redux';
 import {checkLoginDate} from '../utils/helpers';
 import Begin from './Begin';
+import TarifMain from './TarifMain';
 
 const Stack = createNativeStackNavigator();
 
@@ -78,6 +79,11 @@ export default function Main() {
             options={{headerShown: false}}
             name="OfficesLog"
             component={OfficesLog}
+          />
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="TarifMain"
+            component={TarifMain}
           />
         </Stack.Navigator>
       </NavigationContainer>

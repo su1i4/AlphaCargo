@@ -29,7 +29,7 @@ export const Input = ({value, onChange, placeholder, style, disbaled = false, ke
 
 const styles = StyleSheet.create({
   input: {
-    borderRadius: 10,
+    borderRadius: 16,
     height: 55,
     maxHeight: 55,
     minHeight: 55,

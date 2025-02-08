@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     height: 55,
     minHeight: 55,
     maxHeight: 55,
-    borderRadius: 10,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: '#8C8C8C',
     overflow: 'hidden',

@@ -7,7 +7,7 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
   const navigation: any = useNavigation();
 
   return (
-    <View key={oneParcel?.invoice} style={[styles.wrapper, {backgroundColor: oneParcel.payment ? '#94C325' : '#DF5146'}]}>
+    <View key={oneParcel?.invoice} style={[styles.wrapper, {backgroundColor: oneParcel.payment ? '#94C325' : '#DF5146', marginTop: 10}]}>
       <Text style={styles.mainText}>Номер накладной: {oneParcel?.invoice}</Text>
       <Text style={styles.secondText}>Дата: {oneParcel?.date}</Text>
       <Text style={styles.secondText}>Статус: {oneParcel?.status}</Text>

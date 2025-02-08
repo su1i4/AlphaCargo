@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 20,
     borderRadius: 10,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F0F1F3',
   },
   iconWrapper: {
     backgroundColor: '#02447F',
