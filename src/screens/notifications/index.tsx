@@ -25,7 +25,7 @@ export const Notifications = () => {
     if (accessToken) {
       const fetchNotifications = async () => {
         try {
-          const response = await fetch('https://alphacargoserver.azurewebsites.net/notifications', {
+          const response = await fetch('https://alpha-cargo.kg/api/notifications', {
             method: 'GET',
             headers: {
               'Authorization': `Bearer ${accessToken}`,
@@ -53,7 +53,7 @@ export const Notifications = () => {
   }, [accessToken]);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Header
         id="Notifications"
         text="Уведомления"
@@ -99,7 +99,7 @@ export const Notifications = () => {
           )}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

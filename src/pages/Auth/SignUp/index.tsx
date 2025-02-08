@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {SafeAreaView, View, Text, StyleSheet, Linking} from 'react-native';
+import { View, Text, StyleSheet} from 'react-native';
 import {LoginContainer} from '../../../components/Containers/LoginContainer';
 import {Input} from '../../../components/UI/Inputs/Input';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
@@ -37,7 +37,6 @@ export default function SignUp() {
     setLoading(true);
     try {
       const response: any = await SignUp({phone});
-      console.log(response, 'this is lox')
       if (response['error']) {
         Toast.show({
           type: 'error',
@@ -61,11 +60,11 @@ export default function SignUp() {
   }, [phone, password]);
 
   return (
-    <SafeAreaView>
+    <View>
       <View style={styles.main}>
         <LoginContainer isClose={true} text={'Введите номер телефона'}>
           <Text style={{color: '#000018', fontSize: 13, fontWeight: '400'}}>
-            Мы отправим вам на телефон номер
+            Мы отправим код на ваш номер
           </Text>
           <View style={styles.msgWrap}>
             <PhoneNumberInput setPhoneNumber={setPhone} />
@@ -90,7 +89,7 @@ export default function SignUp() {
           />
         </LoginContainer>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

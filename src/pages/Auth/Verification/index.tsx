@@ -1,6 +1,5 @@
 import React, {useRef, useEffect, useState} from 'react';
 import {
-  SafeAreaView,
   View,
   StyleSheet,
   TouchableOpacity,
@@ -10,7 +9,6 @@ import {
 import {LoginContainer} from '../../../components/Containers/LoginContainer';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
 import ArrowBack from '../../../assets/icons/ArrowBack';
-import {useSingUpStep2Mutation} from '../../../services/auth.service';
 import Toast from 'react-native-toast-message';
 import {useActions} from '../../../hooks/useActions';
 
@@ -39,7 +37,7 @@ export default function Verification({navigation, route}: any) {
     setLoading(true);
     try {
       const response: any = await fetch(
-        'https://alphacargoserver.azurewebsites.net/auth/signup-step2',
+        'https://alpha-cargo.kg/api/auth/signup-step2',
         {
           method: 'POST',
           headers: {
@@ -56,9 +54,9 @@ export default function Verification({navigation, route}: any) {
         Toast.show({
           type: 'success',
           text1: 'Успех',
-          text2: 'Аккаунт успешно создан',
+          text2: 'Аккаунт успешно создан войдите',
         });
-        navigation.navigate('Login');
+        navigation.navigate('MainNavigation', {ph: phone, pass: password});
       } else {
         Toast.show({
           type: 'error',
@@ -123,7 +121,7 @@ export default function Verification({navigation, route}: any) {
   }, [code]);
 
   return (
-    <SafeAreaView>
+    <View>
       <View style={styles.main}>
         <LoginContainer text={'Войти'} isClose={true}>
           <View style={styles.headerTitle}>
@@ -156,7 +154,7 @@ export default function Verification({navigation, route}: any) {
           />
         </LoginContainer>
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

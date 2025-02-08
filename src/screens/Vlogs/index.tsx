@@ -8,11 +8,12 @@ import {
   Dimensions,
   TouchableWithoutFeedback,
   StyleSheet,
-  SafeAreaView,
   GestureResponderEvent,
   PanResponder,
-  Platform
+  Platform,
+  TouchableOpacity,
 } from 'react-native';
+import CloseIcon from '../../assets/icons/CloseIcons';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -35,7 +36,7 @@ export default function Vlogs({route}: any) {
           goToPreviousStory();
         }
       },
-    })
+    }),
   ).current;
 
   useEffect(() => {
@@ -139,7 +140,7 @@ export default function Vlogs({route}: any) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.container}>
       <TouchableWithoutFeedback onPress={handlePress}>
         <View style={styles.content} {...panResponder.panHandlers}>
           <FlatList
@@ -156,8 +157,11 @@ export default function Vlogs({route}: any) {
           />
           {renderProgressBars()}
         </View>
-      </TouchableWithoutFeedback>
-    </SafeAreaView>
+      </TouchableWithoutFeedback >
+      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.icon}>
+        <CloseIcon color='white' size={30} />
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -165,6 +169,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'black',
+    position: 'relative',
+  },
+  icon: {
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 75 : 45,
+    right: 15,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#FFFFFF20'
   },
   content: {
     flex: 1,
@@ -173,7 +191,7 @@ const styles = StyleSheet.create({
   progressContainer: {
     flexDirection: 'row',
     position: 'absolute',
-    top: Platform.OS === 'ios'? 60 : 45,
+    top: Platform.OS === 'ios' ? 60 : 30,
     left: 10,
     right: 10,
   },

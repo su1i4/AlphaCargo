@@ -1,12 +1,10 @@
-import {useEffect, useState, useRef} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import { useState, useRef} from 'react';
+import {StyleSheet, View} from 'react-native';
 import Header from '../Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
-import Toast from 'react-native-toast-message';
 import {useGetTariffsQuery} from '../../services/base.service';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
-import {Select} from '../../components/UI/Select';
 import {Input} from '../../components/UI/Inputs/Input';
 import {PhoneNumberInput} from '../../components/UI/PhoneInput';
 
@@ -23,7 +21,7 @@ export default function Tarif() {
   }
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Header
         id="офсл"
         text="Оформить заявку"
@@ -52,7 +50,7 @@ export default function Tarif() {
           style={{width: '100%'}}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

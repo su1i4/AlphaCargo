@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
@@ -51,7 +50,7 @@ export const Loyalty = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Header id="Loyalty" text="Программа лояльности" Right={Right} />
       <ScrollView style={styles.scrollView}>
         <View style={styles.Wrapper}>
@@ -101,7 +100,7 @@ export const Loyalty = () => {
             </Text>
           </View>
           {LEVELS.map((item: any, index: number) => (
-            <TouchableOpacity onPress={() => navigation.navigate('Bonus')} key={index} style={styles.container}>
+            <TouchableOpacity key={index} style={styles.container}>
               {item.icon}
               <Text
                 style={{
@@ -130,7 +129,7 @@ export const Loyalty = () => {
           ))}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 

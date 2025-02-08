@@ -17,8 +17,8 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 280,
-    height: 120,
-    maxHeight: 120,
+    height: 150,
+    maxHeight: 150,
     maxWidth: 280,
     borderRadius: 10,
   },

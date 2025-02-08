@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import { StyleSheet, Text, View} from 'react-native';
 import Header from '../Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
@@ -14,6 +14,7 @@ import {Input} from '../../components/UI/Inputs/Input';
 import {Select} from '../../components/UI/Select';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
 import { useAuth } from '../../hooks/useAuth';
+import Back from '../../assets/icons/Back';
 
 export default function CalcPrice() {
   const user = useAuth();
@@ -62,7 +63,7 @@ export default function CalcPrice() {
       return;
     } else {
       try {
-        const url = 'https://alphacargoserver.azurewebsites.net/calculator';
+        const url = 'https://alpha-cargo.kg/api/calculator';
         const requestBody = {
           cityFromId: cityFromId,
           cityToId: cityToId,
@@ -89,12 +90,14 @@ export default function CalcPrice() {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Header
         id="Profile"
         text="Рассчитать стоимость"
         Right={SingleUser}
         func={() => naviagation.navigate('Profile')}
+        Left={Back}
+        funcLeft={() => naviagation.goBack()}
       />
       <View style={styles.Wrapper}>
         <Select
@@ -171,7 +174,7 @@ export default function CalcPrice() {
           style={{width: '100%'}}
         />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 

@@ -12,7 +12,8 @@ import {useNavigation} from '@react-navigation/native';
 import {useActions} from '../../../hooks/useActions';
 import {LAST_LOGIN_KEY} from '../../../utils/consts';
 
-export default function Login() {
+export default function Login({_, route}: any) {
+  const { ph = '', pass = '' } = route.params || {};
   const navigation: any = useNavigation();
   const [login] = useLoginMutation();
   const [phone, setPhone] = useState('');
@@ -23,6 +24,13 @@ export default function Login() {
   const phoneInputRef = useRef<any>();
 
   const {saveUser} = useActions();
+
+  useEffect(() => {
+    if(ph && pass){
+      setPassword(pass)
+      setPhone(ph)
+    }
+  }, [ph, pass])
 
   const handlePost = async () => {
     setPhoneError('');
@@ -44,7 +52,6 @@ export default function Login() {
     setLoading(true);
     try {
       const response: any = await login({phone, password});
-      console.log(response);
       if (response['error']) {
         Toast.show({
           type: 'error',
@@ -75,45 +82,11 @@ export default function Login() {
     }
   };
 
-  console.log(password, 'this is password');
-
   return (
-    <>
+    <View>
       <View style={styles.main}>
         <View style={styles.imageContainer}>
-          <View
-            style={{
-              borderRadius: 30,
-              overflow: 'hidden',
-              backgroundColor: 'white',
-              width: 130,
-              height: 135,
-            }}>
-            <Image
-              style={{width: 130, height: 100}}
-              source={require('../../../assets/images/alpha-cargo.png')}
-            />
-            <Text
-              style={{
-                color: '#02447F',
-                textAlign: 'center',
-                fontSize: 20,
-                fontWeight: 900,
-                lineHeight: 20,
-              }}>
-              ALPHA
-            </Text>
-            <Text
-              style={{
-                color: '#02447F',
-                textAlign: 'center',
-                fontSize: 16,
-                fontWeight: 700,
-                lineHeight: 15,
-              }}>
-              CARGO
-            </Text>
-          </View>
+          <Image source={require('../../../assets/images/AlphaCargo.png')} />
         </View>
         <LoginContainer isClose={false} text={'Войти'}>
           <View style={styles.msgWrap}>
@@ -141,7 +114,7 @@ export default function Login() {
         </LoginContainer>
       </View>
       <AuthFooter />
-    </>
+    </View>
   );
 }
 

@@ -1,6 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   View,
@@ -45,15 +44,12 @@ export default function WatchOrder() {
     );
   };
 
-  const [text, setText] = useState('');
-
   return (
     <View style={styles.safeArea}>
       <Header
         id="watchOrder"
-        value={text}
-        onChange={setText}
-        isSearch
+        func={() => navigation.navigate('Profile')}
+        Right={SingleUser}
         placeholder="Номер посылки"
         text="Отследить заказ"
       />

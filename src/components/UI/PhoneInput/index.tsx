@@ -1,17 +1,17 @@
-import React, { useRef, useImperativeHandle, forwardRef } from 'react';
+import React, {useRef, useImperativeHandle, forwardRef} from 'react';
 import PhoneInput from 'react-native-phone-number-input';
-import { StyleSheet } from 'react-native';
+import {StyleSheet} from 'react-native';
 
-export const PhoneNumberInput = forwardRef(({ setPhoneNumber }: any, ref) => {
+export const PhoneNumberInput = forwardRef(({setPhoneNumber}: any, ref) => {
   const phoneInput = useRef<PhoneInput>(null);
 
   useImperativeHandle(ref, () => ({
     reset: () => {
       if (phoneInput.current) {
-        phoneInput.current.setState({ number: '' });
+        phoneInput.current.setState({number: ''});
         setPhoneNumber('');
       }
-    }
+    },
   }));
 
   return (
@@ -19,10 +19,10 @@ export const PhoneNumberInput = forwardRef(({ setPhoneNumber }: any, ref) => {
       ref={phoneInput}
       defaultCode="KG"
       layout="first"
-      onChangeFormattedText={(text) => {
+      onChangeFormattedText={text => {
         setPhoneNumber(text);
       }}
-      placeholder='Номер телефона'
+      placeholder="Номер телефона"
       containerStyle={styles.containerStyle}
       textContainerStyle={styles.textContainerStyle}
       textInputStyle={styles.textInputStyle}
@@ -54,12 +54,12 @@ const styles = StyleSheet.create({
     minHeight: 55,
     maxHeight: 55,
     fontSize: 14,
-    color: '#808080'
+    fontWeight: 500,
+    color: '#808080',
   },
   codeTextStyle: {
     fontSize: 14,
     color: '#808080',
-    height: 20,
   },
   flagButtonStyle: {
     width: 60,

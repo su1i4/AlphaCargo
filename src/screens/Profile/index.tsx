@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react';
 import {
-  SafeAreaView,
   StyleSheet,
   ScrollView,
   View,
@@ -157,7 +156,6 @@ export default function Profile() {
         });
       }
     } catch (e: any) {
-      console.log(e, 'this is error delete');
     } finally {
       setDeleteLoading(false);
     }
@@ -172,7 +170,7 @@ export default function Profile() {
   }, [accessToken]);
 
   return (
-    <SafeAreaView style={styles.safeArea}>
+    <View style={styles.safeArea}>
       <Header
         id="Profile"
         Left={BellIcon}
@@ -186,14 +184,14 @@ export default function Profile() {
           {loading ? (
             <Loading />
           ) : (
-            <>
+            <View style={{display: 'flex', flexDirection: 'column', gap: 20}}>
               <TouchableOpacity
                 onPress={() => naviagation.navigate('CalcPrice')}>
                 <Panel />
               </TouchableOpacity>
               <Text style={styles.mainText}>Личные данные</Text>
               {type && (
-                <>
+                <View>
                   <Input
                     value={fio}
                     style={{
@@ -224,7 +222,7 @@ export default function Profile() {
                     onChange={setPassword}
                     placeholder=""
                   />
-                </>
+                </View>
               )}
               <Text style={styles.email}>email</Text>
               <Input
@@ -279,11 +277,11 @@ export default function Profile() {
                 title="Удалить аккаунт"
                 loadingColor="red"
               />
-            </>
+            </View>
           )}
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 }
 

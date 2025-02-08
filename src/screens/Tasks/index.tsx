@@ -1,5 +1,4 @@
 import {
-    SafeAreaView,
     ScrollView,
     StyleSheet,
     View,
@@ -59,7 +58,7 @@ import {
     ];
   
     return (
-      <SafeAreaView style={styles.safeArea}>
+      <View style={styles.safeArea}>
         <Header
           id="Reward"
           text="Задания"
@@ -117,7 +116,7 @@ import {
             ))}
           </View>
         </ScrollView>
-      </SafeAreaView>
+      </View>
     );
   }
   

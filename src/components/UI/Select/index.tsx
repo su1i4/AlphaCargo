@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
   Text,
   TouchableOpacity,
-  FlatList,
   TouchableWithoutFeedback,
+  Modal,
 } from 'react-native';
 import DropDown from '../../../assets/icons/DropDown';
 
@@ -42,10 +42,10 @@ export const Select = ({
   const selectedOption = options.find(option => option.value === value);
 
   return (
-    <View style={{position: 'relative', width: '100%'}}>
+    <View style={{ position: 'relative', width: '100%' }}>
       <TouchableOpacity
         style={[styles.select, style]}
-        onPress={() => !disabled && setDropdownVisible(prev => !prev)}
+        onPress={() => !disabled && setDropdownVisible(true)}
         disabled={disabled}>
         <Text style={styles.selectText}>
           {selectedOption ? selectedOption.label : placeholder}
@@ -62,25 +62,26 @@ export const Select = ({
         <DropDown />
       </View>
 
-      {isDropdownVisible && (
+      <Modal
+        transparent
+        visible={isDropdownVisible}
+        animationType="fade"
+        onRequestClose={() => setDropdownVisible(false)}>
         <TouchableWithoutFeedback onPress={() => setDropdownVisible(false)}>
-          <View style={styles.dropdownContainer}>
-            <FlatList
-              data={options}
-              keyExtractor={item =>
-                item.value.toString() + item.index?.toString() || ''
-              }
-              renderItem={({item}) => (
+          <View style={styles.modalOverlay}>
+            <View style={styles.dropdownContainer}>
+              {options.map((item, index) => (
                 <TouchableOpacity
+                  key={`${item.value}-${index}`}
                   style={styles.option}
                   onPress={() => handleSelect(item.value)}>
                   <Text style={styles.optionText}>{item.label}</Text>
                 </TouchableOpacity>
-              )}
-            />
+              ))}
+            </View>
           </View>
         </TouchableWithoutFeedback>
-      )}
+      </Modal>
     </View>
   );
 };
@@ -103,24 +104,21 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '400',
   },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.3)', // Полупрозрачный фон
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   dropdownContainer: {
-    position: 'absolute',
-    top: '110%',
-    left: 0,
-    right: 0,
-    backgroundColor: 'rgba(239, 239, 239, 1)', 
+    backgroundColor: 'white',
     borderRadius: 10,
     borderColor: '#8C8C8C',
     borderWidth: 1,
-    maxHeight: 200,
-    zIndex: 1000,
-    elevation: 5,
-    shadowColor: '#000', // iOS shadow
-    shadowOffset: { width: 0, height: 2 }, // iOS shadow
-    shadowOpacity: 0.25, // iOS shadow
-    shadowRadius: 3.84, // iOS shadow
+    maxHeight: '70%',
+    width: '90%',
+    overflow: 'scroll'
   },
-  
   option: {
     paddingVertical: 10,
     paddingHorizontal: 20,

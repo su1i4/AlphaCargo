@@ -24,13 +24,19 @@ import CarSvg from '../../assets/svg/CarSvg';
 import CarIcon from '../../assets/icons/CarIcon';
 import Document from '../../assets/icons/Document';
 import RocketIcon from '../../assets/icons/RocketIcon';
+import Back from '../../assets/icons/Back';
 
 export default function Gruz() {
   const navigation: any = useNavigation();
 
   return (
     <View>
-      <Header id="Alpha" text="Официальный груз" />
+      <Header
+        id="Alpha"
+        text="Официальный груз"
+        Left={Back}
+        funcLeft={() => navigation.goBack()}
+      />
       <ScrollView>
         <View style={styles.Wrapper}>
           <View

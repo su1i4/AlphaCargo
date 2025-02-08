@@ -1,33 +1,77 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
 import Header from '../Header';
 import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
 import {Input} from '../../components/UI/Inputs/Input';
 import {Tab} from '../../components/UI/Tab';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
-import {useLazyFindParcelQuery} from '../../services/base.service';
+import DocumentPicker from 'react-native-document-picker';
+import {useAuth} from '../../hooks/useAuth';
+import {useFindParcelQuery} from '../../services/base.service';
 
 const Payment = () => {
+  const user = useAuth();
+  const accessToken = user?.accessToken;
   const navigation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
   const [parcel, setParcel] = useState('');
-  const [findParcel] = useLazyFindParcelQuery();
-  const [blockParcel, setBlockParcel] = useState({});
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [amount, setAmount] = useState('');
+  const [file, setFile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+
+  const handleFileSelect = async () => {
+    try {
+      const res = await DocumentPicker.pickSingle({
+        type: [DocumentPicker.types.allFiles],
+      });
+      setFile(res);
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        Alert.alert('Canceled', 'No file was selected.');
+      } else {
+        console.error(err);
+        Alert.alert('Error', 'Failed to select a file.');
+      }
+    }
+  };
 
   const handlePost = async () => {
     try {
       setLoading(true);
-      const res = await findParcel(parcel);
-      console.log(res);
-      if (res.data.Status !== 'Bad, not found') {
-        setBlockParcel(res.data);
-        setParcel('');
+
+      if (!parcel || !phoneNumber || !amount || !file) {
+        Alert.alert('Error', 'Please fill in all the fields.');
+        return;
       }
-      setLoading(false);
+
+      const formData = new FormData();
+      formData.append('phoneNumber', phoneNumber);
+      formData.append('amount', amount);
+      formData.append('checkFile', {
+        uri: file.uri,
+        type: file.type,
+        name: file.name,
+      });
+
+      const response = await fetch(`${URL}/api/payment`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create payment.');
+      }
+
+      Alert.alert('Success', 'Payment created successfully.');
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      Alert.alert('Error', 'Failed to create payment.');
     } finally {
       setLoading(false);
     }
@@ -54,14 +98,38 @@ const Payment = () => {
               <Text style={{color: '#F9FFFF'}}>Юридическое лицо</Text>
             </View>
           </Tab>
-          <Text style={{marginTop: 10, marginBottom: 10}}>Номер накладной</Text>
+
+          {/* <Text style={{marginTop: 10, marginBottom: 10}}>Номер накладной</Text>
           <Input
             value={parcel}
             onChange={setParcel}
             placeholder="Введите номер"
+          /> */}
+
+          <Text style={{marginTop: 10, marginBottom: 10}}>Номер телефона</Text>
+          <Input
+            value={phoneNumber}
+            onChange={setPhoneNumber}
+            placeholder="Введите номер телефона"
           />
+
+          <Text style={{marginTop: 10, marginBottom: 10}}>Сумма платежа</Text>
+          <Input
+            value={amount}
+            onChange={setAmount}
+            placeholder="Введите сумму"
+          />
+
+          <TouchableOpacity
+            onPress={handleFileSelect}
+            style={styles.fileButton}>
+            <Text style={styles.fileButtonText}>
+              {file ? file.name : 'Выберите файл чека'}
+            </Text>
+          </TouchableOpacity>
+
           <ButtonCustom
-            title="Найти"
+            title="Отправить"
             isLoading={loading}
             onClick={handlePost}
             style={{marginTop: 10}}
@@ -86,6 +154,16 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 17,
     fontWeight: '600',
+  },
+  fileButton: {
+    marginTop: 10,
+    padding: 15,
+    backgroundColor: '#ddd',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  fileButtonText: {
+    color: '#333',
   },
 });
 
