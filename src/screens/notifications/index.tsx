@@ -1,16 +1,10 @@
 import React, {useState, useEffect} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View, Text} from 'react-native';
 import Header from '../../screens/Header';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
 import {useNavigation} from '@react-navigation/native';
 import BellIcon from '../../assets/icons/BellIcon';
-import { useAuth } from '../../hooks/useAuth';
+import {useAuth} from '../../hooks/useAuth';
 import Loading from '../../components/UI/Loading';
 
 export const Notifications = () => {
@@ -25,13 +19,16 @@ export const Notifications = () => {
     if (accessToken) {
       const fetchNotifications = async () => {
         try {
-          const response = await fetch('https://alpha-cargo.kg/api/notifications', {
-            method: 'GET',
-            headers: {
-              'Authorization': `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
+          const response = await fetch(
+            'https://alpha-cargo.kg/api/notifications',
+            {
+              method: 'GET',
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
             },
-          });
+          );
 
           if (!response.ok) {
             throw new Error('Network response was not ok');
@@ -61,40 +58,44 @@ export const Notifications = () => {
         Left={BellIcon}
         funcLeft={() => navigation.navigate('Notifications')}
         func={() => navigation.goBack()}
+        back={true}
       />
       <ScrollView style={[styles.scrollView]}>
-        <View style={!loading ? styles.Wrapper: styles.loadWrap}>
-          {!loading ? notifications?.map((item: any, index: number) => (
-            <View key={index} style={styles.container}>
-              <Text
-                style={{
-                  fontSize: 18,
-                  fontWeight: '600',
-                  color: '#02447F',
-                }}>
-                {item.title}
-              </Text>
-              <View
-                style={{
-                  width: '100%',
-                  height: 1,
-                  backgroundColor: '#27457C4A',
-                  marginVertical: 13,
-                }}
-              />
-              <View>
-                <Text style={{color: '#8C8C8C', fontSize: 13}}>
-                  дата: {item.createdAt.split("T")[0]} - {item.createdAt.split("T")[1].split('.')[0]}
+        <View style={!loading ? styles.Wrapper : styles.loadWrap}>
+          {!loading ? (
+            notifications?.map((item: any, index: number) => (
+              <View key={index} style={styles.container}>
+                <Text
+                  style={{
+                    fontSize: 18,
+                    fontWeight: '600',
+                    color: '#02447F',
+                  }}>
+                  {item.title}
                 </Text>
-                <Text style={{color: '#8C8C8C', fontSize: 13}}>
-                  статус: {item.read ? 'Прочитано': 'Не прочитано'}
-                </Text>
-                <Text style={{color: '#8C8C8C', fontSize: 13}}>
-                  {item.message}
-                </Text>
+                <View
+                  style={{
+                    width: '100%',
+                    height: 1,
+                    backgroundColor: '#27457C4A',
+                    marginVertical: 13,
+                  }}
+                />
+                <View>
+                  <Text style={{color: '#8C8C8C', fontSize: 13}}>
+                    дата: {item.createdAt.split('T')[0]} -{' '}
+                    {item.createdAt.split('T')[1].split('.')[0]}
+                  </Text>
+                  <Text style={{color: '#8C8C8C', fontSize: 13}}>
+                    статус: {item.read ? 'Прочитано' : 'Не прочитано'}
+                  </Text>
+                  <Text style={{color: '#8C8C8C', fontSize: 13}}>
+                    {item.message}
+                  </Text>
+                </View>
               </View>
-            </View>
-          )) : (
+            ))
+          ) : (
             <Loading />
           )}
         </View>
@@ -139,6 +140,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });

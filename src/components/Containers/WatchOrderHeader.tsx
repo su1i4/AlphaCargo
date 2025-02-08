@@ -12,15 +12,15 @@ export const GradientWrapper = ({item, Components}: any) => {
       end={{x: 1, y: 1}}
       style={{
         flex: 1,
-        borderRadius: 20,
-        padding: 2,
+        borderRadius: 45,
+        padding: 3,
       }}>
       <TouchableOpacity
         onPress={() => naviagation.navigate('Vlogs', {Components: Components, id: item.id})}
         style={{
-          backgroundColor: 'white',
-          padding: 2,
-          borderRadius: 18,
+          backgroundColor: '#026297',
+          padding: 3,
+          borderRadius: 42,
           position: 'relative',
           overflow: 'hidden',
         }}>
@@ -35,9 +35,9 @@ export const GradientWrapper = ({item, Components}: any) => {
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: 90,
-    height: 90,
-    borderRadius: 20,
+    width: 80,
+    height: 80,
+    borderRadius: 40,
     objectFit: 'cover',
   },
   text: {

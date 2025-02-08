@@ -98,6 +98,7 @@ export default function CalcPrice() {
         func={() => naviagation.navigate('Profile')}
         Left={Back}
         funcLeft={() => naviagation.goBack()}
+        back
       />
       <View style={styles.Wrapper}>
         <Select

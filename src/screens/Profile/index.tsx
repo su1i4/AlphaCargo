@@ -40,16 +40,13 @@ export default function Profile() {
 
   const fetchNotifications = async () => {
     try {
-      const response = await fetch(
-        'https://alphacargoserver.azurewebsites.net/users',
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
+      const response = await fetch('https://alpha-cargo.kg/api/users', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
         },
-      );
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -84,17 +81,14 @@ export default function Profile() {
     setPatchLoad(true);
 
     try {
-      const response = await fetch(
-        'https://alphacargoserver.azurewebsites.net/users',
-        {
-          method: 'PATCH',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(updateData),
+      const response = await fetch('https://alpha-cargo.kg/api/users', {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(updateData),
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -128,7 +122,7 @@ export default function Profile() {
     setDeleteLoading(true);
     try {
       const response = await fetch(
-        'https://alphacargoserver.azurewebsites.net/users/deactivateUser',
+        'https://alpha-cargo.kg/api/users/deactivateUser',
         {
           method: 'DELETE',
           headers: {
@@ -178,6 +172,7 @@ export default function Profile() {
         Right={LogoutIcon}
         func={() => naviagation.goBack()}
         funcLeft={() => naviagation.navigate('Notifications')}
+        back
       />
       <ScrollView style={styles.scrollView}>
         <View style={!loading ? styles.Wrapper : styles.loadWrap}>
@@ -191,7 +186,7 @@ export default function Profile() {
               </TouchableOpacity>
               <Text style={styles.mainText}>Личные данные</Text>
               {type && (
-                <View>
+                <View style={{display: 'flex', flexDirection: 'column', gap: 10}}>
                   <Input
                     value={fio}
                     style={{
@@ -228,7 +223,7 @@ export default function Profile() {
               <Input
                 value={email}
                 style={{
-                  backgroundColor: 'white',
+                  backgroundColor: '#F0F1F3',
                   borderWidth: 0,
                   borderColor: 'white',
                 }}
@@ -272,7 +267,6 @@ export default function Profile() {
               <ButtonCustom
                 onClick={handleDelete}
                 isLoading={deleteLoading}
-                textStyle={{color: 'red'}}
                 style={{backgroundColor: 'transparent'}}
                 title="Удалить аккаунт"
                 loadingColor="red"
@@ -291,10 +285,14 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     flex: 1,
+    marginTop: -20,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    zIndex: 9999,
+    backgroundColor: 'white',
+    padding: 20,
   },
   Wrapper: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
     display: 'flex',
     flexDirection: 'column',
     gap: 20,

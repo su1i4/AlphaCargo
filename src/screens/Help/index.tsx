@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet,  Linking, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Linking,
+  Alert,
+} from 'react-native';
 import Header from '../Header';
 import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
@@ -12,7 +19,9 @@ const Help = () => {
   const handleWhatsApp = () => {
     const phoneNumber = '+996504244527';
     const message = 'Здравствуйте! Я хотел бы предложить функционал.';
-    const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+    const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
+      message,
+    )}`;
 
     Linking.canOpenURL(url)
       .then(supported => {
@@ -32,6 +41,7 @@ const Help = () => {
         funcLeft={() => navigation.navigate('Alpha')}
         id="questions"
         text="Поддержка"
+        back
       />
       <View style={styles.container}>
         <View style={styles.main}>
@@ -43,7 +53,7 @@ const Help = () => {
           </TouchableOpacity>
           <TouchableOpacity style={[styles.wrap, {paddingLeft: 4}]}>
             <Chat />
-            <TouchableOpacity onPress={handleWhatsApp}  >
+            <TouchableOpacity onPress={handleWhatsApp}>
               <Text>Предложить функционал</Text>
             </TouchableOpacity>
           </TouchableOpacity>

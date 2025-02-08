@@ -36,6 +36,7 @@ export default function Gruz() {
         text="Официальный груз"
         Left={Back}
         funcLeft={() => navigation.goBack()}
+        back
       />
       <ScrollView>
         <View style={styles.Wrapper}>

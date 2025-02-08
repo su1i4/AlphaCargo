@@ -5,7 +5,7 @@ function One() {
   return (
     <Svg
       width={216}
-      height={293}
+      height={403}
       viewBox="0 0 216 293"
       fill="none"
     >

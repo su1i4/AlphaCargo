@@ -110,6 +110,7 @@ const Questions = () => {
         funcLeft={() => navigation.navigate('Alpha')}
         id="questions"
         text="Вопросы и ответы"
+        back
       />
       <View style={styles.container}>
         <View style={styles.header}>

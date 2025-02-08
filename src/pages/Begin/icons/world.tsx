@@ -11,7 +11,7 @@ import Svg, {
 function World() {
   return (
     <Svg
-      width={400}
+      width={350}
       height={275}
       viewBox="0 0 400 275"
       fill="none"

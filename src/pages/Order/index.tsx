@@ -1,8 +1,13 @@
-import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
-import Header from '../../screens/Header';
-import SingleUser from '../../assets/icons/SingleUser';
-import BurgerIcon from '../../assets/icons/BurgerIcon';
+import React, {useState, useRef, useEffect} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Dimensions,
+  PanResponder,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
   useGetAllCitiesQuery,
@@ -10,10 +15,81 @@ import {
   useGetOfficesQuery,
 } from '../../services/base.service';
 import Mapbox from '@rnmapbox/maps';
+import {Animated} from 'react-native';
+import { ButtonCustom } from '../../components/UI/Buttons/Button';
 
 const mapBoxAccessToken =
   'pk.eyJ1Ijoic3VsaXNoIiwiYSI6ImNtMGU3a3E2ZzBnZjcyanFzMzgxdWNhMjcifQ.h6HlFjmcCXDjeWrJwqNgUg';
 Mapbox.setAccessToken(mapBoxAccessToken);
+
+const {height} = Dimensions.get('window');
+const BOTTOM_SHEET_HEIGHT = height * 0.4;
+
+const BottomSheet = ({visible, onClose}: any) => {
+  const translateY = useRef(new Animated.Value(BOTTOM_SHEET_HEIGHT)).current;
+  const [isOpen, setIsOpen] = useState(visible);
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: () => true,
+      onPanResponderMove: (_, gestureState) => {
+        if (gestureState.dy > 0) {
+          translateY.setValue(gestureState.dy);
+        }
+      },
+      onPanResponderRelease: (_, gestureState) => {
+        if (gestureState.dy > BOTTOM_SHEET_HEIGHT / 2) {
+          closeSheet();
+        } else {
+          openSheet();
+        }
+      },
+    }),
+  ).current;
+
+  const openSheet = () => {
+    setIsOpen(true);
+    Animated.timing(translateY, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  const closeSheet = () => {
+    Animated.timing(translateY, {
+      toValue: BOTTOM_SHEET_HEIGHT,
+      duration: 300,
+      useNativeDriver: true,
+    }).start(() => {
+      setIsOpen(false);
+      onClose();
+    });
+  };
+
+  React.useEffect(() => {
+    if (visible) {
+      openSheet();
+    } else {
+      closeSheet();
+    }
+  }, [visible]);
+
+  if (!isOpen) return null;
+
+  return (
+    <TouchableWithoutFeedback onPress={closeSheet}>
+      <View style={styles.overlay}>
+        <Animated.View
+          style={[styles.sheet, {transform: [{translateY}]}]}
+          {...panResponder.panHandlers}>
+          <View style={styles.handle} />
+        </Animated.View>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
 
 export default function Order() {
   const {data = []} = useGetAllCitiesQuery();
@@ -21,6 +97,7 @@ export default function Order() {
   const {data: countries = []} = useGetAllCountriesQuery();
   const navigation: any = useNavigation();
   const [selectedPoint, setSelectedPoint] = useState<any>(null);
+  const [visible, setVisible] = useState(false);
 
   const initialCoordinates = [74.5698, 42.8746];
 
@@ -35,11 +112,19 @@ export default function Order() {
       properties: {
         id: 2,
         address: office.address,
-        city: {cityname: office.city.cityname, countryId: office.city.countyId, id: office.city.id, type: office.city.type},
+        city: {
+          cityname: office.city.cityname,
+          countryId: office.city.countyId,
+          id: office.city.id,
+          type: office.city.type,
+        },
         cityId: office.cityId,
         closingHour: office.closingHour,
         contactNumbers: office.contactNumbers,
-        country: {countryname: office.country.countryname, id: office.country.id},
+        country: {
+          countryname: office.country.countryname,
+          id: office.country.id,
+        },
         countryId: office.countryId,
         openingHour: office.openingHour,
       },
@@ -54,17 +139,10 @@ export default function Order() {
     }
   };
 
-  console.log(offices)
+  const selectedAnswer = true;
 
   return (
     <View style={{flex: 1}}>
-      <Header
-        placeholder="Введите адрес"
-        id="Orders"
-        text="Пункты Альфа"
-        Right={SingleUser}
-        func={() => navigation.navigate('Profile')}
-      />
       <View style={styles.container}>
         <Mapbox.MapView style={styles.map}>
           <Mapbox.Camera
@@ -118,18 +196,9 @@ export default function Order() {
             </TouchableOpacity>
           </View>
         )}
-        <TouchableOpacity
-          style={[styles.popAp, {bottom: 20}]}
-          onPress={() =>
-            navigation.navigate('Points', {
-              cities: data,
-              offices: offices,
-              countries: countries,
-            })
-          }>
-          <BurgerIcon size={28} active={true} lox={true} />
-        </TouchableOpacity>
       </View>
+      {/* <ButtonCustom title="Open Bottom Sheet" onClick={() => setVisible(true)} /> */}
+      <BottomSheet visible={visible} onClose={() => setVisible(false)} />
     </View>
   );
 }
@@ -181,7 +250,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 10,
     shadowOffset: {width: 0, height: 5},
-    zIndex: 9999
+    zIndex: 9999,
   },
   popoverTitle: {
     fontSize: 18,
@@ -201,5 +270,31 @@ const styles = StyleSheet.create({
     backgroundColor: '#94C325',
     padding: 10,
     borderRadius: 5,
+  },
+
+  overlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  sheet: {
+    width: '100%',
+    height: BOTTOM_SHEET_HEIGHT,
+    backgroundColor: 'white',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    padding: 16,
+  },
+  handle: {
+    width: 50,
+    height: 5,
+    backgroundColor: '#ccc',
+    borderRadius: 2.5,
+    alignSelf: 'center',
+    marginBottom: 10,
   },
 });

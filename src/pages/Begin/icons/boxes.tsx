@@ -4,7 +4,7 @@ import Svg, {Path, Defs, Pattern, Use, Image} from 'react-native-svg';
 function Boxes() {
   return (
     <Svg
-      width={490}
+      width={350}
       height={277}
       viewBox="0 0 490 277"
       fill="none"

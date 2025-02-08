@@ -30,8 +30,7 @@ export const getUserFromStorage = async () => {
 export const removeUserFromStorage = async () => {
   try {
     await AsyncStorage.removeItem(USER_KEY);
-  } catch (error) {
-  }
+  } catch (error) {}
 };
 
 export const saveUserToStorage = async (data: any) => {
@@ -64,5 +63,19 @@ export const checkLoginDate = async () => {
     return currentTime - lastLoginTime < ONE_DAY_MS;
   } catch (error) {
     return false;
+  }
+};
+export const statusColor = (txt: string) => {
+  switch (txt) {
+    case 'Принят на склад ожидает отправки':
+      return '#2B3F6C';
+    case 'В пути':
+      return '#E1DC00';
+    case 'Выдан получателю':
+      return '#93C225';
+    case 'Груз прибыл в Москву':
+      return '#3B3F8C';
+    default:
+      break;
   }
 };

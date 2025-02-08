@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
-import { StyleSheet, Text, View} from 'react-native';
-import Header from '../Header';
+import {StyleSheet, Text, View} from 'react-native';
+import Header from '../../screens/Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
@@ -9,7 +9,7 @@ import {ButtonCustom} from '../../components/UI/Buttons/Button';
 import {Select} from '../../components/UI/Select';
 import Back from '../../assets/icons/Back';
 
-export default function Tarif() {
+export default function TarifMain() {
   const {data: Tarifs = []} = useGetTariffsQuery();
   const naviagation: any = useNavigation();
   const [countryId, setCountryId] = useState<number | string>(0);
@@ -30,7 +30,7 @@ export default function Tarif() {
           names.push({label: item.type.name, value: item.type.id});
         }
       });
-      setParcelOption(names)
+      setParcelOption(names);
     }
   }, [countryId, cityId]);
 
@@ -43,15 +43,15 @@ export default function Tarif() {
         text2: 'Пожалуйста заполните все поля',
       });
     } else {
-        let data = []
+      let data = [];
       data = Tarifs.filter(
         (item: any) =>
           item.country.id === countryId &&
           item.cityTo.id === cityId &&
           parcel === item.type.id,
       );
-      if(data.length){
-        setInfo({day: data[0].deliveryTime, price: data[0].price})
+      if (data.length) {
+        setInfo({day: data[0].deliveryTime, price: data[0].price});
       }
     }
   };
@@ -66,6 +66,7 @@ export default function Tarif() {
         funcLeft={() => naviagation.goBack()}
         func={() => naviagation.navigate('Profile')}
         back
+        show={false}
       />
       <View style={styles.Wrapper}>
         <Select
@@ -99,7 +100,7 @@ export default function Tarif() {
           value={parcel}
           options={parcelOption.map((item: any, index: number) => {
             return {
-                index: index + 1,
+              index: index + 1,
               label: item.label,
               value: item.value,
             };
@@ -115,8 +116,10 @@ export default function Tarif() {
               width: '100%',
               gap: 10,
             }}>
-            <Text style={styles.typeText} >Срок доставки: {info.day} дней</Text>
-            <Text style={styles.typeText} >Стоимость за киллограмм: {info.price}₽</Text>
+            <Text style={styles.typeText}>Срок доставки: {info.day} дней</Text>
+            <Text style={styles.typeText}>
+              Стоимость за киллограмм: {info.price}₽
+            </Text>
           </View>
         )}
         <ButtonCustom
