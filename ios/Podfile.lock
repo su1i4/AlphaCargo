@@ -9,11 +9,11 @@ PODS:
   - hermes-engine (0.74.3):
     - hermes-engine/Pre-built (= 0.74.3)
   - hermes-engine/Pre-built (0.74.3)
-  - MapboxCommon (23.11.2)
+  - MapboxCommon (23.11.4)
   - MapboxCoreMaps (10.19.2):
     - MapboxCommon (~> 23.11)
-  - MapboxMaps (10.19.1):
-    - MapboxCommon (= 23.11.2)
+  - MapboxMaps (10.19.3):
+    - MapboxCommon (= 23.11.4)
     - MapboxCoreMaps (= 10.19.2)
     - MapboxMobileEvents (= 2.0.0)
     - Turf (= 2.8.0)
@@ -1519,9 +1519,9 @@ SPEC CHECKSUMS:
   fmt: 4c2741a687cc09f0634a2e2c72a838b99f1ff120
   glog: fdfdfe5479092de0c4bdbebedd9056951f092c4f
   hermes-engine: 1f547997900dd0752dc0cc0ae6dd16173c49e09b
-  MapboxCommon: 873b75dd0e8c5d7029e0c849437eba365f4887e5
+  MapboxCommon: cc47fafe3fe5408ca49240aa80fa64f27f275711
   MapboxCoreMaps: 35685edba03e44468aed57c3dfd7f8795edafda8
-  MapboxMaps: 05822ab0ee74f7d626e6471572439afe35c1c116
+  MapboxMaps: 429db75b136978f8b2dc2456da5d8b6b03c22cea
   MapboxMobileEvents: d044b9edbe0ec7df60f6c2c9634fe9a7f449266b
   RCT-Folly: 02617c592a293bd6d418e0a88ff4ee1f88329b47
   RCTDeprecation: 4c7eeb42be0b2e95195563c49be08d0b839d22b4
@@ -1587,6 +1587,6 @@ SPEC CHECKSUMS:
   Turf: aa2ede4298009639d10db36aba1a7ebaad072a5e
   Yoga: 04f1db30bb810187397fa4c37dd1868a27af229c
 
-PODFILE CHECKSUM: e48c573efec3fa10ea00cac341e91b0e450c2a2b
+PODFILE CHECKSUM: cbb8d478bd7db19e3ccb2880dfd08e5b9bb7c09f
 
 COCOAPODS: 1.16.2
