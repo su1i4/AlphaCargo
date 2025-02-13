@@ -16,80 +16,12 @@ import {
 } from '../../services/base.service';
 import Mapbox from '@rnmapbox/maps';
 import {Animated} from 'react-native';
-import { ButtonCustom } from '../../components/UI/Buttons/Button';
+import {ButtonCustom} from '../../components/UI/Buttons/Button';
+import {BottomSheet} from '../../components/UI/BottomSheet';
 
 const mapBoxAccessToken =
   'pk.eyJ1Ijoic3VsaXNoIiwiYSI6ImNtMGU3a3E2ZzBnZjcyanFzMzgxdWNhMjcifQ.h6HlFjmcCXDjeWrJwqNgUg';
 Mapbox.setAccessToken(mapBoxAccessToken);
-
-const {height} = Dimensions.get('window');
-const BOTTOM_SHEET_HEIGHT = height * 0.4;
-
-const BottomSheet = ({visible, onClose}: any) => {
-  const translateY = useRef(new Animated.Value(BOTTOM_SHEET_HEIGHT)).current;
-  const [isOpen, setIsOpen] = useState(visible);
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onMoveShouldSetPanResponder: () => true,
-      onPanResponderMove: (_, gestureState) => {
-        if (gestureState.dy > 0) {
-          translateY.setValue(gestureState.dy);
-        }
-      },
-      onPanResponderRelease: (_, gestureState) => {
-        if (gestureState.dy > BOTTOM_SHEET_HEIGHT / 2) {
-          closeSheet();
-        } else {
-          openSheet();
-        }
-      },
-    }),
-  ).current;
-
-  const openSheet = () => {
-    setIsOpen(true);
-    Animated.timing(translateY, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  const closeSheet = () => {
-    Animated.timing(translateY, {
-      toValue: BOTTOM_SHEET_HEIGHT,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(() => {
-      setIsOpen(false);
-      onClose();
-    });
-  };
-
-  React.useEffect(() => {
-    if (visible) {
-      openSheet();
-    } else {
-      closeSheet();
-    }
-  }, [visible]);
-
-  if (!isOpen) return null;
-
-  return (
-    <TouchableWithoutFeedback onPress={closeSheet}>
-      <View style={styles.overlay}>
-        <Animated.View
-          style={[styles.sheet, {transform: [{translateY}]}]}
-          {...panResponder.panHandlers}>
-          <View style={styles.handle} />
-        </Animated.View>
-      </View>
-    </TouchableWithoutFeedback>
-  );
-};
 
 export default function Order() {
   const {data = []} = useGetAllCitiesQuery();
@@ -97,7 +29,6 @@ export default function Order() {
   const {data: countries = []} = useGetAllCountriesQuery();
   const navigation: any = useNavigation();
   const [selectedPoint, setSelectedPoint] = useState<any>(null);
-  const [visible, setVisible] = useState(false);
 
   const initialCoordinates = [74.5698, 42.8746];
 
@@ -197,8 +128,7 @@ export default function Order() {
           </View>
         )}
       </View>
-      {/* <ButtonCustom title="Open Bottom Sheet" onClick={() => setVisible(true)} /> */}
-      <BottomSheet visible={visible} onClose={() => setVisible(false)} />
+      <BottomSheet/>
     </View>
   );
 }
@@ -270,31 +200,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#94C325',
     padding: 10,
     borderRadius: 5,
-  },
-
-  overlay: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
-  },
-  sheet: {
-    width: '100%',
-    height: BOTTOM_SHEET_HEIGHT,
-    backgroundColor: 'white',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    padding: 16,
-  },
-  handle: {
-    width: 50,
-    height: 5,
-    backgroundColor: '#ccc',
-    borderRadius: 2.5,
-    alignSelf: 'center',
-    marginBottom: 10,
   },
 });

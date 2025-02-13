@@ -55,14 +55,40 @@ export default function Begin() {
       </View>
       {temps[step].Icon}
       <Text style={styles.text}>{temps[step].text}</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('TarifMain')} >
-        <Text style={{textDecorationLine: 'underline'}}>
-          Узнайте наши тарифы
-        </Text>
+      <TouchableOpacity onPress={() => navigation.navigate('TarifMain')}>
+        {step < 3 && (
+          <Text style={{textDecorationLine: 'underline'}}>
+            Узнайте наши тарифы
+          </Text>
+        )}
       </TouchableOpacity>
       <View style={styles.statistic}>
+        <View
+          style={{
+            width: '90%',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+          <ButtonCustom
+            style={{width: '49%'}}
+            title="Войти"
+            onClick={() => navigation.navigate('Login')}
+          />
+          <ButtonCustom
+            style={{width: '49%'}}
+            title="Регистрация"
+            onClick={() => navigation.navigate('SignUp')}
+          />
+        </View>
         <View style={{width: '90%'}}>
-          <ButtonCustom title="Начать" onClick={outStep} />
+          <ButtonCustom
+            style={{backgroundColor: 'transparent', borderWidth: 1, borderColor: 'black'}}
+            textStyle={{color: 'black'}}
+            black
+            title="Пропустить"
+            onClick={outStep}
+          />
         </View>
       </View>
     </View>
@@ -95,9 +121,11 @@ const styles = StyleSheet.create({
   },
   statistic: {
     width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     position: 'absolute',
     bottom: 40,
+    gap: 10,
   },
 });

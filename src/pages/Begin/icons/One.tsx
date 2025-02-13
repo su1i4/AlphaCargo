@@ -1,11 +1,10 @@
 import * as React from "react"
 import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
-
 function One() {
   return (
     <Svg
       width={216}
-      height={403}
+      height={293}
       viewBox="0 0 216 293"
       fill="none"
     >
