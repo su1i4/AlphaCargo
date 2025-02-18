@@ -56,6 +56,19 @@ const Help = () => {
             </TouchableOpacity>
           </TouchableOpacity>
         </View>
+        <View style={[styles.main, {marginTop: 20}]}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingHorizontal: 10,
+            }}>
+            <Text>О приложении</Text>
+            <Text style={{color: '#666666', fontSize: 15}}>Версия 1.2.0</Text>
+          </View>
+        </View>
       </View>
     </View>
   );

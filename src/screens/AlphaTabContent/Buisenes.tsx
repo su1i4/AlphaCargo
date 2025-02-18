@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import CustomModal from '../../components/UI/Modal';
 import {useState} from 'react';
 import Perevozka from '../../assets/icons/Perevozka';
+import Loyal from '../../assets/icons/Loyal';
 
 export const Buisenes = () => {
   const [active, setActive] = useState(false);
@@ -49,15 +50,15 @@ export const Buisenes = () => {
       <Text style={styles.titles}>Популярное</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={() => navigation.navigate('Tarif')}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/tariff')}
           Icon={<Graph />}
           title={`Рассчитать \nтариф`}
           content={`Узнайте срок и \nцену своих \nотправок`}
           width="48.5%"
         />
         <InfoContainer
-          onClick={() => navigation.navigate('Loyalty')}
-          Icon={<Percent />}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/cargo')}
+          Icon={<Loyal />}
           title={`Программа \nлояльности`}
           content={`Пользуйтесь \nуслугами и копите \nбаллы`}
           width="48.5%"
@@ -65,7 +66,7 @@ export const Buisenes = () => {
       </View>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={() => navigation.navigate('CalcPrice')}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/')}
           Icon={<Calc />}
           title={`Калькулятор`}
           content={`Рассчитайте \nстоимость`}
@@ -89,7 +90,7 @@ export const Buisenes = () => {
           width="48.5%"
         />
         <InfoContainer
-          onClick={() => navigation.navigate('Gruz')}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/iin')}
           Icon={<Document />}
           title={`Официальный \nгруз`}
           content={`Правила для \nупаковки`}
@@ -99,14 +100,14 @@ export const Buisenes = () => {
       <Text style={styles.titles}>Зарабатывай вместе с Альфа</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={() => navigation.navigate('Franshiza')}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/franchise')}
           Icon={<HandIcon size={18} />}
           title={`Франшиза`}
           content={`Начните свой \nбизнес`}
           width="48.5%"
         />
         <InfoContainer
-          onClick={() => navigation.navigate('Franshiza')}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/franchise')}
           Icon={<SingleUser size={18} />}
           title={`Для франчайзи`}
           content={`Инструкции и\nстандарты рабты`}

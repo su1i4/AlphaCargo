@@ -15,8 +15,6 @@ import {
 import Mapbox from '@rnmapbox/maps';
 import {BottomSheet} from '../../components/UI/BottomSheet';
 import LinearGradient from 'react-native-linear-gradient';
-import GeoWhite from './icons/geo';
-import ArrowDownGeo from './icons/ArrowDownGeo';
 import {GeoSearchInput} from './Mine/input';
 import {getStatus, searchLocations} from '../../utils/helpers';
 import GeoIcon from '../../assets/icons/GeoIcon';
