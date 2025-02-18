@@ -130,7 +130,7 @@ export default function Order() {
 
   return (
     <View style={{flex: 1, position: 'relative'}}>
-      <LinearGradient
+      {/* <LinearGradient
         colors={['#203B7A', '#026297', '#006599']}
         start={{x: 0, y: 0}}
         end={{x: 1, y: 0}}
@@ -140,7 +140,7 @@ export default function Order() {
           <Text style={styles.headeInnerTitle}>{selectedCity.label}</Text>
         </View>
         <ArrowDownGeo />
-      </LinearGradient>
+      </LinearGradient> */}
       <View style={styles.container}>
         <Mapbox.MapView style={styles.map}>
           <Mapbox.Camera

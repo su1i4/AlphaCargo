@@ -276,7 +276,7 @@ export default function Profile() {
                   }}
                   onPress={() => {
                     removeUserFromStorage();
-                    naviagation.navigate('Login');
+                    naviagation.navigate('Begin');
                   }}>
                   <LogoutIcon size={20} />
                 </TouchableOpacity>

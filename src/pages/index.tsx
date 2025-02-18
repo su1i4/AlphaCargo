@@ -44,7 +44,6 @@ export default function Main() {
 
   return (
     <>
-      {/* Настраиваем StatusBar */}
       <StatusBar
         barStyle="dark-content"
         backgroundColor="transparent"

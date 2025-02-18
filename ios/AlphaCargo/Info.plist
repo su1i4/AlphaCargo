@@ -1,6 +1,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen.storyboard</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Приложение использует ваше местоположение для отображения близлежащих грузов и расчета маршрутов доставки.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
