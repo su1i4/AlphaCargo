@@ -1,16 +1,10 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  TextInput,
-} from 'react-native';
-import {LoginContainer} from '../../../components/Containers/LoginContainer';
+import {View, StyleSheet, Text, TextInput} from 'react-native';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
-import ArrowBack from '../../../assets/icons/ArrowBack';
 import Toast from 'react-native-toast-message';
 import {useActions} from '../../../hooks/useActions';
+import {TouchableOpacity} from 'react-native';
+import Back from '../../../assets/icons/Back';
 
 export default function Verification({navigation, route}: any) {
   const {phone, password} = route.params;
@@ -19,6 +13,7 @@ export default function Verification({navigation, route}: any) {
   const [errorText, setErrorText] = useState<string>('');
   const inputRefs = useRef<any>([]);
   const [focusedIndex, setFocusedIndex] = useState(0);
+  const [count, setCount] = useState(60);
 
   const {saveUser} = useActions();
 
@@ -120,39 +115,71 @@ export default function Verification({navigation, route}: any) {
     }
   }, [code]);
 
+  useEffect(() => {
+    setInterval(() => {
+      setCount(count - 1);
+    }, 1000);
+  }, []);
+
   return (
-    <View>
+    <View style={{flex: 1, position: 'relative'}}>
+      <View
+        style={{
+          top: 80,
+          position: 'absolute',
+          paddingHorizontal: 20,
+          zIndex: 99,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Back color="black" />
+        </TouchableOpacity>
+      </View>
       <View style={styles.main}>
-        <LoginContainer text={'Войти'} isClose={true}>
-          <View style={styles.headerTitle}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <ArrowBack size={17} />
-            </TouchableOpacity>
-            <Text style={styles.text}>Введите код отправленный на {phone}</Text>
-          </View>
-          <View style={styles.container}>
-            {code.map((digit: any, index: any) => (
-              <TextInput
-                key={index}
-                ref={ref => (inputRefs.current[index] = ref)}
-                style={styles.input}
-                value={digit}
-                onChangeText={text => handleCodeChange(text, index)}
-                onKeyPress={event => handleKeyPress(event, index)}
-                onFocus={() => handleFocus(index)}
-                maxLength={1}
-                keyboardType="numeric"
-              />
-            ))}
-          </View>
-          {errorText ? <Text style={styles.errorText}>{errorText}</Text> : null}
+        <Text
+          style={{
+            width: '100%',
+            fontSize: 30,
+            fontWeight: '700',
+            marginTop: 20,
+          }}>
+          Введите код
+        </Text>
+        <Text style={styles.text}>Код отправлен на {phone}</Text>
+        <View style={styles.container}>
+          {code.map((digit: any, index: any) => (
+            <TextInput
+              key={index}
+              ref={ref => (inputRefs.current[index] = ref)}
+              style={styles.input}
+              value={digit}
+              onChangeText={text => handleCodeChange(text, index)}
+              onKeyPress={event => handleKeyPress(event, index)}
+              onFocus={() => handleFocus(index)}
+              maxLength={1}
+              keyboardType="numeric"
+            />
+          ))}
+        </View>
+        {errorText ? <Text style={styles.errorText}>{errorText}</Text> : null}
+        <Text
+          style={{
+            width: '100%',
+            fontSize: 16,
+            color: '#636363',
+          }}>
+          Отправить повторно через {count}
+        </Text>
+        <View style={{width: '100%', position: 'absolute', bottom: 40}}>
           <ButtonCustom
             disabled={loading}
             title="Войти"
             onClick={handlePost}
             isLoading={loading}
           />
-        </LoginContainer>
+        </View>
       </View>
     </View>
   );
@@ -162,12 +189,12 @@ const styles = StyleSheet.create({
   main: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#02447F',
     paddingHorizontal: 20,
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 20,
   },
   imageContainer: {
     position: 'absolute',
@@ -187,8 +214,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   text: {
+    width: '100%',
     color: '#000018',
-    fontSize: 13,
+    fontSize: 16,
     fontWeight: '400',
   },
   container: {

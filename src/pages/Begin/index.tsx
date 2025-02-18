@@ -63,33 +63,45 @@ export default function Begin() {
         )}
       </TouchableOpacity>
       <View style={styles.statistic}>
-        <View
-          style={{
-            width: '90%',
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
-          <ButtonCustom
-            style={{width: '49%'}}
-            title="Войти"
-            onClick={() => navigation.navigate('Login')}
-          />
-          <ButtonCustom
-            style={{width: '49%'}}
-            title="Регистрация"
-            onClick={() => navigation.navigate('SignUp')}
-          />
-        </View>
-        <View style={{width: '90%'}}>
-          <ButtonCustom
-            style={{backgroundColor: 'transparent', borderWidth: 1, borderColor: 'black'}}
-            textStyle={{color: 'black'}}
-            black
-            title="Пропустить"
-            onClick={outStep}
-          />
-        </View>
+        {step > 3 && (
+          <View
+            style={{
+              width: '90%',
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+            }}>
+            <ButtonCustom
+              style={{width: '49%'}}
+              title="Войти"
+              onClick={() => navigation.navigate('Login')}
+            />
+            <ButtonCustom
+              style={{width: '49%'}}
+              title="Регистрация"
+              onClick={() => navigation.navigate('SignUp')}
+            />
+          </View>
+        )}
+        {step > 3 ? (
+          <View style={{width: '90%'}}>
+            <ButtonCustom
+              style={{
+                backgroundColor: 'transparent',
+                borderWidth: 1,
+                borderColor: 'black',
+              }}
+              textStyle={{color: 'black'}}
+              black
+              title="Пропустить"
+              onClick={() => navigation.navigate('MainNavigation')}
+            />
+          </View>
+        ) : (
+          <View style={{width: '90%'}}>
+            <ButtonCustom title="Начать" onClick={outStep} />
+          </View>
+        )}
       </View>
     </View>
   );

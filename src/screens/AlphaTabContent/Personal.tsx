@@ -38,7 +38,6 @@ export const Personal = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: 20,
-        marginTop: 20,
         marginBottom: 40,
       }}>
       <CustomModal active={active} onClose={toggleModal} />

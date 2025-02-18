@@ -8,12 +8,7 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
-import Header from '../../screens/Header';
 import BellIcon from '../../assets/icons/BellIcon';
-import SingleUser from '../../assets/icons/SingleUser';
-import {Panel} from '../../screens/Panel';
-import {Tab} from '../../components/UI/Tab';
-import HandIcon from '../../assets/icons/HandIcon';
 import {Personal} from '../../screens/AlphaTabContent/Personal';
 import {Buisenes} from '../../screens/AlphaTabContent/Buisenes';
 import QuesDock from '../../assets/icons/QuesDock';
@@ -24,6 +19,16 @@ import CustomModal from '../../components/UI/Modal';
 import ProfileUser from '../../assets/icons/ProfileUser';
 import {useAuth} from '../../hooks/useAuth';
 import LinearGradient from 'react-native-linear-gradient';
+import PersonalIcon from '../../assets/icons/Personal';
+import SuitCaseIcon from '../../assets/icons/SuitCase';
+
+import NewNoti from '../../assets/icons/NewNoti';
+import NewRaketa from '../../assets/icons/NewRaketa';
+import NewFlip from '../../assets/icons/NewFlip';
+import NewImage from '../../assets/icons/NewImage';
+import NewUsers from '../../assets/icons/NewUsers';
+
+const tabs = ['Частным клиентам', 'Бизнесу'];
 
 export default function Alpha() {
   const user = useAuth();
@@ -62,14 +67,19 @@ export default function Alpha() {
 
   const HeaderIcons = [
     {
-      icon: <BellIcon color="#94C325" size={18} strokeWidth={2} />,
+      icon: <NewNoti />,
       text: `Уведом-\nления`,
       link: () => navigation.navigate('Notifications'),
     },
     {
-      icon: <FaUser />,
-      text: `Вызов\nвыездной\nгруппы`,
+      icon: <NewRaketa />,
+      text: `Выездная\nгруппа`,
       link: openWhatsAppOrWebsite,
+    },
+    {
+      icon: <NewUsers />,
+      text: `Мы в соц-\nсетях`,
+      link: () => navigation.navigate('Socials'),
     },
     {
       icon: <Card />,
@@ -77,9 +87,14 @@ export default function Alpha() {
       link: () => navigation.navigate('Payment'),
     },
     {
-      icon: <QuesDock />,
-      text: `Вопросы и\nответы`,
+      icon: <NewFlip />,
+      text: `Поддержка`,
       link: () => navigation.navigate('Help'),
+    },
+    {
+      icon: <NewImage />,
+      text: `Оформление`,
+      link: () => navigation.navigate('Oformlenie'),
     },
   ];
 
@@ -104,7 +119,6 @@ export default function Alpha() {
       }
 
       const data = await response.json();
-      console.log(data, 'this is user');
       if (data) {
         setEmail(data.email);
         setFio(data.fio);
@@ -124,24 +138,25 @@ export default function Alpha() {
     }
   }, [accessToken]);
 
+  const icons = [
+    <PersonalIcon color={activeTab === 0 ? 'white' : 'black'} />,
+    <SuitCaseIcon color={activeTab === 1 ? 'white' : 'black'} />,
+  ];
+
   return (
     <View style={{flex: 1}}>
-      <Header
-        id="Alpha"
-        Left={BellIcon}
-        text="Мой Альфа"
-        Right={SingleUser}
-        func={() => navigation.navigate('Profile')}
-        funcLeft={() => navigation.navigate('Notifications')}
-      />
       <ScrollView style={styles.scrollView}>
         <CustomModal active={active} onClose={toggleModal} />
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 60}}>
+          Мой Альфа
+        </Text>
         <TouchableOpacity
           style={{
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
             gap: 10,
+            marginTop: 20,
           }}
           onPress={() => navigation.navigate('Profile')}>
           <ProfileUser />
@@ -155,7 +170,7 @@ export default function Alpha() {
           end={{x: 1, y: 0}}
           style={{
             paddingHorizontal: 20,
-            paddingVertical: 7,
+            paddingVertical: 12,
             borderRadius: 20,
             marginTop: 15,
             display: 'flex',
@@ -166,7 +181,7 @@ export default function Alpha() {
           <Text style={{fontSize: 16, fontWeight: 500}}>
             Ваш уникальный код
           </Text>
-          <LinearGradient
+          {/* <LinearGradient
             colors={['#203B7A', '#026297', '#006599']}
             start={{x: 0, y: 0}}
             end={{x: 1, y: 0}}
@@ -178,23 +193,37 @@ export default function Alpha() {
             <Text style={{fontSize: 16, fontWeight: 500, color: 'white'}}>
               к0707
             </Text>
-          </LinearGradient>
+          </LinearGradient> */}
         </LinearGradient>
         <View
           style={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'center',
             paddingHorizontal: 10,
+            marginTop: 10,
+            gap: 20,
+            flexWrap: 'wrap',
           }}>
           {HeaderIcons.map((item: any, index) => (
             <View
               key={index}
-              style={{display: 'flex', flexDirection: 'column', marginTop: 10}}>
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginTop: 10,
+              }}>
               <TouchableOpacity
                 onPress={() => item.link()}
                 style={{
-                  padding: 22,
+                  width: 65,
+                  height: 65,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
                   borderRadius: 20,
                   backgroundColor: '#F0F1F3',
                 }}>
@@ -212,60 +241,70 @@ export default function Alpha() {
             </View>
           ))}
         </View>
+        <Text style={styles.textHeader}>Сервисы</Text>
         <View
           style={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginVertical: 10,
+            gap: 5,
+            paddingVertical: 20,
           }}>
-          <View
-            style={{
-              width: '48%',
-              height: 80,
-              borderRadius: 16,
-              backgroundColor: '#F0F1F3',
-              padding: 10,
-            }}>
-            <Text style={{fontSize: 16, fontWeight: 500, color: 'black'}}>
-              За декабрь
-            </Text>
-            <Text style={{fontSize: 16, fontWeight: 500, color: 'green'}}>
-              0
-            </Text>
-          </View>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Bonus')}
-            style={{
-              width: '48%',
-              height: 80,
-              borderRadius: 16,
-              backgroundColor: '#F0F1F3',
-              padding: 10,
-            }}>
-            <Text style={{fontSize: 16, fontWeight: 500, color: 'black'}}>
-              Мои баллы
-            </Text>
-            <Text style={{fontSize: 16, fontWeight: 500, color: 'green'}}>
-              1
-            </Text>
-          </TouchableOpacity>
+          {tabs.map((item: any, index: number) => {
+            return index === activeTab ? (
+              <TouchableOpacity
+                key={item}
+                onPress={() => setActiveTab(index)}
+                style={styles.touchable}>
+                <LinearGradient
+                  colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={styles.gradientBorder}>
+                  <View
+                    style={[
+                      styles.innerButton,
+                      {backgroundColor: 'transparent'},
+                    ]}>
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 5,
+                      }}>
+                      {icons[index]}
+                      <Text style={{color: '#FFFFFF'}}>{tabs[index]}</Text>
+                    </View>
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                key={item}
+                onPress={() => setActiveTab(index)}
+                style={styles.touchable}>
+                <LinearGradient
+                  colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={styles.gradientBorder}>
+                  <View style={styles.innerButton}>
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 5,
+                      }}>
+                      {icons[index]}
+                      <Text>{tabs[index]}</Text>
+                    </View>
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            );
+          })}
         </View>
-        <TouchableOpacity
-          style={{marginBottom: 10}}
-          onPress={() => navigation.navigate('CalcPrice')}>
-          <Panel />
-        </TouchableOpacity>
-        <Tab text="Сервисы" active={activeTab} setActive={setActiveTab}>
-          <View>
-            <SingleUser size={19} />
-            <Text style={{color: '#F9FFFF'}}>Частным клиентам</Text>
-          </View>
-          <View>
-            <HandIcon size={19} />
-            <Text style={{color: '#F9FFFF'}}>Бизнесу</Text>
-          </View>
-        </Tab>
         {components[activeTab]}
       </ScrollView>
     </View>
@@ -278,7 +317,6 @@ const styles = StyleSheet.create({
     marginTop: -20,
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
-    zIndex: 9999,
     backgroundColor: 'white',
     padding: 20,
   },
@@ -300,5 +338,28 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 10,
+  },
+  touchable: {
+    borderRadius: 20,
+    marginRight: 10,
+    overflow: 'hidden',
+  },
+  gradientBorder: {
+    padding: 4, // Толщина рамки
+    borderRadius: 20,
+  },
+  innerButton: {
+    backgroundColor: '#FFFFFF', // Цвет фона кнопки
+    borderRadius: 18, // Немного меньше, чтобы градиент был виден
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+  },
+  textHeader: {
+    color: '#000000',
+    fontSize: 20,
+    fontWeight: '600',
+    marginTop: 15,
   },
 });

@@ -60,6 +60,7 @@ export const Select = ({
           styles.iconWrap,
           {
             transform: isDropdownVisible ? 'rotate(180deg)' : 'rotate(0deg)',
+            top: label ? '53%' : '30%',
           },
         ]}>
         <DropDown />
@@ -91,9 +92,9 @@ export const Select = ({
 
 const styles = StyleSheet.create({
   select: {
-    borderRadius: 10,
-    paddingTop: 12,
-    paddingBottom: 14,
+    borderRadius: 16,
+    paddingTop: 16,
+    paddingBottom: 18,
     paddingHorizontal: 20,
     borderColor: '#8C8C8C',
     borderWidth: 1,
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
   },
   placeHolder: {
     color: '#8C8C8C',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '400',
   },
   modalOverlay: {
@@ -139,7 +140,6 @@ const styles = StyleSheet.create({
   },
   iconWrap: {
     position: 'absolute',
-    top: '50%',
     right: 20,
   },
 });

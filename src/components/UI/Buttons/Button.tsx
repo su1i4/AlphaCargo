@@ -29,7 +29,7 @@ export const ButtonCustom = ({
 
   return (
     <TouchableOpacity
-      onPress={() => (disabled ? false : onClick())}
+      onPress={() => (disabled ? false : isLoading === true ? false : onClick())}
       disabled={disabled}
       style={[styles.touchable, style]}>
       {black ? (

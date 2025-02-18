@@ -1,18 +1,22 @@
-import {useEffect, useState, useRef} from 'react';
+import {useRef} from 'react';
 import {
   Dimensions,
   Animated,
   View,
   PanResponder,
-  TouchableWithoutFeedback,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
 
 const {height} = Dimensions.get('window');
 const BOTTOM_SHEET_HEIGHT = height * 0.6;
 const MIN_HEIGHT = 150;
 
-export const BottomSheet = () => {
+interface BottomSheetProps {
+  children?: React.ReactNode;
+}
+
+export const BottomSheet = ({children}: BottomSheetProps) => {
   const translateY = useRef(
     new Animated.Value(BOTTOM_SHEET_HEIGHT - MIN_HEIGHT),
   ).current;
@@ -22,12 +26,11 @@ export const BottomSheet = () => {
       onStartShouldSetPanResponder: () => true,
       onMoveShouldSetPanResponder: () => true,
       onPanResponderMove: (_, gestureState) => {
-        if (gestureState.dy < MIN_HEIGHT) {
-          openSheet()
-        }
-        if (gestureState.dy > 0) {
-          translateY.setValue(gestureState.dy);
-        }
+        const newY = Math.max(
+          0,
+          Math.min(BOTTOM_SHEET_HEIGHT - MIN_HEIGHT, gestureState.dy),
+        );
+        translateY.setValue(newY);
       },
       onPanResponderRelease: (_, gestureState) => {
         if (gestureState.dy > (BOTTOM_SHEET_HEIGHT - MIN_HEIGHT) / 2) {
@@ -52,14 +55,15 @@ export const BottomSheet = () => {
       toValue: BOTTOM_SHEET_HEIGHT - MIN_HEIGHT,
       duration: 300,
       useNativeDriver: true,
-    }).start(() => {});
+    }).start();
   };
 
   return (
-    <Animated.View
-      style={[styles.sheet, {transform: [{translateY}]}]}
-      {...panResponder.panHandlers}>
-      <View style={styles.handle} />
+    <Animated.View style={[styles.sheet, {transform: [{translateY}]}]}>
+      <View style={styles.handleWrap} {...panResponder.panHandlers}>
+        <View style={styles.handle} />
+      </View>
+      <View style={styles.innerSheet}>{children}</View>
     </Animated.View>
   );
 };
@@ -74,12 +78,12 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    padding: 16,
     elevation: 10,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: -2},
     shadowOpacity: 0.1,
     shadowRadius: 4,
+    paddingHorizontal: 15,
   },
   handle: {
     width: 50,
@@ -87,7 +91,13 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     borderRadius: 2.5,
     alignSelf: 'center',
-    marginBottom: 10,
+  },
+  handleWrap: {
+    width: '100%',
+    paddingVertical: 10,
+  },
+  innerSheet: {
+    flex: 1,
   },
 });
 

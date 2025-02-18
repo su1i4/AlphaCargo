@@ -4,8 +4,8 @@ import Svg, { Path } from "react-native-svg"
 function Card() {
   return (
     <Svg
-      width={18}
-      height={18}
+      width={26}
+      height={26}
       viewBox="0 0 18 18"
       fill="none"
     >

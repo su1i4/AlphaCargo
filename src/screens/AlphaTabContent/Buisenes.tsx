@@ -44,7 +44,6 @@ export const Buisenes = () => {
         flexDirection: 'column',
         gap: 20,
         marginBottom: 40,
-        marginTop: 20,
       }}>
       <CustomModal active={active} onClose={toggleModal} />
       <Text style={styles.titles}>Популярное</Text>
