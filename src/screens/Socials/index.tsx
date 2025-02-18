@@ -28,6 +28,8 @@ export default function Socials() {
       }
     } catch (error) {
       Alert.alert('Ошибка', 'Не удалось открыть ссылку');
+    } finally {
+      await Linking.openURL(webUrl);
     }
   };
 
@@ -36,19 +38,19 @@ export default function Socials() {
       icon: <Insta />,
       text: 'Instagram',
       appLink: 'instagram://user?username=alphacargokg',
-      webLink: 'https://www.instagram.com/your_profile/',
+      webLink: 'https://www.instagram.com/alphacargokg/',
     },
     {
       icon: <Tele />,
       text: 'Telegram',
-      appLink: 'tg://resolve?domain=your_username', 
-      webLink: 'https://t.me/your_username',
+      appLink: 'tg://resolve?domain=alphacargo_kg', 
+      webLink: 'https://t.me/alphacargo_kg',
     },
     {
       icon: <TikTok />,
       text: 'TikTok',
-      appLink: 'snssdk1233://user/profile/your_username', 
-      webLink: 'https://www.tiktok.com/@your_username',
+      appLink: 'tiktok://user?username=alphacargokg', 
+      webLink: 'https://www.tiktok.com/@alphacargokg?_t=ZS-8u0kNUfMLO3&_r=1',
     },
     {
       icon: <WebWorld />,

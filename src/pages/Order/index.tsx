@@ -5,6 +5,8 @@ import {
   Text,
   TouchableOpacity,
   ScrollView,
+  Linking,
+  Alert,
 } from 'react-native';
 import {
   useGetAllCitiesQuery,
@@ -19,6 +21,9 @@ import {GeoSearchInput} from './Mine/input';
 import {getStatus, searchLocations} from '../../utils/helpers';
 import GeoIcon from '../../assets/icons/GeoIcon';
 import Calendar from '../../assets/icons/Calendar';
+import Phone from '../../assets/icons/Phone';
+import Message from '../../assets/icons/Message';
+import RouteIcon from '../../assets/icons/Route';
 
 const mapBoxAccessToken =
   'pk.eyJ1Ijoic3VsaXNoIiwiYSI6ImNtMGU3a3E2ZzBnZjcyanFzMzgxdWNhMjcifQ.h6HlFjmcCXDjeWrJwqNgUg';
@@ -126,7 +131,35 @@ export default function Order() {
     // }
   };
 
-  console.log(selectedPoint, 'this is selectedPoint');
+  const openPhoneCall = async (phoneNumber: string) => {
+    try {
+      const url = `tel:${phoneNumber}`;
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        Alert.alert('Ошибка', 'Не удалось совершить звонок');
+      }
+    } catch (error) {
+      Alert.alert('Ошибка', 'Не удалось совершить звонок');
+    }
+  };
+
+  const openMessage = async (phoneNumber: string) => {
+    try {
+      const url = `sms:${phoneNumber}`;
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        Alert.alert('Ошибка', 'Не удалось отправить сообщение');
+      }
+    } catch (error) {
+      Alert.alert('Ошибка', 'Не удалось отправить сообщение');
+    }
+  };
+
+  const phoneNumber = '+996550559846';
 
   return (
     <View style={{flex: 1, position: 'relative'}}>
@@ -272,27 +305,41 @@ export default function Order() {
               }}>
               <TouchableOpacity
                 style={{
-                  padding: 20,
+                  padding: 10,
                   backgroundColor: '#F0F1F3',
                   borderRadius: 15,
-                }}>
-                <Text>Позвонить</Text>
+                  width: 100,
+                }}
+                onPress={() => openPhoneCall(phoneNumber)}>
+                <View style={{alignSelf: 'center', marginBottom: 5}}>
+                  <Phone />
+                </View>
+                <Text style={{textAlign: 'center'}}>Позвонить</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
-                  padding: 20,
+                  padding: 10,
                   backgroundColor: '#F0F1F3',
                   borderRadius: 15,
-                }}>
-                <Text>Написать</Text>
+                  width: 100,
+                }}
+                onPress={() => openMessage(phoneNumber)}>
+                <View style={{alignSelf: 'center', marginBottom: 5}}>
+                  <Message />
+                </View>
+                <Text style={{textAlign: 'center'}}>Написать</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
-                  padding: 20,
+                  padding: 10,
                   backgroundColor: '#F0F1F3',
                   borderRadius: 15,
+                  width: 100,
                 }}>
-                <Text>Маршрут</Text>
+                <View style={{alignSelf: 'center', marginBottom: 5}}>
+                  <RouteIcon />
+                </View>
+                <Text style={{textAlign: 'center'}}>Маршрут</Text>
               </TouchableOpacity>
             </View>
             <View style={{marginTop: 20}}>
