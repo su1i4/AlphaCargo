@@ -1,12 +1,13 @@
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {ReactNode} from 'react';
+import LinearGradient from 'react-native-linear-gradient';
 
 interface InfoContainerProps {
   Icon: ReactNode;
   title: string;
   content: string;
   width?: any;
-  onClick: any
+  onClick: any;
 }
 
 export const InfoContainer = ({
@@ -14,11 +15,19 @@ export const InfoContainer = ({
   title,
   content,
   width = '100%',
-  onClick
+  onClick,
 }: InfoContainerProps): JSX.Element => {
   return (
-    <TouchableOpacity onPress={() => onClick()} style={[styles.container, {width: width}]}>
-      <View style={styles.iconWrapper}>{Icon}</View>
+    <TouchableOpacity
+      onPress={() => onClick()}
+      style={[styles.container, {width: width}]}>
+      <LinearGradient
+        colors={['#203B7A', '#026297', '#006599']}
+        start={{x: 0, y: 0}}
+        end={{x: 1, y: 0}}
+        style={styles.iconWrapper}>
+        {Icon}
+      </LinearGradient>
       <Text style={styles.title}>{title}</Text>
       <Text style={styles.content}>{content}</Text>
     </TouchableOpacity>

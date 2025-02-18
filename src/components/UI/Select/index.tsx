@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -20,6 +20,7 @@ interface SelectProps {
   }>;
   style?: object;
   disabled?: boolean;
+  label?: string;
 }
 
 export const Select = ({
@@ -29,6 +30,7 @@ export const Select = ({
   options,
   style,
   disabled = false,
+  label,
 }: SelectProps) => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
@@ -42,12 +44,13 @@ export const Select = ({
   const selectedOption = options.find(option => option.value === value);
 
   return (
-    <View style={{ position: 'relative', width: '100%' }}>
+    <View style={{position: 'relative', width: '100%'}}>
+      {label && <Text style={{fontSize: 15, marginBottom: 5}}>{label}</Text>}
       <TouchableOpacity
         style={[styles.select, style]}
         onPress={() => !disabled && setDropdownVisible(true)}
         disabled={disabled}>
-        <Text style={styles.selectText}>
+        <Text style={selectedOption ? styles.selectText : styles.placeHolder}>
           {selectedOption ? selectedOption.label : placeholder}
         </Text>
       </TouchableOpacity>
@@ -57,6 +60,7 @@ export const Select = ({
           styles.iconWrap,
           {
             transform: isDropdownVisible ? 'rotate(180deg)' : 'rotate(0deg)',
+            top: label ? '53%' : '30%',
           },
         ]}>
         <DropDown />
@@ -88,9 +92,9 @@ export const Select = ({
 
 const styles = StyleSheet.create({
   select: {
-    borderRadius: 10,
-    paddingTop: 12,
-    paddingBottom: 14,
+    borderRadius: 16,
+    paddingTop: 16,
+    paddingBottom: 18,
     paddingHorizontal: 20,
     borderColor: '#8C8C8C',
     borderWidth: 1,
@@ -100,13 +104,18 @@ const styles = StyleSheet.create({
     position: 'relative',
   },
   selectText: {
+    color: 'black',
+    fontSize: 15,
+    fontWeight: '400',
+  },
+  placeHolder: {
     color: '#8C8C8C',
-    fontSize: 13,
+    fontSize: 15,
     fontWeight: '400',
   },
   modalOverlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.3)', // Полупрозрачный фон
+    backgroundColor: 'rgba(0,0,0,0.3)',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -117,7 +126,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     maxHeight: '70%',
     width: '90%',
-    overflow: 'scroll'
+    overflow: 'scroll',
   },
   option: {
     paddingVertical: 10,
@@ -131,7 +140,6 @@ const styles = StyleSheet.create({
   },
   iconWrap: {
     position: 'absolute',
-    top: '30%',
     right: 20,
   },
 });

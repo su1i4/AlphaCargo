@@ -78,17 +78,25 @@ const Payment = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
-      <Header
-        Left={Back}
-        funcLeft={() => navigation.navigate('Alpha')}
-        id="questions"
-        text="Оплата"
-      />
+    <View style={{flex: 1, position: 'relative'}}>
+      <View
+        style={{
+          top: 55,
+          position: 'absolute',
+          paddingHorizontal: 20,
+          zIndex: 99,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
+          Оплата
+        </Text>
+      </View>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Онлайн оплата услуг</Text>
-        </View>
         <View style={{padding: 20}}>
           <Tab text="Плательщик" active={activeTab} setActive={setActiveTab}>
             <View>
@@ -142,7 +150,7 @@ const Payment = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginTop: 150,
   },
   header: {
     width: '100%',

@@ -14,14 +14,23 @@ import {
   TouchableWithoutFeedback,
   Image,
 } from 'react-native';
-import Header from '../../screens/Header';
-import SingleUser from '../../assets/icons/SingleUser';
 import {Tab} from '../../components/UI/Tab';
 import {useNavigation} from '@react-navigation/native';
 import {ParcelCard} from './parcelCard';
 import {URL} from '../../utils/consts';
 import VoskArrow from '../../assets/icons/VoskArrow';
 import LinearGradient from 'react-native-linear-gradient';
+import NewCalcPrice from '../../screens/NewCalcPrice';
+import Zakazik from '../../screens/Zakazik';
+import NewTarif from '../../screens/NewTarif';
+
+const tabs = ['Отправления', 'Рассчитать', 'Заказать выезд', 'Тарифы'];
+const texts = [
+  'Отправления',
+  'Рассчитать доставку',
+  'Заказать выезд',
+  'Тарифы',
+];
 
 export default function Send() {
   const user = useAuth();
@@ -33,6 +42,7 @@ export default function Send() {
   const [activeTab, setActiveTab] = useState(0);
   const [zakaz, setZakaz] = useState('');
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [tab, setTab] = useState(0);
 
   const phoneNumber = '+996772007183';
   const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
@@ -135,134 +145,87 @@ export default function Send() {
 
   return (
     <View style={{flex: 1}}>
-      <Header
-        id="watchOrder"
-        text="Отправления"
-        placeholder="Номер посылки"
-        func={() => naviagation.navigate('Profile')}
-        Right={SingleUser}
-      />
       <ScrollView style={styles.scrollView}>
-        {/* <SearchInput
-          id="d"
-          value={zakaz}
-          onChange={(e: any) => setZakaz(e)}
-          placeholder="Номер накладной"
-        /> */}
-        {/* <TouchableOpacity
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 60}}>
+          {texts[tab]}
+        </Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 10,
-            marginTop: 15,
-            paddingLeft: 10,
-          }}
-          onPress={() => setDropdownVisible(true)}>
-          <Vosk />
-          <Text
-            style={{
-              color: '#878787',
-              fontSize: 15,
-              textDecorationLine: 'underline',
-            }}>
-            Как узнать номер накладной?
-          </Text>
-        </TouchableOpacity>
-        <View style={styles.brokeTools}>
-          <TouchableOpacity
-            onPress={() => naviagation.navigate('CalcPrice')}
-            style={styles.content}>
-            <Calc active />
-            <Text style={styles.text}>Рассчитать</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={openWhatsAppOrWebsite}
-            style={styles.content}>
-            <CarIcon />
-            <Text style={styles.text}>{`Вызвать\nвыездную группу`}</Text>
-          </TouchableOpacity>
-        </View> */}
-        {/* <TouchableOpacity
-          onPress={() => naviagation.navigate('Tarif')}
-          style={styles.container}>
-          <TarifIcon />
-          <Text style={{fontSize: 15, fontWeight: '400', color: '#F9FFFF'}}>
-            Тарифы
-          </Text>
-        </TouchableOpacity> */}
-        <View
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: 10,
-            marginBottom: 10,
+            paddingVertical: 25,
           }}>
-          <TouchableOpacity
-            onPress={() => naviagation.navigate('CalcPrice')}
-            style={styles.touchable}>
-            <LinearGradient
-              colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={styles.gradientBorder}>
-              <View style={styles.innerButton}>
-                <Text>Рассчитать</Text>
+          {tabs.map((item: any, index: number) => {
+            return index === tab ? (
+              <TouchableOpacity
+                key={item}
+                onPress={() => setTab(index)}
+                style={styles.touchable}>
+                <LinearGradient
+                  colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={styles.gradientBorder}>
+                  <View
+                    style={[
+                      styles.innerButton,
+                      {backgroundColor: 'transparent'},
+                    ]}>
+                    <Text style={{color: '#FFFFFF'}}>{tabs[index]}</Text>
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                key={item}
+                onPress={() => setTab(index)}
+                style={styles.touchable}>
+                <LinearGradient
+                  colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={styles.gradientBorder}>
+                  <View style={styles.innerButton}>
+                    <Text>{tabs[index]}</Text>
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+        {tab === 0 && data && (
+          <View>
+            <Tab
+              text="Мои отправления"
+              active={activeTab}
+              setActive={setActiveTab}>
+              <View>
+                <Text style={{color: '#F9FFFF'}}>Все</Text>
               </View>
-            </LinearGradient>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={openWhatsAppOrWebsite}
-            style={styles.touchable}>
-            <LinearGradient
-              colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={styles.gradientBorder}>
-              <View style={styles.innerButton}>
-                <Text>Заказать выезд</Text>
+              <View>
+                <Text style={{color: '#F9FFFF'}}>Оплаченные</Text>
               </View>
-            </LinearGradient>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => naviagation.navigate('Tarif')}
-            style={styles.touchable}>
-            <LinearGradient
-              colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
-              start={{x: 0, y: 0}}
-              end={{x: 1, y: 0}}
-              style={styles.gradientBorder}>
-              <View style={styles.innerButton}>
-                <Text>Тарифы</Text>
+              <View>
+                <Text style={{color: '#F9FFFF'}}>Не оплаченные</Text>
               </View>
-            </LinearGradient>
-          </TouchableOpacity>
-        </View>
-        {data && (
-          <Tab
-            text="Мои отправления"
-            active={activeTab}
-            setActive={setActiveTab}>
-            <View>
-              <Text style={{color: '#F9FFFF'}}>Все</Text>
+            </Tab>
+
+            <View style={{marginTop: 20, marginBottom: 50}}>
+              {isLoading ? (
+                <Text style={{fontSize: 15}}>Загрузка ...</Text>
+              ) : !data.length ? (
+                <Text style={{fontSize: 15}}>Пусто</Text>
+              ) : (
+                data.map((item: any) => (
+                  <ParcelCard key={item.id} oneParcel={item} getPdf={getPdf} />
+                ))
+              )}
             </View>
-            <View>
-              <Text style={{color: '#F9FFFF'}}>Оплаченные</Text>
-            </View>
-            <View>
-              <Text style={{color: '#F9FFFF'}}>Не оплаченные</Text>
-            </View>
-          </Tab>
+          </View>
         )}
-        {isLoading ? (
-          <Text>Загрузка ...</Text>
-        ) : !data.length ? (
-          <Text>Пусто</Text>
-        ) : null}
-        {data &&
-          data?.map((item: any) => (
-            <ParcelCard oneParcel={item} getPdf={getPdf} />
-          ))}
+        {tab === 1 && <NewCalcPrice />}
+        {tab === 2 && <Zakazik />}
+        {tab === 3 && <NewTarif />}
       </ScrollView>
       <Modal
         transparent
@@ -363,6 +326,7 @@ const styles = StyleSheet.create({
 
   touchable: {
     borderRadius: 20,
+    marginRight: 10,
     overflow: 'hidden',
   },
   gradientBorder: {

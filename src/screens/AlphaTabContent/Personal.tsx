@@ -7,6 +7,7 @@ import RocketIcon from '../../assets/icons/RocketIcon';
 import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
 import CustomModal from '../../components/UI/Modal';
+import Loyal from '../../assets/icons/Loyal';
 
 export const Personal = () => {
   const [active, setActive] = useState(false);
@@ -38,21 +39,20 @@ export const Personal = () => {
         display: 'flex',
         flexDirection: 'column',
         gap: 20,
-        marginTop: 20,
         marginBottom: 40,
       }}>
       <CustomModal active={active} onClose={toggleModal} />
       <Text style={styles.titles}>Популярное</Text>
       <InfoContainer
-        onClick={() => navigation.navigate('Loyalty')}
-        Icon={<Percent />}
+        onClick={() => handleLink('https://www.alpha-cargo.kg/#/cargo')}
+        Icon={<Loyal />}
         title="Программа лояльности"
         content="Пользуйтесь услугами и копите баллы"
       />
       <Text style={styles.titles}>Зарабатывай вместе с Альфа</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={() => navigation.navigate('Franshiza')}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/franchise')}
           Icon={<HandIcon size={18} />}
           title="Франшиза"
           content="Начните свой бизнес"

@@ -1,17 +1,24 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, View, Text} from 'react-native';
-import Header from '../../screens/Header';
-import LogoutIcon from '../../assets/icons/LogoutIcon';
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import BellIcon from '../../assets/icons/BellIcon';
 import {useAuth} from '../../hooks/useAuth';
 import Loading from '../../components/UI/Loading';
+import Back from '../../assets/icons/Back';
+import MiniLogo from '../../assets/icons/MiniLogo';
+import {formatDate} from '../../utils/helpers';
 
 export const Notifications = () => {
   const user = useAuth();
   const accessToken = user?.accessToken;
   const navigation: any = useNavigation();
   const [notifications, setNotifications] = useState([]);
+  const [lows, setLows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -35,7 +42,9 @@ export const Notifications = () => {
           }
 
           const data = await response.json();
-          setNotifications(data);
+
+          setNotifications(data.filter((item: any) => item.read));
+          setLows(data.filter((item: any) => !item.read));
         } catch (err: any) {
           setError(err.message);
         } finally {
@@ -49,52 +58,43 @@ export const Notifications = () => {
     }
   }, [accessToken]);
 
+  console.log(lows, notifications[0]);
+
   return (
     <View style={styles.safeArea}>
-      <Header
-        id="Notifications"
-        text="Уведомления"
-        Right={LogoutIcon}
-        Left={BellIcon}
-        funcLeft={() => navigation.navigate('Notifications')}
-        func={() => navigation.goBack()}
-        back={true}
-      />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Уведомления</Text>
+      </View>
+
       <ScrollView style={[styles.scrollView]}>
         <View style={!loading ? styles.Wrapper : styles.loadWrap}>
           {!loading ? (
-            notifications?.map((item: any, index: number) => (
-              <View key={index} style={styles.container}>
-                <Text
-                  style={{
-                    fontSize: 18,
-                    fontWeight: '600',
-                    color: '#02447F',
-                  }}>
-                  {item.title}
-                </Text>
-                <View
-                  style={{
-                    width: '100%',
-                    height: 1,
-                    backgroundColor: '#27457C4A',
-                    marginVertical: 13,
-                  }}
-                />
-                <View>
-                  <Text style={{color: '#8C8C8C', fontSize: 13}}>
-                    дата: {item.createdAt.split('T')[0]} -{' '}
-                    {item.createdAt.split('T')[1].split('.')[0]}
-                  </Text>
-                  <Text style={{color: '#8C8C8C', fontSize: 13}}>
-                    статус: {item.read ? 'Прочитано' : 'Не прочитано'}
-                  </Text>
-                  <Text style={{color: '#8C8C8C', fontSize: 13}}>
-                    {item.message}
-                  </Text>
+            <View style={{width: '100%'}}>
+              <Text style={{fontSize: 18, fontWeight: '500'}}>Новые</Text>
+              {notifications?.map((item: any, index: number) => (
+                <View key={index} style={styles.container}>
+                  <View
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      gap: 10,
+                      maxWidth: '70%',
+                    }}>
+                    <MiniLogo />
+                    <View>
+                      <Text style={{fontSize: 18, fontWeight: '700'}}>
+                        {item.title}
+                      </Text>
+                      <Text style={{flexWrap: 'wrap'}}>{item.message}</Text>
+                    </View>
+                  </View>
+                  <Text>{formatDate(item.createdAt)}</Text>
                 </View>
-              </View>
-            ))
+              ))}
+            </View>
           ) : (
             <Loading />
           )}
@@ -107,9 +107,21 @@ export const Notifications = () => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    position: 'relative',
   },
   scrollView: {
     flex: 1,
+  },
+  header: {
+    top: 55,
+    position: 'absolute',
+    paddingHorizontal: 20,
+    zIndex: 99,
+  },
+  headerText: {
+    fontSize: 27,
+    fontWeight: '700',
+    marginTop: 20,
   },
   Wrapper: {
     paddingHorizontal: 20,
@@ -118,6 +130,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     gap: 20,
     alignItems: 'center',
+    marginTop: 140,
   },
   bigText: {
     color: '#000000',
@@ -130,10 +143,12 @@ const styles = StyleSheet.create({
     fontWeight: '400',
   },
   container: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 10,
-    padding: 20,
-    width: '100%',
+    height: 'auto',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 15,
+    gap: 10,
   },
   loadWrap: {
     height: 600,

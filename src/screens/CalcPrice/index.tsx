@@ -151,14 +151,12 @@ export default function CalcPrice() {
         />
         <Input
           style={{width: '100%', paddingBottom: 10, paddingTop: 8}}
-          keyboardType
           value={weight}
           onChange={setWeight}
           placeholder="Вес"
         />
         <Input
           style={{width: '100%', paddingBottom: 10, paddingTop: 8}}
-          keyboardType
           value={countOfType}
           onChange={setCountOfType}
           placeholder="Количество"

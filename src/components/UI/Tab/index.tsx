@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   },
   textHeader: {
     color: '#000000',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '600',
   },
   innerWrapper: {

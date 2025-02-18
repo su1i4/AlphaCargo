@@ -15,6 +15,9 @@ import Help from '../screens/Help';
 import Payment from '../screens/Payment';
 import Gruz from '../screens/Gruz';
 import Tarif from '../screens/Tarif';
+import NewCalcPrice from '../screens/NewCalcPrice';
+import Socials from '../screens/Socials';
+import Oformlenie from '../screens/Oformlenie';
 
 const MainStack = createNativeStackNavigator();
 
@@ -26,6 +29,7 @@ export default function MainNavigation() {
       <MainStack.Screen name="Points" component={Points} />
       <MainStack.Screen name="Profile" component={Profile} />
       <MainStack.Screen name="CalcPrice" component={CalcPrice} />
+      <MainStack.Screen name="NewCalcPrice" component={NewCalcPrice} />
       <MainStack.Screen name="Notifications" component={Notifications} />
       <MainStack.Screen name="Bonus" component={Bonus} />
       <MainStack.Screen name="Reward" component={Reward} />
@@ -37,6 +41,8 @@ export default function MainNavigation() {
       <MainStack.Screen name="Franshiza" component={Franshiza} />
       <MainStack.Screen name="Payment" component={Payment} />
       <MainStack.Screen name="Gruz" component={Gruz} />
+      <MainStack.Screen name="Socials" component={Socials} />
+      <MainStack.Screen name="Oformlenie" component={Oformlenie} />
     </MainStack.Navigator>
   );
 }

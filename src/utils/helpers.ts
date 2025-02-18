@@ -3,6 +3,9 @@ import {LAST_LOGIN_KEY, ONE_DAY_MS} from './consts';
 
 export function getStatus(openingHour: any, closingHour: any) {
   const currentHour = new Date().getHours();
+  if (openingHour === 0 && closingHour === 24) {
+    return {text: 'Круглосуточно', color: '#00C036'};
+  }
   if (currentHour >= openingHour && currentHour < closingHour) {
     return {text: 'Открыто', color: '#00C036'};
   } else {
@@ -78,4 +81,49 @@ export const statusColor = (txt: string) => {
     default:
       break;
   }
+};
+
+export function formatDate(isoString: string): string {
+  const months = [
+    'января',
+    'февраля',
+    'марта',
+    'апреля',
+    'мая',
+    'июня',
+    'июля',
+    'августа',
+    'сентября',
+    'октября',
+    'ноября',
+    'декабря',
+  ];
+
+  const date = new Date(isoString);
+  const day = date.getUTCDate();
+  const month = months[date.getUTCMonth()];
+  const hours = date.getUTCHours().toString().padStart(2, '0');
+  const minutes = date.getUTCMinutes().toString().padStart(2, '0');
+
+  return `${day} ${month} ${hours}:${minutes}`;
+}
+
+export const searchLocations = (locations: any[], query: string) => {
+  if (!query.trim()) return locations;
+  const lowerQuery = query.toLowerCase();
+
+  return locations.filter((location) =>
+    Object.values(location).some((value) => {
+      if (typeof value === 'object' && value !== null) {
+        return Object.values(value).some(
+          (nestedValue) =>
+            typeof nestedValue === 'string' &&
+            nestedValue.toLowerCase().includes(lowerQuery)
+        );
+      }
+      return (
+        typeof value === 'string' && value.toLowerCase().includes(lowerQuery)
+      );
+    })
+  );
 };

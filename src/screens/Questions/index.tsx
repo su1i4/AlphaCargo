@@ -104,18 +104,28 @@ const Questions = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
-      <Header
-        Left={Back}
-        funcLeft={() => navigation.navigate('Alpha')}
-        id="questions"
-        text="Вопросы и ответы"
-        back
-      />
+    <View style={{flex: 1, position: 'relative'}}>
+      <View
+        style={{
+          top: 55,
+          position: 'absolute',
+          paddingHorizontal: 20,
+          zIndex: 99,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={{fontSize: 26, fontWeight: '700', marginTop: 20}}>
+          Часто задаваемые вопросы
+        </Text>
+      </View>
       <View style={styles.container}>
-        <View style={styles.header}>
+        {/* <View style={styles.header}>
           <Text style={styles.headerText}>Где моя посылка?</Text>
-        </View>
+        </View> */}
         <View style={styles.list}>
           {data.map((item, index) => (
             <TouchableOpacity
@@ -139,7 +149,7 @@ const Questions = () => {
               style={{position: 'absolute', top: 15, right: 10}}>
               <CloseIcon size={26} />
             </TouchableOpacity>
-            <Text style={{fontSize: 16}} >{selectedAnswer}</Text>
+            <Text style={{fontSize: 16}}>{selectedAnswer}</Text>
           </View>
         </Animated.View>
       )}
@@ -150,7 +160,8 @@ const Questions = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    // backgroundColor: '#FFFFFF',
+    marginTop: 150
   },
   header: {
     width: '100%',
@@ -194,7 +205,7 @@ const styles = StyleSheet.create({
   },
   bottomSheetContent: {
     flex: 1,
-    backgroundColor: '#EFEFEF',
+    backgroundColor: 'white',
     paddingVertical: 10,
     paddingHorizontal: 20,
     position: 'relative',
@@ -208,7 +219,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: 'gray',
     paddingVertical: 8,
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
   },
   closeButton: {
     backgroundColor: '#007BFF',

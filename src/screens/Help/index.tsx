@@ -7,7 +7,6 @@ import {
   Linking,
   Alert,
 } from 'react-native';
-import Header from '../Header';
 import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
 import Mark from '../../assets/icons/support/mark';
@@ -35,14 +34,13 @@ const Help = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
-      <Header
-        Left={Back}
-        funcLeft={() => navigation.navigate('Alpha')}
-        id="questions"
-        text="Поддержка"
-        back
-      />
+    <View style={{flex: 1, position: 'relative'}}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Поддержка</Text>
+      </View>
       <View style={styles.container}>
         <View style={styles.main}>
           <TouchableOpacity
@@ -58,6 +56,19 @@ const Help = () => {
             </TouchableOpacity>
           </TouchableOpacity>
         </View>
+        <View style={[styles.main, {marginTop: 20}]}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingHorizontal: 10,
+            }}>
+            <Text>О приложении</Text>
+            <Text style={{color: '#666666', fontSize: 15}}>Версия 1.2.0</Text>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -68,6 +79,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     padding: 20,
+    marginTop: 150,
   },
   main: {
     width: '100%',
@@ -89,6 +101,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
     alignItems: 'center',
+  },
+
+  header: {
+    top: 60,
+    position: 'absolute',
+    paddingHorizontal: 20,
+    zIndex: 99,
+  },
+  headerText: {
+    fontSize: 30,
+    fontWeight: '700',
+    marginTop: 20,
   },
 });
 

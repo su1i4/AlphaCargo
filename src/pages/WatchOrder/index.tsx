@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Modal,
   TouchableWithoutFeedback,
-  Image,
 } from 'react-native';
 import Header from '../../screens/Header';
 import SingleUser from '../../assets/icons/SingleUser';
@@ -19,6 +18,7 @@ import VoskArrow from '../../assets/icons/VoskArrow';
 import {useAuth} from '../../hooks/useAuth';
 import {statusColor} from '../../utils/helpers';
 import Checl from '../../assets/icons/Checktrue';
+import Nakladnoi from '../../assets/icons/Nakladoi';
 
 export default function WatchOrder() {
   const navigation: any = useNavigation();
@@ -149,10 +149,23 @@ export default function WatchOrder() {
         <TouchableWithoutFeedback onPress={() => setDropdownVisible(false)}>
           <View style={styles.modalOverlay}>
             <View style={styles.dropdownContainer}>
-              <View style={{display: 'flex', flexDirection: 'row'}}>
-                <Image source={require('../../assets/images/Nakladnoi.png')} />
-                <View style={{paddingTop: 10}}>
-                  <VoskArrow />
+              <View
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                }}>
+                <View
+                  style={{
+                    marginLeft: 20,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                  }}>
+                  <Nakladnoi />
+                  <View style={{paddingTop: 10}}>
+                    <VoskArrow />
+                  </View>
                 </View>
               </View>
               <Text style={{fontWeight: 600, marginTop: 10}}>
@@ -207,7 +220,6 @@ const styles = StyleSheet.create({
     overflow: 'scroll',
   },
   Wrapper: {
-    paddingTop: 40,
     paddingVertical: 20,
     display: 'flex',
     flexDirection: 'column',
@@ -264,19 +276,14 @@ const styles = StyleSheet.create({
   },
   timeline: {
     marginLeft: 10,
-    marginTop: 10
+    marginTop: 25,
   },
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'flex-start',
     marginBottom: 16,
-    gap: 10
+    gap: 10,
   },
-  // iconContainer: {
-  //   alignItems: 'center',
-  //   marginRight: 10,
-  //   position: 'relative',
-  // },
   iconWrapper: {
     width: 30,
     height: 30,
