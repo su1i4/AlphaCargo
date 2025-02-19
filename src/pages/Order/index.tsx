@@ -7,6 +7,9 @@ import {
   ScrollView,
   Linking,
   Alert,
+  Modal,
+  // Platform,
+  // PermissionsAndroid,
 } from 'react-native';
 import {
   useGetAllCitiesQuery,
@@ -22,6 +25,7 @@ import Calendar from '../../assets/icons/Calendar';
 import Phone from '../../assets/icons/Phone';
 import Message from '../../assets/icons/Message';
 import RouteIcon from '../../assets/icons/Route';
+// import Geolocation from 'react-native-geolocation-service';
 
 const mapBoxAccessToken =
   'pk.eyJ1Ijoic3VsaXNoIiwiYSI6ImNtMGU3a3E2ZzBnZjcyanFzMzgxdWNhMjcifQ.h6HlFjmcCXDjeWrJwqNgUg';
@@ -38,6 +42,15 @@ export default function Order() {
   const [activeTab, setActiveTab] = useState(0);
   const [offices, setOffices] = useState<any[]>([]);
   const [lowData, setLowData] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const openMapChoiceModal = () => {
+    setIsVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsVisible(false);
+  };
 
   const [search, setSearch] = useState('');
 
@@ -143,35 +156,112 @@ export default function Order() {
     }
   };
 
-  const openMessage = async (phoneNumber: string) => {
+  const openMessage = async (email: string) => {
     try {
-      const url = `sms:${phoneNumber}`;
+      const url = `mailto:${email}`;
       const supported = await Linking.canOpenURL(url);
       if (supported) {
         await Linking.openURL(url);
       } else {
-        Alert.alert('Ошибка', 'Не удалось отправить сообщение');
+        Alert.alert('Ошибка', 'Не удалось открыть почтовый клиент');
       }
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось отправить сообщение');
+      Alert.alert('Ошибка', 'Не удалось открыть почтовый клиент');
     }
   };
 
   const phoneNumber = '+996550559846';
 
+  // const openGoogleMapsRoute = (latitude: any, longitude: any) => {
+  //   const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+  //   Linking.openURL(url);
+  // };
+
+  const openGoogleMapsRoute = (
+    startLatitude: any,
+    startLongitude: any,
+    endLatitude: any,
+    endLongitude: any,
+  ) => {
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${startLatitude},${startLongitude}&destination=${endLatitude},${endLongitude}`;
+    Linking.openURL(url);
+  };
+
+  const open2GISRoute = (
+    startLatitude: any,
+    startLongitude: any,
+    endLatitude: any,
+    endLongitude: any,
+  ) => {
+    const url = `dgis://2gis.ru/routeSearch/rsType/car/from/${startLatitude},${startLongitude}/to/${endLatitude},${endLongitude}`;
+    Linking.openURL(url);
+  };
+
+  const [location, setLocation] = React.useState<any>(null);
+
+  // const getCurrentLocation = async () => {
+  //   if (Platform.OS === 'android') {
+  //     const permission = await PermissionsAndroid.request(
+  //       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+  //     );
+  //     if (permission !== PermissionsAndroid.RESULTS.GRANTED) {
+  //       console.warn('Location permission denied');
+  //       return;
+  //     }
+  //   }
+  
+  //   Geolocation.getCurrentPosition(
+  //     (position) => {
+  //       const { latitude, longitude } = position.coords;
+  //       setLocation({ latitude, longitude });
+  //       console.log('Latitude:', latitude, 'Longitude:', longitude);
+  //     },
+  //     (error) => {
+  //       console.warn(error.message);
+  //     },
+  //     {
+  //       enableHighAccuracy: true,
+  //       timeout: 15000,
+  //       maximumAge: 10000,
+  //     }
+  //   );
+  // };
+  
+  // useEffect(() => {
+  //   getCurrentLocation();
+  // }, []);
+
   return (
     <View style={{flex: 1, position: 'relative'}}>
-      {/* <LinearGradient
-        colors={['#203B7A', '#026297', '#006599']}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}
-        style={styles.header}>
-        <View style={styles.headeInner}>
-          <GeoWhite />
-          <Text style={styles.headeInnerTitle}>{selectedCity.label}</Text>
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={isVisible}
+        onRequestClose={closeModal}>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>
+              Выберите приложение для маршрута
+            </Text>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => openGoogleMapsRoute(32, 23, 32, 32)}>
+              <Text style={styles.buttonText}>Google Maps</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => open2GISRoute(23, 3, 2, 3)}>
+              <Text style={styles.buttonText}>2GIS</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.cancelButton} onPress={closeModal}>
+              <Text style={styles.cancelText}>Закрыть</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <ArrowDownGeo />
-      </LinearGradient> */}
+      </Modal>
       <View style={styles.container}>
         <Mapbox.MapView style={styles.map}>
           <Mapbox.Camera
@@ -321,7 +411,7 @@ export default function Order() {
                   borderRadius: 15,
                   width: 100,
                 }}
-                onPress={() => openMessage(phoneNumber)}>
+                onPress={() => openMessage('alphacargo3003@gmail.com')}>
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <Message />
                 </View>
@@ -333,7 +423,8 @@ export default function Order() {
                   backgroundColor: '#F0F1F3',
                   borderRadius: 15,
                   width: 100,
-                }}>
+                }}
+                onPress={openMapChoiceModal}>
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <RouteIcon />
                 </View>
@@ -542,5 +633,46 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: 'white',
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContainer: {
+    width: 300,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 18,
+    marginBottom: 20,
+    fontWeight: 'bold',
+  },
+  button: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    marginBottom: 10,
+    width: '100%',
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+  },
+  cancelButton: {
+    padding: 10,
+    backgroundColor: '#FF5722',
+    marginTop: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+  },
+  cancelText: {
+    color: 'white',
+    fontSize: 13,
   },
 });

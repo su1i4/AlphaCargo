@@ -92,7 +92,7 @@ export default function Login({_, route}: any) {
         }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.goBack();
+            navigation.navigate('Begin');
           }}>
           <Back color="black" />
         </TouchableOpacity>

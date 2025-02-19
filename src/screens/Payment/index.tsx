@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
-import Header from '../Header';
 import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
 import {Input} from '../../components/UI/Inputs/Input';
@@ -8,7 +7,6 @@ import {Tab} from '../../components/UI/Tab';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
 import DocumentPicker from 'react-native-document-picker';
 import {useAuth} from '../../hooks/useAuth';
-import {useFindParcelQuery} from '../../services/base.service';
 
 const Payment = () => {
   const user = useAuth();
@@ -127,15 +125,6 @@ const Payment = () => {
             onChange={setAmount}
             placeholder="Введите сумму"
           />
-
-          <TouchableOpacity
-            onPress={handleFileSelect}
-            style={styles.fileButton}>
-            <Text style={styles.fileButtonText}>
-              {file ? file.name : 'Выберите файл чека'}
-            </Text>
-          </TouchableOpacity>
-
           <ButtonCustom
             title="Отправить"
             isLoading={loading}

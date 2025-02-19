@@ -27,7 +27,7 @@ export default function Socials() {
         await Linking.openURL(webUrl);
       }
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось открыть ссылку');
+      // Alert.alert('Ошибка', 'Не удалось открыть ссылку');
     } finally {
       await Linking.openURL(webUrl);
     }

@@ -266,7 +266,7 @@ export default function Profile() {
                 <TouchableOpacity
                   style={{
                     width: '18%',
-                    backgroundColor: '#02447F',
+                    backgroundColor: '#F0F1F3',
                     paddingTop: 12,
                     paddingBottom: 14,
                     paddingHorizontal: 10,
@@ -276,9 +276,12 @@ export default function Profile() {
                   }}
                   onPress={() => {
                     removeUserFromStorage();
-                    naviagation.navigate('Begin');
+                    naviagation.reset({
+                      index: 0, // Устанавливаем индекс в 0, чтобы это был первый экран
+                      routes: [{ name: 'Login' }], // Указываем маршрут, на который нужно перейти
+                    });
                   }}>
-                  <LogoutIcon size={20} />
+                  <LogoutIcon color='black' size={20} />
                 </TouchableOpacity>
               </View>
               <ButtonCustom

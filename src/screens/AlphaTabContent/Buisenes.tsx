@@ -45,12 +45,14 @@ export const Buisenes = () => {
         flexDirection: 'column',
         gap: 20,
         marginBottom: 40,
+        flex: 1,
+        position: 'relative'
       }}>
       <CustomModal active={active} onClose={toggleModal} />
       <Text style={styles.titles}>Популярное</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={() => handleLink('https://www.alpha-cargo.kg/#/tariff')}
+          onClick={() => navigation.navigate('Tarif')}
           Icon={<Graph />}
           title={`Рассчитать \nтариф`}
           content={`Узнайте срок и \nцену своих \nотправок`}
@@ -66,7 +68,7 @@ export const Buisenes = () => {
       </View>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={() => handleLink('https://www.alpha-cargo.kg/')}
+          onClick={() => navigation.navigate('CalcPrice')}
           Icon={<Calc />}
           title={`Калькулятор`}
           content={`Рассчитайте \nстоимость`}
@@ -83,7 +85,7 @@ export const Buisenes = () => {
       <Text style={styles.titles}>Доставка</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={() => handleLink('https://www.alpha-cargo.kg/#/tracking')}
+          onClick={() => navigation.navigate('WatchOrder')}
           Icon={<CubeIcon />}
           title={`Отследить \nпосылку`}
           content={`Как оформить \nвозврат товара`}
