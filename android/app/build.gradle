@@ -74,9 +74,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.alphacargo"
+    namespace "com.alpha.cargo"
     defaultConfig {
-        applicationId "com.alphacargo"
+        applicationId "com.alpha.cargo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
