@@ -138,7 +138,13 @@ const Questions = () => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 26, fontWeight: '700', marginTop: 20}}>
+        <Text
+          style={{
+            fontSize: 26,
+            fontWeight: '700',
+            marginTop: 20,
+            fontFamily: 'Exo 2',
+          }}>
           Часто задаваемые вопросы
         </Text>
       </View>
@@ -167,7 +173,9 @@ const Questions = () => {
               style={{position: 'absolute', top: 15, right: 10}}>
               <CloseIcon size={26} />
             </TouchableOpacity>
-            <Text style={{fontSize: 16}}>{selectedAnswer}</Text>
+            <Text style={{fontSize: 16, fontFamily: 'Exo 2'}}>
+              {selectedAnswer}
+            </Text>
           </View>
         </Animated.View>
       )}
@@ -189,7 +197,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#E1E1E1',
   },
-  questionText: {maxWidth: '90%', fontSize: 15},
+  questionText: {maxWidth: '90%', fontSize: 15, fontFamily: 'Exo 2'},
   bottomSheet: {
     position: 'absolute',
     left: 0,
@@ -218,6 +226,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'gray',
     paddingVertical: 8,
     paddingHorizontal: 10,
+    fontFamily: 'Exo 2',
   },
 });
 

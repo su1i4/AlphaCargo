@@ -90,7 +90,7 @@ const Payment = () => {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
           Оплата
         </Text>
       </View>
@@ -98,10 +98,10 @@ const Payment = () => {
         <View style={{padding: 20}}>
           <Tab text="Плательщик" active={activeTab} setActive={setActiveTab}>
             <View>
-              <Text style={{color: '#F9FFFF'}}>Частное лицо</Text>
+              <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Частное лицо</Text>
             </View>
             <View>
-              <Text style={{color: '#F9FFFF'}}>Юридическое лицо</Text>
+              <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Юридическое лицо</Text>
             </View>
           </Tab>
 
@@ -112,14 +112,14 @@ const Payment = () => {
             placeholder="Введите номер"
           /> */}
 
-          <Text style={{marginTop: 10, marginBottom: 10}}>Номер телефона</Text>
+          <Text style={{marginTop: 10, marginBottom: 10, fontFamily: 'Exo 2'}}>Номер телефона</Text>
           <Input
             value={phoneNumber}
             onChange={setPhoneNumber}
             placeholder="Введите номер телефона"
           />
 
-          <Text style={{marginTop: 10, marginBottom: 10}}>Сумма платежа</Text>
+          <Text style={{marginTop: 10, marginBottom: 10, fontFamily: 'Exo 2'}}>Сумма платежа</Text>
           <Input
             value={amount}
             onChange={setAmount}

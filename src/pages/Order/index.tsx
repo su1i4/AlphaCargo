@@ -8,7 +8,7 @@ import {
   Linking,
   Alert,
   Modal,
-  // Platform,
+  Platform,
   // PermissionsAndroid,
 } from 'react-native';
 import {
@@ -25,7 +25,8 @@ import Calendar from '../../assets/icons/Calendar';
 import Phone from '../../assets/icons/Phone';
 import Message from '../../assets/icons/Message';
 import RouteIcon from '../../assets/icons/Route';
-// import Geolocation from 'react-native-geolocation-service';
+import Geolocation from 'react-native-geolocation-service';
+import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
 const mapBoxAccessToken =
   'pk.eyJ1Ijoic3VsaXNoIiwiYSI6ImNtMGU3a3E2ZzBnZjcyanFzMzgxdWNhMjcifQ.h6HlFjmcCXDjeWrJwqNgUg';
@@ -197,39 +198,51 @@ export default function Order() {
     Linking.openURL(url);
   };
 
-  const [location, setLocation] = React.useState<any>(null);
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
 
-  // const getCurrentLocation = async () => {
-  //   if (Platform.OS === 'android') {
-  //     const permission = await PermissionsAndroid.request(
-  //       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
-  //     );
-  //     if (permission !== PermissionsAndroid.RESULTS.GRANTED) {
-  //       console.warn('Location permission denied');
-  //       return;
-  //     }
-  //   }
-  
-  //   Geolocation.getCurrentPosition(
-  //     (position) => {
-  //       const { latitude, longitude } = position.coords;
-  //       setLocation({ latitude, longitude });
-  //       console.log('Latitude:', latitude, 'Longitude:', longitude);
-  //     },
-  //     (error) => {
-  //       console.warn(error.message);
-  //     },
-  //     {
-  //       enableHighAccuracy: true,
-  //       timeout: 15000,
-  //       maximumAge: 10000,
-  //     }
-  //   );
-  // };
-  
-  // useEffect(() => {
-  //   getCurrentLocation();
-  // }, []);
+  const requestLocationPermission = async () => {
+    if (Platform.OS === 'ios') {
+      const result = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+
+      if (result === RESULTS.GRANTED) {
+        return true;
+      } else {
+        Alert.alert(
+          'Ошибка',
+          'Разрешение на доступ к геолокации не предоставлено',
+        );
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const getLocation = async () => {
+    const hasPermission = await requestLocationPermission();
+    if (!hasPermission) return;
+
+    Geolocation.getCurrentPosition(
+      position => {
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      error => {
+        Alert.alert('Ошибка', error.message);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    );
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  console.log(selectedPoint.lat, 'this is lox');
 
   return (
     <View style={{flex: 1, position: 'relative'}}>
@@ -246,13 +259,31 @@ export default function Order() {
 
             <TouchableOpacity
               style={styles.button}
-              onPress={() => openGoogleMapsRoute(32, 23, 32, 32)}>
+              onPress={async () =>
+                (await requestLocationPermission())
+                  ? openGoogleMapsRoute(
+                      location?.latitude || 36,
+                      location?.longitude || 47,
+                      selectedPoint.lat,
+                      selectedPoint.lng,
+                    )
+                  : false
+              }>
               <Text style={styles.buttonText}>Google Maps</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.button}
-              onPress={() => open2GISRoute(23, 3, 2, 3)}>
+              onPress={async () =>
+                (await requestLocationPermission())
+                  ? open2GISRoute(
+                      location?.latitude || 36,
+                      location?.longitude || 47,
+                      selectedPoint.lat,
+                      selectedPoint.lng,
+                    )
+                  : false
+              }>
               <Text style={styles.buttonText}>2GIS</Text>
             </TouchableOpacity>
 
@@ -335,10 +366,19 @@ export default function Order() {
                 style={{width: 100}}>
                 <Text style={{fontFamily: 'Exo 2'}}>Закрыть</Text>
               </TouchableOpacity>
-              <Text style={{fontSize: 16, fontWeight: '600', fontFamily: 'Exo 2'}}>Пункт Альфа</Text>
+              <Text
+                style={{fontSize: 16, fontWeight: '600', fontFamily: 'Exo 2'}}>
+                Пункт Альфа
+              </Text>
               <View style={{width: 100}}></View>
             </View>
-            <Text style={{fontSize: 18, fontWeight: '600', marginTop: 20, fontFamily: 'Exo 2'}}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: '600',
+                marginTop: 20,
+                fontFamily: 'Exo 2',
+              }}>
               {selectedPoint.city.cityname}, улица {selectedPoint.address},{' '}
               {selectedPoint.country.countryname}
             </Text>
@@ -373,7 +413,13 @@ export default function Order() {
                     height: 8,
                     borderRadius: 4,
                   }}></View>
-                <Text style={{fontSize: 15, marginTop: 3, fontWeight: '600', fontFamily: 'Exo 2'}}>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    marginTop: 3,
+                    fontWeight: '600',
+                    fontFamily: 'Exo 2',
+                  }}>
                   {
                     getStatus(
                       selectedPoint.openingHour,
@@ -402,7 +448,9 @@ export default function Order() {
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <Phone />
                 </View>
-                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>Позвонить</Text>
+                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>
+                  Позвонить
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -415,7 +463,9 @@ export default function Order() {
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <Message />
                 </View>
-                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>Написать</Text>
+                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>
+                  Написать
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -428,7 +478,9 @@ export default function Order() {
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <RouteIcon />
                 </View>
-                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>Маршрут</Text>
+                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>
+                  Маршрут
+                </Text>
               </TouchableOpacity>
             </View>
             <View style={{marginTop: 20}}>
@@ -484,10 +536,20 @@ export default function Order() {
                   key={index}>
                   <View>
                     <Text
-                      style={{color: 'black', fontSize: 17, fontWeight: '600', fontFamily: 'Exo 2'}}>
+                      style={{
+                        color: 'black',
+                        fontSize: 17,
+                        fontWeight: '600',
+                        fontFamily: 'Exo 2',
+                      }}>
                       {item.address}
                     </Text>
-                    <Text style={{color: '#AAAAAA', fontSize: 14, fontFamily: 'Exo 2'}}>
+                    <Text
+                      style={{
+                        color: '#AAAAAA',
+                        fontSize: 14,
+                        fontFamily: 'Exo 2',
+                      }}>
                       {item.city.cityname}, улица {item.address},{' '}
                       {item.country.countryname}
                     </Text>
@@ -509,7 +571,12 @@ export default function Order() {
                           borderRadius: 4,
                         }}></View>
                       <Text
-                        style={{fontSize: 13, color: '#AAAAAA', marginTop: 3, fontFamily: 'Exo 2'}}>
+                        style={{
+                          fontSize: 13,
+                          color: '#AAAAAA',
+                          marginTop: 3,
+                          fontFamily: 'Exo 2',
+                        }}>
                         {getStatus(item.openingHour, item.closingHour).text}
                       </Text>
                     </View>
@@ -584,7 +651,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: 'bold',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   popoverClose: {
     alignSelf: 'flex-end',
@@ -617,7 +684,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: '600',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   tabs: {
     display: 'flex',
@@ -635,7 +702,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: 'white',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   modalBackground: {
     flex: 1,
@@ -654,7 +721,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 20,
     fontWeight: 'bold',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   button: {
     backgroundColor: '#4CAF50',
@@ -667,7 +734,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   cancelButton: {
     padding: 10,
@@ -679,6 +746,6 @@ const styles = StyleSheet.create({
   cancelText: {
     color: 'white',
     fontSize: 13,
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
 });

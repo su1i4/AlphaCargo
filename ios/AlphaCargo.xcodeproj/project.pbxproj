@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* AlphaCargoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AlphaCargoTests.m */; };
+		030B0432A35943188831B1B2 /* Exo 2 Medium 500.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BCBDAA67A394DE481DA9983 /* Exo 2 Medium 500.ttf */; };
 		07081A456E2A4791ABBEA84D /* Futura XBlk BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A7A788856F140B9A1A44186 /* Futura XBlk BT.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-AlphaCargo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-AlphaCargo.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
@@ -30,15 +31,14 @@
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		87EB853221CC49A988AF4B28 /* Futura Heavy Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 560B985C5467447ABFAF23FC /* Futura Heavy Italic font.ttf */; };
 		A628C503362F4FDF939C8359 /* Futura-CondensedLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4728135C0CF741968D7182B8 /* Futura-CondensedLight.otf */; };
+		AEB15B351CBF4FE6BE070BE4 /* Exo 2 Bold 700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52834ED95E6445369C2EDF2F /* Exo 2 Bold 700.ttf */; };
+		B3723F0977D04A6292061FFF /* Exo 2 400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 668ABF4762454755A336804E /* Exo 2 400.ttf */; };
 		B9125E696EF44679A0CDE0A2 /* Futura Extra Black font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BBFB7590D09F43B7A700AB4D /* Futura Extra Black font.ttf */; };
+		C8ABF7C98111460C948B478F /* Exo 2 Semi Bold 600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A4247322390405F8AD3FCC9 /* Exo 2 Semi Bold 600.ttf */; };
 		CAF29DE6031B4D23B157573F /* Futura Book Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A32B7B885D044D6B8565CE03 /* Futura Book Italic font.ttf */; };
 		ED18AB349AD54D2FAD3094E7 /* futura medium condensed bt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D598B86A45764960879DF9F4 /* futura medium condensed bt.ttf */; };
 		EDE315CDB47B49678E2680EC /* sharefonts.net.txt in Resources */ = {isa = PBXBuildFile; fileRef = D63585EB329E47548D3D96DD /* sharefonts.net.txt */; };
 		F31C89A523D58D0492880550 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 50592F6DDA2751EE769E3165 /* PrivacyInfo.xcprivacy */; };
-		B3723F0977D04A6292061FFF /* Exo 2 400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 668ABF4762454755A336804E /* Exo 2 400.ttf */; };
-		AEB15B351CBF4FE6BE070BE4 /* Exo 2 Bold 700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52834ED95E6445369C2EDF2F /* Exo 2 Bold 700.ttf */; };
-		030B0432A35943188831B1B2 /* Exo 2 Medium 500.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BCBDAA67A394DE481DA9983 /* Exo 2 Medium 500.ttf */; };
-		C8ABF7C98111460C948B478F /* Exo 2 Semi Bold 600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A4247322390405F8AD3FCC9 /* Exo 2 Semi Bold 600.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,14 +67,18 @@
 		2DF48A58ADA9465CAFC1D479 /* futur.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = futur.ttf; path = ../assets/fonts/futur.ttf; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-AlphaCargo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo.debug.xcconfig"; path = "Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo.debug.xcconfig"; sourceTree = "<group>"; };
 		4728135C0CF741968D7182B8 /* Futura-CondensedLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura-CondensedLight.otf"; path = "../assets/fonts/Futura-CondensedLight.otf"; sourceTree = "<group>"; };
+		4BCBDAA67A394DE481DA9983 /* Exo 2 Medium 500.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Medium 500.ttf"; path = "../assets/fonts/Exo 2 Medium 500.ttf"; sourceTree = "<group>"; };
 		50592F6DDA2751EE769E3165 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = AlphaCargo/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		52834ED95E6445369C2EDF2F /* Exo 2 Bold 700.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Bold 700.ttf"; path = "../assets/fonts/Exo 2 Bold 700.ttf"; sourceTree = "<group>"; };
 		560B985C5467447ABFAF23FC /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Heavy Italic font.ttf"; path = "../assets/fonts/Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-AlphaCargo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo.release.xcconfig"; path = "Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig"; path = "Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-AlphaCargo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AlphaCargo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6587A276297B48BFACB61B24 /* Futura Light Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Light Italic font.ttf"; path = "../assets/fonts/Futura Light Italic font.ttf"; sourceTree = "<group>"; };
+		668ABF4762454755A336804E /* Exo 2 400.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 400.ttf"; path = "../assets/fonts/Exo 2 400.ttf"; sourceTree = "<group>"; };
 		69B8092EEE5D4542A88D7383 /* Futura Heavy font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Heavy font.ttf"; path = "../assets/fonts/Futura Heavy font.ttf"; sourceTree = "<group>"; };
 		6A7A788856F140B9A1A44186 /* Futura XBlk BT.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura XBlk BT.ttf"; path = "../assets/fonts/Futura XBlk BT.ttf"; sourceTree = "<group>"; };
+		7A4247322390405F8AD3FCC9 /* Exo 2 Semi Bold 600.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Semi Bold 600.ttf"; path = "../assets/fonts/Exo 2 Semi Bold 600.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AlphaCargo/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82C26C8A4AFB4A2A99E665B4 /* futura medium bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "futura medium bt.ttf"; path = "../assets/fonts/futura medium bt.ttf"; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-AlphaCargo-AlphaCargoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo-AlphaCargoTests.release.xcconfig"; path = "Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,10 +95,6 @@
 		EFCE8D7990D442A68F4D18E0 /* Futura Bold font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Bold font.ttf"; path = "../assets/fonts/Futura Bold font.ttf"; sourceTree = "<group>"; };
 		F95F93E8C96C463F801F6BF2 /* futura light bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "futura light bt.ttf"; path = "../assets/fonts/futura light bt.ttf"; sourceTree = "<group>"; };
 		FA911096FD274BC48450FF88 /* unicode.futurabb.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = unicode.futurabb.ttf; path = ../assets/fonts/unicode.futurabb.ttf; sourceTree = "<group>"; };
-		668ABF4762454755A336804E /* Exo 2 400.ttf */ = {isa = PBXFileReference; name = "Exo 2 400.ttf"; path = "../assets/fonts/Exo 2 400.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		52834ED95E6445369C2EDF2F /* Exo 2 Bold 700.ttf */ = {isa = PBXFileReference; name = "Exo 2 Bold 700.ttf"; path = "../assets/fonts/Exo 2 Bold 700.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		4BCBDAA67A394DE481DA9983 /* Exo 2 Medium 500.ttf */ = {isa = PBXFileReference; name = "Exo 2 Medium 500.ttf"; path = "../assets/fonts/Exo 2 Medium 500.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7A4247322390405F8AD3FCC9 /* Exo 2 Semi Bold 600.ttf */ = {isa = PBXFileReference; name = "Exo 2 Semi Bold 600.ttf"; path = "../assets/fonts/Exo 2 Semi Bold 600.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

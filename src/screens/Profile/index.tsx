@@ -199,7 +199,7 @@ export default function Profile() {
                 <View style={{alignSelf: 'center'}}>
                   <ProfileUser />
                 </View>
-                <Text style={{fontSize: 18, marginTop: 10}}>{phone}</Text>
+                <Text style={{fontSize: 18, marginTop: 10, fontFamily: 'Exo 2'}}>{phone}</Text>
               </View>
               {type && (
                 <View

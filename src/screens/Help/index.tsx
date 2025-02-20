@@ -43,13 +43,13 @@ const Help = () => {
             onPress={() => navigation.navigate('Questions')}
             style={styles.wrap}>
             <Mark />
-            <Text>Часто задаваемые вопросы</Text>
+            <Text style={{fontFamily: 'Exo 2'}}>Часто задаваемые вопросы</Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={openMail}
             style={[styles.wrap, {paddingLeft: 4}]}>
             <Chat />
-            <Text>Предложить функционал</Text>
+            <Text style={{fontFamily: 'Exo 2'}}>Предложить функционал</Text>
           </TouchableOpacity>
         </View>
         <View style={[styles.main, {marginTop: 20}]}>
@@ -61,7 +61,7 @@ const Help = () => {
               alignItems: 'center',
               paddingHorizontal: 10,
             }}>
-            <Text>О приложении</Text>
+            <Text style={{fontFamily: 'Exo 2'}}>О приложении</Text>
             <Text style={{color: '#666666', fontSize: 15}}>Версия 1.0.2</Text>
           </View>
         </View>
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     marginTop: 20,
+    fontFamily: 'Exo 2'
   },
 });
 
