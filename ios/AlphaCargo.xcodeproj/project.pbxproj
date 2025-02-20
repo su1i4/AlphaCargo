@@ -55,7 +55,7 @@
 		00E356EE1AD99517003FC87E /* AlphaCargoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AlphaCargoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* AlphaCargoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlphaCargoTests.m; sourceTree = "<group>"; };
-		07FA606BAE7C47ECAD2344E1 /* Futura Bold Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Bold Italic font.ttf"; path = "../assets/fonts/Futura Bold Italic font.ttf"; sourceTree = "<group>"; };
+		07FA606BAE7C47ECAD2344E1 /* Futura Bold Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Bold Italic font.ttf"; path = "../assets/fonts/Futura Bold Italic font.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* AlphaCargo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AlphaCargo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = AlphaCargo/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = AlphaCargo/AppDelegate.mm; sourceTree = "<group>"; };
@@ -64,37 +64,37 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AlphaCargo/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = AlphaCargo/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		1E3AA18F99FB1087E211F8F6 /* libPods-AlphaCargo-AlphaCargoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AlphaCargo-AlphaCargoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2DF48A58ADA9465CAFC1D479 /* futur.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = futur.ttf; path = ../assets/fonts/futur.ttf; sourceTree = "<group>"; };
+		2DF48A58ADA9465CAFC1D479 /* futur.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = futur.ttf; path = ../assets/fonts/futur.ttf; sourceTree = "<group>"; };
 		3DAF06BE2C2401BCFA64FA1F /* libPods-AlphaCargo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AlphaCargo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4728135C0CF741968D7182B8 /* Futura-CondensedLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura-CondensedLight.otf"; path = "../assets/fonts/Futura-CondensedLight.otf"; sourceTree = "<group>"; };
-		4BCBDAA67A394DE481DA9983 /* Exo 2 Medium 500.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Medium 500.ttf"; path = "../assets/fonts/Exo 2 Medium 500.ttf"; sourceTree = "<group>"; };
+		4728135C0CF741968D7182B8 /* Futura-CondensedLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura-CondensedLight.otf"; path = "../assets/fonts/Futura-CondensedLight.otf"; sourceTree = "<group>"; };
+		4BCBDAA67A394DE481DA9983 /* Exo 2 Medium 500.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Medium 500.ttf"; path = "../assets/fonts/Exo 2 Medium 500.ttf"; sourceTree = "<group>"; };
 		50592F6DDA2751EE769E3165 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = AlphaCargo/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		52834ED95E6445369C2EDF2F /* Exo 2 Bold 700.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Bold 700.ttf"; path = "../assets/fonts/Exo 2 Bold 700.ttf"; sourceTree = "<group>"; };
-		560B985C5467447ABFAF23FC /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Heavy Italic font.ttf"; path = "../assets/fonts/Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
-		6587A276297B48BFACB61B24 /* Futura Light Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Light Italic font.ttf"; path = "../assets/fonts/Futura Light Italic font.ttf"; sourceTree = "<group>"; };
-		668ABF4762454755A336804E /* Exo 2 400.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 400.ttf"; path = "../assets/fonts/Exo 2 400.ttf"; sourceTree = "<group>"; };
-		69B8092EEE5D4542A88D7383 /* Futura Heavy font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Heavy font.ttf"; path = "../assets/fonts/Futura Heavy font.ttf"; sourceTree = "<group>"; };
-		6A7A788856F140B9A1A44186 /* Futura XBlk BT.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura XBlk BT.ttf"; path = "../assets/fonts/Futura XBlk BT.ttf"; sourceTree = "<group>"; };
-		7A4247322390405F8AD3FCC9 /* Exo 2 Semi Bold 600.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Semi Bold 600.ttf"; path = "../assets/fonts/Exo 2 Semi Bold 600.ttf"; sourceTree = "<group>"; };
+		52834ED95E6445369C2EDF2F /* Exo 2 Bold 700.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Bold 700.ttf"; path = "../assets/fonts/Exo 2 Bold 700.ttf"; sourceTree = "<group>"; };
+		560B985C5467447ABFAF23FC /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Heavy Italic font.ttf"; path = "../assets/fonts/Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
+		6587A276297B48BFACB61B24 /* Futura Light Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Light Italic font.ttf"; path = "../assets/fonts/Futura Light Italic font.ttf"; sourceTree = "<group>"; };
+		668ABF4762454755A336804E /* Exo 2 400.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 400.ttf"; path = "../assets/fonts/Exo 2 400.ttf"; sourceTree = "<group>"; };
+		69B8092EEE5D4542A88D7383 /* Futura Heavy font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Heavy font.ttf"; path = "../assets/fonts/Futura Heavy font.ttf"; sourceTree = "<group>"; };
+		6A7A788856F140B9A1A44186 /* Futura XBlk BT.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura XBlk BT.ttf"; path = "../assets/fonts/Futura XBlk BT.ttf"; sourceTree = "<group>"; };
+		7A4247322390405F8AD3FCC9 /* Exo 2 Semi Bold 600.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Semi Bold 600.ttf"; path = "../assets/fonts/Exo 2 Semi Bold 600.ttf"; sourceTree = "<group>"; };
 		7A60C5A9EC01678CA5BC2F13 /* Pods-AlphaCargo-AlphaCargoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo-AlphaCargoTests.release.xcconfig"; path = "Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AlphaCargo/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		82C26C8A4AFB4A2A99E665B4 /* futura medium bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "futura medium bt.ttf"; path = "../assets/fonts/futura medium bt.ttf"; sourceTree = "<group>"; };
+		82C26C8A4AFB4A2A99E665B4 /* futura medium bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "futura medium bt.ttf"; path = "../assets/fonts/futura medium bt.ttf"; sourceTree = "<group>"; };
 		9D11ED4455C61B9BEACC31A0 /* Pods-AlphaCargo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo.debug.xcconfig"; path = "Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo.debug.xcconfig"; sourceTree = "<group>"; };
-		9FCA184DF8C2426985E5026E /* Futura Light font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Light font.ttf"; path = "../assets/fonts/Futura Light font.ttf"; sourceTree = "<group>"; };
-		A00228BB9F0E4850BF560E2B /* Futura Medium Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Medium Italic font.ttf"; path = "../assets/fonts/Futura Medium Italic font.ttf"; sourceTree = "<group>"; };
-		A32B7B885D044D6B8565CE03 /* Futura Book Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Book Italic font.ttf"; path = "../assets/fonts/Futura Book Italic font.ttf"; sourceTree = "<group>"; };
-		B6EB2DB6F12E48369AEE5A49 /* tt0205m_.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = tt0205m_.ttf; path = ../assets/fonts/tt0205m_.ttf; sourceTree = "<group>"; };
-		BBFB7590D09F43B7A700AB4D /* Futura Extra Black font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Extra Black font.ttf"; path = "../assets/fonts/Futura Extra Black font.ttf"; sourceTree = "<group>"; };
-		D598B86A45764960879DF9F4 /* futura medium condensed bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "futura medium condensed bt.ttf"; path = "../assets/fonts/futura medium condensed bt.ttf"; sourceTree = "<group>"; };
-		D63585EB329E47548D3D96DD /* sharefonts.net.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = sharefonts.net.txt; path = ../assets/fonts/sharefonts.net.txt; sourceTree = "<group>"; };
+		9FCA184DF8C2426985E5026E /* Futura Light font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Light font.ttf"; path = "../assets/fonts/Futura Light font.ttf"; sourceTree = "<group>"; };
+		A00228BB9F0E4850BF560E2B /* Futura Medium Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Medium Italic font.ttf"; path = "../assets/fonts/Futura Medium Italic font.ttf"; sourceTree = "<group>"; };
+		A32B7B885D044D6B8565CE03 /* Futura Book Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Book Italic font.ttf"; path = "../assets/fonts/Futura Book Italic font.ttf"; sourceTree = "<group>"; };
+		B6EB2DB6F12E48369AEE5A49 /* tt0205m_.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = tt0205m_.ttf; path = ../assets/fonts/tt0205m_.ttf; sourceTree = "<group>"; };
+		BBFB7590D09F43B7A700AB4D /* Futura Extra Black font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Extra Black font.ttf"; path = "../assets/fonts/Futura Extra Black font.ttf"; sourceTree = "<group>"; };
+		D598B86A45764960879DF9F4 /* futura medium condensed bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "futura medium condensed bt.ttf"; path = "../assets/fonts/futura medium condensed bt.ttf"; sourceTree = "<group>"; };
+		D63585EB329E47548D3D96DD /* sharefonts.net.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = sharefonts.net.txt; path = ../assets/fonts/sharefonts.net.txt; sourceTree = "<group>"; };
 		E2518AD46B0ED5A53E86A6BE /* Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig"; path = "Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E339DB33B5D7633E29FA19EF /* Pods-AlphaCargo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo.release.xcconfig"; path = "Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo.release.xcconfig"; sourceTree = "<group>"; };
-		E9E37E5BB99B46949705E714 /* unicode.futurab.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = unicode.futurab.ttf; path = ../assets/fonts/unicode.futurab.ttf; sourceTree = "<group>"; };
-		EC98544E28DC4F769E8E4132 /* Futura Book font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Book font.ttf"; path = "../assets/fonts/Futura Book font.ttf"; sourceTree = "<group>"; };
+		E9E37E5BB99B46949705E714 /* unicode.futurab.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unicode.futurab.ttf; path = ../assets/fonts/unicode.futurab.ttf; sourceTree = "<group>"; };
+		EC98544E28DC4F769E8E4132 /* Futura Book font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Book font.ttf"; path = "../assets/fonts/Futura Book font.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		EFCE8D7990D442A68F4D18E0 /* Futura Bold font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Bold font.ttf"; path = "../assets/fonts/Futura Bold font.ttf"; sourceTree = "<group>"; };
-		F95F93E8C96C463F801F6BF2 /* futura light bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "futura light bt.ttf"; path = "../assets/fonts/futura light bt.ttf"; sourceTree = "<group>"; };
-		FA911096FD274BC48450FF88 /* unicode.futurabb.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = unicode.futurabb.ttf; path = ../assets/fonts/unicode.futurabb.ttf; sourceTree = "<group>"; };
+		EFCE8D7990D442A68F4D18E0 /* Futura Bold font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Bold font.ttf"; path = "../assets/fonts/Futura Bold font.ttf"; sourceTree = "<group>"; };
+		F95F93E8C96C463F801F6BF2 /* futura light bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "futura light bt.ttf"; path = "../assets/fonts/futura light bt.ttf"; sourceTree = "<group>"; };
+		FA911096FD274BC48450FF88 /* unicode.futurabb.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = unicode.futurabb.ttf; path = ../assets/fonts/unicode.futurabb.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -231,7 +231,6 @@
 				7A4247322390405F8AD3FCC9 /* Exo 2 Semi Bold 600.ttf */,
 			);
 			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -524,6 +523,7 @@
 			baseConfigurationReference = E2518AD46B0ED5A53E86A6BE /* Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = MT38PK5TC6;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -540,7 +540,8 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.alpha.cargo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alphacargo.alphacargo;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "com.alphacargo.alphacargo--";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlphaCargo.app/AlphaCargo";
 			};
@@ -552,6 +553,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = MT38PK5TC6;
 				INFOPLIST_FILE = AlphaCargoTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -564,7 +566,8 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.alpha.cargo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alphacargo.alphacargo;
+				"PRODUCT_BUNDLE_IDENTIFIER[sdk=iphoneos*]" = "com.alphacargo.alphacargo--";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AlphaCargo.app/AlphaCargo";
 			};
@@ -576,7 +579,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = MT38PK5TC6;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = AlphaCargo/Info.plist;
@@ -585,13 +588,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.alpha.cargo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alphacargo.alphacargo;
 				PRODUCT_NAME = AlphaCargo;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -605,7 +608,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = MT38PK5TC6;
 				INFOPLIST_FILE = AlphaCargo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = AlphaCargo;
@@ -613,13 +616,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.3;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.alpha.cargo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.alphacargo.alphacargo;
 				PRODUCT_NAME = AlphaCargo;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -699,10 +702,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -774,10 +774,7 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					" ",
-				);
+				OTHER_LDFLAGS = "$(inherited)  ";
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

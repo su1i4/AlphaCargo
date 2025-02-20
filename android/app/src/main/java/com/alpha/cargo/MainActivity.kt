@@ -1,4 +1,4 @@
-package com.alpha.cargo
+package com.alphacargo.alphacargo
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
