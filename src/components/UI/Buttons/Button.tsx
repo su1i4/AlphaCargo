@@ -81,5 +81,6 @@ const styles = StyleSheet.create({
     color: '#F9FFFF',
     fontSize: 16,
     fontWeight: '400',
+    fontFamily: 'Exo 2'
   },
 });

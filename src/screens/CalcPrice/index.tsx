@@ -104,8 +104,8 @@ export default function CalcPrice() {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
-          Войти
+        <Text style={{fontSize: 27, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
+          Рассчитать стоимость
         </Text>
       </View>
       <View style={styles.Wrapper}>

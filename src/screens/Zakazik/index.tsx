@@ -21,10 +21,10 @@ export default function Zakazik() {
   return (
     <View style={styles.safeArea}>
       <View style={styles.Wrapper}>
-        <Text style={{fontSize: 20, fontWeight: '700'}}>
+        <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'Exo 2'}}>
           Контакты выездной группы
         </Text>
-        <Text style={{fontSize: 16, fontWeight: '500', paddingVertical: 20}}>
+        <Text style={{fontSize: 16, fontWeight: '500', paddingVertical: 20, fontFamily: 'Exo 2'}}>
           Тел: +996 (772) 007-183
         </Text>
         <TouchableOpacity
@@ -40,7 +40,7 @@ export default function Zakazik() {
             alignItems: 'center',
           }}
           onPress={openWhatsAppOrWebsite}>
-          <Text style={{color: 'white', fontSize: 16}}>Открыть WhatsApp</Text>
+          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Exo 2'}}>Открыть WhatsApp</Text>
         </TouchableOpacity>
         <Vyezd />
       </View>

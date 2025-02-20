@@ -34,7 +34,7 @@ export const Input = ({
 
   return (
     <View style={{ position: 'relative', width: '100%' }}>
-      {label && <Text style={{ fontSize: 15, marginBottom: 5 }}>{label}</Text>}
+      {label && <Text style={{ fontSize: 15, marginBottom: 5, fontFamily: 'Exo 2' }}>{label}</Text>}
 
       <TextInput
         style={[styles.input, style]}
@@ -61,5 +61,6 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 15,
     fontWeight: '400',
+    fontFamily: 'Exo 2'
   },
 });

@@ -180,7 +180,7 @@ export default function Profile() {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
           Личный кабинет{' '}
         </Text>
       </View>
@@ -328,11 +328,13 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 18,
     fontWeight: '600',
+    fontFamily: 'Exo 2'
   },
   email: {
     color: '#000018',
     fontSize: 13,
     fontWeight: '400',
+    fontFamily: 'Exo 2'
   },
   delete: {color: 'red', width: '100%', textAlign: 'center'},
 });

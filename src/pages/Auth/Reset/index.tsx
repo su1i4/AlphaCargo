@@ -96,10 +96,10 @@ export default function Reset({_, route}: any) {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
           Введите ваш номер
         </Text>
-        <Text style={{fontSize: 30, fontWeight: '700'}}>телефона</Text>
+        <Text style={{fontSize: 30, fontWeight: '700', fontFamily: 'Exo 2'}}>телефона</Text>
       </View>
       <View style={styles.main}>
         <View style={styles.msgWrap}>

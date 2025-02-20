@@ -200,6 +200,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     paddingBottom: 5,
+    fontFamily: 'Exo 2'
   },
   headerWrapper: {
     display: 'flex',

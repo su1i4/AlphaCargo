@@ -101,6 +101,7 @@ export default function WatchOrder() {
               color: '#878787',
               fontSize: 15,
               textDecorationLine: 'underline',
+              fontFamily: 'Exo 2'
             }}>
             Как узнать номер накладной?
           </Text>
@@ -128,7 +129,7 @@ export default function WatchOrder() {
           ))}
         </View>
         <View style={styles.Wrapper}>
-          <Text style={styles.colon}>Наши партнеры</Text>
+          <Text style={[styles.colon, {fontFamily: 'Exo 2'}]}>Наши партнеры</Text>
         </View>
         <ScrollView
           horizontal
@@ -168,20 +169,20 @@ export default function WatchOrder() {
                   </View>
                 </View>
               </View>
-              <Text style={{fontWeight: 600, marginTop: 10}}>
+              <Text style={{fontWeight: 600, marginTop: 10, fontFamily: 'Exo 2'}}>
                 Как узнать номер накладной?
               </Text>
-              <Text style={{marginTop: 10}}>
+              <Text style={{marginTop: 10, fontFamily: 'Exo 2'}}>
                 Номер накладной можно найти в правом верхнем
               </Text>
-              <Text>углу вашего документа.</Text>
-              <Text>Это 14-значный номер, который используется для</Text>
-              <Text>отслеживания вашего груза.</Text>
-              <Text>Пример: 02.240202151313</Text>
-              <Text style={{marginTop: 10}}>
+              <Text style={{fontFamily: 'Exo 2'}}>углу вашего документа.</Text>
+              <Text style={{fontFamily: 'Exo 2'}}>Это 14-значный номер, который используется для</Text>
+              <Text style={{fontFamily: 'Exo 2'}}>отслеживания вашего груза.</Text>
+              <Text style={{fontFamily: 'Exo 2'}}>Пример: 02.240202151313</Text>
+              <Text style={{marginTop: 10, fontFamily: 'Exo 2'}}>
                 Введите этот номер в приложении, чтобы узнать{' '}
               </Text>
-              <Text>статус доставки вашего груза.</Text>
+              <Text style={{fontFamily: 'Exo 2'}}>статус доставки вашего груза.</Text>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -306,9 +307,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333333',
     marginBottom: 4,
+    fontFamily: 'Exo 2'
   },
   status: {
     fontSize: 14,
     color: '#666666',
+    fontFamily: 'Exo 2'
   },
 });

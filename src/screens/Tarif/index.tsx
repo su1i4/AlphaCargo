@@ -78,16 +78,16 @@ export default function Tarif() {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
-          Войти
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20,fontFamily: 'Exo 2' }}>
+          Тарифы
         </Text>
       </View>
       <View style={styles.Wrapper}>
         <View style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
-          <Text style={{fontSize: 20, fontWeight: '700'}}>
+          <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'Exo 2'}}>
             Узнайте предварительную
           </Text>
-          <Text style={{fontSize: 20, fontWeight: '700', marginBottom: 20}}>
+          <Text style={{fontSize: 20, fontWeight: '700', marginBottom: 20, fontFamily: 'Exo 2'}}>
             стоимость отправки
           </Text>
         </View>

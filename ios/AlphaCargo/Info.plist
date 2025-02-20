@@ -86,24 +86,10 @@
 		<string>tt0205m_.ttf</string>
 		<string>unicode.futurab.ttf</string>
 		<string>unicode.futurabb.ttf</string>
-		<string>Exo2-Black.otf</string>
-		<string>Exo2-BlackItalic.otf</string>
-		<string>Exo2-Bold.otf</string>
-		<string>Exo2-BoldItalic.otf</string>
-		<string>Exo2-ExtraBold.otf</string>
-		<string>Exo2-ExtraBoldItalic.otf</string>
-		<string>Exo2-ExtraLight.otf</string>
-		<string>Exo2-ExtraLightItalic.otf</string>
-		<string>Exo2-Italic.otf</string>
-		<string>Exo2-Light.otf</string>
-		<string>Exo2-LightItalic.otf</string>
-		<string>Exo2-Medium.otf</string>
-		<string>Exo2-MediumItalic.otf</string>
-		<string>Exo2-Regular.otf</string>
-		<string>Exo2-SemiBold.otf</string>
-		<string>Exo2-SemiBoldItalic.otf</string>
-		<string>Exo2-Thin.otf</string>
-		<string>Exo2-ThinItalic.otf</string>
+		<string>Exo 2 400.ttf</string>
+		<string>Exo 2 Bold 700.ttf</string>
+		<string>Exo 2 Medium 500.ttf</string>
+		<string>Exo 2 Semi Bold 600.ttf</string>
 	</array>
 </dict>
 </plist>

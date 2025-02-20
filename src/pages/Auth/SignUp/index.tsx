@@ -76,7 +76,7 @@ export default function SignUp() {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
           Регистрация
         </Text>
       </View>

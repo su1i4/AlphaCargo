@@ -45,7 +45,7 @@ export const Select = ({
 
   return (
     <View style={{position: 'relative', width: '100%'}}>
-      {label && <Text style={{fontSize: 15, marginBottom: 5}}>{label}</Text>}
+      {label && <Text style={{fontSize: 15, marginBottom: 5, fontFamily: 'Exo 2'}}>{label}</Text>}
       <TouchableOpacity
         style={[styles.select, style]}
         onPress={() => !disabled && setDropdownVisible(true)}
@@ -107,11 +107,13 @@ const styles = StyleSheet.create({
     color: 'black',
     fontSize: 15,
     fontWeight: '400',
+    fontFamily: 'Exo 2'
   },
   placeHolder: {
     color: '#8C8C8C',
     fontSize: 15,
     fontWeight: '400',
+    fontFamily: 'Exo 2'
   },
   modalOverlay: {
     flex: 1,

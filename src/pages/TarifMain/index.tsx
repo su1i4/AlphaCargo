@@ -72,13 +72,13 @@ export default function TarifMain() {
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Back color="black" />
           </TouchableOpacity>
-          <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
+          <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
             Тарифы
           </Text>
-          <Text style={{fontSize: 20, fontWeight: '700', marginTop: 15}}>
+          <Text style={{fontSize: 20, fontWeight: '700', marginTop: 15,fontFamily: 'Exo 2'}}>
             Узнайте предварительную
           </Text>
-          <Text style={{fontSize: 20, fontWeight: '700', marginBottom: 20}}>
+          <Text style={{fontSize: 20, fontWeight: '700', marginBottom: 20, fontFamily: 'Exo 2'}}>
             стоимость отправки
           </Text>
         </View>

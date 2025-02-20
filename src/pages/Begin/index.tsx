@@ -61,7 +61,7 @@ export default function Begin() {
   // Если последний слайд, запускаем анимацию масштабирования (например, с 0.8 до 1)
   useEffect(() => {
     if (step === temps.length - 1) {
-      buttonScale.setValue(0.97);
+      buttonScale.setValue(0.98);
       Animated.spring(buttonScale, {
         toValue: 1,
         friction: 2,
@@ -216,7 +216,6 @@ const styles = StyleSheet.create({
     textDecorationLine: 'underline',
     marginTop: 10,
     fontFamily: 'Exo 2',
-    fontWeight: '600'
   },
   statistic: {
     width: '100%',

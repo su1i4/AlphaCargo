@@ -333,12 +333,12 @@ export default function Order() {
               <TouchableOpacity
                 onPress={() => setSelectedPoint(null)}
                 style={{width: 100}}>
-                <Text>Закрыть</Text>
+                <Text style={{fontFamily: 'Exo 2'}}>Закрыть</Text>
               </TouchableOpacity>
-              <Text style={{fontSize: 16, fontWeight: '600'}}>Пункт Альфа</Text>
+              <Text style={{fontSize: 16, fontWeight: '600', fontFamily: 'Exo 2'}}>Пункт Альфа</Text>
               <View style={{width: 100}}></View>
             </View>
-            <Text style={{fontSize: 18, fontWeight: '600', marginTop: 20}}>
+            <Text style={{fontSize: 18, fontWeight: '600', marginTop: 20, fontFamily: 'Exo 2'}}>
               {selectedPoint.city.cityname}, улица {selectedPoint.address},{' '}
               {selectedPoint.country.countryname}
             </Text>
@@ -355,7 +355,7 @@ export default function Order() {
                 alignSelf: 'center',
                 marginTop: 20,
               }}>
-              <Text>График работы</Text>
+              <Text style={{fontFamily: 'Exo 2'}}>График работы</Text>
               <View
                 style={{
                   display: 'flex',
@@ -373,7 +373,7 @@ export default function Order() {
                     height: 8,
                     borderRadius: 4,
                   }}></View>
-                <Text style={{fontSize: 15, marginTop: 3, fontWeight: '600'}}>
+                <Text style={{fontSize: 15, marginTop: 3, fontWeight: '600', fontFamily: 'Exo 2'}}>
                   {
                     getStatus(
                       selectedPoint.openingHour,
@@ -402,7 +402,7 @@ export default function Order() {
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <Phone />
                 </View>
-                <Text style={{textAlign: 'center'}}>Позвонить</Text>
+                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>Позвонить</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -415,7 +415,7 @@ export default function Order() {
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <Message />
                 </View>
-                <Text style={{textAlign: 'center'}}>Написать</Text>
+                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>Написать</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -428,7 +428,7 @@ export default function Order() {
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <RouteIcon />
                 </View>
-                <Text style={{textAlign: 'center'}}>Маршрут</Text>
+                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>Маршрут</Text>
               </TouchableOpacity>
             </View>
             <View style={{marginTop: 20}}>
@@ -440,7 +440,7 @@ export default function Order() {
                   gap: 10,
                 }}>
                 <GeoIcon size={22} active />
-                <Text style={{fontSize: 15}}>
+                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>
                   Улица {selectedPoint.address}
                 </Text>
               </View>
@@ -455,7 +455,7 @@ export default function Order() {
                   marginLeft: 2,
                 }}>
                 <Calendar />
-                <Text style={{fontSize: 15}}>
+                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>
                   {selectedPoint.openingHour === 0 &&
                   selectedPoint.closingHour === 24
                     ? 'Работает круглосуточно'
@@ -484,10 +484,10 @@ export default function Order() {
                   key={index}>
                   <View>
                     <Text
-                      style={{color: 'black', fontSize: 17, fontWeight: '600'}}>
+                      style={{color: 'black', fontSize: 17, fontWeight: '600', fontFamily: 'Exo 2'}}>
                       {item.address}
                     </Text>
-                    <Text style={{color: '#AAAAAA', fontSize: 14}}>
+                    <Text style={{color: '#AAAAAA', fontSize: 14, fontFamily: 'Exo 2'}}>
                       {item.city.cityname}, улица {item.address},{' '}
                       {item.country.countryname}
                     </Text>
@@ -509,7 +509,7 @@ export default function Order() {
                           borderRadius: 4,
                         }}></View>
                       <Text
-                        style={{fontSize: 13, color: '#AAAAAA', marginTop: 3}}>
+                        style={{fontSize: 13, color: '#AAAAAA', marginTop: 3, fontFamily: 'Exo 2'}}>
                         {getStatus(item.openingHour, item.closingHour).text}
                       </Text>
                     </View>
@@ -584,6 +584,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: 'bold',
+    fontFamily: 'Exo 2'
   },
   popoverClose: {
     alignSelf: 'flex-end',
@@ -616,6 +617,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: '600',
+    fontFamily: 'Exo 2'
   },
   tabs: {
     display: 'flex',
@@ -633,6 +635,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: 'white',
+    fontFamily: 'Exo 2'
   },
   modalBackground: {
     flex: 1,
@@ -651,6 +654,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 20,
     fontWeight: 'bold',
+    fontFamily: 'Exo 2'
   },
   button: {
     backgroundColor: '#4CAF50',
@@ -663,6 +667,7 @@ const styles = StyleSheet.create({
   buttonText: {
     color: 'white',
     fontSize: 16,
+    fontFamily: 'Exo 2'
   },
   cancelButton: {
     padding: 10,
@@ -674,5 +679,6 @@ const styles = StyleSheet.create({
   cancelText: {
     color: 'white',
     fontSize: 13,
+    fontFamily: 'Exo 2'
   },
 });
