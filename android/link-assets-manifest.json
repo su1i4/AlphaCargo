@@ -2,6 +2,78 @@
   "migIndex": 1,
   "data": [
     {
+      "path": "assets/fonts/Exo2-Black.otf",
+      "sha1": "acdaa805e8f5743eb17e17e117d989e418d803d2"
+    },
+    {
+      "path": "assets/fonts/Exo2-BlackItalic.otf",
+      "sha1": "ed7e2db82dbcac0442a2685a4193908548573377"
+    },
+    {
+      "path": "assets/fonts/Exo2-Bold.otf",
+      "sha1": "f0c6b074f8186851b00ee0ddd5ec84f66e06e9e5"
+    },
+    {
+      "path": "assets/fonts/Exo2-BoldItalic.otf",
+      "sha1": "0e2e4cab8b588639b749aad8a7c17e84d0f99fc9"
+    },
+    {
+      "path": "assets/fonts/Exo2-ExtraBold.otf",
+      "sha1": "b983bf924cc7e75356bb6ee4b52ebd472dec833c"
+    },
+    {
+      "path": "assets/fonts/Exo2-ExtraBoldItalic.otf",
+      "sha1": "7c398db6e64075f4f6a514d5558f644e77fa1b9f"
+    },
+    {
+      "path": "assets/fonts/Exo2-ExtraLight.otf",
+      "sha1": "eeefba9ac5f47fa81e49ec63f424121c20c92e23"
+    },
+    {
+      "path": "assets/fonts/Exo2-ExtraLightItalic.otf",
+      "sha1": "7c99daa8d774acbcf014fbe85042361dd67aaee9"
+    },
+    {
+      "path": "assets/fonts/Exo2-Italic.otf",
+      "sha1": "25559166c42d3e9bfa75b2479d255fba5977a38e"
+    },
+    {
+      "path": "assets/fonts/Exo2-Light.otf",
+      "sha1": "e288806b2a499a9be4edfe9f738573abbae2020e"
+    },
+    {
+      "path": "assets/fonts/Exo2-LightItalic.otf",
+      "sha1": "784332ba6f075ae9ae1882939cb00c8e4e2f4d9b"
+    },
+    {
+      "path": "assets/fonts/Exo2-Medium.otf",
+      "sha1": "cedaf8ae3768ebd4904c0005aaf726fa25f6ff58"
+    },
+    {
+      "path": "assets/fonts/Exo2-MediumItalic.otf",
+      "sha1": "1965990809f764b26f007426296b7214e9129d24"
+    },
+    {
+      "path": "assets/fonts/Exo2-Regular.otf",
+      "sha1": "324f1bc8bd44bf4dff539037c643acafbe5cafb8"
+    },
+    {
+      "path": "assets/fonts/Exo2-SemiBold.otf",
+      "sha1": "6b9b3fba5a57c2d7d77f6461b48f50e41810aab0"
+    },
+    {
+      "path": "assets/fonts/Exo2-SemiBoldItalic.otf",
+      "sha1": "596857b5c40066ae596302733e695223d3fe76be"
+    },
+    {
+      "path": "assets/fonts/Exo2-Thin.otf",
+      "sha1": "40ba3bf565a64d89e6a2a849ef5b49f9a32ae67c"
+    },
+    {
+      "path": "assets/fonts/Exo2-ThinItalic.otf",
+      "sha1": "0953ebeaa5d8817317d6d3fdd5b0c130a3746c35"
+    },
+    {
       "path": "assets/fonts/Futura Bold Italic font.ttf",
       "sha1": "a35361959a4a0264e43d5656c8012feaf5f10070"
     },

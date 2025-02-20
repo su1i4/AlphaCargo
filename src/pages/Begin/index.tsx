@@ -215,8 +215,8 @@ const styles = StyleSheet.create({
   linkText: {
     textDecorationLine: 'underline',
     marginTop: 10,
-    fontFamily: 'Futura-Light',
-    fontWeight: '400'
+    fontFamily: 'Exo 2',
+    fontWeight: '600'
   },
   statistic: {
     width: '100%',
