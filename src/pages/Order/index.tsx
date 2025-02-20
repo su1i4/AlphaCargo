@@ -242,8 +242,6 @@ export default function Order() {
     getLocation();
   }, []);
 
-  console.log(selectedPoint.lat, 'this is lox');
-
   return (
     <View style={{flex: 1, position: 'relative'}}>
       <Modal
@@ -264,8 +262,8 @@ export default function Order() {
                   ? openGoogleMapsRoute(
                       location?.latitude || 36,
                       location?.longitude || 47,
-                      selectedPoint.lat,
-                      selectedPoint.lng,
+                      selectedPoint?.lat,
+                      selectedPoint?.lng,
                     )
                   : false
               }>
@@ -279,8 +277,8 @@ export default function Order() {
                   ? open2GISRoute(
                       location?.latitude || 36,
                       location?.longitude || 47,
-                      selectedPoint.lat,
-                      selectedPoint.lng,
+                      selectedPoint?.lat,
+                      selectedPoint?.lng,
                     )
                   : false
               }>
@@ -728,7 +726,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     width: '100%',
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: 'center',
   },
   buttonText: {
@@ -737,10 +735,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Exo 2',
   },
   cancelButton: {
-    padding: 10,
+    padding: 6,
+    paddingHorizontal: 10,
     backgroundColor: '#FF5722',
     marginTop: 10,
-    borderRadius: 5,
+    borderRadius: 10,
     alignItems: 'center',
   },
   cancelText: {

@@ -4,10 +4,10 @@
 <dict>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Приложение использует ваше местоположение для отображения близлежащих грузов и расчета маршрутов доставки.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Приложение использует ваше местоположение для отображения близлежащих грузов и расчета маршрутов доставки.</string>
+	<string>Мы используем ваше местоположение для навигации</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Мы используем ваше местоположение, пока приложение активно</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>

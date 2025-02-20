@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
-
 #import <React/RCTBundleURLProvider.h>
+#import <React/RCTRootView.h> // Import RCTRootView
 
 @implementation AppDelegate
 
@@ -11,7 +11,33 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
-  return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  // --- ADD THE DELAY AND RCTRootView SETUP HERE ---
+  NSURL *jsCodeLocation = [self bundleURL]; // Get the bundle URL
+
+  // Add a small delay here (e.g., 0.1 seconds)
+  [NSThread sleepForTimeInterval:1.5];
+
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                                      moduleName:self.moduleName
+                                               initialProperties:self.initialProps
+                                                   launchOptions:launchOptions];
+    rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1]; // Or set to your desired background color
+
+
+    UIViewController *rootViewController = [UIViewController new];
+    rootViewController.view = rootView;
+
+
+    if(!self.window) { //Important check added
+        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    }
+
+    self.window.rootViewController = rootViewController;
+    [self.window makeKeyAndVisible];
+
+  // --- END OF ADDED CODE ---
+
+  return [super application:application didFinishLaunchingWithOptions:launchOptions]; // Call super *after* our setup
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

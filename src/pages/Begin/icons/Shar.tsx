@@ -6,7 +6,7 @@ function Shar() {
     <Svg
       width={400}
       height={307}
-      viewBox="0 0 507 507"
+      viewBox="0 0 507 457"
       fill="none"
     >
       <Path
