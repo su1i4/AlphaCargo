@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {
   StyleSheet,
   View,
@@ -26,7 +26,7 @@ import Phone from '../../assets/icons/Phone';
 import Message from '../../assets/icons/Message';
 import RouteIcon from '../../assets/icons/Route';
 import Geolocation from 'react-native-geolocation-service';
-import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
+import {check, request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
 const mapBoxAccessToken =
   'pk.eyJ1Ijoic3VsaXNoIiwiYSI6ImNtMGU3a3E2ZzBnZjcyanFzMzgxdWNhMjcifQ.h6HlFjmcCXDjeWrJwqNgUg';
@@ -205,42 +205,73 @@ export default function Order() {
 
   const requestLocationPermission = async () => {
     if (Platform.OS === 'ios') {
-      const result = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+      try {
+        const permissionStatus = await check(
+          PERMISSIONS.IOS.LOCATION_WHEN_IN_USE,
+        );
 
-      if (result === RESULTS.GRANTED) {
-        return true;
-      } else {
+        if (permissionStatus === RESULTS.DENIED) {
+          const result = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+          if (result === RESULTS.GRANTED) {
+            return true;
+          }
+        } else if (permissionStatus === RESULTS.GRANTED) {
+          return true;
+        }
+
         Alert.alert(
           'Ошибка',
-          'Разрешение на доступ к геолокации не предоставлено',
+          'Для определения местоположения необходимо предоставить разрешение в настройках устройства',
         );
+        return false;
+      } catch (error) {
+        console.error('Error checking location permission:', error);
         return false;
       }
     }
     return true;
   };
 
-  const getLocation = async () => {
-    const hasPermission = await requestLocationPermission();
-    if (!hasPermission) return;
+  const getLocation = useCallback(async () => {
+    try {
+      const hasPermission = await requestLocationPermission();
+      if (!hasPermission) return;
 
-    Geolocation.getCurrentPosition(
-      position => {
-        setLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      },
-      error => {
-        Alert.alert('Ошибка', error.message);
-      },
-      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
-    );
-  };
+      Geolocation.getCurrentPosition(
+        position => {
+          console.log('Position received:', position);
+          setLocation({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+          });
+        },
+        error => {
+          console.log('Geolocation error:', error);
+          Alert.alert('Ошибка', 'Не удалось определить местоположение');
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 10000,
+          distanceFilter: 10,
+        },
+      );
+    } catch (error) {
+      console.error('Error in getLocation:', error);
+    }
+  }, []); // пустой массив зависимостей, так как функция не использует внешние значения
 
   useEffect(() => {
-    getLocation();
-  }, []);
+    const initializeLocation = async () => {
+      try {
+        await getLocation();
+      } catch (error) {
+        console.error('Error initializing location:', error);
+      }
+    };
+
+    initializeLocation();
+  }, [getLocation]); // теперь добавляем getLocation в зависимости
 
   return (
     <View style={{flex: 1, position: 'relative'}}>

@@ -10,7 +10,6 @@
 		00E356F31AD99517003FC87E /* AlphaCargoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* AlphaCargoTests.m */; };
 		030B0432A35943188831B1B2 /* Exo 2 Medium 500.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4BCBDAA67A394DE481DA9983 /* Exo 2 Medium 500.ttf */; };
 		07081A456E2A4791ABBEA84D /* Futura XBlk BT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A7A788856F140B9A1A44186 /* Futura XBlk BT.ttf */; };
-		0C80B921A6F3F58F76C31292 /* libPods-AlphaCargo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-AlphaCargo.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -20,6 +19,7 @@
 		3A3D22095A6241ACBF644420 /* Futura Bold font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EFCE8D7990D442A68F4D18E0 /* Futura Bold font.ttf */; };
 		3A95E25B69F54A559C31C04B /* unicode.futurabb.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FA911096FD274BC48450FF88 /* unicode.futurabb.ttf */; };
 		3AEBBFD81A804D68AE9D04D1 /* futura light bt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F95F93E8C96C463F801F6BF2 /* futura light bt.ttf */; };
+		4781EDE72E374B3FA09F589A /* libPods-AlphaCargo-AlphaCargoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1E3AA18F99FB1087E211F8F6 /* libPods-AlphaCargo-AlphaCargoTests.a */; };
 		560C119C966D43178D688C9C /* Futura Heavy font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 69B8092EEE5D4542A88D7383 /* Futura Heavy font.ttf */; };
 		585C433EE9324068B00C055B /* unicode.futurab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9E37E5BB99B46949705E714 /* unicode.futurab.ttf */; };
 		65A68030242A4C82ACEA08B6 /* Futura Light Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6587A276297B48BFACB61B24 /* Futura Light Italic font.ttf */; };
@@ -27,13 +27,13 @@
 		6A67CD6396C04A5F9C7C7DBA /* Futura Medium Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A00228BB9F0E4850BF560E2B /* Futura Medium Italic font.ttf */; };
 		6CF6254E82404275814DBD8B /* futur.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DF48A58ADA9465CAFC1D479 /* futur.ttf */; };
 		7439E1D1998F495CA9FA2BA2 /* Futura Book font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC98544E28DC4F769E8E4132 /* Futura Book font.ttf */; };
-		7699B88040F8A987B510C191 /* libPods-AlphaCargo-AlphaCargoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-AlphaCargo-AlphaCargoTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		87EB853221CC49A988AF4B28 /* Futura Heavy Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 560B985C5467447ABFAF23FC /* Futura Heavy Italic font.ttf */; };
 		A628C503362F4FDF939C8359 /* Futura-CondensedLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4728135C0CF741968D7182B8 /* Futura-CondensedLight.otf */; };
 		AEB15B351CBF4FE6BE070BE4 /* Exo 2 Bold 700.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52834ED95E6445369C2EDF2F /* Exo 2 Bold 700.ttf */; };
 		B3723F0977D04A6292061FFF /* Exo 2 400.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 668ABF4762454755A336804E /* Exo 2 400.ttf */; };
 		B9125E696EF44679A0CDE0A2 /* Futura Extra Black font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BBFB7590D09F43B7A700AB4D /* Futura Extra Black font.ttf */; };
+		BB2E4ED97611CA80FC9A7B3E /* libPods-AlphaCargo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAF06BE2C2401BCFA64FA1F /* libPods-AlphaCargo.a */; };
 		C8ABF7C98111460C948B478F /* Exo 2 Semi Bold 600.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A4247322390405F8AD3FCC9 /* Exo 2 Semi Bold 600.ttf */; };
 		CAF29DE6031B4D23B157573F /* Futura Book Italic font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A32B7B885D044D6B8565CE03 /* Futura Book Italic font.ttf */; };
 		ED18AB349AD54D2FAD3094E7 /* futura medium condensed bt.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D598B86A45764960879DF9F4 /* futura medium condensed bt.ttf */; };
@@ -63,25 +63,23 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = AlphaCargo/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = AlphaCargo/main.m; sourceTree = "<group>"; };
 		13B07FB81A68108700A75B9A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = PrivacyInfo.xcprivacy; path = AlphaCargo/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
-		19F6CBCC0A4E27FBF8BF4A61 /* libPods-AlphaCargo-AlphaCargoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AlphaCargo-AlphaCargoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E3AA18F99FB1087E211F8F6 /* libPods-AlphaCargo-AlphaCargoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AlphaCargo-AlphaCargoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DF48A58ADA9465CAFC1D479 /* futur.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = futur.ttf; path = ../assets/fonts/futur.ttf; sourceTree = "<group>"; };
-		3B4392A12AC88292D35C810B /* Pods-AlphaCargo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo.debug.xcconfig"; path = "Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo.debug.xcconfig"; sourceTree = "<group>"; };
+		3DAF06BE2C2401BCFA64FA1F /* libPods-AlphaCargo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AlphaCargo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4728135C0CF741968D7182B8 /* Futura-CondensedLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura-CondensedLight.otf"; path = "../assets/fonts/Futura-CondensedLight.otf"; sourceTree = "<group>"; };
 		4BCBDAA67A394DE481DA9983 /* Exo 2 Medium 500.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Medium 500.ttf"; path = "../assets/fonts/Exo 2 Medium 500.ttf"; sourceTree = "<group>"; };
 		50592F6DDA2751EE769E3165 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = AlphaCargo/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		52834ED95E6445369C2EDF2F /* Exo 2 Bold 700.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Bold 700.ttf"; path = "../assets/fonts/Exo 2 Bold 700.ttf"; sourceTree = "<group>"; };
 		560B985C5467447ABFAF23FC /* Futura Heavy Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Heavy Italic font.ttf"; path = "../assets/fonts/Futura Heavy Italic font.ttf"; sourceTree = "<group>"; };
-		5709B34CF0A7D63546082F79 /* Pods-AlphaCargo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo.release.xcconfig"; path = "Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo.release.xcconfig"; sourceTree = "<group>"; };
-		5B7EB9410499542E8C5724F5 /* Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig"; path = "Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5DCACB8F33CDC322A6C60F78 /* libPods-AlphaCargo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AlphaCargo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6587A276297B48BFACB61B24 /* Futura Light Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Light Italic font.ttf"; path = "../assets/fonts/Futura Light Italic font.ttf"; sourceTree = "<group>"; };
 		668ABF4762454755A336804E /* Exo 2 400.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 400.ttf"; path = "../assets/fonts/Exo 2 400.ttf"; sourceTree = "<group>"; };
 		69B8092EEE5D4542A88D7383 /* Futura Heavy font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Heavy font.ttf"; path = "../assets/fonts/Futura Heavy font.ttf"; sourceTree = "<group>"; };
 		6A7A788856F140B9A1A44186 /* Futura XBlk BT.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura XBlk BT.ttf"; path = "../assets/fonts/Futura XBlk BT.ttf"; sourceTree = "<group>"; };
 		7A4247322390405F8AD3FCC9 /* Exo 2 Semi Bold 600.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Exo 2 Semi Bold 600.ttf"; path = "../assets/fonts/Exo 2 Semi Bold 600.ttf"; sourceTree = "<group>"; };
+		7A60C5A9EC01678CA5BC2F13 /* Pods-AlphaCargo-AlphaCargoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo-AlphaCargoTests.release.xcconfig"; path = "Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests.release.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = AlphaCargo/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82C26C8A4AFB4A2A99E665B4 /* futura medium bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "futura medium bt.ttf"; path = "../assets/fonts/futura medium bt.ttf"; sourceTree = "<group>"; };
-		89C6BE57DB24E9ADA2F236DE /* Pods-AlphaCargo-AlphaCargoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo-AlphaCargoTests.release.xcconfig"; path = "Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests.release.xcconfig"; sourceTree = "<group>"; };
+		9D11ED4455C61B9BEACC31A0 /* Pods-AlphaCargo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo.debug.xcconfig"; path = "Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo.debug.xcconfig"; sourceTree = "<group>"; };
 		9FCA184DF8C2426985E5026E /* Futura Light font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Light font.ttf"; path = "../assets/fonts/Futura Light font.ttf"; sourceTree = "<group>"; };
 		A00228BB9F0E4850BF560E2B /* Futura Medium Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Medium Italic font.ttf"; path = "../assets/fonts/Futura Medium Italic font.ttf"; sourceTree = "<group>"; };
 		A32B7B885D044D6B8565CE03 /* Futura Book Italic font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Book Italic font.ttf"; path = "../assets/fonts/Futura Book Italic font.ttf"; sourceTree = "<group>"; };
@@ -89,6 +87,8 @@
 		BBFB7590D09F43B7A700AB4D /* Futura Extra Black font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Extra Black font.ttf"; path = "../assets/fonts/Futura Extra Black font.ttf"; sourceTree = "<group>"; };
 		D598B86A45764960879DF9F4 /* futura medium condensed bt.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "futura medium condensed bt.ttf"; path = "../assets/fonts/futura medium condensed bt.ttf"; sourceTree = "<group>"; };
 		D63585EB329E47548D3D96DD /* sharefonts.net.txt */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = sharefonts.net.txt; path = ../assets/fonts/sharefonts.net.txt; sourceTree = "<group>"; };
+		E2518AD46B0ED5A53E86A6BE /* Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig"; path = "Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig"; sourceTree = "<group>"; };
+		E339DB33B5D7633E29FA19EF /* Pods-AlphaCargo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AlphaCargo.release.xcconfig"; path = "Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo.release.xcconfig"; sourceTree = "<group>"; };
 		E9E37E5BB99B46949705E714 /* unicode.futurab.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = unicode.futurab.ttf; path = ../assets/fonts/unicode.futurab.ttf; sourceTree = "<group>"; };
 		EC98544E28DC4F769E8E4132 /* Futura Book font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Futura Book font.ttf"; path = "../assets/fonts/Futura Book font.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -102,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7699B88040F8A987B510C191 /* libPods-AlphaCargo-AlphaCargoTests.a in Frameworks */,
+				4781EDE72E374B3FA09F589A /* libPods-AlphaCargo-AlphaCargoTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -110,7 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C80B921A6F3F58F76C31292 /* libPods-AlphaCargo.a in Frameworks */,
+				BB2E4ED97611CA80FC9A7B3E /* libPods-AlphaCargo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -153,8 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				5DCACB8F33CDC322A6C60F78 /* libPods-AlphaCargo.a */,
-				19F6CBCC0A4E27FBF8BF4A61 /* libPods-AlphaCargo-AlphaCargoTests.a */,
+				3DAF06BE2C2401BCFA64FA1F /* libPods-AlphaCargo.a */,
+				1E3AA18F99FB1087E211F8F6 /* libPods-AlphaCargo-AlphaCargoTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -194,10 +194,10 @@
 		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3B4392A12AC88292D35C810B /* Pods-AlphaCargo.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-AlphaCargo.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-AlphaCargo-AlphaCargoTests.release.xcconfig */,
+				9D11ED4455C61B9BEACC31A0 /* Pods-AlphaCargo.debug.xcconfig */,
+				E339DB33B5D7633E29FA19EF /* Pods-AlphaCargo.release.xcconfig */,
+				E2518AD46B0ED5A53E86A6BE /* Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig */,
+				7A60C5A9EC01678CA5BC2F13 /* Pods-AlphaCargo-AlphaCargoTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -241,12 +241,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "AlphaCargoTests" */;
 			buildPhases = (
-				A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */,
+				7CEF70E70643792A3D9A8F04 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */,
-				F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */,
+				C0842E03F575311744247AC0 /* [CP] Embed Pods Frameworks */,
+				40BEEF1BBFBA053021A28CA0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -262,13 +262,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "AlphaCargo" */;
 			buildPhases = (
-				C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */,
+				024B3F2F15A14274057623DB /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
-				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				8F090DD66800FDD32C3C95B6 /* [CP] Embed Pods Frameworks */,
+				1A731FAB790D5E2CCCD700B9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -376,46 +376,7 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n";
 		};
-		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		A55EABD7B0C7F3A422A6CC61 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-AlphaCargo-AlphaCargoTests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C38B50BA6285516D6DCD4F65 /* [CP] Check Pods Manifest.lock */ = {
+		024B3F2F15A14274057623DB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -437,24 +398,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C59DA0FBD6956966B86A3779 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E235C05ADACE081382539298 /* [CP] Copy Pods Resources */ = {
+		1A731FAB790D5E2CCCD700B9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -471,7 +415,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F6A41C54EA430FDDC6A6ED99 /* [CP] Copy Pods Resources */ = {
+		40BEEF1BBFBA053021A28CA0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -486,6 +430,62 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7CEF70E70643792A3D9A8F04 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AlphaCargo-AlphaCargoTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8F090DD66800FDD32C3C95B6 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo/Pods-AlphaCargo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0842E03F575311744247AC0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AlphaCargo-AlphaCargoTests/Pods-AlphaCargo-AlphaCargoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -521,7 +521,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5B7EB9410499542E8C5724F5 /* Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig */;
+			baseConfigurationReference = E2518AD46B0ED5A53E86A6BE /* Pods-AlphaCargo-AlphaCargoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -548,7 +548,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 89C6BE57DB24E9ADA2F236DE /* Pods-AlphaCargo-AlphaCargoTests.release.xcconfig */;
+			baseConfigurationReference = 7A60C5A9EC01678CA5BC2F13 /* Pods-AlphaCargo-AlphaCargoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -572,7 +572,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B4392A12AC88292D35C810B /* Pods-AlphaCargo.debug.xcconfig */;
+			baseConfigurationReference = 9D11ED4455C61B9BEACC31A0 /* Pods-AlphaCargo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -601,7 +601,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5709B34CF0A7D63546082F79 /* Pods-AlphaCargo.release.xcconfig */;
+			baseConfigurationReference = E339DB33B5D7633E29FA19EF /* Pods-AlphaCargo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -699,7 +699,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;
@@ -771,7 +774,10 @@
 					"-DFOLLY_CFG_NO_COROUTINES=1",
 					"-DFOLLY_HAVE_CLOCK_GETTIME=1",
 				);
-				OTHER_LDFLAGS = "$(inherited)  ";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					" ",
+				);
 				REACT_NATIVE_PATH = "${PODS_ROOT}/../../node_modules/react-native";
 				SDKROOT = iphoneos;
 				USE_HERMES = true;

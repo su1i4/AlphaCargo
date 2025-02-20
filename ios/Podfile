@@ -1,5 +1,18 @@
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
+
+require_relative '../node_modules/react-native-permissions/scripts/setup'
+
+setup_permissions([
+  'LocationWhenInUse',
+  'LocationAlways',
+])
 
 linkage = ENV['USE_FRAMEWORKS']
 if linkage != nil
@@ -7,39 +20,35 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
-permissions_path = '../node_modules/react-native-permissions/ios'
-
-# Add this line to define the permissions you are using
-permissions = ['LocationWhenInUse', 'LocationAlways']
-
 target 'AlphaCargo' do
   config = use_native_modules!
 
   use_react_native!(
     :path => config[:reactNativePath],
+    # An absolute path to your application root.
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  pod 'Permission-LocationWhenInUse', :path => "#{permissions_path}/LocationWhenInUse"
-  pod 'Permission-LocationAlways', :path => "#{permissions_path}/LocationAlways"
-
   pre_install do |installer|
+    # Add Mapbox-specific pre-install hook
     $RNMapboxMaps.pre_install(installer)
-    # Add this line!  This is the key fix.
-    setup_permissions(installer, permissions)
   end
 
   post_install do |installer|
+    # Add Mapbox-specific post-install hook
     $RNMapboxMaps.post_install(installer)
 
+    # Existing React Native post-install hook
     react_native_post_install(
       installer,
       config[:reactNativePath],
-      :mac_catalyst_enabled => false
+      :mac_catalyst_enabled => false,
+      # :ccache_enabled => true
     )
   end
 
   target 'AlphaCargoTests' do
     inherit! :complete
+    # Pods for testing
   end
 end
