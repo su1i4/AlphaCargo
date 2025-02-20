@@ -1,8 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>UILaunchStoryboardName</key>
-    <string>LaunchScreen.storyboard</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Приложение использует ваше местоположение для отображения близлежащих грузов и расчета маршрутов доставки.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
@@ -31,14 +32,11 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
-		<!-- Do not change NSAllowsArbitraryLoads to true, or you will risk app rejection! -->
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>arm64</string>
@@ -53,13 +51,11 @@
 	<false/>
 	<key>UIStatusBarHidden</key>
 	<true/>
-
-	<!-- Блок для иконок -->
 	<key>CFBundleIcons</key>
 	<dict>
 		<key>CFBundlePrimaryIcon</key>
 		<dict>
-			<key>CFBundleIconFiles</key>  
+			<key>CFBundleIconFiles</key>
 			<array>
 				<string>AppIcon</string>
 			</array>
@@ -69,6 +65,27 @@
 	</dict>
 	<key>CFBundleIconName</key>
 	<string>AppIcon</string>
-
+	<key>UIAppFonts</key>
+	<array>
+		<string>Futura-CondensedLight.otf</string>
+		<string>Futura Bold Italic font.ttf</string>
+		<string>Futura Bold font.ttf</string>
+		<string>Futura Book Italic font.ttf</string>
+		<string>Futura Book font.ttf</string>
+		<string>Futura Extra Black font.ttf</string>
+		<string>Futura Heavy Italic font.ttf</string>
+		<string>Futura Heavy font.ttf</string>
+		<string>Futura Light Italic font.ttf</string>
+		<string>Futura Light font.ttf</string>
+		<string>Futura Medium Italic font.ttf</string>
+		<string>Futura XBlk BT.ttf</string>
+		<string>futur.ttf</string>
+		<string>futura light bt.ttf</string>
+		<string>futura medium bt.ttf</string>
+		<string>futura medium condensed bt.ttf</string>
+		<string>tt0205m_.ttf</string>
+		<string>unicode.futurab.ttf</string>
+		<string>unicode.futurabb.ttf</string>
+	</array>
 </dict>
 </plist>

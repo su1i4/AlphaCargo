@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,15 +8,15 @@ import {
   Dimensions,
 } from 'react-native';
 import Swiper from 'react-native-swiper';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 import World from './icons/world';
 import Boxes from './icons/boxes';
 import Shar from './icons/Shar';
 import One from './icons/One';
 import SAL from './icons/SAL';
-import { ButtonCustom } from '../../components/UI/Buttons/Button';
+import {ButtonCustom} from '../../components/UI/Buttons/Button';
 
-const { width: screenWidth } = Dimensions.get('window');
+const {width: screenWidth} = Dimensions.get('window');
 
 const temps = [
   {
@@ -61,10 +61,10 @@ export default function Begin() {
   // Если последний слайд, запускаем анимацию масштабирования (например, с 0.8 до 1)
   useEffect(() => {
     if (step === temps.length - 1) {
-      buttonScale.setValue(0.8);
+      buttonScale.setValue(0.97);
       Animated.spring(buttonScale, {
         toValue: 1,
-        friction: 3,
+        friction: 2,
         useNativeDriver: true,
       }).start();
     } else {
@@ -90,7 +90,9 @@ export default function Begin() {
     <View style={styles.main}>
       {/* Прогресс-бар */}
       <View style={styles.progressBarContainer}>
-        <Animated.View style={[styles.progressBar, { width: progressBarWidth }]} />
+        <Animated.View
+          style={[styles.progressBar, {width: progressBarWidth}]}
+        />
       </View>
 
       {/* Свайпер */}
@@ -105,13 +107,12 @@ export default function Begin() {
           style={styles.swiperStyle}
           scrollEventThrottle={16}
           onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-            { useNativeDriver: false }
-          )}
-        >
+            [{nativeEvent: {contentOffset: {x: scrollX}}}],
+            {useNativeDriver: false},
+          )}>
           {temps.map((item, index) => (
             <View style={styles.slide} key={index}>
-              <View style={{ alignSelf: 'center' }}>{item.Icon}</View>
+              <View style={{alignSelf: 'center'}}>{item.Icon}</View>
               <Text style={styles.text}>{item.text}</Text>
             </View>
           ))}
@@ -119,7 +120,8 @@ export default function Begin() {
       </View>
 
       {/* Нижняя панель с кнопками и ссылками - всегда видна, но с анимацией на последнем слайде */}
-      <Animated.View style={[styles.statistic, { transform: [{ scale: buttonScale }] }]}>
+      <Animated.View
+        style={[styles.statistic, {transform: [{scale: buttonScale}]}]}>
         <TouchableOpacity onPress={() => navigation.navigate('TarifMain')}>
           {step < 3 && <Text style={styles.linkText}>Узнайте наши тарифы</Text>}
         </TouchableOpacity>
@@ -138,16 +140,21 @@ export default function Begin() {
           </View>
         )}
         {step > 3 ? (
-          <View style={{ width: '90%' }}>
+          <View style={{width: '90%'}}>
             <ButtonCustom
-              style={styles.skipButton}
-              textStyle={styles.skipButtonText}
+              style={{
+                backgroundColor: 'white',
+                borderWidth: 1,
+                borderColor: 'black',
+              }}
+              black
+              textStyle={{color: 'black'}}
               title="Пропустить"
               onClick={() => navigation.navigate('MainNavigation')}
             />
           </View>
         ) : (
-          <View style={{ width: '90%' }}>
+          <View style={{width: '90%'}}>
             <ButtonCustom title="Начать" onClick={outStep} />
           </View>
         )}
@@ -200,14 +207,16 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: '700',
-    fontSize: 30,
+    fontSize: 26,
     textAlign: 'center',
     marginVertical: 20,
+    fontFamily: 'Futura',
   },
   linkText: {
     textDecorationLine: 'underline',
-    color: 'blue',
     marginTop: 10,
+    fontFamily: 'Futura-Light',
+    fontWeight: '400'
   },
   statistic: {
     width: '100%',

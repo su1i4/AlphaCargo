@@ -1,0 +1,85 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Futura Bold Italic font.ttf",
+      "sha1": "a35361959a4a0264e43d5656c8012feaf5f10070"
+    },
+    {
+      "path": "assets/fonts/Futura Bold font.ttf",
+      "sha1": "68fab471b5d366f87ade01b7f6c810d3a078a298"
+    },
+    {
+      "path": "assets/fonts/Futura Book Italic font.ttf",
+      "sha1": "8475f2f936dd6005491ae75c968b3e28b28e40f5"
+    },
+    {
+      "path": "assets/fonts/Futura Book font.ttf",
+      "sha1": "1bcd70a20cff464c22ac4c9519fb9f72dd9be22a"
+    },
+    {
+      "path": "assets/fonts/Futura Extra Black font.ttf",
+      "sha1": "c410d6b004896b7aa8f2b745e58dc91083c36850"
+    },
+    {
+      "path": "assets/fonts/Futura Heavy Italic font.ttf",
+      "sha1": "fd576f5456b547e0cd090cf9487ba25802093483"
+    },
+    {
+      "path": "assets/fonts/Futura Heavy font.ttf",
+      "sha1": "35bbb08ac0c52b83898323a948a8e71f88f2469c"
+    },
+    {
+      "path": "assets/fonts/Futura Light Italic font.ttf",
+      "sha1": "cfe0613225fe55bff41e18d4cfeacd3118858388"
+    },
+    {
+      "path": "assets/fonts/Futura Light font.ttf",
+      "sha1": "58fa3b9c7a828c600e15b1a86dd70f6ac8c76bfe"
+    },
+    {
+      "path": "assets/fonts/Futura Medium Italic font.ttf",
+      "sha1": "da281ac7dd6351045c1b814c2bc8e12347e8db3d"
+    },
+    {
+      "path": "assets/fonts/Futura XBlk BT.ttf",
+      "sha1": "5d20fef3473680f2c03937e0cd126a86c007c26f"
+    },
+    {
+      "path": "assets/fonts/Futura-CondensedLight.otf",
+      "sha1": "bfbb7d4d56453355314561345c0634b23e278b6a"
+    },
+    {
+      "path": "assets/fonts/futur.ttf",
+      "sha1": "77aab0b78e5f9b3d89df070cfb763fb17606fa7e"
+    },
+    {
+      "path": "assets/fonts/futura light bt.ttf",
+      "sha1": "922d91d7c4f1ba42241a362bdafb59fe44baa85e"
+    },
+    {
+      "path": "assets/fonts/futura medium bt.ttf",
+      "sha1": "738e0588a2b321c45c7eeca39f87e78a263b1d82"
+    },
+    {
+      "path": "assets/fonts/futura medium condensed bt.ttf",
+      "sha1": "d4413ab5a6cb6d8f2c98242845e54f1dce6ad4cb"
+    },
+    {
+      "path": "assets/fonts/sharefonts.net.txt",
+      "sha1": "85bf45cf82ce60461ff5acb8f86b0df501090a8b"
+    },
+    {
+      "path": "assets/fonts/tt0205m_.ttf",
+      "sha1": "d7083016ebae2f2126f943cf8ea004264460c1c5"
+    },
+    {
+      "path": "assets/fonts/unicode.futurab.ttf",
+      "sha1": "8e74b3822261534c00630a56abf0593e98e58b07"
+    },
+    {
+      "path": "assets/fonts/unicode.futurabb.ttf",
+      "sha1": "5a13b85dbaa05ba2be98e168930ed43ee40ab97c"
+    }
+  ]
+}
