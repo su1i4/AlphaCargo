@@ -180,7 +180,7 @@ export default function Profile() {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
           Личный кабинет{' '}
         </Text>
       </View>
@@ -199,7 +199,7 @@ export default function Profile() {
                 <View style={{alignSelf: 'center'}}>
                   <ProfileUser />
                 </View>
-                <Text style={{fontSize: 18, marginTop: 10}}>{phone}</Text>
+                <Text style={{fontSize: 18, marginTop: 10, fontFamily: 'Exo 2'}}>{phone}</Text>
               </View>
               {type && (
                 <View
@@ -266,7 +266,7 @@ export default function Profile() {
                 <TouchableOpacity
                   style={{
                     width: '18%',
-                    backgroundColor: '#02447F',
+                    backgroundColor: '#F0F1F3',
                     paddingTop: 12,
                     paddingBottom: 14,
                     paddingHorizontal: 10,
@@ -276,9 +276,12 @@ export default function Profile() {
                   }}
                   onPress={() => {
                     removeUserFromStorage();
-                    naviagation.navigate('Begin');
+                    naviagation.reset({
+                      index: 0, // Устанавливаем индекс в 0, чтобы это был первый экран
+                      routes: [{ name: 'Login' }], // Указываем маршрут, на который нужно перейти
+                    });
                   }}>
-                  <LogoutIcon size={20} />
+                  <LogoutIcon color='black' size={20} />
                 </TouchableOpacity>
               </View>
               <ButtonCustom
@@ -325,11 +328,13 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 18,
     fontWeight: '600',
+    fontFamily: 'Exo 2'
   },
   email: {
     color: '#000018',
     fontSize: 13,
     fontWeight: '400',
+    fontFamily: 'Exo 2'
   },
   delete: {color: 'red', width: '100%', textAlign: 'center'},
 });

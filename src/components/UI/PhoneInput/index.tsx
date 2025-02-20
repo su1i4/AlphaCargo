@@ -17,7 +17,7 @@ export const PhoneNumberInput = forwardRef(
 
     return (
       <View>
-        {label && <Text style={{fontSize: 15, marginBottom: 5}}>{label}</Text>}
+        {label && <Text style={{fontSize: 15, marginBottom: 5, fontFamily: 'Exo 2'}}>{label}</Text>}
         <PhoneInput
           ref={phoneInput}
           defaultCode="KG"
@@ -48,11 +48,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#8C8C8C',
     overflow: 'hidden',
+    fontFamily: 'Exo 2'
   },
   textContainerStyle: {
     borderLeftWidth: 1,
     borderLeftColor: '#ccc',
     backgroundColor: 'white',
+    fontFamily: 'Exo 2'
   },
   textInputStyle: {
     height: 55,
@@ -61,19 +63,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 500,
     color: '#808080',
+    fontFamily: 'Exo 2'
   },
   codeTextStyle: {
     fontSize: 14,
     color: '#808080',
+    fontFamily: 'Exo 2'
   },
   flagButtonStyle: {
     width: 60,
     height: 50,
     backgroundColor: '#FFFFFF',
+    fontFamily: 'Exo 2'
   },
   countryPickerButtonStyle: {
     width: 60,
     height: 50,
     backgroundColor: '#FFFFFF',
+    fontFamily: 'Exo 2'
   },
 });

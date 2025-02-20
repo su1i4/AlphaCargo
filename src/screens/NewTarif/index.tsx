@@ -67,10 +67,10 @@ export default function NewTarif() {
     <View style={styles.safeArea}>
       <View style={styles.Wrapper}>
         <View style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
-          <Text style={{fontSize: 20, fontWeight: '700'}}>
+          <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'Exo 2'}}>
             Узнайте предварительную
           </Text>
-          <Text style={{fontSize: 20, fontWeight: '700', marginBottom: 20}}>
+          <Text style={{fontSize: 20, fontWeight: '700', marginBottom: 20, fontFamily: 'Exo 2'}}>
             стоимость отправки
           </Text>
         </View>

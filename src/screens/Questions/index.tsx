@@ -6,10 +6,8 @@ import {
   StyleSheet,
   Animated,
   Easing,
-  Dimensions,
-  Pressable,
+  PanResponder,
 } from 'react-native';
-import Header from '../Header';
 import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
 import ArrowRight from '../../assets/icons/support/ArrowRight';
@@ -103,8 +101,33 @@ const Questions = () => {
     }).start(() => setSelectedAnswer(null));
   };
 
+  // Пан-обработчик для свайпа вниз
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, gestureState) =>
+        Math.abs(gestureState.dy) > 5,
+      onPanResponderMove: (_, gestureState) => {
+        if (gestureState.dy > 0) {
+          slideAnim.setValue(400 - gestureState.dy);
+        }
+      },
+      onPanResponderRelease: (_, gestureState) => {
+        if (gestureState.dy > 100) {
+          closeBottomSheet();
+        } else {
+          Animated.timing(slideAnim, {
+            toValue: 400,
+            duration: 200,
+            useNativeDriver: false,
+          }).start();
+        }
+      },
+    }),
+  ).current;
+
   return (
-    <View style={{flex: 1, position: 'relative'}}>
+    <View style={{flex: 1}}>
       <View
         style={{
           top: 55,
@@ -112,24 +135,24 @@ const Questions = () => {
           paddingHorizontal: 20,
           zIndex: 99,
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 26, fontWeight: '700', marginTop: 20}}>
+        <Text
+          style={{
+            fontSize: 26,
+            fontWeight: '700',
+            marginTop: 20,
+            fontFamily: 'Exo 2',
+          }}>
           Часто задаваемые вопросы
         </Text>
       </View>
       <View style={styles.container}>
-        {/* <View style={styles.header}>
-          <Text style={styles.headerText}>Где моя посылка?</Text>
-        </View> */}
         <View style={styles.list}>
-          {data.map((item, index) => (
+          {data.map(item => (
             <TouchableOpacity
-              key={index}
+              key={item.id}
               style={styles.question}
               onPress={() => openBottomSheet(item.answer, item.question)}>
               <Text style={styles.questionText}>{item.question}</Text>
@@ -139,9 +162,10 @@ const Questions = () => {
         </View>
       </View>
 
-      {/* BottomSheet */}
       {selectedAnswer && (
-        <Animated.View style={[styles.bottomSheet, {height: slideAnim}]}>
+        <Animated.View
+          style={[styles.bottomSheet, {height: slideAnim}]}
+          {...panResponder.panHandlers}>
           <View style={styles.bottomSheetContent}>
             <Text style={styles.answerText}>{selectedQuestion}</Text>
             <TouchableOpacity
@@ -149,7 +173,9 @@ const Questions = () => {
               style={{position: 'absolute', top: 15, right: 10}}>
               <CloseIcon size={26} />
             </TouchableOpacity>
-            <Text style={{fontSize: 16}}>{selectedAnswer}</Text>
+            <Text style={{fontSize: 16, fontFamily: 'Exo 2'}}>
+              {selectedAnswer}
+            </Text>
           </View>
         </Animated.View>
       )}
@@ -158,26 +184,8 @@ const Questions = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // backgroundColor: '#FFFFFF',
-    marginTop: 150
-  },
-  header: {
-    width: '100%',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    backgroundColor: '#E1E1E1',
-  },
-  headerText: {
-    color: 'black',
-    fontSize: 17,
-    fontWeight: '600',
-  },
-  list: {
-    flexDirection: 'column',
-    width: '100%',
-  },
+  container: {flex: 1, marginTop: 180},
+  list: {flexDirection: 'column', width: '100%'},
   question: {
     width: '100%',
     height: 50,
@@ -189,10 +197,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#E1E1E1',
   },
-  questionText: {
-    maxWidth: '90%',
-    fontSize: 15,
-  },
+  questionText: {maxWidth: '90%', fontSize: 15, fontFamily: 'Exo 2'},
   bottomSheet: {
     position: 'absolute',
     left: 0,
@@ -209,6 +214,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingHorizontal: 20,
     position: 'relative',
+    elevation: 6,
   },
   answerText: {
     fontSize: 16,
@@ -220,16 +226,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'gray',
     paddingVertical: 8,
     paddingHorizontal: 10,
-  },
-  closeButton: {
-    backgroundColor: '#007BFF',
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 5,
-  },
-  closeButtonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
+    fontFamily: 'Exo 2',
   },
 });
 

@@ -1,31 +1,30 @@
-import {useEffect, useState} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import Header from '../Header';
-import SingleUser from '../../assets/icons/SingleUser';
-import {useNavigation} from '@react-navigation/native';
-import Toast from 'react-native-toast-message';
-import {
-  useGetAllCitiesQuery,
-  useGetAllCountriesQuery,
-  useGetBagsQuery,
-  useGetParcelTypesQuery,
-} from '../../services/base.service';
-import {Input} from '../../components/UI/Inputs/Input';
-import {Select} from '../../components/UI/Select';
-import {ButtonCustom} from '../../components/UI/Buttons/Button';
-import {useAuth} from '../../hooks/useAuth';
-import Back from '../../assets/icons/Back';
-import WhiteWhat from '../../assets/icons/WhiteWhat';
+import {StyleSheet, Text, TouchableOpacity, View, Linking} from 'react-native';
 import Vyezd from '../../assets/icons/Vyezd';
 
 export default function Zakazik() {
+  const phoneNumber = '+996772007183';
+    const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
+    const webWhatsAppUrl = `https://wa.me/${phoneNumber}`;
+  
+    const openWhatsAppOrWebsite = async () => {
+      try {
+        const supported = await Linking.canOpenURL(whatsAppUrl);
+        if (supported) {
+          await Linking.openURL(whatsAppUrl);
+        } else {
+          await Linking.openURL(webWhatsAppUrl);
+        }
+      } catch (error) {
+        await Linking.openURL(webWhatsAppUrl);
+      }
+    };
   return (
     <View style={styles.safeArea}>
       <View style={styles.Wrapper}>
-        <Text style={{fontSize: 20, fontWeight: '700'}}>
+        <Text style={{fontSize: 20, fontWeight: '700', fontFamily: 'Exo 2'}}>
           Контакты выездной группы
         </Text>
-        <Text style={{fontSize: 16, fontWeight: '500', paddingVertical: 20}}>
+        <Text style={{fontSize: 16, fontWeight: '500', paddingVertical: 20, fontFamily: 'Exo 2'}}>
           Тел: +996 (772) 007-183
         </Text>
         <TouchableOpacity
@@ -39,8 +38,9 @@ export default function Zakazik() {
             flexDirection: 'row',
             justifyContent: 'center',
             alignItems: 'center',
-          }}>
-          <Text style={{color: 'white', fontSize: 16}}>Открыть WhatsApp</Text>
+          }}
+          onPress={openWhatsAppOrWebsite}>
+          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Exo 2'}}>Открыть WhatsApp</Text>
         </TouchableOpacity>
         <Vyezd />
       </View>

@@ -7,6 +7,9 @@ import {
   ScrollView,
   Linking,
   Alert,
+  Modal,
+  Platform,
+  // PermissionsAndroid,
 } from 'react-native';
 import {
   useGetAllCitiesQuery,
@@ -22,6 +25,8 @@ import Calendar from '../../assets/icons/Calendar';
 import Phone from '../../assets/icons/Phone';
 import Message from '../../assets/icons/Message';
 import RouteIcon from '../../assets/icons/Route';
+import Geolocation from 'react-native-geolocation-service';
+import {request, PERMISSIONS, RESULTS} from 'react-native-permissions';
 
 const mapBoxAccessToken =
   'pk.eyJ1Ijoic3VsaXNoIiwiYSI6ImNtMGU3a3E2ZzBnZjcyanFzMzgxdWNhMjcifQ.h6HlFjmcCXDjeWrJwqNgUg';
@@ -38,6 +43,15 @@ export default function Order() {
   const [activeTab, setActiveTab] = useState(0);
   const [offices, setOffices] = useState<any[]>([]);
   const [lowData, setLowData] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+
+  const openMapChoiceModal = () => {
+    setIsVisible(true);
+  };
+
+  const closeModal = () => {
+    setIsVisible(false);
+  };
 
   const [search, setSearch] = useState('');
 
@@ -143,35 +157,140 @@ export default function Order() {
     }
   };
 
-  const openMessage = async (phoneNumber: string) => {
+  const openMessage = async (email: string) => {
     try {
-      const url = `sms:${phoneNumber}`;
+      const url = `mailto:${email}`;
       const supported = await Linking.canOpenURL(url);
       if (supported) {
         await Linking.openURL(url);
       } else {
-        Alert.alert('Ошибка', 'Не удалось отправить сообщение');
+        Alert.alert('Ошибка', 'Не удалось открыть почтовый клиент');
       }
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось отправить сообщение');
+      Alert.alert('Ошибка', 'Не удалось открыть почтовый клиент');
     }
   };
 
   const phoneNumber = '+996550559846';
 
+  // const openGoogleMapsRoute = (latitude: any, longitude: any) => {
+  //   const url = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
+  //   Linking.openURL(url);
+  // };
+
+  const openGoogleMapsRoute = (
+    startLatitude: any,
+    startLongitude: any,
+    endLatitude: any,
+    endLongitude: any,
+  ) => {
+    const url = `https://www.google.com/maps/dir/?api=1&origin=${startLatitude},${startLongitude}&destination=${endLatitude},${endLongitude}`;
+    Linking.openURL(url);
+  };
+
+  const open2GISRoute = (
+    startLatitude: any,
+    startLongitude: any,
+    endLatitude: any,
+    endLongitude: any,
+  ) => {
+    const url = `dgis://2gis.ru/routeSearch/rsType/car/from/${startLatitude},${startLongitude}/to/${endLatitude},${endLongitude}`;
+    Linking.openURL(url);
+  };
+
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
+
+  const requestLocationPermission = async () => {
+    if (Platform.OS === 'ios') {
+      const result = await request(PERMISSIONS.IOS.LOCATION_WHEN_IN_USE);
+
+      if (result === RESULTS.GRANTED) {
+        return true;
+      } else {
+        Alert.alert(
+          'Ошибка',
+          'Разрешение на доступ к геолокации не предоставлено',
+        );
+        return false;
+      }
+    }
+    return true;
+  };
+
+  const getLocation = async () => {
+    const hasPermission = await requestLocationPermission();
+    if (!hasPermission) return;
+
+    Geolocation.getCurrentPosition(
+      position => {
+        setLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      },
+      error => {
+        Alert.alert('Ошибка', error.message);
+      },
+      {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+    );
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
   return (
     <View style={{flex: 1, position: 'relative'}}>
-      {/* <LinearGradient
-        colors={['#203B7A', '#026297', '#006599']}
-        start={{x: 0, y: 0}}
-        end={{x: 1, y: 0}}
-        style={styles.header}>
-        <View style={styles.headeInner}>
-          <GeoWhite />
-          <Text style={styles.headeInnerTitle}>{selectedCity.label}</Text>
+      <Modal
+        transparent={true}
+        animationType="fade"
+        visible={isVisible}
+        onRequestClose={closeModal}>
+        <View style={styles.modalBackground}>
+          <View style={styles.modalContainer}>
+            <Text style={styles.modalTitle}>
+              Выберите приложение для маршрута
+            </Text>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={async () =>
+                (await requestLocationPermission())
+                  ? openGoogleMapsRoute(
+                      location?.latitude || 36,
+                      location?.longitude || 47,
+                      selectedPoint?.lat,
+                      selectedPoint?.lng,
+                    )
+                  : false
+              }>
+              <Text style={styles.buttonText}>Google Maps</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={async () =>
+                (await requestLocationPermission())
+                  ? open2GISRoute(
+                      location?.latitude || 36,
+                      location?.longitude || 47,
+                      selectedPoint?.lat,
+                      selectedPoint?.lng,
+                    )
+                  : false
+              }>
+              <Text style={styles.buttonText}>2GIS</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.cancelButton} onPress={closeModal}>
+              <Text style={styles.cancelText}>Закрыть</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-        <ArrowDownGeo />
-      </LinearGradient> */}
+      </Modal>
       <View style={styles.container}>
         <Mapbox.MapView style={styles.map}>
           <Mapbox.Camera
@@ -243,12 +362,21 @@ export default function Order() {
               <TouchableOpacity
                 onPress={() => setSelectedPoint(null)}
                 style={{width: 100}}>
-                <Text>Закрыть</Text>
+                <Text style={{fontFamily: 'Exo 2'}}>Закрыть</Text>
               </TouchableOpacity>
-              <Text style={{fontSize: 16, fontWeight: '600'}}>Пункт Альфа</Text>
+              <Text
+                style={{fontSize: 16, fontWeight: '600', fontFamily: 'Exo 2'}}>
+                Пункт Альфа
+              </Text>
               <View style={{width: 100}}></View>
             </View>
-            <Text style={{fontSize: 18, fontWeight: '600', marginTop: 20}}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: '600',
+                marginTop: 20,
+                fontFamily: 'Exo 2',
+              }}>
               {selectedPoint.city.cityname}, улица {selectedPoint.address},{' '}
               {selectedPoint.country.countryname}
             </Text>
@@ -265,7 +393,7 @@ export default function Order() {
                 alignSelf: 'center',
                 marginTop: 20,
               }}>
-              <Text>График работы</Text>
+              <Text style={{fontFamily: 'Exo 2'}}>График работы</Text>
               <View
                 style={{
                   display: 'flex',
@@ -283,7 +411,13 @@ export default function Order() {
                     height: 8,
                     borderRadius: 4,
                   }}></View>
-                <Text style={{fontSize: 15, marginTop: 3, fontWeight: '600'}}>
+                <Text
+                  style={{
+                    fontSize: 15,
+                    marginTop: 3,
+                    fontWeight: '600',
+                    fontFamily: 'Exo 2',
+                  }}>
                   {
                     getStatus(
                       selectedPoint.openingHour,
@@ -312,7 +446,9 @@ export default function Order() {
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <Phone />
                 </View>
-                <Text style={{textAlign: 'center'}}>Позвонить</Text>
+                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>
+                  Позвонить
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -321,11 +457,13 @@ export default function Order() {
                   borderRadius: 15,
                   width: 100,
                 }}
-                onPress={() => openMessage(phoneNumber)}>
+                onPress={() => openMessage('alphacargo3003@gmail.com')}>
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <Message />
                 </View>
-                <Text style={{textAlign: 'center'}}>Написать</Text>
+                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>
+                  Написать
+                </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={{
@@ -333,11 +471,14 @@ export default function Order() {
                   backgroundColor: '#F0F1F3',
                   borderRadius: 15,
                   width: 100,
-                }}>
+                }}
+                onPress={openMapChoiceModal}>
                 <View style={{alignSelf: 'center', marginBottom: 5}}>
                   <RouteIcon />
                 </View>
-                <Text style={{textAlign: 'center'}}>Маршрут</Text>
+                <Text style={{textAlign: 'center', fontFamily: 'Exo 2'}}>
+                  Маршрут
+                </Text>
               </TouchableOpacity>
             </View>
             <View style={{marginTop: 20}}>
@@ -349,7 +490,7 @@ export default function Order() {
                   gap: 10,
                 }}>
                 <GeoIcon size={22} active />
-                <Text style={{fontSize: 15}}>
+                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>
                   Улица {selectedPoint.address}
                 </Text>
               </View>
@@ -364,7 +505,7 @@ export default function Order() {
                   marginLeft: 2,
                 }}>
                 <Calendar />
-                <Text style={{fontSize: 15}}>
+                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>
                   {selectedPoint.openingHour === 0 &&
                   selectedPoint.closingHour === 24
                     ? 'Работает круглосуточно'
@@ -393,10 +534,20 @@ export default function Order() {
                   key={index}>
                   <View>
                     <Text
-                      style={{color: 'black', fontSize: 17, fontWeight: '600'}}>
+                      style={{
+                        color: 'black',
+                        fontSize: 17,
+                        fontWeight: '600',
+                        fontFamily: 'Exo 2',
+                      }}>
                       {item.address}
                     </Text>
-                    <Text style={{color: '#AAAAAA', fontSize: 14}}>
+                    <Text
+                      style={{
+                        color: '#AAAAAA',
+                        fontSize: 14,
+                        fontFamily: 'Exo 2',
+                      }}>
                       {item.city.cityname}, улица {item.address},{' '}
                       {item.country.countryname}
                     </Text>
@@ -418,7 +569,12 @@ export default function Order() {
                           borderRadius: 4,
                         }}></View>
                       <Text
-                        style={{fontSize: 13, color: '#AAAAAA', marginTop: 3}}>
+                        style={{
+                          fontSize: 13,
+                          color: '#AAAAAA',
+                          marginTop: 3,
+                          fontFamily: 'Exo 2',
+                        }}>
                         {getStatus(item.openingHour, item.closingHour).text}
                       </Text>
                     </View>
@@ -493,6 +649,7 @@ const styles = StyleSheet.create({
   },
   label: {
     fontWeight: 'bold',
+    fontFamily: 'Exo 2',
   },
   popoverClose: {
     alignSelf: 'flex-end',
@@ -525,6 +682,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: '600',
+    fontFamily: 'Exo 2',
   },
   tabs: {
     display: 'flex',
@@ -542,5 +700,51 @@ const styles = StyleSheet.create({
   },
   tabText: {
     color: 'white',
+    fontFamily: 'Exo 2',
+  },
+  modalBackground: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContainer: {
+    width: 300,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 18,
+    marginBottom: 20,
+    fontWeight: 'bold',
+    fontFamily: 'Exo 2',
+  },
+  button: {
+    backgroundColor: '#4CAF50',
+    padding: 10,
+    marginBottom: 10,
+    width: '100%',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontFamily: 'Exo 2',
+  },
+  cancelButton: {
+    padding: 6,
+    paddingHorizontal: 10,
+    backgroundColor: '#FF5722',
+    marginTop: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  cancelText: {
+    color: 'white',
+    fontSize: 13,
+    fontFamily: 'Exo 2',
   },
 });

@@ -54,11 +54,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
     color: '#000018',
+    fontFamily: 'Exo 2'
   },
   content: {
     fontSize: 13,
     fontWeight: '400',
     color: '#8C8C8C',
     lineHeight: 18,
+    fontFamily: 'Exo 2'
   },
 });

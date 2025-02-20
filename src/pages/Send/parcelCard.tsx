@@ -28,7 +28,7 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
       )}
       <TouchableOpacity onPress={() => getPdf(oneParcel?.invoice)}>
         <PdfIcon />
-        <Text style={{fontSize: 12, color: 'white'}}>Накладная</Text>
+        <Text style={{fontSize: 12, color: 'white', fontFamily: 'Exo 2'}}>Накладная</Text>
       </TouchableOpacity>
       {oneParcel?.payment ? (
         <View
@@ -42,7 +42,7 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
             alignItems: 'center',
             borderRadius: 10,
           }}>
-          <Text style={{color: 'white', fontSize: 16}}>Оплачено</Text>
+          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Exo 2'}}>Оплачено</Text>
         </View>
       ) : (
         <TouchableOpacity
@@ -57,7 +57,7 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
             alignItems: 'center',
             borderRadius: 10,
           }}>
-          <Text style={{color: 'white', fontSize: 16}}>Оплатить</Text>
+          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Exo 2'}}>Оплатить</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -78,9 +78,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
     color: 'white',
+    fontFamily: 'Exo 2'
   },
   secondText: {
     fontSize: 15,
     color: 'white',
+    fontFamily: 'Exo 2'
   },
 });

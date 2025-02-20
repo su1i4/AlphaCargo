@@ -8,12 +8,9 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
-import BellIcon from '../../assets/icons/BellIcon';
 import {Personal} from '../../screens/AlphaTabContent/Personal';
 import {Buisenes} from '../../screens/AlphaTabContent/Buisenes';
-import QuesDock from '../../assets/icons/QuesDock';
 import Card from '../../assets/icons/Card';
-import FaUser from '../../assets/icons/FaUser';
 import {useNavigation} from '@react-navigation/native';
 import CustomModal from '../../components/UI/Modal';
 import ProfileUser from '../../assets/icons/ProfileUser';
@@ -147,7 +144,13 @@ export default function Alpha() {
     <View style={{flex: 1}}>
       <ScrollView style={styles.scrollView}>
         <CustomModal active={active} onClose={toggleModal} />
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 60}}>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: '700',
+            marginTop: 60,
+            fontFamily: 'Exo 2',
+          }}>
           Мой Альфа
         </Text>
         <TouchableOpacity
@@ -160,7 +163,13 @@ export default function Alpha() {
           }}
           onPress={() => navigation.navigate('Profile')}>
           <ProfileUser />
-          <Text style={{color: 'black', fontWeight: 500, fontSize: 18}}>
+          <Text
+            style={{
+              color: 'black',
+              fontWeight: 500,
+              fontSize: 18,
+              fontFamily: 'Exo 2',
+            }}>
             {phone}
           </Text>
         </TouchableOpacity>
@@ -178,7 +187,7 @@ export default function Alpha() {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <Text style={{fontSize: 16, fontWeight: 500}}>
+          <Text style={{fontSize: 16, fontWeight: 500, fontFamily: 'Exo 2'}}>
             Ваш уникальный код
           </Text>
           {/* <LinearGradient
@@ -199,10 +208,8 @@ export default function Alpha() {
           style={{
             display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'center',
-            paddingHorizontal: 10,
             marginTop: 10,
-            gap: 20,
+            gap: 10,
             flexWrap: 'wrap',
           }}>
           {HeaderIcons.map((item: any, index) => (
@@ -213,13 +220,14 @@ export default function Alpha() {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'center',
-                marginTop: 10,
               }}>
               <TouchableOpacity
                 onPress={() => item.link()}
                 style={{
-                  width: 65,
-                  height: 65,
+                  width: 70,
+                  height: 70,
+                  minHeight: 70,
+                  maxHeight: 70,
                   display: 'flex',
                   flexDirection: 'row',
                   justifyContent: 'center',
@@ -232,16 +240,17 @@ export default function Alpha() {
               <Text
                 style={{
                   color: '#000018',
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: '400',
                   textAlign: 'center',
+                  fontFamily: 'Exo 2',
                 }}>
                 {item.text}
               </Text>
             </View>
           ))}
         </View>
-        <Text style={styles.textHeader}>Сервисы</Text>
+        <Text style={[styles.textHeader, {fontFamily: 'Exo 2'}]}>Сервисы</Text>
         <View
           style={{
             display: 'flex',
@@ -273,7 +282,7 @@ export default function Alpha() {
                         gap: 5,
                       }}>
                       {icons[index]}
-                      <Text style={{color: '#FFFFFF'}}>{tabs[index]}</Text>
+                      <Text style={{color: '#FFFFFF', fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
                     </View>
                   </View>
                 </LinearGradient>
@@ -297,7 +306,7 @@ export default function Alpha() {
                         gap: 5,
                       }}>
                       {icons[index]}
-                      <Text>{tabs[index]}</Text>
+                      <Text style={{fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
                     </View>
                   </View>
                 </LinearGradient>
@@ -361,5 +370,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     marginTop: 15,
+    fontFamily: 'Exo 2'
   },
 });

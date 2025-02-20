@@ -53,5 +53,6 @@ const styles = StyleSheet.create({
     height: 50,
     minHeight: 50,
     maxHeight: 50,
+    fontFamily: 'Exo 2'
   },
 });

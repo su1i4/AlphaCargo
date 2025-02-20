@@ -92,7 +92,7 @@ export default function Login({_, route}: any) {
         }}>
         <TouchableOpacity
           onPress={() => {
-            navigation.goBack();
+            navigation.navigate('Begin');
           }}>
           <Back color="black" />
         </TouchableOpacity>
@@ -130,7 +130,7 @@ export default function Login({_, route}: any) {
           style={{width: '100%'}}
         />
         <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
-          <Text style={{textDecorationLine: 'underline'}}>
+          <Text style={{textDecorationLine: 'underline', fontFamily: 'Exo 2'}}>
             Не можете войти в ваш профиль?
           </Text>
         </TouchableOpacity>

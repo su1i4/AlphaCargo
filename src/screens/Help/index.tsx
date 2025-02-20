@@ -15,23 +15,19 @@ import Chat from '../../assets/icons/support/chat';
 const Help = () => {
   const navigation: any = useNavigation();
 
-  const handleWhatsApp = () => {
-    const phoneNumber = '+996504244527';
-    const message = 'Здравствуйте! Я хотел бы предложить функционал.';
-    const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(
-      message,
-    )}`;
-
-    Linking.canOpenURL(url)
-      .then(supported => {
+  const openMail = async () => {
+      try {
+        const url = `mailto:alphacargo3003@gmail.com`;
+        const supported = await Linking.canOpenURL(url);
         if (supported) {
-          return Linking.openURL(url);
+          await Linking.openURL(url);
         } else {
-          Alert.alert('Ошибка', 'WhatsApp не установлен на устройстве.');
+          Alert.alert('Ошибка', 'Не удалось открыть почтовый клиент');
         }
-      })
-      .catch(err => console.error('Ошибка при открытии WhatsApp:', err));
-  };
+      } catch (error) {
+        Alert.alert('Ошибка', 'Не удалось открыть почтовый клиент');
+      }
+    };
 
   return (
     <View style={{flex: 1, position: 'relative'}}>
@@ -47,13 +43,13 @@ const Help = () => {
             onPress={() => navigation.navigate('Questions')}
             style={styles.wrap}>
             <Mark />
-            <Text>Часто задаваемые вопросы</Text>
+            <Text style={{fontFamily: 'Exo 2'}}>Часто задаваемые вопросы</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.wrap, {paddingLeft: 4}]}>
+          <TouchableOpacity
+            onPress={openMail}
+            style={[styles.wrap, {paddingLeft: 4}]}>
             <Chat />
-            <TouchableOpacity onPress={handleWhatsApp}>
-              <Text>Предложить функционал</Text>
-            </TouchableOpacity>
+            <Text style={{fontFamily: 'Exo 2'}}>Предложить функционал</Text>
           </TouchableOpacity>
         </View>
         <View style={[styles.main, {marginTop: 20}]}>
@@ -65,8 +61,8 @@ const Help = () => {
               alignItems: 'center',
               paddingHorizontal: 10,
             }}>
-            <Text>О приложении</Text>
-            <Text style={{color: '#666666', fontSize: 15}}>Версия 1.2.0</Text>
+            <Text style={{fontFamily: 'Exo 2'}}>О приложении</Text>
+            <Text style={{color: '#666666', fontSize: 15}}>Версия 1.0.2</Text>
           </View>
         </View>
       </View>
@@ -113,6 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: '700',
     marginTop: 20,
+    fontFamily: 'Exo 2'
   },
 });
 

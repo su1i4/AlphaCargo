@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
     color: '#8C8C8C',
     fontSize: 13,
     fontWeight: '400',
+    fontFamily: 'Exo 2'
   },
   brokeTools: {
     // width: '100%',

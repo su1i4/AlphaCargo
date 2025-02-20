@@ -1,4 +1,4 @@
-package com.alphacargo
+package com.alpha.cargo
 
 import android.app.Application
 import com.facebook.react.PackageList

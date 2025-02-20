@@ -22,7 +22,9 @@ export default function Oformlenie() {
         <Text style={styles.headerText}>Изменить оформление</Text>
       </View>
       <View style={styles.Wrapper}>
-        <Text>Скоро эта функция будет доступна</Text>
+        <Text style={{fontFamily: 'Exo 2'}}>
+          Скоро эта функция будет доступна
+        </Text>
       </View>
     </View>
   );
@@ -43,6 +45,7 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: '700',
     marginTop: 20,
+    fontFamily: 'Exo 2',
   },
   Wrapper: {
     paddingHorizontal: 20,
@@ -52,5 +55,6 @@ const styles = StyleSheet.create({
     gap: 20,
     alignItems: 'center',
     marginTop: 140,
+    fontFamily: 'Exo 2',
   },
 });

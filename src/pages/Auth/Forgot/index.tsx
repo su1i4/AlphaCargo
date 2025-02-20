@@ -27,17 +27,18 @@ export default function Forgot() {
             fontWeight: '700',
             marginTop: 20,
             lineHeight: 35,
+            fontFamily: 'Exo 2'
           }}>
           Я не помню пароль для
         </Text>
-        <Text style={{fontSize: 30, fontWeight: '700', lineHeight: 35}}>
+        <Text style={{fontSize: 30, fontWeight: '700', lineHeight: 35, fontFamily: 'Exo 2'}}>
           входа в профиль
         </Text>
       </View>
       <View style={styles.main}>
-        <Text style={{color: '#636363', fontSize: 16}}>
+        <Text style={{color: '#636363', fontSize: 16, fontFamily: 'Exo 2'}}>
           Если вы вышли из своего профиля и не можете вспомнить свой пароль, мы{' '}
-          <Text style={{color: 'black', fontWeight: '700'}}>
+          <Text style={{color: 'black', fontWeight: '700', fontFamily: 'Exo 2'}}>
             можем отправить вам код со ссылкой для сброса пароля в сообщения по
             номеру телефона.
           </Text>
@@ -48,6 +49,7 @@ export default function Forgot() {
             color: '#636363',
             fontSize: 16,
             textAlign: 'left',
+            fontFamily: 'Exo 2'
           }}>
           Если вы не получили код, вот наиболее распространённые причины этого,
           и что делать чтобы это исправить.
@@ -76,7 +78,7 @@ export default function Forgot() {
                 height: 5,
                 borderRadius: 5,
               }}></View>
-            <Text style={{fontSize: 16, lineHeight: 15}}>
+            <Text style={{fontSize: 16, lineHeight: 15, fontFamily: 'Exo 2'}}>
               Указали неверный номер телефона.
             </Text>
           </View>
@@ -86,6 +88,7 @@ export default function Forgot() {
               color: '#636363',
               fontSize: 16,
               textAlign: 'left',
+              fontFamily: 'Exo 2'
             }}>
             Попробуйте еще раз с тем номером телефона, который вы используете
             для Альфа Карго.
@@ -115,7 +118,7 @@ export default function Forgot() {
                 height: 5,
                 borderRadius: 5,
               }}></View>
-            <Text style={{fontSize: 16, lineHeight: 15}}>
+            <Text style={{fontSize: 16, lineHeight: 15, fontFamily: 'Exo 2'}}>
                Вы неправильно написали номер
             </Text>
           </View>
@@ -125,6 +128,7 @@ export default function Forgot() {
               color: '#636363',
               fontSize: 16,
               textAlign: 'left',
+              fontFamily: 'Exo 2'
             }}>
             телефона. Пожалуйста, дважды проверьте номер на наличие опечаток и
             исправлений
@@ -154,7 +158,7 @@ export default function Forgot() {
                 height: 5,
                 borderRadius: 5,
               }}></View>
-            <Text style={{fontSize: 16, lineHeight: 15}}>
+            <Text style={{fontSize: 16, lineHeight: 15, fontFamily: 'Exo 2'}}>
               Вы письмо находится в другом ящике.
             </Text>
           </View>
@@ -164,6 +168,7 @@ export default function Forgot() {
               color: '#636363',
               fontSize: 16,
               textAlign: 'left',
+              fontFamily: 'Exo 2'
             }}>
             Убедитесь, что вы проверили правильный почтовый ящик, который вы
             указали, а также, пожалуйста, проверьте папку со спамом.

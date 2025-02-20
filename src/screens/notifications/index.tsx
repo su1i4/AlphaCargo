@@ -73,7 +73,7 @@ export const Notifications = () => {
         <View style={!loading ? styles.Wrapper : styles.loadWrap}>
           {!loading ? (
             <View style={{width: '100%'}}>
-              <Text style={{fontSize: 18, fontWeight: '500'}}>Новые</Text>
+              <Text style={{fontSize: 18, fontWeight: '500', fontFamily: 'Exo 2'}}>Новые</Text>
               {notifications?.map((item: any, index: number) => (
                 <View key={index} style={styles.container}>
                   <View
@@ -85,13 +85,13 @@ export const Notifications = () => {
                     }}>
                     <MiniLogo />
                     <View>
-                      <Text style={{fontSize: 18, fontWeight: '700'}}>
+                      <Text style={{fontSize: 18, fontWeight: '700', fontFamily: 'Exo 2'}}>
                         {item.title}
                       </Text>
-                      <Text style={{flexWrap: 'wrap'}}>{item.message}</Text>
+                      <Text style={{flexWrap: 'wrap', fontFamily: 'Exo 2'}}>{item.message}</Text>
                     </View>
                   </View>
-                  <Text>{formatDate(item.createdAt)}</Text>
+                  <Text style={{fontFamily: 'Exo 2'}}>{formatDate(item.createdAt)}</Text>
                 </View>
               ))}
             </View>
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: '700',
     marginTop: 20,
+    fontFamily: 'Exo 2'
   },
   Wrapper: {
     paddingHorizontal: 20,
@@ -136,11 +137,13 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 18,
     fontWeight: '600',
+    fontFamily: 'Exo 2'
   },
   smallText: {
     color: '#8C8C8C',
     fontSize: 13,
     fontWeight: '400',
+    fontFamily: 'Exo 2'
   },
   container: {
     height: 'auto',

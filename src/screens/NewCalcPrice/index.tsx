@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Header from '../Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
@@ -19,7 +19,7 @@ import Back from '../../assets/icons/Back';
 export default function NewCalcPrice() {
   const user = useAuth();
   const accessToken = user?.accessToken;
-  const naviagation: any = useNavigation();
+  const navigation: any = useNavigation();
 
   const {data: Cities = [], isLoading: cityLoading} = useGetAllCitiesQuery();
   const {data: Countries = [], isLoading: countryLoading} =
@@ -125,7 +125,7 @@ export default function NewCalcPrice() {
               value: item.id,
             };
           })}
-          placeholder="Тип посылки"
+          placeholder="Тип товара"
           style={{width: '100%'}}
         />
         <Select
@@ -137,7 +137,7 @@ export default function NewCalcPrice() {
               value: item.id,
             };
           })}
-          placeholder="Тип товара"
+          placeholder="Тип упаковки"
           style={{width: '100%'}}
         />
         <Input
@@ -173,6 +173,7 @@ export default function NewCalcPrice() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    position:'relative'
   },
   scrollView: {
     flex: 1,

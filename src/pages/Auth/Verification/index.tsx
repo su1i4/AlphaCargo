@@ -144,16 +144,19 @@ export default function Verification({navigation, route}: any) {
             fontSize: 30,
             fontWeight: '700',
             marginTop: 20,
+            fontFamily: 'Exo 2',
           }}>
           Введите код
         </Text>
-        <Text style={styles.text}>Код отправлен на {phone}</Text>
+        <Text style={[styles.text, {fontFamily: 'Exo 2'}]}>
+          Код отправлен на {phone}
+        </Text>
         <View style={styles.container}>
           {code.map((digit: any, index: any) => (
             <TextInput
               key={index}
               ref={ref => (inputRefs.current[index] = ref)}
-              style={styles.input}
+              style={[styles.input, {fontFamily: 'Exo 2'}]}
               value={digit}
               onChangeText={text => handleCodeChange(text, index)}
               onKeyPress={event => handleKeyPress(event, index)}
@@ -169,6 +172,7 @@ export default function Verification({navigation, route}: any) {
             width: '100%',
             fontSize: 16,
             color: '#636363',
+            fontFamily: 'Exo 2'
           }}>
           Отправить повторно через {count}
         </Text>

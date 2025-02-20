@@ -146,7 +146,7 @@ export default function Send() {
   return (
     <View style={{flex: 1}}>
       <ScrollView style={styles.scrollView}>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 60}}>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 60, fontFamily: 'Exo 2'}}>
           {texts[tab]}
         </Text>
         <ScrollView
@@ -171,7 +171,7 @@ export default function Send() {
                       styles.innerButton,
                       {backgroundColor: 'transparent'},
                     ]}>
-                    <Text style={{color: '#FFFFFF'}}>{tabs[index]}</Text>
+                    <Text style={{color: '#FFFFFF', fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
                   </View>
                 </LinearGradient>
               </TouchableOpacity>
@@ -186,7 +186,7 @@ export default function Send() {
                   end={{x: 1, y: 0}}
                   style={styles.gradientBorder}>
                   <View style={styles.innerButton}>
-                    <Text>{tabs[index]}</Text>
+                    <Text style={{fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
                   </View>
                 </LinearGradient>
               </TouchableOpacity>
@@ -200,21 +200,21 @@ export default function Send() {
               active={activeTab}
               setActive={setActiveTab}>
               <View>
-                <Text style={{color: '#F9FFFF'}}>Все</Text>
+                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Все</Text>
               </View>
               <View>
-                <Text style={{color: '#F9FFFF'}}>Оплаченные</Text>
+                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Оплаченные</Text>
               </View>
               <View>
-                <Text style={{color: '#F9FFFF'}}>Не оплаченные</Text>
+                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Не оплаченные</Text>
               </View>
             </Tab>
 
             <View style={{marginTop: 20, marginBottom: 50}}>
               {isLoading ? (
-                <Text style={{fontSize: 15}}>Загрузка ...</Text>
+                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>Загрузка ...</Text>
               ) : !data.length ? (
-                <Text style={{fontSize: 15}}>Пусто</Text>
+                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>Пусто</Text>
               ) : (
                 data.map((item: any) => (
                   <ParcelCard key={item.id} oneParcel={item} getPdf={getPdf} />
@@ -227,38 +227,6 @@ export default function Send() {
         {tab === 2 && <Zakazik />}
         {tab === 3 && <NewTarif />}
       </ScrollView>
-      <Modal
-        transparent
-        visible={isDropdownVisible}
-        animationType="fade"
-        onRequestClose={() => setDropdownVisible(false)}>
-        <TouchableWithoutFeedback onPress={() => setDropdownVisible(false)}>
-          <View style={styles.modalOverlay}>
-            <View style={styles.dropdownContainer}>
-              <View style={{display: 'flex', flexDirection: 'row'}}>
-                <Image source={require('../../assets/images/Nakladnoi.png')} />
-                <View style={{paddingTop: 10}}>
-                  <VoskArrow />
-                </View>
-              </View>
-              <Text style={{fontWeight: 600, marginTop: 10}}>
-                Как узнать номер накладной?
-              </Text>
-              <Text style={{marginTop: 10}}>
-                Номер накладной можно найти в правом верхнем
-              </Text>
-              <Text>углу вашего документа.</Text>
-              <Text>Это 14-значный номер, который используется для</Text>
-              <Text>отслеживания вашего груза.</Text>
-              <Text>Пример: 02.240202151313</Text>
-              <Text style={{marginTop: 10}}>
-                Введите этот номер в приложении, чтобы узнать{' '}
-              </Text>
-              <Text>статус доставки вашего груза.</Text>
-            </View>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
     </View>
   );
 }

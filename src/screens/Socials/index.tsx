@@ -27,7 +27,7 @@ export default function Socials() {
         await Linking.openURL(webUrl);
       }
     } catch (error) {
-      Alert.alert('Ошибка', 'Не удалось открыть ссылку');
+      // Alert.alert('Ошибка', 'Не удалось открыть ссылку');
     } finally {
       await Linking.openURL(webUrl);
     }
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: '700',
     marginTop: 20,
+    fontFamily: 'Exo 2'
   },
   container: {
     flex: 1,
@@ -113,5 +114,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 17,
+    fontFamily: 'Exo 2'
   },
 });
