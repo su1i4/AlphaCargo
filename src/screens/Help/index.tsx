@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet,  Linking, Alert} from 'react-native';
-import Header from '../Header';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Linking,
+  Alert,
+} from 'react-native';
 import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
 import Mark from '../../assets/icons/support/mark';
@@ -9,44 +15,55 @@ import Chat from '../../assets/icons/support/chat';
 const Help = () => {
   const navigation: any = useNavigation();
 
-  const handleWhatsApp = () => {
-    const phoneNumber = '+996504244527';
-    const message = 'Здравствуйте! Я хотел бы предложить функционал.';
-    const url = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-
-    Linking.canOpenURL(url)
-      .then(supported => {
+  const openMail = async () => {
+      try {
+        const url = `mailto:alphacargo3003@gmail.com`;
+        const supported = await Linking.canOpenURL(url);
         if (supported) {
-          return Linking.openURL(url);
+          await Linking.openURL(url);
         } else {
-          Alert.alert('Ошибка', 'WhatsApp не установлен на устройстве.');
+          Alert.alert('Ошибка', 'Не удалось открыть почтовый клиент');
         }
-      })
-      .catch(err => console.error('Ошибка при открытии WhatsApp:', err));
-  };
+      } catch (error) {
+        Alert.alert('Ошибка', 'Не удалось открыть почтовый клиент');
+      }
+    };
 
   return (
-    <View style={{flex: 1}}>
-      <Header
-        Left={Back}
-        funcLeft={() => navigation.navigate('Alpha')}
-        id="questions"
-        text="Поддержка"
-      />
+    <View style={{flex: 1, position: 'relative'}}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Поддержка</Text>
+      </View>
       <View style={styles.container}>
         <View style={styles.main}>
           <TouchableOpacity
             onPress={() => navigation.navigate('Questions')}
             style={styles.wrap}>
             <Mark />
-            <Text>Часто задаваемые вопросы</Text>
+            <Text style={{fontFamily: 'Exo 2'}}>Часто задаваемые вопросы</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.wrap, {paddingLeft: 4}]}>
+          <TouchableOpacity
+            onPress={openMail}
+            style={[styles.wrap, {paddingLeft: 4}]}>
             <Chat />
-            <TouchableOpacity onPress={handleWhatsApp}  >
-              <Text>Предложить функционал</Text>
-            </TouchableOpacity>
+            <Text style={{fontFamily: 'Exo 2'}}>Предложить функционал</Text>
           </TouchableOpacity>
+        </View>
+        <View style={[styles.main, {marginTop: 20}]}>
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              paddingHorizontal: 10,
+            }}>
+            <Text style={{fontFamily: 'Exo 2'}}>О приложении</Text>
+            <Text style={{color: '#666666', fontSize: 15}}>Версия 1.0.2</Text>
+          </View>
         </View>
       </View>
     </View>
@@ -58,6 +75,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     padding: 20,
+    marginTop: 150,
   },
   main: {
     width: '100%',
@@ -79,6 +97,19 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 10,
     alignItems: 'center',
+  },
+
+  header: {
+    top: 60,
+    position: 'absolute',
+    paddingHorizontal: 20,
+    zIndex: 99,
+  },
+  headerText: {
+    fontSize: 30,
+    fontWeight: '700',
+    marginTop: 20,
+    fontFamily: 'Exo 2'
   },
 });
 

@@ -54,6 +54,7 @@ export default function Franshiza() {
         Left={Back}
         funcLeft={() => navigation.goBack()}
         isSearch={false}
+        back
       />
       <View
         style={{

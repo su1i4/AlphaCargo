@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, Linking, Alert} from 'react-native';
 import {InfoContainer} from '../../components/Containers/InfoContainer';
 import Percent from '../../assets/icons/Percent';
 import Calc from '../../assets/icons/Calc';
@@ -12,6 +12,7 @@ import {useNavigation} from '@react-navigation/native';
 import CustomModal from '../../components/UI/Modal';
 import {useState} from 'react';
 import Perevozka from '../../assets/icons/Perevozka';
+import Loyal from '../../assets/icons/Loyal';
 
 export const Buisenes = () => {
   const [active, setActive] = useState(false);
@@ -23,21 +24,43 @@ export const Buisenes = () => {
 
   const getModal = () => setActive(true);
 
+  const handleLink = async (link: string) => {
+    const url = link;
+    try {
+      const supported = await Linking.canOpenURL(url);
+      if (supported) {
+        await Linking.openURL(url);
+      } else {
+        Alert.alert('Ошибка', 'Невозможно открыть ссылку: ' + url);
+      }
+    } catch (error) {
+      Alert.alert('Ошибка', 'Произошла ошибка при попытке открыть ссылку.');
+    }
+  };
+
   return (
-    <>
+    <View
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 20,
+        marginBottom: 40,
+        flex: 1,
+        position: 'relative'
+      }}>
       <CustomModal active={active} onClose={toggleModal} />
       <Text style={styles.titles}>Популярное</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={getModal}
+          onClick={() => navigation.navigate('Tarif')}
           Icon={<Graph />}
           title={`Рассчитать \nтариф`}
           content={`Узнайте срок и \nцену своих \nотправок`}
           width="48.5%"
         />
         <InfoContainer
-          onClick={() => navigation.navigate('Loyalty')}
-          Icon={<Percent />}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/cargo')}
+          Icon={<Loyal />}
           title={`Программа \nлояльности`}
           content={`Пользуйтесь \nуслугами и копите \nбаллы`}
           width="48.5%"
@@ -45,14 +68,14 @@ export const Buisenes = () => {
       </View>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={getModal}
+          onClick={() => navigation.navigate('CalcPrice')}
           Icon={<Calc />}
           title={`Калькулятор`}
           content={`Рассчитайте \nстоимость`}
           width="48.5%"
         />
         <InfoContainer
-          onClick={getModal}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/ltl')}
           Icon={<Perevozka />}
           title={`LTL`}
           content={`Перевозка грузов \nдля бизнеса`}
@@ -62,14 +85,14 @@ export const Buisenes = () => {
       <Text style={styles.titles}>Доставка</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={getModal}
+          onClick={() => navigation.navigate('WatchOrder')}
           Icon={<CubeIcon />}
           title={`Отследить \nпосылку`}
           content={`Как оформить \nвозврат товара`}
           width="48.5%"
         />
         <InfoContainer
-          onClick={() => navigation.navigate('Gruz')}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/iin')}
           Icon={<Document />}
           title={`Официальный \nгруз`}
           content={`Правила для \nупаковки`}
@@ -79,14 +102,14 @@ export const Buisenes = () => {
       <Text style={styles.titles}>Зарабатывай вместе с Альфа</Text>
       <View style={styles.brokeTools}>
         <InfoContainer
-          onClick={getModal}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/franchise')}
           Icon={<HandIcon size={18} />}
           title={`Франшиза`}
           content={`Начните свой \nбизнес`}
           width="48.5%"
         />
         <InfoContainer
-          onClick={getModal}
+          onClick={() => handleLink('https://www.alpha-cargo.kg/#/franchise')}
           Icon={<SingleUser size={18} />}
           title={`Для франчайзи`}
           content={`Инструкции и\nстандарты рабты`}
@@ -95,12 +118,12 @@ export const Buisenes = () => {
       </View>
       <Text style={styles.titles}>Доставка</Text>
       <InfoContainer
-        onClick={getModal}
+        onClick={() => handleLink('https://www.alpha-cargo.kg/#/media')}
         Icon={<TvIcon />}
         title={`Альфа Партнеры`}
         content={`Размещайте рекламу у нас в приложении`}
       />
-    </>
+    </View>
   );
 };
 

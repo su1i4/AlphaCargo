@@ -4,9 +4,9 @@ import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
 function Shar() {
   return (
     <Svg
-      width={407}
-      height={407}
-      viewBox="0 0 507 507"
+      width={400}
+      height={307}
+      viewBox="0 0 507 457"
       fill="none"
     >
       <Path

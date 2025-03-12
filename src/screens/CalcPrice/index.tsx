@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import Header from '../Header';
 import SingleUser from '../../assets/icons/SingleUser';
 import {useNavigation} from '@react-navigation/native';
@@ -13,13 +13,13 @@ import {
 import {Input} from '../../components/UI/Inputs/Input';
 import {Select} from '../../components/UI/Select';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
-import { useAuth } from '../../hooks/useAuth';
+import {useAuth} from '../../hooks/useAuth';
 import Back from '../../assets/icons/Back';
 
 export default function CalcPrice() {
   const user = useAuth();
   const accessToken = user?.accessToken;
-  const naviagation: any = useNavigation();
+  const navigation: any = useNavigation();
 
   const {data: Cities = [], isLoading: cityLoading} = useGetAllCitiesQuery();
   const {data: Countries = [], isLoading: countryLoading} =
@@ -59,7 +59,7 @@ export default function CalcPrice() {
         text1: 'Ошибка',
         text2: 'Пожалуйста заполните все поля',
       });
-      setLoading(false)
+      setLoading(false);
       return;
     } else {
       try {
@@ -75,13 +75,13 @@ export default function CalcPrice() {
         const response = await fetch(url, {
           method: 'POST',
           headers: {
-            'Authorization': `Bearer ${accessToken}`,
+            Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(requestBody),
         });
         const data = await response.json();
-        setPrice(data)        
+        setPrice(data);
       } catch (error) {
         console.error('Fetch error:', error);
       }
@@ -91,14 +91,23 @@ export default function CalcPrice() {
 
   return (
     <View style={styles.safeArea}>
-      <Header
-        id="Profile"
-        text="Рассчитать стоимость"
-        Right={SingleUser}
-        func={() => naviagation.navigate('Profile')}
-        Left={Back}
-        funcLeft={() => naviagation.goBack()}
-      />
+      <View
+        style={{
+          top: 55,
+          position: 'absolute',
+          paddingHorizontal: 20,
+          zIndex: 99,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={{fontSize: 27, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
+          Рассчитать стоимость
+        </Text>
+      </View>
       <View style={styles.Wrapper}>
         <Select
           onChange={setCityFromId}
@@ -121,7 +130,7 @@ export default function CalcPrice() {
               value: item.id,
             };
           })}
-          placeholder="Откуда"
+          placeholder="Куда"
           style={{width: '100%'}}
         />
         <Select
@@ -133,7 +142,7 @@ export default function CalcPrice() {
               value: item.id,
             };
           })}
-          placeholder="Тип посылки"
+          placeholder="Тип товара"
           style={{width: '100%'}}
         />
         <Select
@@ -145,25 +154,25 @@ export default function CalcPrice() {
               value: item.id,
             };
           })}
-          placeholder="Тип товара"
+          placeholder="Тип упаковки"
           style={{width: '100%'}}
         />
         <Input
           style={{width: '100%', paddingBottom: 10, paddingTop: 8}}
-          keyboardType
-          value={weight}
-          onChange={setWeight}
-          placeholder="Вес"
+          number={true}
+          value={countOfType}
+          onChange={setCountOfType}
+          placeholder="Количество мешков"
         />
         <Input
           style={{width: '100%', paddingBottom: 10, paddingTop: 8}}
-          keyboardType
-          value={countOfType}
-          onChange={setCountOfType}
-          placeholder="Количество"
+          number={true}
+          value={weight}
+          onChange={setWeight}
+          placeholder="Вес кг"
         />
         {price && (
-          <Text style={{fontSize: 15, color: '#000000', fontWeight: '600'}} >
+          <Text style={{fontSize: 15, color: '#000000', fontWeight: '600'}}>
             Стоимость за кг: {price}₽
           </Text>
         )}
@@ -181,17 +190,18 @@ export default function CalcPrice() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    position: 'relative',
   },
   scrollView: {
     flex: 1,
   },
   Wrapper: {
     width: '100%',
-    paddingHorizontal: 20,
-    paddingVertical: 20,
     display: 'flex',
     flexDirection: 'column',
     gap: 10,
     alignItems: 'center',
+    marginTop: 160,
+    paddingHorizontal: 20,
   },
 });

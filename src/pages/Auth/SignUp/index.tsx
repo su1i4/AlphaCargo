@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import { View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {LoginContainer} from '../../../components/Containers/LoginContainer';
 import {Input} from '../../../components/UI/Inputs/Input';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
@@ -7,6 +7,7 @@ import {useSingUpStep1Mutation} from '../../../services/auth.service';
 import Toast from 'react-native-toast-message';
 import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
 import {useNavigation} from '@react-navigation/native';
+import Back from '../../../assets/icons/Back';
 
 export default function SignUp() {
   const navigation: any = useNavigation();
@@ -60,34 +61,59 @@ export default function SignUp() {
   }, [phone, password]);
 
   return (
-    <View>
+    <View style={{flex: 1, position: 'relative'}}>
+      <View
+        style={{
+          top: 80,
+          position: 'absolute',
+          paddingHorizontal: 20,
+          zIndex: 99,
+          width: '100%',
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
+          Регистрация
+        </Text>
+      </View>
       <View style={styles.main}>
-        <LoginContainer isClose={true} text={'Введите номер телефона'}>
-          <Text style={{color: '#000018', fontSize: 13, fontWeight: '400'}}>
-            Мы отправим код на ваш номер
-          </Text>
-          <View style={styles.msgWrap}>
-            <PhoneNumberInput setPhoneNumber={setPhone} />
-            {phoneError ? (
-              <Text style={styles.errorText}>{phoneError}</Text>
-            ) : null}
-          </View>
-          <View style={styles.msgWrap}>
-            <Input
-              value={password}
-              onChange={setPassword}
-              placeholder="Придумайте пароль"
-            />
-            {passwordError ? (
-              <Text style={styles.errorText}>{passwordError}</Text>
-            ) : null}
-          </View>
+        <View style={styles.msgWrap}>
+          <PhoneNumberInput
+            label="Мы отправим вам код на этот номер"
+            setPhoneNumber={setPhone}
+          />
+          {phoneError ? (
+            <Text style={styles.errorText}>{phoneError}</Text>
+          ) : null}
+        </View>
+        <View style={styles.msgWrap}>
+          <Input
+            label="Придумайте пароль"
+            value={password}
+            onChange={setPassword}
+            placeholder="Пароль"
+            style={{backgroundColor: 'white'}}
+          />
+          {passwordError ? (
+            <Text style={styles.errorText}>{passwordError}</Text>
+          ) : null}
+        </View>
+        <View style={{width: '100%', position: 'absolute', bottom: 40}}>
           <ButtonCustom
             title="Регистрация"
-            onClick={handlePost}
+            onClick={() =>
+              navigation.navigate('Verification', {
+                phone: '+996504244527',
+                password: 2004,
+              })
+            }
             isLoading={loading}
           />
-        </LoginContainer>
+        </View>
       </View>
     </View>
   );
@@ -97,12 +123,12 @@ const styles = StyleSheet.create({
   main: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#02447F',
     paddingHorizontal: 20,
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 20,
   },
   imageContainer: {
     position: 'absolute',

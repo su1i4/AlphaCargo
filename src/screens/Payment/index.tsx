@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
-import Header from '../Header';
 import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
 import {Input} from '../../components/UI/Inputs/Input';
@@ -8,7 +7,6 @@ import {Tab} from '../../components/UI/Tab';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
 import DocumentPicker from 'react-native-document-picker';
 import {useAuth} from '../../hooks/useAuth';
-import {useFindParcelQuery} from '../../services/base.service';
 
 const Payment = () => {
   const user = useAuth();
@@ -78,24 +76,32 @@ const Payment = () => {
   };
 
   return (
-    <View style={{flex: 1}}>
-      <Header
-        Left={Back}
-        funcLeft={() => navigation.navigate('Alpha')}
-        id="questions"
-        text="Оплата"
-      />
+    <View style={{flex: 1, position: 'relative'}}>
+      <View
+        style={{
+          top: 55,
+          position: 'absolute',
+          paddingHorizontal: 20,
+          zIndex: 99,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.goBack();
+          }}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
+          Оплата
+        </Text>
+      </View>
       <View style={styles.container}>
-        <View style={styles.header}>
-          <Text style={styles.headerText}>Онлайн оплата услуг</Text>
-        </View>
         <View style={{padding: 20}}>
           <Tab text="Плательщик" active={activeTab} setActive={setActiveTab}>
             <View>
-              <Text style={{color: '#F9FFFF'}}>Частное лицо</Text>
+              <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Частное лицо</Text>
             </View>
             <View>
-              <Text style={{color: '#F9FFFF'}}>Юридическое лицо</Text>
+              <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Юридическое лицо</Text>
             </View>
           </Tab>
 
@@ -106,28 +112,19 @@ const Payment = () => {
             placeholder="Введите номер"
           /> */}
 
-          <Text style={{marginTop: 10, marginBottom: 10}}>Номер телефона</Text>
+          <Text style={{marginTop: 10, marginBottom: 10, fontFamily: 'Exo 2'}}>Номер телефона</Text>
           <Input
             value={phoneNumber}
             onChange={setPhoneNumber}
             placeholder="Введите номер телефона"
           />
 
-          <Text style={{marginTop: 10, marginBottom: 10}}>Сумма платежа</Text>
+          <Text style={{marginTop: 10, marginBottom: 10, fontFamily: 'Exo 2'}}>Сумма платежа</Text>
           <Input
             value={amount}
             onChange={setAmount}
             placeholder="Введите сумму"
           />
-
-          <TouchableOpacity
-            onPress={handleFileSelect}
-            style={styles.fileButton}>
-            <Text style={styles.fileButtonText}>
-              {file ? file.name : 'Выберите файл чека'}
-            </Text>
-          </TouchableOpacity>
-
           <ButtonCustom
             title="Отправить"
             isLoading={loading}
@@ -142,7 +139,7 @@ const Payment = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    marginTop: 150,
   },
   header: {
     width: '100%',

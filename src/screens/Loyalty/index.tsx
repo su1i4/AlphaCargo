@@ -17,8 +17,8 @@ import {useNavigation} from '@react-navigation/native';
 export const Loyalty = () => {
   const navigation: any = useNavigation();
   const Right = () => {
-    return ( 
-      <TouchableOpacity onPress={() => navigation.goBack()} >
+    return (
+      <TouchableOpacity onPress={() => navigation.goBack()}>
         <LogoutIcon size={19} />
       </TouchableOpacity>
     );
@@ -46,12 +46,11 @@ export const Loyalty = () => {
 
   const [text, setText] = useState('');
 
-  const backToLogin = () => {
-  };
+  const backToLogin = () => {};
 
   return (
     <View style={styles.safeArea}>
-      <Header id="Loyalty" text="Программа лояльности" Right={Right} />
+      <Header id="Loyalty" text="Программа лояльности" Right={Right} back />
       <ScrollView style={styles.scrollView}>
         <View style={styles.Wrapper}>
           <View style={{width: '100%'}}>

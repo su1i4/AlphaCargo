@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
   View,
   StyleSheet,
@@ -8,24 +8,38 @@ import {
   Alert,
   TouchableOpacity,
 } from 'react-native';
-import Header from '../../screens/Header';
-import BellIcon from '../../assets/icons/BellIcon';
-import SingleUser from '../../assets/icons/SingleUser';
-import {Panel} from '../../screens/Panel';
-import {Tab} from '../../components/UI/Tab';
-import HandIcon from '../../assets/icons/HandIcon';
 import {Personal} from '../../screens/AlphaTabContent/Personal';
 import {Buisenes} from '../../screens/AlphaTabContent/Buisenes';
-import QuesDock from '../../assets/icons/QuesDock';
 import Card from '../../assets/icons/Card';
-import FaUser from '../../assets/icons/FaUser';
 import {useNavigation} from '@react-navigation/native';
 import CustomModal from '../../components/UI/Modal';
+import ProfileUser from '../../assets/icons/ProfileUser';
+import {useAuth} from '../../hooks/useAuth';
+import LinearGradient from 'react-native-linear-gradient';
+import PersonalIcon from '../../assets/icons/Personal';
+import SuitCaseIcon from '../../assets/icons/SuitCase';
+
+import NewNoti from '../../assets/icons/NewNoti';
+import NewRaketa from '../../assets/icons/NewRaketa';
+import NewFlip from '../../assets/icons/NewFlip';
+import NewImage from '../../assets/icons/NewImage';
+import NewUsers from '../../assets/icons/NewUsers';
+
+const tabs = ['Частным клиентам', 'Бизнесу'];
 
 export default function Alpha() {
+  const user = useAuth();
+  const accessToken = user?.accessToken;
+
   const navigation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
   const [active, setActive] = useState(false);
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [phone, setPhone] = useState('');
+  const [fio, setFio] = useState('');
+  const [loading, setLoading] = useState(true);
 
   const phoneNumber = '+996772007183';
   const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
@@ -50,14 +64,19 @@ export default function Alpha() {
 
   const HeaderIcons = [
     {
-      icon: <BellIcon color="#94C325" size={18} strokeWidth={2} />,
+      icon: <NewNoti />,
       text: `Уведом-\nления`,
       link: () => navigation.navigate('Notifications'),
     },
     {
-      icon: <FaUser />,
-      text: `Вызов\nвыездной\nгруппы`,
+      icon: <NewRaketa />,
+      text: `Выездная\nгруппа`,
       link: openWhatsAppOrWebsite,
+    },
+    {
+      icon: <NewUsers />,
+      text: `Мы в соц-\nсетях`,
+      link: () => navigation.navigate('Socials'),
     },
     {
       icon: <Card />,
@@ -65,9 +84,14 @@ export default function Alpha() {
       link: () => navigation.navigate('Payment'),
     },
     {
-      icon: <QuesDock />,
-      text: `Вопросы и\nответы`,
+      icon: <NewFlip />,
+      text: `Поддержка`,
       link: () => navigation.navigate('Help'),
+    },
+    {
+      icon: <NewImage />,
+      text: `Оформление`,
+      link: () => navigation.navigate('Oformlenie'),
     },
   ];
 
@@ -77,110 +101,234 @@ export default function Alpha() {
     setActive(false);
   };
 
+  const fetchNotifications = async () => {
+    try {
+      const response = await fetch('https://alpha-cargo.kg/api/users', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const data = await response.json();
+      if (data) {
+        setEmail(data.email);
+        setFio(data.fio);
+        setPhone(data.phone);
+      }
+    } catch (err: any) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (accessToken) {
+      fetchNotifications();
+    } else {
+      setLoading(false);
+    }
+  }, [accessToken]);
+
+  const icons = [
+    <PersonalIcon color={activeTab === 0 ? 'white' : 'black'} />,
+    <SuitCaseIcon color={activeTab === 1 ? 'white' : 'black'} />,
+  ];
+
   return (
-    <View>
-      <Header
-        id="Alpha"
-        Left={BellIcon}
-        text="Мой Альфа"
-        Right={SingleUser}
-        func={() => navigation.navigate('Profile')}
-        funcLeft={() => navigation.navigate('Notifications')}
-      />
-      <ScrollView>
+    <View style={{flex: 1}}>
+      <ScrollView style={styles.scrollView}>
         <CustomModal active={active} onClose={toggleModal} />
-        <View style={styles.Wrapper}>
-          <View
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: '700',
+            marginTop: 60,
+            fontFamily: 'Exo 2',
+          }}>
+          Мой Альфа
+        </Text>
+        <TouchableOpacity
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 10,
+            marginTop: 20,
+          }}
+          onPress={() => navigation.navigate('Profile')}>
+          <ProfileUser />
+          <Text
             style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
+              color: 'black',
+              fontWeight: 500,
+              fontSize: 18,
+              fontFamily: 'Exo 2',
+            }}>
+            {phone}
+          </Text>
+        </TouchableOpacity>
+        <LinearGradient
+          colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+          style={{
+            paddingHorizontal: 20,
+            paddingVertical: 12,
+            borderRadius: 20,
+            marginTop: 15,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <Text style={{fontSize: 16, fontWeight: 500, fontFamily: 'Exo 2'}}>
+            Ваш уникальный код
+          </Text>
+          {/* <LinearGradient
+            colors={['#203B7A', '#026297', '#006599']}
+            start={{x: 0, y: 0}}
+            end={{x: 1, y: 0}}
+            style={{
               paddingHorizontal: 10,
+              paddingVertical: 5,
+              borderRadius: 20,
             }}>
-            {HeaderIcons.map((item: any, index) => (
-              <View
-                key={index}
-                style={{display: 'flex', flexDirection: 'column'}}>
-                <TouchableOpacity
-                  onPress={() => item.link()}
-                  style={{
-                    padding: 22,
-                    borderRadius: 20,
-                    backgroundColor: '#FFFFFF',
-                  }}>
-                  {item.icon}
-                </TouchableOpacity>
-                <Text
-                  style={{
-                    color: '#000018',
-                    fontSize: 12,
-                    fontWeight: '400',
-                    textAlign: 'center',
-                  }}>
-                  {item.text}
-                </Text>
-              </View>
-            ))}
-          </View>
-          <View
-            style={{
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-            }}>
+            <Text style={{fontSize: 16, fontWeight: 500, color: 'white'}}>
+              к0707
+            </Text>
+          </LinearGradient> */}
+        </LinearGradient>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            marginTop: 10,
+            gap: 10,
+            flexWrap: 'wrap',
+          }}>
+          {HeaderIcons.map((item: any, index) => (
             <View
+              key={index}
               style={{
-                width: '48%',
-                height: 80,
-                borderRadius: 16,
-                backgroundColor: 'white',
-                padding: 10,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}>
-              <Text style={{fontSize: 16, fontWeight: 500, color: 'black'}}>
-                За декабрь
-              </Text>
-              <Text style={{fontSize: 16, fontWeight: 500, color: 'green'}}>
-                0
+              <TouchableOpacity
+                onPress={() => item.link()}
+                style={{
+                  width: 70,
+                  height: 70,
+                  minHeight: 70,
+                  maxHeight: 70,
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderRadius: 20,
+                  backgroundColor: '#F0F1F3',
+                }}>
+                {item.icon}
+              </TouchableOpacity>
+              <Text
+                style={{
+                  color: '#000018',
+                  fontSize: 11,
+                  fontWeight: '400',
+                  textAlign: 'center',
+                  fontFamily: 'Exo 2',
+                }}>
+                {item.text}
               </Text>
             </View>
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Bonus')}
-              style={{
-                width: '48%',
-                height: 80,
-                borderRadius: 16,
-                backgroundColor: 'white',
-                padding: 10,
-              }}>
-              <Text style={{fontSize: 16, fontWeight: 500, color: 'black'}}>
-                Мои баллы
-              </Text>
-              <Text style={{fontSize: 16, fontWeight: 500, color: 'green'}}>
-                1
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity onPress={() => navigation.navigate('CalcPrice')}>
-            <Panel />
-          </TouchableOpacity>
-          <Tab text="Сервисы" active={activeTab} setActive={setActiveTab}>
-            <View>
-              <SingleUser size={19} />
-              <Text style={{color: '#F9FFFF'}}>Частным клиентам</Text>
-            </View>
-            <View>
-              <HandIcon size={19} />
-              <Text style={{color: '#F9FFFF'}}>Бизнесу</Text>
-            </View>
-          </Tab>
-          {components[activeTab]}
+          ))}
         </View>
+        <Text style={[styles.textHeader, {fontFamily: 'Exo 2'}]}>Сервисы</Text>
+        <View
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: 5,
+            paddingVertical: 20,
+          }}>
+          {tabs.map((item: any, index: number) => {
+            return index === activeTab ? (
+              <TouchableOpacity
+                key={item}
+                onPress={() => setActiveTab(index)}
+                style={styles.touchable}>
+                <LinearGradient
+                  colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={styles.gradientBorder}>
+                  <View
+                    style={[
+                      styles.innerButton,
+                      {backgroundColor: 'transparent'},
+                    ]}>
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 5,
+                      }}>
+                      {icons[index]}
+                      <Text style={{color: '#FFFFFF', fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
+                    </View>
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                key={item}
+                onPress={() => setActiveTab(index)}
+                style={styles.touchable}>
+                <LinearGradient
+                  colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={styles.gradientBorder}>
+                  <View style={styles.innerButton}>
+                    <View
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        gap: 5,
+                      }}>
+                      {icons[index]}
+                      <Text style={{fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
+                    </View>
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+        {components[activeTab]}
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+    marginTop: -20,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    backgroundColor: 'white',
+    padding: 20,
+  },
   Wrapper: {
     padding: 20,
     paddingBottom: 40,
@@ -199,5 +347,29 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 10,
+  },
+  touchable: {
+    borderRadius: 20,
+    marginRight: 10,
+    overflow: 'hidden',
+  },
+  gradientBorder: {
+    padding: 4, // Толщина рамки
+    borderRadius: 20,
+  },
+  innerButton: {
+    backgroundColor: '#FFFFFF', // Цвет фона кнопки
+    borderRadius: 18, // Немного меньше, чтобы градиент был виден
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+  },
+  textHeader: {
+    color: '#000000',
+    fontSize: 20,
+    fontWeight: '600',
+    marginTop: 15,
+    fontFamily: 'Exo 2'
   },
 });

@@ -57,6 +57,8 @@ export default function OfficesLog() {
         text="Пункты Альфа"
         Left={Back}
         funcLeft={() => navigation.goBack()}
+        back
+        show={false}
       />
       <View style={styles.container}>
         <Mapbox.MapView style={styles.map}>

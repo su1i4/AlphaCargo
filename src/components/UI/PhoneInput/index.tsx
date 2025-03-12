@@ -1,37 +1,42 @@
 import React, {useRef, useImperativeHandle, forwardRef} from 'react';
 import PhoneInput from 'react-native-phone-number-input';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 
-export const PhoneNumberInput = forwardRef(({setPhoneNumber}: any, ref) => {
-  const phoneInput = useRef<PhoneInput>(null);
+export const PhoneNumberInput = forwardRef(
+  ({setPhoneNumber, label}: any, ref) => {
+    const phoneInput = useRef<PhoneInput>(null);
 
-  useImperativeHandle(ref, () => ({
-    reset: () => {
-      if (phoneInput.current) {
-        phoneInput.current.setState({number: ''});
-        setPhoneNumber('');
-      }
-    },
-  }));
+    useImperativeHandle(ref, () => ({
+      reset: () => {
+        if (phoneInput.current) {
+          phoneInput.current.setState({number: ''});
+          setPhoneNumber('');
+        }
+      },
+    }));
 
-  return (
-    <PhoneInput
-      ref={phoneInput}
-      defaultCode="KG"
-      layout="first"
-      onChangeFormattedText={text => {
-        setPhoneNumber(text);
-      }}
-      placeholder="Номер телефона"
-      containerStyle={styles.containerStyle}
-      textContainerStyle={styles.textContainerStyle}
-      textInputStyle={styles.textInputStyle}
-      codeTextStyle={styles.codeTextStyle}
-      flagButtonStyle={styles.flagButtonStyle}
-      countryPickerButtonStyle={styles.countryPickerButtonStyle}
-    />
-  );
-});
+    return (
+      <View>
+        {label && <Text style={{fontSize: 15, marginBottom: 5, fontFamily: 'Exo 2'}}>{label}</Text>}
+        <PhoneInput
+          ref={phoneInput}
+          defaultCode="KG"
+          layout="first"
+          onChangeFormattedText={text => {
+            setPhoneNumber(text);
+          }}
+          placeholder="Номер телефона"
+          containerStyle={styles.containerStyle}
+          textContainerStyle={styles.textContainerStyle}
+          textInputStyle={styles.textInputStyle}
+          codeTextStyle={styles.codeTextStyle}
+          flagButtonStyle={styles.flagButtonStyle}
+          countryPickerButtonStyle={styles.countryPickerButtonStyle}
+        />
+      </View>
+    );
+  },
+);
 
 const styles = StyleSheet.create({
   containerStyle: {
@@ -39,15 +44,17 @@ const styles = StyleSheet.create({
     height: 55,
     minHeight: 55,
     maxHeight: 55,
-    borderRadius: 10,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: '#8C8C8C',
     overflow: 'hidden',
+    fontFamily: 'Exo 2'
   },
   textContainerStyle: {
     borderLeftWidth: 1,
     borderLeftColor: '#ccc',
     backgroundColor: 'white',
+    fontFamily: 'Exo 2'
   },
   textInputStyle: {
     height: 55,
@@ -56,19 +63,23 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 500,
     color: '#808080',
+    fontFamily: 'Exo 2'
   },
   codeTextStyle: {
     fontSize: 14,
     color: '#808080',
+    fontFamily: 'Exo 2'
   },
   flagButtonStyle: {
     width: 60,
     height: 50,
     backgroundColor: '#FFFFFF',
+    fontFamily: 'Exo 2'
   },
   countryPickerButtonStyle: {
     width: 60,
     height: 50,
     backgroundColor: '#FFFFFF',
+    fontFamily: 'Exo 2'
   },
 });

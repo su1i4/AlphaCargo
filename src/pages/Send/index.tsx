@@ -10,16 +10,27 @@ import {
   TouchableOpacity,
   Linking,
   Alert,
+  Modal,
+  TouchableWithoutFeedback,
+  Image,
 } from 'react-native';
-import Header from '../../screens/Header';
-import SingleUser from '../../assets/icons/SingleUser';
-import Calc from '../../assets/icons/Calc';
-import CarIcon from '../../assets/icons/CarIcon';
-import TarifIcon from '../../assets/icons/TarifIcon';
 import {Tab} from '../../components/UI/Tab';
 import {useNavigation} from '@react-navigation/native';
 import {ParcelCard} from './parcelCard';
 import {URL} from '../../utils/consts';
+import VoskArrow from '../../assets/icons/VoskArrow';
+import LinearGradient from 'react-native-linear-gradient';
+import NewCalcPrice from '../../screens/NewCalcPrice';
+import Zakazik from '../../screens/Zakazik';
+import NewTarif from '../../screens/NewTarif';
+
+const tabs = ['Отправления', 'Рассчитать', 'Заказать выезд', 'Тарифы'];
+const texts = [
+  'Отправления',
+  'Рассчитать доставку',
+  'Заказать выезд',
+  'Тарифы',
+];
 
 export default function Send() {
   const user = useAuth();
@@ -29,6 +40,9 @@ export default function Send() {
   const [isLoading, setLoading] = useState(true);
   const naviagation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
+  const [zakaz, setZakaz] = useState('');
+  const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const [tab, setTab] = useState(0);
 
   const phoneNumber = '+996772007183';
   const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
@@ -130,76 +144,102 @@ export default function Send() {
   };
 
   return (
-    <View>
-      <Header
-        id="watchOrder"
-        text="Отправления"
-        placeholder="Номер посылки"
-        func={() => naviagation.navigate('Profile')}
-        Right={SingleUser}
-      />
-      <ScrollView>
-        <View style={styles.Wrapper}>
-          <View style={styles.brokeTools}>
-            <TouchableOpacity
-              onPress={() => naviagation.navigate('CalcPrice')}
-              style={styles.content}>
-              <Calc active />
-              <Text style={styles.text}>Рассчитать</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={openWhatsAppOrWebsite}
-              style={styles.content}>
-              <CarIcon />
-              <Text style={styles.text}>{`Вызвать\nвыездную группу`}</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            onPress={() => naviagation.navigate('Tarif')}
-            style={styles.container}>
-            <TarifIcon />
-            <Text style={{fontSize: 15, fontWeight: '400', color: '#F9FFFF'}}>
-              Тарифы
-            </Text>
-          </TouchableOpacity>
-          {data && (
+    <View style={{flex: 1}}>
+      <ScrollView style={styles.scrollView}>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 60, fontFamily: 'Exo 2'}}>
+          {texts[tab]}
+        </Text>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={{
+            paddingVertical: 25,
+          }}>
+          {tabs.map((item: any, index: number) => {
+            return index === tab ? (
+              <TouchableOpacity
+                key={item}
+                onPress={() => setTab(index)}
+                style={styles.touchable}>
+                <LinearGradient
+                  colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={styles.gradientBorder}>
+                  <View
+                    style={[
+                      styles.innerButton,
+                      {backgroundColor: 'transparent'},
+                    ]}>
+                    <Text style={{color: '#FFFFFF', fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                key={item}
+                onPress={() => setTab(index)}
+                style={styles.touchable}>
+                <LinearGradient
+                  colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={styles.gradientBorder}>
+                  <View style={styles.innerButton}>
+                    <Text style={{fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
+                  </View>
+                </LinearGradient>
+              </TouchableOpacity>
+            );
+          })}
+        </ScrollView>
+        {tab === 0 && data && (
+          <View>
             <Tab
               text="Мои отправления"
               active={activeTab}
               setActive={setActiveTab}>
               <View>
-                <Text style={{color: '#F9FFFF'}}>Все</Text>
+                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Все</Text>
               </View>
               <View>
-                <Text style={{color: '#F9FFFF'}}>Оплаченные</Text>
+                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Оплаченные</Text>
               </View>
               <View>
-                <Text style={{color: '#F9FFFF'}}>Не оплаченные</Text>
+                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Не оплаченные</Text>
               </View>
             </Tab>
-          )}
-          {isLoading ? (
-            <Text>Загрузка ...</Text>
-          ) : !data.length  ? (
-            <Text>Пусто</Text>
-          ) : null}
-          {data &&
-            data?.map((item: any) => (
-              <ParcelCard oneParcel={item} getPdf={getPdf} />
-            ))}
-        </View>
+
+            <View style={{marginTop: 20, marginBottom: 50}}>
+              {isLoading ? (
+                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>Загрузка ...</Text>
+              ) : !data.length ? (
+                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>Пусто</Text>
+              ) : (
+                data.map((item: any) => (
+                  <ParcelCard key={item.id} oneParcel={item} getPdf={getPdf} />
+                ))
+              )}
+            </View>
+          </View>
+        )}
+        {tab === 1 && <NewCalcPrice />}
+        {tab === 2 && <Zakazik />}
+        {tab === 3 && <NewTarif />}
       </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  Wrapper: {
+  scrollView: {
+    flex: 1,
+    marginTop: -20,
+    borderTopLeftRadius: 25,
+    borderTopRightRadius: 25,
+    zIndex: 9999,
+    backgroundColor: 'white',
     padding: 20,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 15,
-    marginBottom: '40%',
   },
   brokeTools: {
     width: '100%',
@@ -209,13 +249,14 @@ const styles = StyleSheet.create({
   },
   content: {
     width: '48.5%',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#F0F1F3',
     borderRadius: 10,
     height: 90,
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
   },
   text: {
     color: '#8C8C8C',
@@ -231,5 +272,46 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  dropdownContainer: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    borderColor: '#8C8C8C',
+    borderWidth: 1,
+    maxHeight: '70%',
+    width: '80%',
+    padding: 20,
+    overflow: 'scroll',
+  },
+
+  touchable: {
+    borderRadius: 20,
+    marginRight: 10,
+    overflow: 'hidden',
+  },
+  gradientBorder: {
+    padding: 4, // Толщина рамки
+    borderRadius: 20,
+  },
+  innerButton: {
+    backgroundColor: '#FFFFFF', // Цвет фона кнопки
+    borderRadius: 18, // Немного меньше, чтобы градиент был виден
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+  },
+  buttonText: {
+    color: '#203B7A',
+    fontSize: 17,
+    fontWeight: '400',
   },
 });

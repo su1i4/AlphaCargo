@@ -1,19 +1,18 @@
 import {useEffect, useState, useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {View, Text, StyleSheet, Image} from 'react-native';
-import {LoginContainer} from '../../../components/Containers/LoginContainer';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Input} from '../../../components/UI/Inputs/Input';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
-import AuthFooter from '../../../components/Auth/AuthFooter';
 import {useLoginMutation} from '../../../services/auth.service';
 import Toast from 'react-native-toast-message';
 import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
 import {useNavigation} from '@react-navigation/native';
 import {useActions} from '../../../hooks/useActions';
 import {LAST_LOGIN_KEY} from '../../../utils/consts';
+import Back from '../../../assets/icons/Back';
 
 export default function Login({_, route}: any) {
-  const { ph = '', pass = '' } = route.params || {};
+  const {ph = '', pass = ''} = route.params || {};
   const navigation: any = useNavigation();
   const [login] = useLoginMutation();
   const [phone, setPhone] = useState('');
@@ -26,11 +25,11 @@ export default function Login({_, route}: any) {
   const {saveUser} = useActions();
 
   useEffect(() => {
-    if(ph && pass){
-      setPassword(pass)
-      setPhone(ph)
+    if (ph && pass) {
+      setPassword(pass);
+      setPhone(ph);
     }
-  }, [ph, pass])
+  }, [ph, pass]);
 
   const handlePost = async () => {
     setPhoneError('');
@@ -83,37 +82,59 @@ export default function Login({_, route}: any) {
   };
 
   return (
-    <View>
-      <View style={styles.main}>
-        <View style={styles.imageContainer}>
-          <Image source={require('../../../assets/images/AlphaCargo.png')} />
-        </View>
-        <LoginContainer isClose={false} text={'Войти'}>
-          <View style={styles.msgWrap}>
-            <PhoneNumberInput setPhoneNumber={setPhone} ref={phoneInputRef} />
-            {phoneError ? (
-              <Text style={styles.errorText}>{phoneError}</Text>
-            ) : null}
-          </View>
-          <View style={styles.msgWrap}>
-            <Input
-              value={password}
-              onChange={setPassword}
-              placeholder="Пароль"
-            />
-            {passwordError ? (
-              <Text style={styles.errorText}>{passwordError}</Text>
-            ) : null}
-          </View>
-          <ButtonCustom
-            title="Войти"
-            onClick={handlePost}
-            isLoading={loading}
-            style={{width: '100%'}}
-          />
-        </LoginContainer>
+    <View style={{flex: 1, position: 'relative'}}>
+      <View
+        style={{
+          top: 80,
+          position: 'absolute',
+          paddingHorizontal: 20,
+          zIndex: 99,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('Begin');
+          }}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
+          Войти
+        </Text>
       </View>
-      <AuthFooter />
+      <View style={styles.main}>
+        <View style={styles.msgWrap}>
+          <PhoneNumberInput
+            label="Ваш номер телефона"
+            setPhoneNumber={setPhone}
+            ref={phoneInputRef}
+          />
+          {phoneError ? (
+            <Text style={styles.errorText}>{phoneError}</Text>
+          ) : null}
+        </View>
+        <View style={styles.msgWrap}>
+          <Input
+            label="Пароль"
+            style={{backgroundColor: 'white'}}
+            value={password}
+            onChange={setPassword}
+            placeholder="Пароль"
+          />
+          {passwordError ? (
+            <Text style={styles.errorText}>{passwordError}</Text>
+          ) : null}
+        </View>
+        <ButtonCustom
+          title="Войти"
+          onClick={handlePost}
+          isLoading={loading}
+          style={{width: '100%'}}
+        />
+        <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
+          <Text style={{textDecorationLine: 'underline', fontFamily: 'Exo 2'}}>
+            Не можете войти в ваш профиль?
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
@@ -122,10 +143,12 @@ const styles = StyleSheet.create({
   main: {
     width: '100%',
     height: '100%',
-    backgroundColor: '#02447F',
+    // backgroundColor: '#02447F',
     paddingHorizontal: 20,
     position: 'relative',
     display: 'flex',
+    flexDirection: 'column',
+    gap: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },

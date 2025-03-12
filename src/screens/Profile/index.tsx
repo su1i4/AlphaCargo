@@ -17,6 +17,8 @@ import {useAuth} from '../../hooks/useAuth';
 import Loading from '../../components/UI/Loading';
 import Toast from 'react-native-toast-message';
 import {removeUserFromStorage} from '../../utils/helpers';
+import Back from '../../assets/icons/Back';
+import ProfileUser from '../../assets/icons/ProfileUser';
 
 export default function Profile() {
   const user = useAuth();
@@ -40,16 +42,13 @@ export default function Profile() {
 
   const fetchNotifications = async () => {
     try {
-      const response = await fetch(
-        'https://alphacargoserver.azurewebsites.net/users',
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
+      const response = await fetch('https://alpha-cargo.kg/api/users', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
         },
-      );
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -84,17 +83,14 @@ export default function Profile() {
     setPatchLoad(true);
 
     try {
-      const response = await fetch(
-        'https://alphacargoserver.azurewebsites.net/users',
-        {
-          method: 'PATCH',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(updateData),
+      const response = await fetch('https://alpha-cargo.kg/api/users', {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
         },
-      );
+        body: JSON.stringify(updateData),
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -128,7 +124,7 @@ export default function Profile() {
     setDeleteLoading(true);
     try {
       const response = await fetch(
-        'https://alphacargoserver.azurewebsites.net/users/deactivateUser',
+        'https://alpha-cargo.kg/api/users/deactivateUser',
         {
           method: 'DELETE',
           headers: {
@@ -171,27 +167,43 @@ export default function Profile() {
 
   return (
     <View style={styles.safeArea}>
-      <Header
-        id="Profile"
-        Left={BellIcon}
-        text="Личный кабинет"
-        Right={LogoutIcon}
-        func={() => naviagation.goBack()}
-        funcLeft={() => naviagation.navigate('Notifications')}
-      />
+      <View
+        style={{
+          top: 55,
+          position: 'absolute',
+          paddingHorizontal: 20,
+          zIndex: 99,
+        }}>
+        <TouchableOpacity
+          onPress={() => {
+            naviagation.goBack();
+          }}>
+          <Back color="black" />
+        </TouchableOpacity>
+        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
+          Личный кабинет{' '}
+        </Text>
+      </View>
       <ScrollView style={styles.scrollView}>
         <View style={!loading ? styles.Wrapper : styles.loadWrap}>
           {loading ? (
             <Loading />
           ) : (
             <View style={{display: 'flex', flexDirection: 'column', gap: 20}}>
-              <TouchableOpacity
+              {/* <TouchableOpacity
                 onPress={() => naviagation.navigate('CalcPrice')}>
                 <Panel />
               </TouchableOpacity>
-              <Text style={styles.mainText}>Личные данные</Text>
+              <Text style={styles.mainText}>Личные данные</Text> */}
+              <View style={{alignSelf: 'center'}}>
+                <View style={{alignSelf: 'center'}}>
+                  <ProfileUser />
+                </View>
+                <Text style={{fontSize: 18, marginTop: 10, fontFamily: 'Exo 2'}}>{phone}</Text>
+              </View>
               {type && (
-                <View>
+                <View
+                  style={{display: 'flex', flexDirection: 'column', gap: 10}}>
                   <Input
                     value={fio}
                     style={{
@@ -228,7 +240,7 @@ export default function Profile() {
               <Input
                 value={email}
                 style={{
-                  backgroundColor: 'white',
+                  backgroundColor: '#F0F1F3',
                   borderWidth: 0,
                   borderColor: 'white',
                 }}
@@ -254,7 +266,7 @@ export default function Profile() {
                 <TouchableOpacity
                   style={{
                     width: '18%',
-                    backgroundColor: '#02447F',
+                    backgroundColor: '#F0F1F3',
                     paddingTop: 12,
                     paddingBottom: 14,
                     paddingHorizontal: 10,
@@ -264,15 +276,17 @@ export default function Profile() {
                   }}
                   onPress={() => {
                     removeUserFromStorage();
-                    naviagation.navigate('Login');
+                    naviagation.reset({
+                      index: 0, // Устанавливаем индекс в 0, чтобы это был первый экран
+                      routes: [{ name: 'Login' }], // Указываем маршрут, на который нужно перейти
+                    });
                   }}>
-                  <LogoutIcon size={20} />
+                  <LogoutIcon color='black' size={20} />
                 </TouchableOpacity>
               </View>
               <ButtonCustom
                 onClick={handleDelete}
                 isLoading={deleteLoading}
-                textStyle={{color: 'red'}}
                 style={{backgroundColor: 'transparent'}}
                 title="Удалить аккаунт"
                 loadingColor="red"
@@ -288,13 +302,16 @@ export default function Profile() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    position: 'relative',
+    backgroundColor: 'white',
   },
   scrollView: {
     flex: 1,
+    marginTop: 150,
+    zIndex: 9999,
+    padding: 20,
   },
   Wrapper: {
-    paddingHorizontal: 20,
-    paddingVertical: 20,
     display: 'flex',
     flexDirection: 'column',
     gap: 20,
@@ -311,11 +328,13 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 18,
     fontWeight: '600',
+    fontFamily: 'Exo 2'
   },
   email: {
     color: '#000018',
     fontSize: 13,
     fontWeight: '400',
+    fontFamily: 'Exo 2'
   },
   delete: {color: 'red', width: '100%', textAlign: 'center'},
 });
