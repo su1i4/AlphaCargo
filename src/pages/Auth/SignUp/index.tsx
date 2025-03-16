@@ -105,12 +105,7 @@ export default function SignUp() {
         <View style={{width: '100%', position: 'absolute', bottom: 40}}>
           <ButtonCustom
             title="Регистрация"
-            onClick={() =>
-              navigation.navigate('Verification', {
-                phone: '+996504244527',
-                password: 2004,
-              })
-            }
+            onClick={handlePost}
             isLoading={loading}
           />
         </View>

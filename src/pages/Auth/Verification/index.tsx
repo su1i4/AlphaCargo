@@ -5,15 +5,22 @@ import Toast from 'react-native-toast-message';
 import {useActions} from '../../../hooks/useActions';
 import {TouchableOpacity} from 'react-native';
 import Back from '../../../assets/icons/Back';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useLoginMutation, useSingUpStep1Mutation} from '../../../services/auth.service';
+import {LAST_LOGIN_KEY} from '../../../utils/consts';
+import {Count} from '../Count.tsx';
+
+
 
 export default function Verification({navigation, route}: any) {
   const {phone, password} = route.params;
+  const [SignUp] = useSingUpStep1Mutation();
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState<any>(['', '', '', '', '', '']);
+  const [login] = useLoginMutation();
   const [errorText, setErrorText] = useState<string>('');
   const inputRefs = useRef<any>([]);
   const [focusedIndex, setFocusedIndex] = useState(0);
-  const [count, setCount] = useState(60);
 
   const {saveUser} = useActions();
 
@@ -46,11 +53,19 @@ export default function Verification({navigation, route}: any) {
         },
       );
       if (response.status === 201) {
-        Toast.show({
-          type: 'success',
-          text1: 'Успех',
-          text2: 'Аккаунт успешно создан войдите',
-        });
+        const responseLogin: any = await login({phone, password});
+        if (responseLogin['error']) {
+          Toast.show({
+            type: 'error',
+            text1: 'Ошибка входа',
+            text2: response.error.data.message,
+          });
+        } else {
+          const currentDate = new Date().toISOString();
+          await AsyncStorage.setItem(LAST_LOGIN_KEY, currentDate);
+          saveUser(responseLogin.data);
+          navigation.navigate('MainNavigation');
+        }
         navigation.navigate('MainNavigation', {ph: phone, pass: password});
       } else {
         Toast.show({
@@ -115,11 +130,26 @@ export default function Verification({navigation, route}: any) {
     }
   }, [code]);
 
-  useEffect(() => {
-    setInterval(() => {
-      setCount(count - 1);
-    }, 1000);
-  }, []);
+  const handleResend = async () => {
+    setLoading(true);
+    try {
+      const response: any = await SignUp({phone});
+      if (response['error']) {
+        Toast.show({
+          type: 'error',
+          text1: 'Ошибка входа',
+          text2: response.error.data.message,
+          visibilityTime: 3000,
+        });
+      } else {
+        navigation.navigate('Verification', {
+          password: password,
+          phone: phone,
+        });
+      }
+    } catch (error) {}
+    setLoading(false);
+  };
 
   return (
     <View style={{flex: 1, position: 'relative'}}>
@@ -167,15 +197,7 @@ export default function Verification({navigation, route}: any) {
           ))}
         </View>
         {errorText ? <Text style={styles.errorText}>{errorText}</Text> : null}
-        <Text
-          style={{
-            width: '100%',
-            fontSize: 16,
-            color: '#636363',
-            fontFamily: 'Exo 2'
-          }}>
-          Отправить повторно через {count}
-        </Text>
+        <Count onPress={handleResend} />
         <View style={{width: '100%', position: 'absolute', bottom: 40}}>
           <ButtonCustom
             disabled={loading}

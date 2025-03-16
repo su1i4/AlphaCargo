@@ -111,7 +111,6 @@ export default function Order() {
       setOffices(lowData);
     } else {
       const lok = searchLocations(offices, search);
-      console.log(lok);
       setOffices(lok);
     }
   }, [search]);
@@ -239,14 +238,12 @@ export default function Order() {
 
       Geolocation.getCurrentPosition(
         position => {
-          console.log('Position received:', position);
           setLocation({
             latitude: position.coords.latitude,
             longitude: position.coords.longitude,
           });
         },
         error => {
-          console.log('Geolocation error:', error);
           Alert.alert('Ошибка', 'Не удалось определить местоположение');
         },
         {

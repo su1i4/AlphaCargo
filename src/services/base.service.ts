@@ -53,6 +53,12 @@ export const baseApi = createApi({
         };
       },
     }),
+    readNotification: build.mutation<any, any>({
+      query: (id: any) => ({
+        url: `/notifications/${id}`,
+        method: 'PATCH',
+      }),
+    }),
   }),
 });
 
@@ -71,4 +77,5 @@ export const {
   usePostFranchiseMutation,
   useLazyFindParcelQuery,
   useFindParcelQuery,
+  useReadNotificationMutation,
 } = baseApi;

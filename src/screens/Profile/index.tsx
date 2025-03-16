@@ -244,7 +244,7 @@ export default function Profile() {
                   borderWidth: 0,
                   borderColor: 'white',
                 }}
-                disbaled={true}
+                // disbaled={true}
                 onChange={setEmail}
                 placeholder=""
               />

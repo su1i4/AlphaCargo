@@ -23,6 +23,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import NewCalcPrice from '../../screens/NewCalcPrice';
 import Zakazik from '../../screens/Zakazik';
 import NewTarif from '../../screens/NewTarif';
+import RNFetchBlob from 'react-native-blob-util';
+import { decode } from 'base-64';
 
 const tabs = ['Отправления', 'Рассчитать', 'Заказать выезд', 'Тарифы'];
 const texts = [
@@ -107,38 +109,68 @@ export default function Send() {
 
   const getPdf = async (invoiceNumber: string) => {
     try {
-      const response = await fetch(
+      // Показываем индикатор загрузки
+      Alert.alert('Информация', 'Начинаем загрузку PDF, пожалуйста, подождите...');
+      
+      // Используем RNFetchBlob для получения PDF напрямую
+      const resp = await RNFetchBlob.config({
+        fileCache: true,
+        appendExt: 'pdf',
+      }).fetch(
+        'GET',
         `${URL}/parcels/invoice/${invoiceNumber}/pdf`,
         {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/pdf',
-          },
-        },
+          Authorization: `Bearer ${accessToken}`,
+        }
       );
-      if (!response.ok) {
-        throw new Error('Failed to fetch PDF');
-      }
-      const blob = await response.blob();
-      const filePath = `${RNFS.DocumentDirectoryPath}/invoice-${invoiceNumber}.pdf`;
-      const base64Data = await blobToBase64(blob);
-      await RNFS.writeFile(filePath, base64Data, 'base64');
-
-      await FileViewer.open(filePath, {
-        showOpenWithDialog: true,
-      });
+      
+      // Получаем путь к файлу
+      const filePath = resp.path();
+      console.log('Файл сохранен по пути:', filePath);
+      
+      // Открываем файл
+      await FileViewer.open(filePath, { showOpenWithDialog: true });
+      
     } catch (error) {
-      Alert.alert('Error', 'Failed to download or open the PDF');
-      console.error(error);
+      console.error('Ошибка в процессе создания PDF:', error);
+      Alert.alert(
+        'Ошибка',
+        'Не удалось создать или открыть PDF. Попробуйте позже или обратитесь в поддержку.'
+      );
     }
   };
+
+  // Эта функция больше не используется, т.к. мы получаем PDF напрямую
+  /*
+  const saveAndOpenPDF = async (encodedString: string) => {
+    try {
+      // Путь для сохранения PDF
+      const pdfPath = `${RNFS.DocumentDirectoryPath}/invoice-${Date.now()}.pdf`;
+      console.log('Сохраняем PDF по пути:', pdfPath);
+  
+      // Сохраняем PDF файл
+      await RNFS.writeFile(pdfPath, encodedString, 'base64');
+      console.log('Файл успешно сохранен');
+      
+      // Открываем PDF файл с помощью FileViewer
+      await FileViewer.open(pdfPath);
+      
+    } catch (error) {
+      console.error('Ошибка при сохранении или открытии PDF:', error);
+      Alert.alert('Ошибка', 'Не удалось сохранить или открыть PDF файл');
+    }
+  };
+  */
 
   const blobToBase64 = (blob: Blob): Promise<string> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
-      reader.onloadend = () => resolve((reader.result as string).split(',')[1]);
-      reader.onerror = () => reject(reader.error);
+      reader.onloadend = () => {
+        // Извлекаем только часть base64 без префикса data:application/pdf;base64,
+        const base64data = (reader.result as string).split(',')[1];
+        resolve(base64data);
+      };
+      reader.onerror = reject;
       reader.readAsDataURL(blob);
     });
   };

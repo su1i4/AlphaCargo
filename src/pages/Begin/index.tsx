@@ -75,7 +75,6 @@ export default function Begin() {
 
   const onIndexChanged = (index: number) => {
     setStep(index);
-    console.log(index, 'this is index');
   };
 
   const outStep = () => {

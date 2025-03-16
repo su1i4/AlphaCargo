@@ -127,12 +127,34 @@ export default function Alpha() {
     }
   };
 
+  const fetchCode = async () => {
+    try {
+      const response = await fetch(
+        'https://212.2.231.34/alpha_cargo/hs/check_phone',
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (err: any) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (accessToken) {
       fetchNotifications();
     } else {
       setLoading(false);
     }
+    fetchCode();
   }, [accessToken]);
 
   const icons = [
@@ -190,7 +212,7 @@ export default function Alpha() {
           <Text style={{fontSize: 16, fontWeight: 500, fontFamily: 'Exo 2'}}>
             Ваш уникальный код
           </Text>
-          {/* <LinearGradient
+          <LinearGradient
             colors={['#203B7A', '#026297', '#006599']}
             start={{x: 0, y: 0}}
             end={{x: 1, y: 0}}
@@ -202,7 +224,7 @@ export default function Alpha() {
             <Text style={{fontSize: 16, fontWeight: 500, color: 'white'}}>
               к0707
             </Text>
-          </LinearGradient> */}
+          </LinearGradient>
         </LinearGradient>
         <View
           style={{
@@ -282,7 +304,9 @@ export default function Alpha() {
                         gap: 5,
                       }}>
                       {icons[index]}
-                      <Text style={{color: '#FFFFFF', fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
+                      <Text style={{color: '#FFFFFF', fontFamily: 'Exo 2'}}>
+                        {tabs[index]}
+                      </Text>
                     </View>
                   </View>
                 </LinearGradient>
@@ -370,6 +394,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: '600',
     marginTop: 15,
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
 });

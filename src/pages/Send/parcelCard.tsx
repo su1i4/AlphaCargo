@@ -1,9 +1,15 @@
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
 import {useNavigation} from '@react-navigation/native';
-import PdfIcon from '../../assets/icons/PdfIcon';
+import Pdf from 'react-native-pdf';
+import { URL } from '../../utils/consts';
+import FileViewer from 'react-native-file-viewer';
 
 export const ParcelCard = ({oneParcel, getPdf}: any) => {
+  const source = {
+    uri: `${URL}/parcels/invoice/${oneParcel?.invoice}/pdf`,
+    cache: true,
+  };
   const navigation: any = useNavigation();
 
   return (
@@ -26,10 +32,28 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
           onClick={() => navigation.navigate('Payment')}
         />
       )}
-      <TouchableOpacity onPress={() => getPdf(oneParcel?.invoice)}>
-        <PdfIcon />
-        <Text style={{fontSize: 12, color: 'white', fontFamily: 'Exo 2'}}>Накладная</Text>
-      </TouchableOpacity>
+      {/* <TouchableOpacity onPress={() => getPdf(oneParcel?.invoice)}> */}
+      <Pdf
+        source={source}
+        onLoadComplete={(numberOfPages, filePath) => {
+          FileViewer.open(filePath, {showOpenWithDialog: true});
+
+        }}
+        onPageChanged={(page, numberOfPages) => {
+          console.log(`Current page: ${page}`);
+        }}
+        onError={error => {
+          console.log(error);
+        }}
+        onPressLink={uri => {
+          console.log(`Link pressed: ${uri}`);
+        }}
+        style={{width: 100, height: 100}}
+      />
+      <Text style={{fontSize: 12, color: 'white', fontFamily: 'Exo 2'}}>
+        Накладная
+      </Text>
+      {/* </TouchableOpacity> */}
       {oneParcel?.payment ? (
         <View
           style={{
@@ -42,7 +66,9 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
             alignItems: 'center',
             borderRadius: 10,
           }}>
-          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Exo 2'}}>Оплачено</Text>
+          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Exo 2'}}>
+            Оплачено
+          </Text>
         </View>
       ) : (
         <TouchableOpacity
@@ -57,7 +83,9 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
             alignItems: 'center',
             borderRadius: 10,
           }}>
-          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Exo 2'}}>Оплатить</Text>
+          <Text style={{color: 'white', fontSize: 16, fontFamily: 'Exo 2'}}>
+            Оплатить
+          </Text>
         </TouchableOpacity>
       )}
     </View>
@@ -78,11 +106,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '700',
     color: 'white',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   secondText: {
     fontSize: 15,
     color: 'white',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
 });

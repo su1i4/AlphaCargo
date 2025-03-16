@@ -2,6 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Loyalty} from '../screens/Loyalty';
 import {Points} from '../screens/Points';
 import {Notifications} from '../screens/notifications';
+import {NotificationDetail} from '../screens/notifications/NotificationDetail';
 import TabNavigation from '../TabNavigation';
 import Profile from '../screens/Profile';
 import CalcPrice from '../screens/CalcPrice';
@@ -31,6 +32,7 @@ export default function MainNavigation() {
       <MainStack.Screen name="CalcPrice" component={CalcPrice} />
       <MainStack.Screen name="NewCalcPrice" component={NewCalcPrice} />
       <MainStack.Screen name="Notifications" component={Notifications} />
+      <MainStack.Screen name="NotificationDetail" component={NotificationDetail} />
       <MainStack.Screen name="Bonus" component={Bonus} />
       <MainStack.Screen name="Reward" component={Reward} />
       <MainStack.Screen name="Tasks" component={Tasks} />

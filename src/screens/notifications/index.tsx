@@ -13,6 +13,11 @@ import Back from '../../assets/icons/Back';
 import MiniLogo from '../../assets/icons/MiniLogo';
 import {formatDate} from '../../utils/helpers';
 
+const truncateText = (text: string, maxLength: number = 50) => {
+  if (text.length <= maxLength) return text;
+  return text.slice(0, maxLength) + '...';
+};
+
 export const Notifications = () => {
   const user = useAuth();
   const accessToken = user?.accessToken;
@@ -58,41 +63,77 @@ export const Notifications = () => {
     }
   }, [accessToken]);
 
-  console.log(lows, notifications[0]);
-
   return (
     <View style={styles.safeArea}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Back color="black" />
-        </TouchableOpacity>
-        <Text style={styles.headerText}>Уведомления</Text>
-      </View>
-
       <ScrollView style={[styles.scrollView]}>
+        <View
+          style={{
+            top: 80,
+            position: 'absolute',
+            paddingHorizontal: 20,
+            zIndex: 99,
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            gap: 10,
+          }}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}>
+            <Back color="black" />
+          </TouchableOpacity>
+          <Text
+            style={{
+              fontSize: 30,
+              lineHeight: 50,
+              fontWeight: '700',
+            }}>
+            Уведомления
+          </Text>
+        </View>
         <View style={!loading ? styles.Wrapper : styles.loadWrap}>
           {!loading ? (
             <View style={{width: '100%'}}>
-              <Text style={{fontSize: 18, fontWeight: '500', fontFamily: 'Exo 2'}}>Новые</Text>
-              {notifications?.map((item: any, index: number) => (
-                <View key={index} style={styles.container}>
+              <Text
+                style={{fontSize: 18, fontWeight: '500', fontFamily: 'Exo 2'}}>
+                Новые
+              </Text>
+              {lows?.map((item: any, index: number) => (
+                <TouchableOpacity
+                  key={index}
+                  style={styles.container}
+                  onPress={() =>
+                    navigation.navigate('NotificationDetail', {id: item.id})
+                  }>
                   <View
                     style={{
                       display: 'flex',
                       flexDirection: 'row',
                       gap: 10,
                       maxWidth: '70%',
+                      marginTop: 10,
                     }}>
                     <MiniLogo />
                     <View>
-                      <Text style={{fontSize: 18, fontWeight: '700', fontFamily: 'Exo 2'}}>
+                      <Text
+                        style={{
+                          fontSize: 17,
+                          fontWeight: '700',
+                          fontFamily: 'Exo 2',
+                        }}>
                         {item.title}
                       </Text>
-                      <Text style={{flexWrap: 'wrap', fontFamily: 'Exo 2'}}>{item.message}</Text>
+                      <Text style={{flexWrap: 'wrap', fontFamily: 'Exo 2'}}>
+                        {truncateText(item.message)}
+                      </Text>
                     </View>
                   </View>
-                  <Text style={{fontFamily: 'Exo 2'}}>{formatDate(item.createdAt)}</Text>
-                </View>
+                  <Text style={{fontFamily: 'Exo 2'}}>
+                    {formatDate(item.createdAt)}
+                  </Text>
+                </TouchableOpacity>
               ))}
             </View>
           ) : (
@@ -117,12 +158,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     paddingHorizontal: 20,
     zIndex: 99,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   headerText: {
     fontSize: 27,
     fontWeight: '700',
     marginTop: 20,
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   Wrapper: {
     paddingHorizontal: 20,
@@ -137,13 +181,13 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 18,
     fontWeight: '600',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   smallText: {
     color: '#8C8C8C',
     fontSize: 13,
     fontWeight: '400',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   container: {
     height: 'auto',
