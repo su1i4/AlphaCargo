@@ -18,7 +18,6 @@ import {useAuth} from '../../hooks/useAuth';
 import LinearGradient from 'react-native-linear-gradient';
 import PersonalIcon from '../../assets/icons/Personal';
 import SuitCaseIcon from '../../assets/icons/SuitCase';
-
 import NewNoti from '../../assets/icons/NewNoti';
 import NewRaketa from '../../assets/icons/NewRaketa';
 import NewFlip from '../../assets/icons/NewFlip';
@@ -35,15 +34,48 @@ export default function Alpha() {
   const [activeTab, setActiveTab] = useState(0);
   const [active, setActive] = useState(false);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [userData, setUserData] = useState<any>(null);
   const [phone, setPhone] = useState('');
-  const [fio, setFio] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [email, setEmail] = useState<any>(null);
+  const [fio, setFio] = useState<any>(null);
 
   const phoneNumber = '+996772007183';
   const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
   const webWhatsAppUrl = `https://wa.me/${phoneNumber}`;
+
+  useEffect(() => {
+    if (accessToken) {
+      const fetchNotifications = async () => {
+        try {
+          const response = await fetch(
+            'https://alpha-cargo.kg/api/users/check-phone',
+            {
+              method: 'GET',
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+                'Content-Type': 'application/json',
+              },
+            },
+          );
+
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+
+          const data = await response.json();
+          setUserData(data);
+        } catch (err: any) {
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchNotifications();
+    } else {
+      setLoading(false);
+    }
+  }, [accessToken]);
 
   const openWhatsAppOrWebsite = async () => {
     try {
@@ -185,15 +217,30 @@ export default function Alpha() {
           }}
           onPress={() => navigation.navigate('Profile')}>
           <ProfileUser />
-          <Text
-            style={{
-              color: 'black',
-              fontWeight: 500,
-              fontSize: 18,
-              fontFamily: 'Exo 2',
-            }}>
-            {phone}
-          </Text>
+          <View>
+            <Text
+              style={{
+                color: 'black',
+                fontWeight: 500,
+                fontSize: 15,
+                width: '90%',
+                fontFamily: 'Exo 2',
+                marginBottom: 2
+              }}
+              numberOfLines={2}
+              >
+              {userData?.Name}
+            </Text>
+            {/* <Text
+              style={{
+                color: 'black',
+                fontWeight: 500,
+                fontSize: 15,
+                fontFamily: 'Exo 2',
+              }}>
+              {phone}
+            </Text> */}
+          </View>
         </TouchableOpacity>
         <LinearGradient
           colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
@@ -222,7 +269,7 @@ export default function Alpha() {
               borderRadius: 20,
             }}>
             <Text style={{fontSize: 16, fontWeight: 500, color: 'white'}}>
-              к0707
+              {userData?.Code}
             </Text>
           </LinearGradient>
         </LinearGradient>
