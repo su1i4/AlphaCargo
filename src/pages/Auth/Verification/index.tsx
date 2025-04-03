@@ -1,5 +1,15 @@
 import React, {useRef, useEffect, useState} from 'react';
-import {View, StyleSheet, Text, TextInput} from 'react-native';
+import {
+  View, 
+  StyleSheet, 
+  Text, 
+  TextInput, 
+  KeyboardAvoidingView, 
+  Platform,
+  TouchableWithoutFeedback,
+  Keyboard,
+  ScrollView
+} from 'react-native';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
 import Toast from 'react-native-toast-message';
 import {useActions} from '../../../hooks/useActions';
@@ -9,8 +19,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useLoginMutation, useSingUpStep1Mutation} from '../../../services/auth.service';
 import {LAST_LOGIN_KEY} from '../../../utils/consts';
 import {Count} from '../Count.tsx';
-
-
 
 export default function Verification({navigation, route}: any) {
   const {phone, password} = route.params;
@@ -25,6 +33,9 @@ export default function Verification({navigation, route}: any) {
   const {saveUser} = useActions();
 
   const handlePost = async () => {
+    // Dismiss keyboard when submitting
+    Keyboard.dismiss();
+    
     const codeRes = Number(code.join(''));
 
     let hasError = false;
@@ -89,13 +100,39 @@ export default function Verification({navigation, route}: any) {
   }, []);
 
   const handleCodeChange = (text: string, index: number) => {
-    const newCode = [...code];
-    newCode[index] = text;
-    setCode(newCode);
+    // Handle case when a longer string is pasted or auto-filled
+    if (text.length > 1) {
+      // This likely means the entire SMS code was auto-filled
+      const codeDigits = text.slice(0, 6).split('');
+      
+      // Fill the inputs with the digits
+      const newCode = [...code];
+      for (let i = 0; i < codeDigits.length && i < 6; i++) {
+        newCode[i] = codeDigits[i];
+      }
+      setCode(newCode);
+      
+      // Move focus to the last filled input or dismiss keyboard if all filled
+      if (codeDigits.length >= 6) {
+        Keyboard.dismiss();
+      } else if (codeDigits.length > 0) {
+        const newIndex = Math.min(codeDigits.length, 5);
+        setFocusedIndex(newIndex);
+        inputRefs.current[newIndex].focus();
+      }
+    } else {
+      // Normal case - single digit entered
+      const newCode = [...code];
+      newCode[index] = text;
+      setCode(newCode);
 
-    if (text.length === 1 && index < 5) {
-      setFocusedIndex(index + 1);
-      inputRefs.current[index + 1].focus();
+      // If all inputs are filled, dismiss keyboard
+      if (text.length === 1 && index === 5) {
+        Keyboard.dismiss();
+      } else if (text.length === 1 && index < 5) {
+        setFocusedIndex(index + 1);
+        inputRefs.current[index + 1].focus();
+      }
     }
   };
 
@@ -151,63 +188,82 @@ export default function Verification({navigation, route}: any) {
     setLoading(false);
   };
 
+  // Dismiss keyboard when tapping outside input
+  const dismissKeyboard = () => {
+    Keyboard.dismiss();
+  };
+
   return (
-    <View style={{flex: 1, position: 'relative'}}>
-      <View
-        style={{
-          top: 80,
-          position: 'absolute',
-          paddingHorizontal: 20,
-          zIndex: 99,
-        }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}>
-          <Back color="black" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.main}>
-        <Text
-          style={{
-            width: '100%',
-            fontSize: 30,
-            fontWeight: '700',
-            marginTop: 20,
-            fontFamily: 'Exo 2',
-          }}>
-          Введите код
-        </Text>
-        <Text style={[styles.text, {fontFamily: 'Exo 2'}]}>
-          Код отправлен на {phone}
-        </Text>
-        <View style={styles.container}>
-          {code.map((digit: any, index: any) => (
-            <TextInput
-              key={index}
-              ref={ref => (inputRefs.current[index] = ref)}
-              style={[styles.input, {fontFamily: 'Exo 2'}]}
-              value={digit}
-              onChangeText={text => handleCodeChange(text, index)}
-              onKeyPress={event => handleKeyPress(event, index)}
-              onFocus={() => handleFocus(index)}
-              maxLength={1}
-              keyboardType="numeric"
-            />
-          ))}
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{flex: 1}}>
+      <TouchableWithoutFeedback onPress={dismissKeyboard}>
+        <View style={{flex: 1, position: 'relative'}}>
+          <View
+            style={{
+              top: 80,
+              position: 'absolute',
+              paddingHorizontal: 20,
+              zIndex: 99,
+            }}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <Back color="black" />
+            </TouchableOpacity>
+          </View>
+          
+          <ScrollView 
+            contentContainerStyle={{flexGrow: 1}}
+            keyboardShouldPersistTaps="handled">
+            <View style={styles.main}>
+              <Text
+                style={{
+                  width: '100%',
+                  fontSize: 30,
+                  fontWeight: '700',
+                  marginTop: 20,
+                  fontFamily: 'Exo 2',
+                }}>
+                Введите код
+              </Text>
+              <Text style={[styles.text, {fontFamily: 'Exo 2'}]}>
+                Код отправлен на {phone}
+              </Text>
+              <View style={styles.container}>
+                {code.map((digit: any, index: any) => (
+                  <TextInput
+                    key={index}
+                    ref={ref => (inputRefs.current[index] = ref)}
+                    style={[styles.input, {fontFamily: 'Exo 2'}]}
+                    value={digit}
+                    onChangeText={text => handleCodeChange(text, index)}
+                    onKeyPress={event => handleKeyPress(event, index)}
+                    onFocus={() => handleFocus(index)}
+                    maxLength={index === 0 ? 6 : 1}
+                    keyboardType="numeric"
+                    returnKeyType={index === 5 ? "done" : "next"}
+                    blurOnSubmit={index === 5}
+                    textContentType="oneTimeCode"
+                  />
+                ))}
+              </View>
+              {errorText ? <Text style={styles.errorText}>{errorText}</Text> : null}
+              <Count onPress={handleResend} />
+              <View style={{width: '100%', marginTop: 30}}>
+                <ButtonCustom
+                  disabled={loading}
+                  title="Войти"
+                  onClick={handlePost}
+                  isLoading={loading}
+                />
+              </View>
+            </View>
+          </ScrollView>
         </View>
-        {errorText ? <Text style={styles.errorText}>{errorText}</Text> : null}
-        <Count onPress={handleResend} />
-        <View style={{width: '100%', position: 'absolute', bottom: 40}}>
-          <ButtonCustom
-            disabled={loading}
-            title="Войти"
-            onClick={handlePost}
-            isLoading={loading}
-          />
-        </View>
-      </View>
-    </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 }
 

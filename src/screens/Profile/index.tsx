@@ -54,10 +54,25 @@ export default function Profile() {
         throw new Error('Network response was not ok');
       }
 
+      const responseData = await fetch('https://alpha-cargo.kg/api/users/check-phone', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
       const data = await response.json();
+      const responseFeick = await responseData.json();
+      console.log(data)
+      console.log(data);
       if (data) {
         setEmail(data.email);
-        setFio(data.fio);
+        setFio(responseFeick.Name);
         setPhone(data.phone);
         setId(data.id);
       }
@@ -91,6 +106,8 @@ export default function Profile() {
         },
         body: JSON.stringify(updateData),
       });
+
+      console.log(response, 'this is console.log');
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -180,7 +197,13 @@ export default function Profile() {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: '700',
+            marginTop: 20,
+            fontFamily: 'Exo 2',
+          }}>
           Личный кабинет{' '}
         </Text>
       </View>
@@ -199,7 +222,14 @@ export default function Profile() {
                 <View style={{alignSelf: 'center'}}>
                   <ProfileUser />
                 </View>
-                <Text style={{fontSize: 18, marginTop: 10, fontFamily: 'Exo 2'}}>{phone}</Text>
+                <Text
+                  style={{fontSize: 18, marginTop: 10, fontFamily: 'Exo 2'}}>
+                  {fio}
+                </Text>
+                <Text
+                  style={{fontSize: 18, marginTop: 10, fontFamily: 'Exo 2', alignSelf: 'center'}}>
+                  {phone}
+                </Text>
               </View>
               {type && (
                 <View
@@ -236,32 +266,13 @@ export default function Profile() {
                   />
                 </View>
               )}
-              <Text style={styles.email}>email</Text>
-              <Input
-                value={email}
-                style={{
-                  backgroundColor: '#F0F1F3',
-                  borderWidth: 0,
-                  borderColor: 'white',
-                }}
-                // disbaled={true}
-                onChange={setEmail}
-                placeholder=""
-              />
               <View style={{display: 'flex', flexDirection: 'row', gap: 10}}>
                 <ButtonCustom
-                  onClick={() => {
-                    !type
-                      ? setType(true)
-                      : handlePost({
-                          fio: fio,
-                          phone: phone,
-                          password: password,
-                        });
-                  }}
-                  isLoading={pacthLoad}
-                  style={{width: '80%'}}
-                  title={!type ? 'Редактировать' : 'Сохранить'}
+                  onClick={handleDelete}
+                  isLoading={deleteLoading}
+                  style={{backgroundColor: 'transparent', width: '80%'}}
+                  title="Удалить аккаунт"
+                  loadingColor="red"
                 />
                 <TouchableOpacity
                   style={{
@@ -278,19 +289,12 @@ export default function Profile() {
                     removeUserFromStorage();
                     naviagation.reset({
                       index: 0, // Устанавливаем индекс в 0, чтобы это был первый экран
-                      routes: [{ name: 'Login' }], // Указываем маршрут, на который нужно перейти
+                      routes: [{name: 'Login'}], // Указываем маршрут, на который нужно перейти
                     });
                   }}>
-                  <LogoutIcon color='black' size={20} />
+                  <LogoutIcon color="black" size={20} />
                 </TouchableOpacity>
               </View>
-              <ButtonCustom
-                onClick={handleDelete}
-                isLoading={deleteLoading}
-                style={{backgroundColor: 'transparent'}}
-                title="Удалить аккаунт"
-                loadingColor="red"
-              />
             </View>
           )}
         </View>
@@ -328,13 +332,13 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 18,
     fontWeight: '600',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   email: {
     color: '#000018',
     fontSize: 13,
     fontWeight: '400',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   delete: {color: 'red', width: '100%', textAlign: 'center'},
 });

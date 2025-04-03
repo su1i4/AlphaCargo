@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text, Alert} from 'react-native';
 import WatchOrder from '../pages/WatchOrder';
-import Order from '../pages/Order';
+import Order from '../pages/Map';
 import Send from '../pages/Send';
 import Alpha from '../pages/Alpha';
 import LupaIcon from '../assets/icons/LupaIcon';

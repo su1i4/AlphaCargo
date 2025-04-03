@@ -86,10 +86,10 @@ export default function Alpha() {
         await Linking.openURL(webWhatsAppUrl);
       }
     } catch (error) {
-      Alert.alert(
-        'Ошибка',
-        'Не удалось открыть WhatsApp, переход к веб-версии.',
-      );
+      // Alert.alert(
+      //   'Ошибка',
+      //   'Не удалось открыть WhatsApp, переход к веб-версии.',
+      // );
       await Linking.openURL(webWhatsAppUrl);
     }
   };

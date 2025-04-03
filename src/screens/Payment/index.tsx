@@ -1,79 +1,89 @@
 import React, {useState} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet, Alert} from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  Linking,
+} from 'react-native';
 import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
 import {Input} from '../../components/UI/Inputs/Input';
 import {Tab} from '../../components/UI/Tab';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
-import DocumentPicker from 'react-native-document-picker';
-import {useAuth} from '../../hooks/useAuth';
+import Toast from 'react-native-toast-message';
+import WhiteWhat from '../../assets/icons/WhiteWhat';
 
 const Payment = () => {
-  const user = useAuth();
-  const accessToken = user?.accessToken;
   const navigation: any = useNavigation();
   const [activeTab, setActiveTab] = useState(0);
   const [parcel, setParcel] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [amount, setAmount] = useState('');
-  const [file, setFile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [sum, setSum] = useState(null);
+  const [payment, setPayment] = useState(false);
 
-  const handleFileSelect = async () => {
-    try {
-      const res = await DocumentPicker.pickSingle({
-        type: [DocumentPicker.types.allFiles],
-      });
-      setFile(res);
-    } catch (err) {
-      if (DocumentPicker.isCancel(err)) {
-        Alert.alert('Canceled', 'No file was selected.');
-      } else {
-        console.error(err);
-        Alert.alert('Error', 'Failed to select a file.');
-      }
-    }
-  };
+  const phoneNumber = '+996995121822';
+  const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
+  const webWhatsAppUrl = `https://wa.me/${phoneNumber}`;
 
   const handlePost = async () => {
     try {
       setLoading(true);
-
-      if (!parcel || !phoneNumber || !amount || !file) {
-        Alert.alert('Error', 'Please fill in all the fields.');
-        return;
-      }
-
-      const formData = new FormData();
-      formData.append('phoneNumber', phoneNumber);
-      formData.append('amount', amount);
-      formData.append('checkFile', {
-        uri: file.uri,
-        type: file.type,
-        name: file.name,
-      });
-
-      const response = await fetch(`${URL}/api/payment`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'multipart/form-data',
+      const response = await fetch(
+        `https://alpha-cargo.kg/api/parcels/invoice/${parcel}`,
+        {
+          method: 'GET',
         },
-        body: formData,
-      });
+      );
 
       if (!response.ok) {
-        throw new Error('Failed to create payment.');
+        setSum(null);
+        setPayment(false);
+        throw new Error('Network response was not ok');
       }
 
-      Alert.alert('Success', 'Payment created successfully.');
-    } catch (error) {
-      console.error(error);
-      Alert.alert('Error', 'Failed to create payment.');
+      const data = await response.json();
+      if (data?.Statuses?.length) {
+        const lastStatus = data.Statuses[data.Statuses.length - 1]; // Последний элемент
+        setSum(lastStatus.sum);
+        setPayment(lastStatus.payment);
+      } else {
+        setSum(null); // Накладная не найдена
+        setPayment(false);
+        Toast.show({
+          type: 'error',
+          text1: 'Ошибка входа',
+          text2: 'Не удалось найти накладной номер',
+        });
+      }
+    } catch (err: any) {
+      setSum(null);
+      setPayment(false);
+      console.log('Ошибка при получении данных:', err.message);
     } finally {
       setLoading(false);
     }
   };
+
+  const openWhatsAppOrWebsite = async () => {
+    try {
+      const supported = await Linking.canOpenURL(whatsAppUrl);
+      if (supported) {
+        await Linking.openURL(whatsAppUrl);
+      } else {
+        await Linking.openURL(webWhatsAppUrl);
+      }
+    } catch (error) {
+      // Alert.alert(
+      //   'Ошибка',
+      //   'Не удалось открыть WhatsApp, переход к веб-версии.',
+      // );
+      await Linking.openURL(webWhatsAppUrl);
+    }
+  };
+
+  console.log(sum, payment);
 
   return (
     <View style={{flex: 1, position: 'relative'}}>
@@ -90,7 +100,13 @@ const Payment = () => {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: '700',
+            marginTop: 20,
+            fontFamily: 'Exo 2',
+          }}>
           Оплата
         </Text>
       </View>
@@ -98,35 +114,78 @@ const Payment = () => {
         <View style={{padding: 20}}>
           <Tab text="Плательщик" active={activeTab} setActive={setActiveTab}>
             <View>
-              <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Частное лицо</Text>
+              <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>
+                Частное лицо
+              </Text>
             </View>
             <View>
-              <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Юридическое лицо</Text>
+              <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>
+                Юридическое лицо
+              </Text>
             </View>
           </Tab>
-
-          {/* <Text style={{marginTop: 10, marginBottom: 10}}>Номер накладной</Text>
+          <Text style={{marginTop: 10, marginBottom: 10, fontFamily: 'Exo 2'}}>
+            Номер накладной
+          </Text>
           <Input
             value={parcel}
             onChange={setParcel}
-            placeholder="Введите номер"
-          /> */}
-
-          <Text style={{marginTop: 10, marginBottom: 10, fontFamily: 'Exo 2'}}>Номер телефона</Text>
-          <Input
-            value={phoneNumber}
-            onChange={setPhoneNumber}
-            placeholder="Введите номер телефона"
+            placeholder="Введите накладной номер"
           />
-
-          <Text style={{marginTop: 10, marginBottom: 10, fontFamily: 'Exo 2'}}>Сумма платежа</Text>
-          <Input
-            value={amount}
-            onChange={setAmount}
-            placeholder="Введите сумму"
-          />
+          <View
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            {sum ? (
+              <Text
+                style={{marginTop: 10, marginBottom: 10, fontFamily: 'Exo 2'}}>
+                {payment ? (
+                  <Text style={{color: 'green'}}>Оплачено</Text>
+                ) : (
+                  <Text style={{color: 'red'}}>Не оплачено</Text>
+                )}
+              </Text>
+            ) : (
+              ''
+            )}
+            {sum && payment === false && (
+              <Text
+                style={{marginTop: 10, marginBottom: 10, fontFamily: 'Exo 2'}}>
+                Cумма: {sum} р
+              </Text>
+            )}
+          </View>
+          {payment === false && sum !== null && (
+            <ButtonCustom
+              title={
+                <View
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    gap: 20,
+                  }}>
+                  <Text
+                    style={{
+                      fontFamily: 'Exo 2',
+                      color: 'white',
+                      fontSize: 16,
+                    }}>
+                    Написать
+                  </Text>
+                  <WhiteWhat />
+                </View>
+              }
+              onClick={openWhatsAppOrWebsite}
+              style={{marginTop: 10}}
+            />
+          )}
           <ButtonCustom
-            title="Отправить"
+            title="Найти"
             isLoading={loading}
             onClick={handlePost}
             style={{marginTop: 10}}
