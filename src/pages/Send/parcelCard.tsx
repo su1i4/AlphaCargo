@@ -1,16 +1,9 @@
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
 import {useNavigation} from '@react-navigation/native';
-import Pdf from 'react-native-pdf';
-import {URL} from '../../utils/consts';
-import FileViewer from 'react-native-file-viewer';
 import PdfIcon from '../../assets/icons/PdfIcon';
 
 export const ParcelCard = ({oneParcel, getPdf}: any) => {
-  const source = {
-    uri: `${URL}/parcels/invoice/${oneParcel?.invoice}/pdf`,
-    cache: true,
-  };
   const navigation: any = useNavigation();
 
   return (
@@ -33,7 +26,7 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
           onClick={() => navigation.navigate('Payment')}
         />
       )}
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => getPdf(oneParcel?.invoice)}>
         <PdfIcon />
         <Text style={{fontSize: 12, color: 'white', fontFamily: 'Exo 2'}}>
           Накладная

@@ -26,6 +26,8 @@ export default function WatchOrder() {
   const user = useAuth();
   const accessToken = user?.accessToken;
 
+  console.log(accessToken)
+
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState([]);
   const [zakaz, setZakaz] = useState('');

@@ -110,7 +110,7 @@ export default function Send() {
   const getPdf = async (invoiceNumber: string) => {
     try {
       // Показываем индикатор загрузки
-      Alert.alert('Информация', 'Начинаем загрузку PDF, пожалуйста, подождите...');
+      // Alert.alert('Информация', 'Начинаем загрузку PDF, пожалуйста, подождите...');
       
       // Используем RNFetchBlob для получения PDF напрямую
       const resp = await RNFetchBlob.config({
@@ -118,7 +118,7 @@ export default function Send() {
         appendExt: 'pdf',
       }).fetch(
         'GET',
-        `${URL}/parcels/invoice/${invoiceNumber}/pdf`,
+        `${URL}/parcels/invoice/mobile/${invoiceNumber}/pdf`,
         {
           Authorization: `Bearer ${accessToken}`,
         }
@@ -133,10 +133,10 @@ export default function Send() {
       
     } catch (error) {
       console.error('Ошибка в процессе создания PDF:', error);
-      Alert.alert(
-        'Ошибка',
-        'Не удалось создать или открыть PDF. Попробуйте позже или обратитесь в поддержку.'
-      );
+      // Alert.alert(
+      //   'Ошибка',
+      //   'Не удалось создать или открыть PDF. Попробуйте позже или обратитесь в поддержку.'
+      // );
     }
   };
 
