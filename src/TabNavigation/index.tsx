@@ -13,7 +13,7 @@ import {useDispatch} from 'react-redux';
 import {useAuth} from '../hooks/useAuth';
 import {getUserFromStorage, checkLoginDate} from '../utils/helpers';
 import {authActions} from '../store/slices/auth.slice';
-import { useNavigation } from '@react-navigation/native';
+import {useNavigation} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
@@ -23,7 +23,7 @@ export default function TabNavigation({route}: any) {
   const dispatch = useDispatch();
   const user = useAuth();
 
-  const navigation: any = useNavigation()
+  const navigation: any = useNavigation();
 
   useEffect(() => {
     const loadUser = async () => {
@@ -60,7 +60,6 @@ export default function TabNavigation({route}: any) {
       );
     }
   };
-  
 
   if (loading) {
     return null; // Or a loading spinner
@@ -99,7 +98,7 @@ export default function TabNavigation({route}: any) {
         options={{
           tabBarLabel: ({focused}) => (
             <Text style={{color: focused ? '#94C325' : 'gray', fontSize: 11}}>
-              Отправления
+              Мои посылки
             </Text>
           ),
           tabBarIcon: ({focused}) => <CargoIcon active={focused} size={24} />,

@@ -26,9 +26,9 @@ import NewTarif from '../../screens/NewTarif';
 import RNFetchBlob from 'react-native-blob-util';
 import { decode } from 'base-64';
 
-const tabs = ['Отправления', 'Рассчитать', 'Заказать выезд', 'Тарифы'];
+const tabs = ['Отправки', 'Рассчитать', 'Заказать выезд', 'Тарифы'];
 const texts = [
-  'Отправления',
+  'Мои отправки',
   'Рассчитать доставку',
   'Заказать выезд',
   'Тарифы',
@@ -179,7 +179,7 @@ export default function Send() {
     <View style={{flex: 1}}>
       <ScrollView style={styles.scrollView}>
         <Text style={{fontSize: 30, fontWeight: '700', marginTop: 60, fontFamily: 'Exo 2'}}>
-          {texts[tab]}
+          {tab === 0 ? 'Отправки' : texts[tab]}
         </Text>
         <ScrollView
           horizontal
@@ -228,7 +228,7 @@ export default function Send() {
         {tab === 0 && data && (
           <View>
             <Tab
-              text="Мои отправления"
+              text="Мои отправки"
               active={activeTab}
               setActive={setActiveTab}>
               <View>
