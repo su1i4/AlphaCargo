@@ -946,6 +946,8 @@ PODS:
   - React-Mapbuffer (0.74.3):
     - glog
     - React-debug
+  - react-native-biometrics (3.0.1):
+    - React-Core
   - react-native-blob-util (0.21.2):
     - React-Core
   - react-native-document-picker (9.3.1):
@@ -1356,6 +1358,7 @@ DEPENDENCIES:
   - React-jsitracing (from `../node_modules/react-native/ReactCommon/hermes/executor/`)
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - React-Mapbuffer (from `../node_modules/react-native/ReactCommon`)
+  - react-native-biometrics (from `../node_modules/react-native-biometrics`)
   - react-native-blob-util (from `../node_modules/react-native-blob-util`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
@@ -1473,6 +1476,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/logger"
   React-Mapbuffer:
     :path: "../node_modules/react-native/ReactCommon"
+  react-native-biometrics:
+    :path: "../node_modules/react-native-biometrics"
   react-native-blob-util:
     :path: "../node_modules/react-native-blob-util"
   react-native-document-picker:
@@ -1596,6 +1601,7 @@ SPEC CHECKSUMS:
   React-jsitracing: eee70a10f1e17690d33fb46a0989a19657c546a3
   React-logger: bbd09ad59f304e718962b2867534204710873bd9
   React-Mapbuffer: da4470fdf42b2e389efbc4e7af958bf96e921a0b
+  react-native-biometrics: 43ed5b828646a7862dbc7945556446be00798e7d
   react-native-blob-util: b653f7dae5c9fa3f903af51bc2edfb8ef659022b
   react-native-document-picker: 451699da81cba8b40b596b8076019a4deb86f46e
   react-native-geolocation-service: 32b2c2a3b91e70ce2a8d0c684801aaeb0a07e0ec

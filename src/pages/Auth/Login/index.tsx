@@ -8,8 +8,9 @@ import Toast from 'react-native-toast-message';
 import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
 import {useNavigation} from '@react-navigation/native';
 import {useActions} from '../../../hooks/useActions';
-import {LAST_LOGIN_KEY} from '../../../utils/consts';
 import Back from '../../../assets/icons/Back';
+import {LAST_LOGIN_KEY} from '../../../utils/consts';
+import {GradientSwitch} from './gradient-switch';
 
 export default function Login({_, route}: any) {
   const {ph = '', pass = ''} = route.params || {};
@@ -17,11 +18,11 @@ export default function Login({_, route}: any) {
   const [login] = useLoginMutation();
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<string>('');
   const [passwordError, setPasswordError] = useState<string>('');
   const phoneInputRef = useRef<any>();
-
   const {saveUser} = useActions();
 
   useEffect(() => {
@@ -30,6 +31,19 @@ export default function Login({_, route}: any) {
       setPhone(ph);
     }
   }, [ph, pass]);
+
+  useEffect(() => {
+    const loadStoredCredentials = async () => {
+      const savedPhone = await AsyncStorage.getItem('SAVED_PHONE');
+      const savedPassword = await AsyncStorage.getItem('SAVED_PASSWORD');
+      if (savedPhone && savedPassword) {
+        setPhone(savedPhone);
+        setPassword(savedPassword);
+        setRememberMe(true);
+      }
+    };
+    loadStoredCredentials();
+  }, []);
 
   const handlePost = async () => {
     setPhoneError('');
@@ -61,8 +75,17 @@ export default function Login({_, route}: any) {
         const currentDate = new Date().toISOString();
         await AsyncStorage.setItem(LAST_LOGIN_KEY, currentDate);
         saveUser(response.data);
-        navigation.navigate('MainNavigation');
+        navigation.navigate('PinSetupScreen');
         onClose();
+
+        // Сохраняем или очищаем логин/пароль
+        if (rememberMe) {
+          await AsyncStorage.setItem('SAVED_PHONE', phone);
+          await AsyncStorage.setItem('SAVED_PASSWORD', password);
+        } else {
+          await AsyncStorage.removeItem('SAVED_PHONE');
+          await AsyncStorage.removeItem('SAVED_PASSWORD');
+        }
       }
     } catch (error) {}
     setLoading(false);
@@ -90,10 +113,7 @@ export default function Login({_, route}: any) {
           paddingHorizontal: 20,
           zIndex: 99,
         }}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('Begin');
-          }}>
+        <TouchableOpacity onPress={() => navigation.navigate('Begin')}>
           <Back color="black" />
         </TouchableOpacity>
         <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20}}>
@@ -106,6 +126,7 @@ export default function Login({_, route}: any) {
             label="Ваш номер телефона"
             setPhoneNumber={setPhone}
             ref={phoneInputRef}
+            value={phone}
           />
           {phoneError ? (
             <Text style={styles.errorText}>{phoneError}</Text>
@@ -118,17 +139,25 @@ export default function Login({_, route}: any) {
             value={password}
             onChange={setPassword}
             placeholder="Пароль"
+            // secureTextEntry
           />
           {passwordError ? (
             <Text style={styles.errorText}>{passwordError}</Text>
           ) : null}
         </View>
+
+        <View style={styles.rememberMeWrap}>
+          <GradientSwitch value={rememberMe} onValueChange={setRememberMe} />
+          <Text style={{marginLeft: 10}}>Запомнить</Text>
+        </View>
+
         <ButtonCustom
           title="Войти"
           onClick={handlePost}
           isLoading={loading}
           style={{width: '100%'}}
         />
+
         <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
           <Text style={{textDecorationLine: 'underline', fontFamily: 'Exo 2'}}>
             Не можете войти в ваш профиль?
@@ -143,7 +172,6 @@ const styles = StyleSheet.create({
   main: {
     width: '100%',
     height: '100%',
-    // backgroundColor: '#02447F',
     paddingHorizontal: 20,
     position: 'relative',
     display: 'flex',
@@ -152,48 +180,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  imageContainer: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '25%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
-  },
-  inputWrap: {
-    position: 'relative',
-    height: 55,
-    minHeight: 55,
-    maxHeight: 55,
-  },
-  signWrap: {
-    position: 'absolute',
-    top: 0,
-    right: 50,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    bottom: 0,
-  },
-  logWrap: {
-    position: 'absolute',
-    top: 0,
-    right: 20,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    bottom: 0,
+  msgWrap: {
+    width: '100%',
   },
   errorText: {
     color: 'red',
     fontSize: 12,
   },
-  msgWrap: {
+  rememberMeWrap: {
     width: '100%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
   },
 });

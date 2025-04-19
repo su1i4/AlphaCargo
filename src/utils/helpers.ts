@@ -1,5 +1,11 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {LAST_LOGIN_KEY, ONE_DAY_MS} from './consts';
+import {
+  FIVE_MINUTES_MS,
+  LAST_LOGIN_KEY,
+  ONE_DAY_MS,
+  PIN_KEY,
+  PIN_KEY_DATE,
+} from './consts';
 
 export function getStatus(openingHour: any, closingHour: any) {
   const currentHour = new Date().getHours();
@@ -68,6 +74,44 @@ export const checkLoginDate = async () => {
     return false;
   }
 };
+
+export const checkPinDate = async () => {
+  try {
+    const lastLoginDate = await AsyncStorage.getItem(PIN_KEY_DATE);
+    if (!lastLoginDate) return false;
+
+    const lastLoginTime = new Date(lastLoginDate).getTime();
+    const currentTime = Date.now();
+
+    console.log(
+      'Last PIN login time:',
+      new Date(lastLoginTime).toLocaleString(),
+    );
+    console.log('Current time:', new Date(currentTime).toLocaleString());
+    console.log('Time difference (ms):', currentTime - lastLoginTime);
+    console.log('Valid if less than:', FIVE_MINUTES_MS);
+
+    // PIN session is valid if less than 5 minutes have passed
+    return currentTime - lastLoginTime < FIVE_MINUTES_MS;
+  } catch (error) {
+    console.error('Error checking PIN date:', error);
+    return false;
+  }
+};
+
+// Function to update PIN session timestamp
+export const updatePinSession = async () => {
+  try {
+    const currentTime = new Date().toISOString();
+    await AsyncStorage.setItem(PIN_KEY_DATE, currentTime);
+    console.log('PIN session updated at:', currentTime);
+    return true;
+  } catch (error) {
+    console.error('Error updating PIN session:', error);
+    return false;
+  }
+};
+
 export const statusColor = (txt: string) => {
   switch (txt) {
     case 'Принят на склад ожидает отправки':
@@ -112,18 +156,18 @@ export const searchLocations = (locations: any[], query: string) => {
   if (!query.trim()) return locations;
   const lowerQuery = query.toLowerCase();
 
-  return locations.filter((location) =>
-    Object.values(location).some((value) => {
+  return locations.filter(location =>
+    Object.values(location).some(value => {
       if (typeof value === 'object' && value !== null) {
         return Object.values(value).some(
-          (nestedValue) =>
+          nestedValue =>
             typeof nestedValue === 'string' &&
-            nestedValue.toLowerCase().includes(lowerQuery)
+            nestedValue.toLowerCase().includes(lowerQuery),
         );
       }
       return (
         typeof value === 'string' && value.toLowerCase().includes(lowerQuery)
       );
-    })
+    }),
   );
 };

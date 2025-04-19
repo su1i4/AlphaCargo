@@ -19,6 +19,8 @@ import Toast from 'react-native-toast-message';
 import {removeUserFromStorage} from '../../utils/helpers';
 import Back from '../../assets/icons/Back';
 import ProfileUser from '../../assets/icons/ProfileUser';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {PIN_KEY, PIN_KEY_DATE} from '../../utils/consts';
 
 export default function Profile() {
   const user = useAuth();
@@ -54,13 +56,16 @@ export default function Profile() {
         throw new Error('Network response was not ok');
       }
 
-      const responseData = await fetch('https://alpha-cargo.kg/api/users/check-phone', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
+      const responseData = await fetch(
+        'https://alpha-cargo.kg/api/users/check-phone',
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
         },
-      });
+      );
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -68,7 +73,7 @@ export default function Profile() {
 
       const data = await response.json();
       const responseFeick = await responseData.json();
-      console.log(data)
+      console.log(data);
       console.log(data);
       if (data) {
         setEmail(data.email);
@@ -89,53 +94,6 @@ export default function Profile() {
       setLoading(false);
     }
   }, [accessToken]);
-
-  const handlePost = async (updateData: any) => {
-    if (!accessToken) {
-      console.error('No access token available');
-      return;
-    }
-    setPatchLoad(true);
-
-    try {
-      const response = await fetch('https://alpha-cargo.kg/api/users', {
-        method: 'PATCH',
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updateData),
-      });
-
-      console.log(response, 'this is console.log');
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.json();
-      if (data['error']) {
-        Toast.show({
-          type: 'error',
-          text1: 'Ошибка входа',
-          text2: data?.error?.data?.message,
-          visibilityTime: 3000,
-        });
-      } else {
-        Toast.show({
-          type: 'success',
-          text1: 'Успеx',
-          text2: 'Успешное обновление личных данных',
-          visibilityTime: 3000,
-        });
-        setType(false);
-        fetchNotifications();
-      }
-    } catch (err) {
-      console.error('Error updating user data:', err);
-    }
-    setPatchLoad(false);
-  };
 
   const handleDelete = async () => {
     setDeleteLoading(true);
@@ -227,7 +185,12 @@ export default function Profile() {
                   {fio}
                 </Text>
                 <Text
-                  style={{fontSize: 18, marginTop: 10, fontFamily: 'Exo 2', alignSelf: 'center'}}>
+                  style={{
+                    fontSize: 18,
+                    marginTop: 10,
+                    fontFamily: 'Exo 2',
+                    alignSelf: 'center',
+                  }}>
                   {phone}
                 </Text>
               </View>
@@ -285,8 +248,10 @@ export default function Profile() {
                     alignItems: 'center',
                     justifyContent: 'center',
                   }}
-                  onPress={() => {
+                  onPress={async () => {
                     removeUserFromStorage();
+                    await AsyncStorage.removeItem(PIN_KEY_DATE);
+                    await AsyncStorage.removeItem(PIN_KEY);
                     naviagation.reset({
                       index: 0, // Устанавливаем индекс в 0, чтобы это был первый экран
                       routes: [{name: 'Login'}], // Указываем маршрут, на который нужно перейти

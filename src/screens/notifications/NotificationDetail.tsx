@@ -12,7 +12,6 @@ import Loading from '../../components/UI/Loading';
 import Back from '../../assets/icons/Back';
 import MiniLogo from '../../assets/icons/MiniLogo';
 import {formatDate} from '../../utils/helpers';
-import { useReadNotificationMutation } from '../../services/base.service';
 
 export const NotificationDetail = () => {
   const route = useRoute();
@@ -23,7 +22,6 @@ export const NotificationDetail = () => {
   const [notification, setNotification] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [readNotification] = useReadNotificationMutation();
 
   useEffect(() => {
     if (accessToken && id) {
@@ -59,16 +57,29 @@ export const NotificationDetail = () => {
     }
   }, [accessToken, id]);
 
+  const readNotification = async (id: string | number) => {
+    try {
+      await fetch(`https://alpha-cargo.kg/api/notifications/${id}`, {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (id) {
       try {
         readNotification(id);
-      } catch (error) {
-      }
+      } catch (error) {}
     }
   }, [id]);
-
-
 
   return (
     <View style={styles.safeArea}>
@@ -146,8 +157,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     marginTop: 140,
   },
-  container: {
-  },
+  container: {},
   notificationHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -170,7 +180,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Exo 2',
   },
   loadWrap: {
-    height: 600,
+    height: 700,
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',

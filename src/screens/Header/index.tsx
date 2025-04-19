@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {
   View,
   StyleSheet,
@@ -12,6 +12,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import NewBell from '../../assets/icons/NewBell';
 import {useAuth} from '../../hooks/useAuth';
 import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect} from '@react-navigation/native'; // Добавлен импорт useFocusEffect
 import Back from '../../assets/icons/Back';
 import { GradientWrapper } from '../../components/Containers/WatchOrderHeader';
 
@@ -52,43 +53,55 @@ export default function Header({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    if (accessToken) {
-      const fetchNotifications = async () => {
-        try {
-          const response = await fetch(
-            'https://alpha-cargo.kg/api/notifications',
-            {
-              method: 'GET',
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-                'Content-Type': 'application/json',
-              },
-            },
-          );
+  const fetchNotifications = useCallback(async () => {
+    console.log('Загружаем уведомления');
+    if (!accessToken) {
+      setLoading(false);
+      return;
+    }
+    
+    try {
+      setLoading(true);
+      const response = await fetch(
+        'https://alpha-cargo.kg/api/notifications',
+        {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            'Content-Type': 'application/json',
+          },
+        },
+      );
 
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-          const data = await response.json();
-          const unreadMessages = data.filter(
-            (item: any) => item.read === false,
-          );
-          setUnread(unreadMessages?.length || 0);
-          setNotifications(data);
-        } catch (err: any) {
-          setError(err.message);
-        } finally {
-          setLoading(false);
-        }
-      };
-
-      fetchNotifications();
-    } else {
+      const data = await response.json();
+      const unreadMessages = data.filter(
+        (item: any) => item.read === false,
+      );
+      setUnread(unreadMessages?.length || 0);
+      setNotifications(data);
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
       setLoading(false);
     }
   }, [accessToken]);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchNotifications();
+      
+      return () => {
+      };
+    }, [fetchNotifications])
+  );
+
+  useEffect(() => {
+    fetchNotifications();
+  }, [fetchNotifications]);
 
   const Components = [
     {
@@ -130,7 +143,7 @@ export default function Header({
           <TouchableOpacity
             onPress={() => navigation.navigate('Notifications')}
             style={{position: 'relative'}}>
-            <NewBell />
+            {/* <NewBell /> */}
             {unread > 0 && (
               <View
                 style={{
