@@ -24,10 +24,11 @@ export const GradientWrapper = ({item, Components}: any) => {
           position: 'relative',
           overflow: 'hidden',
         }}>
-        <Image
+        {/* <Image
           source={item.image}
           style={[styles.wrapper, {backgroundColor: item.color}]}
-        />
+        /> */}
+        {item.image}
       </TouchableOpacity>
     </LinearGradient>
   );

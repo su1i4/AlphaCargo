@@ -14,7 +14,10 @@ import {useAuth} from '../../hooks/useAuth';
 import {useNavigation} from '@react-navigation/native';
 import {useFocusEffect} from '@react-navigation/native'; // Добавлен импорт useFocusEffect
 import Back from '../../assets/icons/Back';
-import { GradientWrapper } from '../../components/Containers/WatchOrderHeader';
+import {GradientWrapper} from '../../components/Containers/WatchOrderHeader';
+import AlfaChinaStory from '../../assets/icons/story/AlfaChina';
+import AlfaFullfilment from '../../assets/icons/story/Alphafullfilment';
+import AlfaVyezd from '../../assets/icons/story/AlfaVyezd';
 
 interface HeaderProps {
   text: string;
@@ -59,28 +62,23 @@ export default function Header({
       setLoading(false);
       return;
     }
-    
+
     try {
       setLoading(true);
-      const response = await fetch(
-        'https://alpha-cargo.kg/api/notifications',
-        {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-            'Content-Type': 'application/json',
-          },
+      const response = await fetch('https://alpha-cargo.kg/api/notifications', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+          'Content-Type': 'application/json',
         },
-      );
+      });
 
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
 
       const data = await response.json();
-      const unreadMessages = data.filter(
-        (item: any) => item.read === false,
-      );
+      const unreadMessages = data.filter((item: any) => item.read === false);
       setUnread(unreadMessages?.length || 0);
       setNotifications(data);
     } catch (err: any) {
@@ -93,10 +91,9 @@ export default function Header({
   useFocusEffect(
     useCallback(() => {
       fetchNotifications();
-      
-      return () => {
-      };
-    }, [fetchNotifications])
+
+      return () => {};
+    }, [fetchNotifications]),
   );
 
   useEffect(() => {
@@ -105,15 +102,28 @@ export default function Header({
 
   const Components = [
     {
+      phoneNumber: '+996778777887',
       id: 0,
       color: '#495665',
       text: 'Регистрация',
-      image: require('../../assets/images/REKLAMA5.png'),
-      children: [
-        require('../../assets/images/REKLAMA5.png'),
-        require('../../assets/images/REKLAMA6.png'),
-        require('../../assets/images/REKLAMA7.png'),
-      ],
+      image: <AlfaChinaStory />,
+      children: [require('../../assets/images/AlfaChina.png')],
+    },
+    {
+      phoneNumber: '+996222990990',
+      id: 1,
+      color: '#495665',
+      text: 'Регистрация',
+      image: <AlfaFullfilment />,
+      children: [require('../../assets/images/AlphaCargoStory1.png')],
+    },
+    {
+      phoneNumber: '+996772007183',
+      id: 2,
+      color: '#495665',
+      text: 'Регистрация',
+      image: <AlfaVyezd />,
+      children: [require('../../assets/images/AlphaCargoStory2.png')],
     },
   ];
 
@@ -143,7 +153,7 @@ export default function Header({
           <TouchableOpacity
             onPress={() => navigation.navigate('Notifications')}
             style={{position: 'relative'}}>
-            {/* <NewBell /> */}
+            <NewBell />
             {unread > 0 && (
               <View
                 style={{
@@ -213,7 +223,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     paddingBottom: 5,
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   headerWrapper: {
     display: 'flex',

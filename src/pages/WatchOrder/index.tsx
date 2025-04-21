@@ -19,6 +19,9 @@ import {useAuth} from '../../hooks/useAuth';
 import {statusColor} from '../../utils/helpers';
 import Checl from '../../assets/icons/Checktrue';
 import Nakladnoi from '../../assets/icons/Nakladoi';
+import AlfaChina from '../../assets/icons/strategy/first';
+import BrandAll from '../../assets/icons/strategy/third';
+import AlhaCargoBrand from '../../assets/icons/strategy/second';
 
 export default function WatchOrder() {
   const navigation: any = useNavigation();
@@ -56,20 +59,6 @@ export default function WatchOrder() {
   useEffect(() => {
     getParcel(zakaz);
   }, [zakaz]);
-
-  const Components = [
-    {
-      id: 0,
-      color: '#495665',
-      text: 'Регистрация',
-      image: require('../../assets/images/REKLAMA5.png'),
-      children: [
-        require('../../assets/images/REKLAMA5.png'),
-        require('../../assets/images/REKLAMA6.png'),
-        require('../../assets/images/REKLAMA7.png'),
-      ],
-    },
-  ];
 
   return (
     <View style={styles.safeArea}>
@@ -138,9 +127,9 @@ export default function WatchOrder() {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.horizontalScrollView}>
           <View style={styles.headerWrapper}>
-            {[''].map((_, index) => (
-              <BannerWrapper key={index} index={index} />
-            ))}
+            <AlfaChina />
+            <AlhaCargoBrand />
+            <BrandAll />
           </View>
         </ScrollView>
       </ScrollView>

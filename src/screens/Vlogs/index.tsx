@@ -12,6 +12,8 @@ import {
   PanResponder,
   Platform,
   TouchableOpacity,
+  Text,
+  Linking,
 } from 'react-native';
 import CloseIcon from '../../assets/icons/CloseIcons';
 
@@ -103,6 +105,24 @@ export default function Vlogs({route}: any) {
     }
   };
 
+  const phoneNumber = Components[currentID].phoneNumber
+
+  const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
+  const webWhatsAppUrl = `https://wa.me/${phoneNumber}`;
+
+  const openWhatsAppOrWebsite = async () => {
+    try {
+      const supported = await Linking.canOpenURL(whatsAppUrl);
+      if (supported) {
+        await Linking.openURL(whatsAppUrl);
+      } else {
+        await Linking.openURL(webWhatsAppUrl);
+      }
+    } catch (error) {
+      await Linking.openURL(webWhatsAppUrl);
+    }
+  };
+
   const renderProgressBars = () => {
     return (
       <View style={styles.progressContainer}>
@@ -156,10 +176,18 @@ export default function Vlogs({route}: any) {
             scrollEnabled={false}
           />
           {renderProgressBars()}
+
+          {/* WhatsApp Button */}
+          <TouchableOpacity
+            style={styles.whatsappButton}
+            onPress={openWhatsAppOrWebsite}
+            activeOpacity={0.8}>
+            <Text style={styles.whatsappButtonText}>Перейти в WhatsApp</Text>
+          </TouchableOpacity>
         </View>
-      </TouchableWithoutFeedback >
+      </TouchableWithoutFeedback>
       <TouchableOpacity onPress={() => navigation.goBack()} style={styles.icon}>
-        <CloseIcon color='white' size={30} />
+        <CloseIcon color="white" size={30} />
       </TouchableOpacity>
     </View>
   );
@@ -182,7 +210,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: '#FFFFFF20'
+    backgroundColor: '#00000050',
   },
   content: {
     flex: 1,
@@ -208,5 +236,28 @@ const styles = StyleSheet.create({
   image: {
     width: screenWidth,
     height: '100%',
+  },
+  whatsappButton: {
+    position: 'absolute',
+    bottom: Platform.OS === 'ios' ? 50 : 30,
+    alignSelf: 'center',
+    backgroundColor: '#25D366',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 30,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  whatsappButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
