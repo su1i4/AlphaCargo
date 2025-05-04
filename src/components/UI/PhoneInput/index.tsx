@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     minHeight: 55,
     maxHeight: 55,
     fontSize: 14,
-    fontWeight: 500,
+    fontWeight: '500',
     color: '#808080',
     fontFamily: 'Exo 2'
   },

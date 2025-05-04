@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   mainText: {
     fontSize: 16,
-    fontWeight: 700,
+    fontWeight: '700',
   },
   secondText: {
     fontSize: 14,

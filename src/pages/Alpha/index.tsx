@@ -221,7 +221,7 @@ export default function Alpha() {
             <Text
               style={{
                 color: 'black',
-                fontWeight: 500,
+                fontWeight: '500',
                 fontSize: 15,
                 width: '90%',
                 fontFamily: 'Exo 2',
@@ -231,15 +231,6 @@ export default function Alpha() {
               >
               {userData?.Name}
             </Text>
-            {/* <Text
-              style={{
-                color: 'black',
-                fontWeight: 500,
-                fontSize: 15,
-                fontFamily: 'Exo 2',
-              }}>
-              {phone}
-            </Text> */}
           </View>
         </TouchableOpacity>
         <LinearGradient
@@ -256,7 +247,7 @@ export default function Alpha() {
             justifyContent: 'space-between',
             alignItems: 'center',
           }}>
-          <Text style={{fontSize: 16, fontWeight: 500, fontFamily: 'Exo 2'}}>
+          <Text style={{fontSize: 16, fontWeight: '500', fontFamily: 'Exo 2'}}>
             Ваш уникальный код
           </Text>
           <LinearGradient
@@ -268,7 +259,7 @@ export default function Alpha() {
               paddingVertical: 5,
               borderRadius: 20,
             }}>
-            <Text style={{fontSize: 16, fontWeight: 500, color: 'white'}}>
+            <Text style={{fontSize: 16, fontWeight: '500', color: 'white'}}>
               {userData?.Code}
             </Text>
           </LinearGradient>

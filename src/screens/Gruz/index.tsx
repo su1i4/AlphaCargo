@@ -70,7 +70,7 @@ export default function Gruz() {
                     }}>
                     <HandIcon size={20} color="black" />
                   </View>
-                  <Text style={{fontSize: 15, fontWeight: 600, color: 'black'}}>
+                  <Text style={{fontSize: 15, fontWeight: '600', color: 'black'}}>
                     Решение любых бизнес-задач
                   </Text>
                 </View>
@@ -95,7 +95,7 @@ export default function Gruz() {
                     }}>
                     <CarIcon size={20} color="black" />
                   </View>
-                  <Text style={{fontSize: 15, fontWeight: 600, color: 'black'}}>
+                  <Text style={{fontSize: 15, fontWeight: '600' , color: 'black'}}>
                     Решение любых бизнес-задач
                   </Text>
                 </View>
@@ -119,7 +119,7 @@ export default function Gruz() {
                     }}>
                     <Document size={20} color="black" />
                   </View>
-                  <Text style={{fontSize: 15, fontWeight: 600, color: 'black'}}>
+                  <Text style={{fontSize: 15, fontWeight: '600', color: 'black'}}>
                     Всё для отчетности
                   </Text>
                 </View>
@@ -143,7 +143,7 @@ export default function Gruz() {
                     }}>
                     <RocketIcon size={20} color="black" />
                   </View>
-                  <Text style={{fontSize: 15, fontWeight: 600, color: 'black'}}>
+                  <Text style={{fontSize: 15, fontWeight: '600', color: 'black'}}>
                     Быстрый старт
                   </Text>
                 </View>
