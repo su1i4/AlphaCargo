@@ -160,27 +160,12 @@ const Payment = () => {
           </View>
           {payment === false && sum !== null && (
             <ButtonCustom
-              title={
-                <View
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    gap: 20,
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Exo 2',
-                      color: 'white',
-                      fontSize: 16,
-                    }}>
-                    Написать
-                  </Text>
-                  <WhiteWhat />
-                </View>
+              title="Оплатить"
+              onClick={() =>
+                navigation.navigate('PaymentList', {
+                  invoice_number: parcel,
+                })
               }
-              onClick={openWhatsAppOrWebsite}
               style={{marginTop: 10}}
             />
           )}

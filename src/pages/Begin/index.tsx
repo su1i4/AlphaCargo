@@ -194,7 +194,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   swiperStyle: {
-    height: 500,
+    height: 800,
     display: 'flex',
   },
   slide: {
@@ -203,6 +203,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 20,
     width: screenWidth,
+    height: 800,
   },
   text: {
     fontWeight: '700',

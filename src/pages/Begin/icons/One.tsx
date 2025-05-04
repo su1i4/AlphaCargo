@@ -3,15 +3,15 @@ import Svg, { Path, Defs, Pattern, Use, Image } from "react-native-svg"
 function One() {
   return (
     <Svg
-      width={216}
+      width={206}
       height={223}
-      viewBox="0 0 216 263"
+      viewBox="0 0 216 273"
       fill="none"
     >
       <Path
-        transform="rotate(-7.025 .346 19.716)"
+        // transform="rotate(-7.025 .346 19.716)"
         fill="url(#pattern0_3115_13491)"
-        d="M0.346191 19.7158H187.43819100000002V293.9018H0.346191z"
+        d="M6.346191 0.7158H187.43819100000002V293.9018H0.346191z"
       />
       <Defs>
         <Pattern

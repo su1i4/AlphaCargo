@@ -68,9 +68,6 @@ const PinCodeScreen: React.FC = () => {
         setBiometricAvailable(available);
         setBiometricType(biometryType);
 
-        console.log('Biometric available:', available);
-        console.log('Biometric type:', biometryType);
-
         // If biometrics are available, prompt immediately
         if (available) {
           handleBiometricLogin();
@@ -89,7 +86,6 @@ const PinCodeScreen: React.FC = () => {
   const handleBiometricLogin = async (): Promise<void> => {
     try {
       if (!rnBiometrics || !biometricAvailable) {
-        console.log('Biometrics not available, skipping authentication');
         return;
       }
 

@@ -77,8 +77,6 @@ export default function Main() {
     }
   }
 
-  console.log('Final initialRoute:', initialRoute);
-
   if (loading || !appInitialized) {
     return null;
   }

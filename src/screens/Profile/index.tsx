@@ -6,11 +6,8 @@ import {
   TouchableOpacity,
   Text,
 } from 'react-native';
-import Header from '../Header';
-import BellIcon from '../../assets/icons/BellIcon';
 import LogoutIcon from '../../assets/icons/LogoutIcon';
 import {useNavigation} from '@react-navigation/native';
-import {Panel} from '../Panel';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
 import {Input} from '../../components/UI/Inputs/Input';
 import {useAuth} from '../../hooks/useAuth';

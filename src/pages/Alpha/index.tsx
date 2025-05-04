@@ -172,9 +172,7 @@ export default function Alpha() {
         },
       );
       const data = await response.json();
-      console.log(data);
     } catch (err: any) {
-      console.log(err);
     } finally {
       setLoading(false);
     }
