@@ -9,15 +9,19 @@ import {
 
 interface TabProps {
   children: ReactNode;
-  text: string;
+  text: any;
+  textRight?: any;
   active: number;
   setActive: Function;
 }
 
-export const Tab = ({children, text, active, setActive}: TabProps) => {
+export const Tab = ({children, text, textRight, active, setActive}: TabProps) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.textHeader}>{text}</Text>
+      <View style={{display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+        <Text style={styles.textHeader}>{text}</Text>
+        {textRight && textRight}
+      </View>
       <View style={styles.innerWrapper}>
         {React.Children.map(children, (child, index) => (
           <TouchableOpacity onPress={() => setActive(index)}>

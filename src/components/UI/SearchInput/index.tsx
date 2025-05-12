@@ -22,9 +22,9 @@ export const SearchInput = ({value, onChange, placeholder, id}: InputProps) => {
         placeholder={placeholder}
         placeholderTextColor="#2B3F6C"
       />
-      <TouchableOpacity>
+      {/* <TouchableOpacity>
         <QrCode />
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     color: '#505893',
     fontSize: 14,
     fontWeight: '400',
-    width: '80%',
+    width: '91%',
     height: 50,
     minHeight: 50,
     maxHeight: 50,

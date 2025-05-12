@@ -24,7 +24,7 @@ import NewCalcPrice from '../../screens/NewCalcPrice';
 import Zakazik from '../../screens/Zakazik';
 import NewTarif from '../../screens/NewTarif';
 import RNFetchBlob from 'react-native-blob-util';
-import { decode } from 'base-64';
+import {decode} from 'base-64';
 
 const tabs = ['Отправки', 'Рассчитать', 'Заказать выезд', 'Тарифы'];
 const texts = [
@@ -111,26 +111,21 @@ export default function Send() {
     try {
       // Показываем индикатор загрузки
       // Alert.alert('Информация', 'Начинаем загрузку PDF, пожалуйста, подождите...');
-      
+
       // Используем RNFetchBlob для получения PDF напрямую
       const resp = await RNFetchBlob.config({
         fileCache: true,
         appendExt: 'pdf',
-      }).fetch(
-        'GET',
-        `${URL}/parcels/invoice/mobile/${invoiceNumber}/pdf`,
-        {
-          Authorization: `Bearer ${accessToken}`,
-        }
-      );
-      
+      }).fetch('GET', `${URL}/parcels/invoice/mobile/${invoiceNumber}/pdf`, {
+        Authorization: `Bearer ${accessToken}`,
+      });
+
       // Получаем путь к файлу
       const filePath = resp.path();
       console.log('Файл сохранен по пути:', filePath);
-      
+
       // Открываем файл
-      await FileViewer.open(filePath, { showOpenWithDialog: true });
-      
+      await FileViewer.open(filePath, {showOpenWithDialog: true});
     } catch (error) {
       console.error('Ошибка в процессе создания PDF:', error);
       // Alert.alert(
@@ -178,7 +173,13 @@ export default function Send() {
   return (
     <View style={{flex: 1}}>
       <ScrollView style={styles.scrollView}>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 60, fontFamily: 'Exo 2'}}>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: '700',
+            marginTop: 60,
+            fontFamily: 'Exo 2',
+          }}>
           {tab === 0 ? 'Отправки' : texts[tab]}
         </Text>
         <ScrollView
@@ -203,7 +204,9 @@ export default function Send() {
                       styles.innerButton,
                       {backgroundColor: 'transparent'},
                     ]}>
-                    <Text style={{color: '#FFFFFF', fontFamily: 'Exo 2'}}>{tabs[index]}</Text>
+                    <Text style={{color: '#FFFFFF', fontFamily: 'Exo 2'}}>
+                      {tabs[index]}
+                    </Text>
                   </View>
                 </LinearGradient>
               </TouchableOpacity>
@@ -229,22 +232,64 @@ export default function Send() {
           <View>
             <Tab
               text="Мои отправки"
+              textRight={
+                <LinearGradient
+                  colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+                  start={{x: 0, y: 0}}
+                  end={{x: 1, y: 0}}
+                  style={{
+                    padding: 2,
+                    borderRadius: 16,
+                  }}>
+                  <View
+                    style={{
+                      width: '100%',
+                      backgroundColor: 'white',
+                      paddingHorizontal: 10,
+                      paddingVertical: 2,
+                      borderRadius: 15,
+                    }}>
+                    <Text
+                      style={{
+                        fontSize: 15,
+                        fontWeight: '600',
+                        lineHeight: 23,
+                        fontFamily: 'Exo 2',
+                      }}>
+                      Общий долг:{' '}
+                      {data
+                        ?.filter((item: any) => !item.payment)
+                        ?.reduce(
+                          (acc: number, item: any) => acc + Number(item.sum),
+                          0,
+                        )}{' '}
+                      р.
+                    </Text>
+                  </View>
+                </LinearGradient>
+              }
               active={activeTab}
               setActive={setActiveTab}>
               <View>
                 <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Все</Text>
               </View>
               <View>
-                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Оплаченные</Text>
+                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>
+                  Оплаченные
+                </Text>
               </View>
               <View>
-                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>Не оплаченные</Text>
+                <Text style={{color: '#F9FFFF', fontFamily: 'Exo 2'}}>
+                  Не оплаченные
+                </Text>
               </View>
             </Tab>
 
             <View style={{marginTop: 20, marginBottom: 50}}>
               {isLoading ? (
-                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>Загрузка ...</Text>
+                <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>
+                  Загрузка ...
+                </Text>
               ) : !data.length ? (
                 <Text style={{fontSize: 15, fontFamily: 'Exo 2'}}>Пусто</Text>
               ) : (

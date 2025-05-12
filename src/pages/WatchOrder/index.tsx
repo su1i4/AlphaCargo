@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Modal,
   TouchableWithoutFeedback,
+  Linking,
 } from 'react-native';
 import Header from '../../screens/Header';
 import SingleUser from '../../assets/icons/SingleUser';
@@ -29,7 +30,7 @@ export default function WatchOrder() {
   const user = useAuth();
   const accessToken = user?.accessToken;
 
-  console.log(accessToken)
+  console.log(accessToken);
 
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState([]);
@@ -59,6 +60,21 @@ export default function WatchOrder() {
   useEffect(() => {
     getParcel(zakaz);
   }, [zakaz]);
+
+  const openWhatsAppOrWebsite = async (phoneNumber: string) => {
+    const whatsAppUrl = `whatsapp://send?phone=${phoneNumber}`;
+    const webWhatsAppUrl = `https://wa.me/${phoneNumber}`;
+    try {
+      const supported = await Linking.canOpenURL(whatsAppUrl);
+      if (supported) {
+        await Linking.openURL(whatsAppUrl);
+      } else {
+        await Linking.openURL(webWhatsAppUrl);
+      }
+    } catch (error) {
+      await Linking.openURL(webWhatsAppUrl);
+    }
+  };
 
   return (
     <View style={styles.safeArea}>
@@ -92,7 +108,7 @@ export default function WatchOrder() {
               color: '#878787',
               fontSize: 15,
               textDecorationLine: 'underline',
-              fontFamily: 'Exo 2'
+              fontFamily: 'Exo 2',
             }}>
             Как узнать номер накладной?
           </Text>
@@ -120,16 +136,24 @@ export default function WatchOrder() {
           ))}
         </View>
         <View style={styles.Wrapper}>
-          <Text style={[styles.colon, {fontFamily: 'Exo 2'}]}>Наши партнеры</Text>
+          <Text style={[styles.colon, {fontFamily: 'Exo 2'}]}>
+            Наши партнеры
+          </Text>
         </View>
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.horizontalScrollView}>
           <View style={styles.headerWrapper}>
-            <AlfaChina />
-            <AlhaCargoBrand />
-            <BrandAll />
+            <TouchableOpacity onPress={() => openWhatsAppOrWebsite('996778777887')}>
+              <AlfaChina />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => openWhatsAppOrWebsite('996222990990')}>
+              <AlhaCargoBrand />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => openWhatsAppOrWebsite('996777792777')}>
+              <BrandAll />
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </ScrollView>
@@ -160,20 +184,27 @@ export default function WatchOrder() {
                   </View>
                 </View>
               </View>
-              <Text style={{fontWeight: 600, marginTop: 10, fontFamily: 'Exo 2'}}>
+              <Text
+                style={{fontWeight: 600, marginTop: 10, fontFamily: 'Exo 2'}}>
                 Как узнать номер накладной?
               </Text>
               <Text style={{marginTop: 10, fontFamily: 'Exo 2'}}>
                 Номер накладной можно найти в правом верхнем
               </Text>
               <Text style={{fontFamily: 'Exo 2'}}>углу вашего документа.</Text>
-              <Text style={{fontFamily: 'Exo 2'}}>Это 14-значный номер, который используется для</Text>
-              <Text style={{fontFamily: 'Exo 2'}}>отслеживания вашего груза.</Text>
+              <Text style={{fontFamily: 'Exo 2'}}>
+                Это 14-значный номер, который используется для
+              </Text>
+              <Text style={{fontFamily: 'Exo 2'}}>
+                отслеживания вашего груза.
+              </Text>
               <Text style={{fontFamily: 'Exo 2'}}>Пример: 02.240202151313</Text>
               <Text style={{marginTop: 10, fontFamily: 'Exo 2'}}>
                 Введите этот номер в приложении, чтобы узнать{' '}
               </Text>
-              <Text style={{fontFamily: 'Exo 2'}}>статус доставки вашего груза.</Text>
+              <Text style={{fontFamily: 'Exo 2'}}>
+                статус доставки вашего груза.
+              </Text>
             </View>
           </View>
         </TouchableWithoutFeedback>
@@ -298,11 +329,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#333333',
     marginBottom: 4,
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
   status: {
     fontSize: 14,
     color: '#666666',
-    fontFamily: 'Exo 2'
+    fontFamily: 'Exo 2',
   },
 });

@@ -14,6 +14,7 @@ import Back from '../../assets/icons/Back';
 import {useNavigation} from '@react-navigation/native';
 import {useAuth} from '../../hooks/useAuth';
 import {ButtonCustom} from '../../components/UI/Buttons/Button';
+import LinearGradient from 'react-native-linear-gradient';
 
 interface PaymentData {
   id: number;
@@ -226,7 +227,34 @@ export const PaymentOplata = ({route}: any) => {
               ))}
           </Text>
         </View>
-        <View style={styles.infoContainer}>
+        <LinearGradient
+          colors={['#009DE1', '#1FA5B9', '#6EB856', '#A0C417']}
+          start={{x: 0, y: 0}}
+          end={{x: 1, y: 0}}
+          style={{
+            padding: 3,
+            borderRadius: 20,
+            marginBottom: 20,
+          }}>
+          <View
+            style={{
+              width: '100%',
+              backgroundColor: 'white',
+              padding: 10,
+              borderRadius: 18,
+            }}>
+            <Text
+              style={{
+                fontSize: 18,
+                fontWeight: '600',
+                lineHeight: 23,
+                fontFamily: 'Exo 2',
+              }}>
+              Cумма к оплате: {sum} р.
+            </Text>
+          </View>
+        </LinearGradient>
+        {/* <View style={styles.infoContainer}>
           <Text
             style={{
               fontSize: 18,
@@ -236,7 +264,7 @@ export const PaymentOplata = ({route}: any) => {
             }}>
             Cумма к оплате: {sum} р.
           </Text>
-        </View>
+        </View> */}
 
         <View style={styles.uploadSection}>
           <Text style={styles.uploadLabel}>Загрузить чек об оплате:</Text>

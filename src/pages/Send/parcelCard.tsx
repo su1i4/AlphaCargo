@@ -19,13 +19,6 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
       <Text style={styles.mainText}>Номер накладной: {oneParcel?.invoice}</Text>
       <Text style={styles.secondText}>Дата: {oneParcel?.date}</Text>
       <Text style={styles.secondText}>Статус: {oneParcel?.status}</Text>
-      {!oneParcel?.payment && (
-        <ButtonCustom
-          style={{width: 100, backgroundColor: '#94C325', borderRadius: 23}}
-          title="Оплатить"
-          onClick={() => navigation.navigate('Payment')}
-        />
-      )}
       <TouchableOpacity onPress={() => getPdf(oneParcel?.invoice)}>
         <PdfIcon />
         <Text style={{fontSize: 12, color: 'white', fontFamily: 'Exo 2'}}>
@@ -50,7 +43,12 @@ export const ParcelCard = ({oneParcel, getPdf}: any) => {
         </View>
       ) : (
         <TouchableOpacity
-          onPress={() => false}
+          onPress={() =>
+            navigation.navigate('PaymentList', {
+              sum: oneParcel?.sum,
+              invoice_number: oneParcel?.invoice,
+            })
+          }
           style={{
             backgroundColor: '#94C325',
             width: 100,

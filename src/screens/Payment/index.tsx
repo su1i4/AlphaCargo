@@ -164,6 +164,7 @@ const Payment = () => {
               onClick={() =>
                 navigation.navigate('PaymentList', {
                   invoice_number: parcel,
+                  sum: sum,
                 })
               }
               style={{marginTop: 10}}
