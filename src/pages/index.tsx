@@ -21,6 +21,7 @@ import PinSetupScreen from './RePinCode';
 import PinSessionMonitor from './PinSessionMonitor';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {PIN_KEY, PIN_KEY_DATE} from '../utils/consts';
+import Change from './Auth/Change';
 
 const Stack = createNativeStackNavigator();
 
@@ -145,6 +146,11 @@ export default function Main() {
             options={{headerShown: false}}
             name="TarifMain"
             component={TarifMain}
+          />
+          <Stack.Screen
+            options={{headerShown: false}}
+            name="Change"
+            component={Change}
           />
         </Stack.Navigator>
       </NavigationContainer>

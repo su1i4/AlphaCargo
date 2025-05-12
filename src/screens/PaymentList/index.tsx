@@ -8,7 +8,7 @@ export const PaymentList = ({route}: any) => {
   const navigation: any = useNavigation();
   const user = useAuth();
   const [paymentList, setPaymentList] = useState([]);
-  const {invoice_number} = route.params;
+  const {invoice_number, sum} = route.params;
   const accessToken = user?.accessToken;
 
   useEffect(() => {
@@ -71,6 +71,7 @@ export const PaymentList = ({route}: any) => {
               navigation.navigate('PaymentOplata', {
                 id: item.id,
                 invoice_number: invoice_number,
+                sum: sum,
               });
             }}>
             <Image

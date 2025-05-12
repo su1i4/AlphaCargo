@@ -108,6 +108,10 @@ export default function Header({
       text: 'Регистрация',
       image: <AlfaChinaStory />,
       children: [require('../../assets/images/AlfaChina.png')],
+      buttonText: 'Узнать про Китай!',
+      buttonStyle: {
+        backgroundColor: '#E65E42',
+      },
     },
     {
       phoneNumber: '+996222990990',
@@ -116,6 +120,10 @@ export default function Header({
       text: 'Регистрация',
       image: <AlfaFullfilment />,
       children: [require('../../assets/images/AlphaCargoStory1.png')],
+      buttonText: 'Узнать про фулфилмент!',
+      buttonStyle: {
+        backgroundColor: '#3EA2C6',
+      },
     },
     {
       phoneNumber: '+996772007183',
@@ -124,6 +132,10 @@ export default function Header({
       text: 'Регистрация',
       image: <AlfaVyezd />,
       children: [require('../../assets/images/AlphaCargoStory2.png')],
+      buttonText: 'Вызвать выездную группу!',
+      buttonStyle: {
+        backgroundColor: '#3EA2C6',
+      },
     },
   ];
 

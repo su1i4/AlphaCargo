@@ -59,6 +59,28 @@ export const baseApi = createApi({
         method: 'PATCH',
       }),
     }),
+    sendCode: build.mutation<{phone: string}, {phone: string}>({
+      query: (body) => {
+        return {
+          url: 'users/password/forgot',
+          method: 'POST',
+          body: body,
+        }
+      }
+    }),
+    resetPassword: build.mutation<any, any>({
+      query: (body) => {
+        return {
+          url: 'users/password/reset',
+          method: 'PATCH',
+          body: {
+            phone: body.phone,
+            code: body.code,
+            newPassword: body.password,
+          },
+        }
+      }
+    })
   }),
 });
 
@@ -78,4 +100,6 @@ export const {
   useLazyFindParcelQuery,
   useFindParcelQuery,
   useReadNotificationMutation,
+  useSendCodeMutation,
+  useResetPasswordMutation,
 } = baseApi;

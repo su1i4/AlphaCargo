@@ -266,6 +266,7 @@ export default function Alpha() {
           style={{
             display: 'flex',
             flexDirection: 'row',
+            justifyContent: 'space-between',
             marginTop: 10,
             gap: 10,
             flexWrap: 'wrap',
@@ -282,10 +283,10 @@ export default function Alpha() {
               <TouchableOpacity
                 onPress={() => item.link()}
                 style={{
-                  width: 70,
-                  height: 70,
-                  minHeight: 70,
-                  maxHeight: 70,
+                  width: 65,
+                  height: 65,
+                  minHeight: 65,
+                  maxHeight: 65,
                   display: 'flex',
                   flexDirection: 'row',
                   justifyContent: 'center',
@@ -302,6 +303,7 @@ export default function Alpha() {
                   fontWeight: '400',
                   textAlign: 'center',
                   fontFamily: 'Exo 2',
+                  height: 30,
                 }}>
                 {item.text}
               </Text>

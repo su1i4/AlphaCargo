@@ -1,33 +1,28 @@
 import {useEffect, useState, useRef} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
-import {Input} from '../../../components/UI/Inputs/Input';
 import {ButtonCustom} from '../../../components/UI/Buttons/Button';
-import {useLoginMutation} from '../../../services/auth.service';
 import Toast from 'react-native-toast-message';
-import {PhoneNumberInput} from '../../../components/UI/PhoneInput';
 import {useNavigation} from '@react-navigation/native';
 import {useActions} from '../../../hooks/useActions';
 import {LAST_LOGIN_KEY} from '../../../utils/consts';
 import Back from '../../../assets/icons/Back';
-import { useSendCodeMutation } from '../../../services/base.service';
+import {useResetPasswordMutation} from '../../../services/base.service';
+import {Input} from '../../../components/UI/Inputs/Input';
 
-export default function Reset({_, route}: any) {
-  const {ph = '', pass = ''} = route.params || {};
+export default function Change({_, route}: any) {
+  const {phone} = route.params;
   const navigation: any = useNavigation();
-  const [sendCode] = useSendCodeMutation();
-  const [phone, setPhone] = useState('');
+  const [resetPassword] = useResetPasswordMutation();
+  const [code, setCode] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [phoneError, setPhoneError] = useState<string>('');
+  const [codeError, setCodeError] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [passwordError, setPasswordError] = useState<string>('');
   const phoneInputRef = useRef<any>();
 
   const {saveUser} = useActions();
-
-  useEffect(() => {
-    if (ph && pass) {
-      setPhone(ph);
-    }
-  }, [ph, pass]);
 
   const handlePost = async () => {
     setPhoneError('');
@@ -42,15 +37,19 @@ export default function Reset({_, route}: any) {
 
     setLoading(true);
     try {
-      const response: any = await sendCode({phone});
+      const response: any = await resetPassword({phone, code, password});
+      console.log(response, phone, code, password);
       if (response['error']) {
         Toast.show({
           type: 'error',
-          text1: 'Ошибка входа',
+          text1: 'Ошибка смены пароля',
           text2: response.error.data.message,
         });
       } else {
-        navigation.navigate('Change', {phone});
+        navigation.reset({
+          index: 0, // Устанавливаем индекс в 0, чтобы это был первый экран
+          routes: [{name: 'Login'}], // Указываем маршрут, на который нужно перейти
+        });
       }
     } catch (error) {}
     setLoading(false);
@@ -61,7 +60,6 @@ export default function Reset({_, route}: any) {
   }, [phone]);
 
   const onClose = () => {
-    setPhone('');
     if (phoneInputRef.current) {
       phoneInputRef.current.reset();
     }
@@ -82,24 +80,44 @@ export default function Reset({_, route}: any) {
           }}>
           <Back color="black" />
         </TouchableOpacity>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 20, fontFamily: 'Exo 2'}}>
-          Введите ваш номер
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: '700',
+            marginTop: 20,
+            fontFamily: 'Exo 2',
+          }}>
+          Восстановление
         </Text>
-        <Text style={{fontSize: 30, fontWeight: '700', fontFamily: 'Exo 2'}}>телефона</Text>
+        <Text style={{fontSize: 30, fontWeight: '700', fontFamily: 'Exo 2'}}>
+          пароля
+        </Text>
       </View>
       <View style={styles.main}>
         <View style={styles.msgWrap}>
-          <PhoneNumberInput
-            label="Мы отправим вам код на этот номер"
-            setPhoneNumber={setPhone}
-            ref={phoneInputRef}
+          <Input
+            label="Введите код"
+            onChange={setCode}
+            value={code}
+            placeholder="Введите код"
           />
-          {phoneError ? (
-            <Text style={styles.errorText}>{phoneError}</Text>
+
+          {codeError ? <Text style={styles.errorText}>{codeError}</Text> : null}
+        </View>
+        <View style={styles.msgWrap}>
+          <Input
+            label="Введите новый пароль"
+            onChange={setPassword}
+            value={password}
+            placeholder="Введите новый пароль"
+          />
+
+          {passwordError ? (
+            <Text style={styles.errorText}>{passwordError}</Text>
           ) : null}
         </View>
         <ButtonCustom
-          title="Отправить код"
+          title="Сменить пароль"
           onClick={handlePost}
           isLoading={loading}
           style={{width: '100%'}}

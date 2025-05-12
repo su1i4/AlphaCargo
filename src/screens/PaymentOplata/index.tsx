@@ -32,7 +32,7 @@ export const PaymentOplata = ({route}: any) => {
   const [userData, setUserData] = useState<any>(null);
   const [amount, setAmount] = useState('0');
   const accessToken = user?.accessToken;
-  const {id, invoice_number} = route.params;
+  const {id, invoice_number, sum} = route.params;
 
   useEffect(() => {
     const fetchPaymentList = async () => {
@@ -211,25 +211,33 @@ export const PaymentOplata = ({route}: any) => {
         )}
 
         <View style={styles.infoContainer}>
-          <View style={styles.infoSection}>
-            <Text style={styles.label}>Реквизиты для оплаты:</Text>
-            <Text style={styles.value}>
-              {paymentList.description
-                .replace(/<p>|<\/p>/g, '') // удаляем теги <p>
-                .replace(/<br\s*\/?>/g, '\n') // заменяем <br> на перенос строки
-                .split('\n')
-                .filter(line => line.trim() !== '') // удаляем пустые строки
-                .map((line, index) => (
-                  <Text key={index}>
-                    {line}
-                    {'\n'}
-                  </Text>
-                ))}
-            </Text>
-          </View>
+          <Text style={styles.label}>Реквизиты для оплаты:</Text>
+          <Text style={styles.value}>
+            {paymentList.description
+              .replace(/<p>|<\/p>/g, '')
+              .replace(/<br\s*\/?>/g, '\n')
+              .split('\n')
+              .filter(line => line.trim() !== '')
+              .map((line, index) => (
+                <Text key={index}>
+                  {line}
+                  {'\n'}
+                </Text>
+              ))}
+          </Text>
+        </View>
+        <View style={styles.infoContainer}>
+          <Text
+            style={{
+              fontSize: 18,
+              fontWeight: '600',
+              lineHeight: 23,
+              fontFamily: 'Exo 2',
+            }}>
+            Cумма к оплате: {sum} р.
+          </Text>
         </View>
 
-        {/* Секция загрузки чека */}
         <View style={styles.uploadSection}>
           <Text style={styles.uploadLabel}>Загрузить чек об оплате:</Text>
           <TouchableOpacity style={styles.fileButton} onPress={pickDocument}>
@@ -324,9 +332,6 @@ const styles = StyleSheet.create({
     padding: 20,
     marginBottom: 20,
   },
-  infoSection: {
-    marginBottom: 15,
-  },
   label: {
     fontSize: 14,
     color: '#666',
@@ -395,6 +400,7 @@ const styles = StyleSheet.create({
     borderColor: '#E1E1E1',
     borderRadius: 8,
     paddingHorizontal: 15,
+    paddingVertical: 15,
     fontSize: 16,
     color: '#333',
   },

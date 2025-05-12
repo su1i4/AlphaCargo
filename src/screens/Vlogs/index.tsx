@@ -179,10 +179,10 @@ export default function Vlogs({route}: any) {
 
           {/* WhatsApp Button */}
           <TouchableOpacity
-            style={styles.whatsappButton}
+            style={[styles.whatsappButton, Components[currentID].buttonStyle]}
             onPress={openWhatsAppOrWebsite}
             activeOpacity={0.8}>
-            <Text style={styles.whatsappButtonText}>Перейти в WhatsApp</Text>
+            <Text style={[styles.whatsappButtonText, Components[currentID].buttonTextStyle]}>{Components[currentID].buttonText}</Text>
           </TouchableOpacity>
         </View>
       </TouchableWithoutFeedback>

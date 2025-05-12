@@ -1,6 +1,6 @@
 export const ONE_DAY_MS = 96 * 60 * 60 * 1000;
 
-export const FIVE_MINUTES_MS = 5 * 60 * 1000;
+export const FIVE_MINUTES_MS = 15 * 60 * 1000;
 
 export const LAST_LOGIN_KEY = '@last_login_date';
 
