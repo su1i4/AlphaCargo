@@ -7,6 +7,7 @@ import {
   Linking,
   Alert,
   TouchableOpacity,
+  Dimensions,
 } from 'react-native';
 import {Personal} from '../../screens/AlphaTabContent/Personal';
 import {Buisenes} from '../../screens/AlphaTabContent/Buisenes';
@@ -25,6 +26,9 @@ import NewImage from '../../assets/icons/NewImage';
 import NewUsers from '../../assets/icons/NewUsers';
 
 const tabs = ['Частным клиентам', 'Бизнесу'];
+
+const screenWidth = Dimensions.get('window').width;
+const itemSize = screenWidth / 4 - 20;
 
 export default function Alpha() {
   const user = useAuth();
@@ -223,10 +227,9 @@ export default function Alpha() {
                 fontSize: 15,
                 width: '90%',
                 fontFamily: 'Exo 2',
-                marginBottom: 2
+                marginBottom: 2,
               }}
-              numberOfLines={2}
-              >
+              numberOfLines={2}>
               {userData?.Name}
             </Text>
           </View>
@@ -264,35 +267,31 @@ export default function Alpha() {
         </LinearGradient>
         <View
           style={{
-            display: 'flex',
             flexDirection: 'row',
-            justifyContent: 'space-between',
-            marginTop: 10,
-            gap: 10,
             flexWrap: 'wrap',
+            // justifyContent: 'space-between',
+            rowGap: 16,
+            columnGap: 0,
+            marginTop: 10,
           }}>
-          {HeaderIcons.map((item: any, index) => (
+          {HeaderIcons.map((item: any, index: number) => (
             <View
               key={index}
               style={{
-                display: 'flex',
-                flexDirection: 'column',
+                width: '25%',
                 alignItems: 'center',
                 justifyContent: 'center',
+                marginTop: 10,
               }}>
               <TouchableOpacity
                 onPress={() => item.link()}
                 style={{
                   width: 65,
                   height: 65,
-                  minHeight: 65,
-                  maxHeight: 65,
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignItems: 'center',
                   borderRadius: 20,
                   backgroundColor: '#F0F1F3',
+                  alignItems: 'center',
+                  justifyContent: 'center',
                 }}>
                 {item.icon}
               </TouchableOpacity>
@@ -303,6 +302,7 @@ export default function Alpha() {
                   fontWeight: '400',
                   textAlign: 'center',
                   fontFamily: 'Exo 2',
+                  marginTop: 6,
                   height: 30,
                 }}>
                 {item.text}

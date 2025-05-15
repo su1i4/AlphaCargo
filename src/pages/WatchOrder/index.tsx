@@ -83,7 +83,7 @@ export default function WatchOrder() {
         func={() => navigation.navigate('Profile')}
         Right={SingleUser}
         placeholder="Номер посылки"
-        text="Отследить заказ"
+        text="Главная"
       />
       <ScrollView style={styles.scrollView}>
         <SearchInput

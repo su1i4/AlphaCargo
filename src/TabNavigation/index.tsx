@@ -78,7 +78,7 @@ export default function TabNavigation({route}: any) {
         options={{
           tabBarLabel: ({focused}) => (
             <Text style={{color: focused ? '#94C325' : 'gray', fontSize: 11}}>
-              Отследить
+              Главная
             </Text>
           ),
           tabBarIcon: ({focused}) => <LupaIcon active={focused} size={24} />,
